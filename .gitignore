@@ -1,0 +1,18 @@
+# raw data must never be committed or shipped in the ZIP
+data/
+*.TXT
+*.zip
+*.CSV
+all_stocks_5yrs.csv
+# local spark/hive artefacts
+spark-warehouse/
+metastore_db/
+derby.log
+__pycache__/
+.ipynb_checkpoints/
+work/
+models/
+# credentials
+*.pem
+.env
+Project Instructions.pdf

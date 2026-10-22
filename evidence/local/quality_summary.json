@@ -1,0 +1,98 @@
+{
+  "prices": {
+    "rows": 619040,
+    "tickers": 505,
+    "date_min": "2013-02-08",
+    "date_max": "2018-02-07",
+    "rows_up_to_2017-12-29": 605910,
+    "duplicate_ticker_date": 0,
+    "rows_with_empty_field": {
+      "open": 11,
+      "high": 8,
+      "low": 8
+    },
+    "ohlc_inconsistent_rows": 12,
+    "nonpositive_rows": 0,
+    "series_length_min_median_max": [
+      44,
+      1259,
+      1259
+    ],
+    "short_series_lt_500": [
+      "APTV",
+      "BHF",
+      "BHGE",
+      "DWDP",
+      "DXC",
+      "EVHC",
+      "FTV",
+      "HLT",
+      "UA"
+    ]
+  },
+  "gdelt": {
+    "20151201.export.CSV": {
+      "rows": 228333,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8211,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20151201": 228333
+      }
+    },
+    "20151202.export.CSV": {
+      "rows": 236578,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8453,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20151202": 236578
+      }
+    },
+    "20151203.export.CSV": {
+      "rows": 235400,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8267,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20151203": 235400
+      }
+    },
+    "20151204.export.CSV": {
+      "rows": 227122,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7707,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20151204": 227122
+      }
+    },
+    "20151205.export.CSV": {
+      "rows": 149629,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4642,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20151205": 149629
+      }
+    },
+    "20151206.export.CSV": {
+      "rows": 134434,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4271,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20151206": 134434
+      }
+    },
+    "20151207.export.CSV": {
+      "rows": 213738,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8079,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20151207": 213738
+      }
+    }
+  }
+}
