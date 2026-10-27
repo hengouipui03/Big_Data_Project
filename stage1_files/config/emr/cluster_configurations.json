@@ -1,0 +1,31 @@
+[
+  {
+    "Classification": "hdfs-site",
+    "Properties": {
+      "dfs.replication": "2"
+    }
+  },
+  {
+    "Classification": "spark-defaults",
+    "Properties": {
+      "spark.executor.instances": "2",
+      "spark.executor.cores": "2",
+      "spark.executor.memory": "6g",
+      "spark.dynamicAllocation.enabled": "false",
+      "spark.sql.catalogImplementation": "hive"
+    }
+  },
+  {
+    "Classification": "hive-site",
+    "Properties": {
+      "hive.execution.engine": "tez"
+    }
+  },
+  {
+    "Classification": "jupyter-s3-conf",
+    "Properties": {
+      "s3.persistence.enabled": "true",
+      "s3.persistence.bucket": "REPLACE-WITH-YOUR-BUCKET-NAME"
+    }
+  }
+]
