@@ -4,6 +4,11 @@ data/
 *.zip
 *.CSV
 all_stocks_5yrs.csv
+all_stocks_5yr.csv
+# ...but small evidence tables (inventory.csv, audit outputs) MUST be committed
+!evidence/**/*.csv
+!evidence/**/*.CSV
+!evidence/**/*.tsv
 # local spark/hive artefacts
 spark-warehouse/
 metastore_db/

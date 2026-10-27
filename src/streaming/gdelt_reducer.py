@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Hadoop Streaming reducer: sums the mapper records per key (input is sorted by key).
 
-Output: key \t events \t avg_tone \t events_with_event_date != date_added
+Output, one line per key:
+    key \t events \t avg_tone \t events_with_event_date != date_added
+For the BAD_* counter keys avg_tone is written as NA (no tone values to average).
 """
 import sys
 
@@ -10,8 +12,8 @@ key, n, tone, nt, lag = None, 0, 0.0, 0, 0
 
 def flush():
     if key is not None:
-        avg = tone / nt if nt else float("nan")
-        print(f"{key}\t{n}\t{avg:.4f}\t{lag}")
+        avg = f"{tone / nt:.4f}" if nt else "NA"
+        print(f"{key}\t{n}\t{avg}\t{lag}")
 
 
 for line in sys.stdin:

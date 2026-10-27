@@ -1,0 +1,9 @@
+source,file,url,acquired_utc,downloaded_bytes,downloaded_sha256
+prices,all_stocks_5yr.csv,https://raw.githubusercontent.com/plotly/datasets/master/all_stocks_5yr.csv,2026-10-27T07:18:21+00:00,29580549,6aea253cd19de60b568143991aaf1fa482456565c389205658d236e595e716cf
+gdelt,20151201.export.CSV,https://data.gdeltproject.org/events/20151201.export.CSV.zip,2026-10-27T07:18:27+00:00,15225248,d4a78cc820507c473aa9d1d520ae8968d1d5bde4899a0a633bda26aeb5e35479
+gdelt,20151202.export.CSV,https://data.gdeltproject.org/events/20151202.export.CSV.zip,2026-10-27T07:18:29+00:00,15782460,36f8cf89096316e387684fd8ecd8df31534fccb372609bdc409b0a2dd0a254b5
+gdelt,20151203.export.CSV,https://data.gdeltproject.org/events/20151203.export.CSV.zip,2026-10-27T07:18:32+00:00,15798815,32c3efd31674f633ea7df745ae72cf729ffbd28f92652d01525985d64e79de21
+gdelt,20151204.export.CSV,https://data.gdeltproject.org/events/20151204.export.CSV.zip,2026-10-27T07:18:36+00:00,15140349,6e90b221da59d6a7da3f9838ec8066fff3474ce3bdaf61ab71d95d34be31602d
+gdelt,20151205.export.CSV,https://data.gdeltproject.org/events/20151205.export.CSV.zip,2026-10-27T07:18:40+00:00,9528835,52c0b8ccfea53c06652a111babcfb7cc610d4f52c82ec9aa0009d9c06512457c
+gdelt,20151206.export.CSV,https://data.gdeltproject.org/events/20151206.export.CSV.zip,2026-10-27T07:18:42+00:00,8468061,aca79a16f424b30f919b6aa987a83d0f885f99dcc1eb95933733ed6302b39ddb
+gdelt,20151207.export.CSV,https://data.gdeltproject.org/events/20151207.export.CSV.zip,2026-10-27T07:18:46+00:00,14126683,197609330bb16987c52c372e383e1eef145c4c8b9f3c7008101f914d8f84e496

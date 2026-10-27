@@ -1,0 +1,15 @@
+{
+  "_comment": "Provenance for every raw source. url_template may contain {file} (the raw file name, with .zip appended for GDELT). acquired_utc may be set per source if the download time is known exactly; otherwise the file's modification time on disk is used.",
+  "prices": {
+    "description": "Daily OHLCV bars for 505 S&P 500 constituents (plotly/datasets all_stocks_5yr.csv), as linked in the project brief",
+    "url_template": "https://raw.githubusercontent.com/plotly/datasets/master/all_stocks_5yr.csv",
+    "version": "plotly/datasets master branch snapshot, as downloaded",
+    "acquired_utc": null
+  },
+  "gdelt": {
+    "description": "GDELT 1.0 daily event export files (58 tab-separated columns, no header), as linked in the project brief",
+    "url_template": "https://data.gdeltproject.org/events/{file}.zip",
+    "version": "GDELT 1.0 event database, daily archives",
+    "acquired_utc": null
+  }
+}

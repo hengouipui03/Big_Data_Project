@@ -1,13 +1,44 @@
 """Task 1: raw-corpus inventory, checksums and quality profile (pure Python, streaming).
 
-Usage: python -I src/pipeline/t1_profile_raw.py [raw_dir] [out_dir]
-Writes inventory.csv (per-file provenance) and quality_summary.json.
+Usage: python -I src/pipeline/t1_profile_raw.py [raw_dir] [out_dir] [sources_json]
+Writes inventory.csv (per-file provenance: source URL, acquisition time, bytes, rows,
+sha256) and quality_summary.json.
+
+Provenance comes from config/sources.json (download URL template, version, optional exact
+acquisition time). When acquired_utc is not given there, the file's modification time on
+disk is used as the acquisition time.
 """
 import csv, collections, datetime, hashlib, json, os, sys
 
 RAW = sys.argv[1] if len(sys.argv) > 1 else "data/raw"
 OUT = sys.argv[2] if len(sys.argv) > 2 else "evidence/local"
+SOURCES = sys.argv[3] if len(sys.argv) > 3 else "config/sources.json"
 os.makedirs(OUT, exist_ok=True)
+
+with open(SOURCES) as f:
+    sources = {k: v for k, v in json.load(f).items() if not k.startswith("_")}
+
+# exact download times written by src/acquire/download_raw.py, if that script was used
+ACQ_LOG = os.path.join(OUT, "acquisition_log.csv")
+acq = {}
+if os.path.exists(ACQ_LOG):
+    with open(ACQ_LOG, newline="") as f:
+        for r in csv.DictReader(f):
+            acq[(r["source"], r["file"])] = r
+
+
+def provenance(src, name, path):
+    """Source URL, version and acquisition time for one raw file.
+
+    Priority: acquisition_log.csv (exact) > acquired_utc in sources.json > file mtime on disk.
+    """
+    meta = sources.get(src, {})
+    url = meta.get("url_template", "").format(file=name)
+    if (src, name) in acq:
+        return acq[(src, name)]["url"], meta.get("version", ""), acq[(src, name)]["acquired_utc"]
+    acquired = meta.get("acquired_utc") or datetime.datetime.fromtimestamp(
+        os.path.getmtime(path), datetime.timezone.utc).isoformat(timespec="seconds")
+    return url, meta.get("version", ""), acquired
 
 
 def sha256(path):
@@ -76,6 +107,8 @@ inventory, summary = [], {"prices": None, "gdelt": {}}
 now = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
 for src in ("prices", "gdelt"):
     d = os.path.join(RAW, src)
+    if not os.path.isdir(d):
+        continue
     for name in sorted(os.listdir(d)):
         p = os.path.join(d, name)
         prof = profile_prices(p) if src == "prices" else profile_gdelt(p)
@@ -83,7 +116,9 @@ for src in ("prices", "gdelt"):
             summary["prices"] = prof
         else:
             summary["gdelt"][name] = prof
-        inventory.append({"source": src, "file": name, "bytes": os.path.getsize(p),
+        url, version, acquired = provenance(src, name, p)
+        inventory.append({"source": src, "file": name, "source_url": url, "version": version,
+                          "acquired_utc": acquired, "bytes": os.path.getsize(p),
                           "rows": prof["rows"], "sha256": sha256(p), "profiled_utc": now})
 
 with open(os.path.join(OUT, "inventory.csv"), "w", newline="") as f:
