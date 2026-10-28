@@ -1,0 +1,16 @@
+drwxr-xr-x   - hadoop hdfsadmingroup          0 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/gdelt_audit_rejects
+drwxr-xr-x   - hadoop hdfsadmingroup          0 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/gdelt_daily_typed
+-rw-r--r--   2 hadoop hdfsadmingroup       1089 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/gdelt_daily_typed/000000_0
+drwxr-xr-x   - hadoop hdfsadmingroup          0 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/prices_typed
+-rw-r--r--   2 hadoop hdfsadmingroup    7688751 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/prices_typed/000000_0
+-rw-r--r--   2 hadoop hdfsadmingroup    5846732 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/prices_typed/000001_0
+drwxr-xr-x   - hadoop hdfsadmingroup          0 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/prices_yearly_coverage
+-rw-r--r--   2 hadoop hdfsadmingroup        544 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/prices_yearly_coverage/000000_0
+-rw-r--r--   2 hadoop hdfsadmingroup        562 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/prices_yearly_coverage/000001_0
+drwxr-xr-x   - hadoop hdfsadmingroup          0 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/raw_prices_duplicates
+-rw-r--r--   2 hadoop hdfsadmingroup        207 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/raw_prices_duplicates/000000_0
+drwxr-xr-x   - hadoop hdfsadmingroup          0 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/raw_prices_quality
+-rw-r--r--   2 hadoop hdfsadmingroup        998 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/raw_prices_quality/000000_0
+drwxr-xr-x   - hadoop hdfsadmingroup          0 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/raw_prices_series_length
+-rw-r--r--   2 hadoop hdfsadmingroup       1589 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/raw_prices_series_length/000000_0
+-rw-r--r--   2 hadoop hdfsadmingroup       1510 2026-10-28 07:32 /user/hive/warehouse/inf2006.db/raw_prices_series_length/000001_0

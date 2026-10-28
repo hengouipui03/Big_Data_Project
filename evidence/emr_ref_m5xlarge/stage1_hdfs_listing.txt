@@ -1,0 +1,14 @@
+drwxr-xr-x   - hadoop hdfsadmingroup          0 2026-10-28 06:14 /raw/gdelt
+drwxr-xr-x   - hadoop hdfsadmingroup          0 2026-10-28 06:15 /raw/gdelt/v2026-10-27
+-rw-r--r--   2 hadoop hdfsadmingroup   85885950 2026-10-28 06:14 /raw/gdelt/v2026-10-27/20151201.export.CSV
+-rw-r--r--   2 hadoop hdfsadmingroup   88953343 2026-10-28 06:14 /raw/gdelt/v2026-10-27/20151202.export.CSV
+-rw-r--r--   2 hadoop hdfsadmingroup   88888499 2026-10-28 06:14 /raw/gdelt/v2026-10-27/20151203.export.CSV
+-rw-r--r--   2 hadoop hdfsadmingroup   85733537 2026-10-28 06:14 /raw/gdelt/v2026-10-27/20151204.export.CSV
+-rw-r--r--   2 hadoop hdfsadmingroup   56309761 2026-10-28 06:14 /raw/gdelt/v2026-10-27/20151205.export.CSV
+-rw-r--r--   2 hadoop hdfsadmingroup   50685001 2026-10-28 06:14 /raw/gdelt/v2026-10-27/20151206.export.CSV
+-rw-r--r--   2 hadoop hdfsadmingroup   80266558 2026-10-28 06:15 /raw/gdelt/v2026-10-27/20151207.export.CSV
+drwxr-xr-x   - hadoop hdfsadmingroup          0 2026-10-28 06:14 /raw/prices
+drwxr-xr-x   - hadoop hdfsadmingroup          0 2026-10-28 06:14 /raw/prices/v2026-10-27
+-rw-r--r--   2 hadoop hdfsadmingroup   29580549 2026-10-28 06:14 /raw/prices/v2026-10-27/all_stocks_5yr.csv
+511.9 M  1023.7 M  /raw/gdelt
+28.2 M   56.4 M    /raw/prices

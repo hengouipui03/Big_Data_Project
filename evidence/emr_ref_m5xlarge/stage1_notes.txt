@@ -1,0 +1,22 @@
+--- working cluster ---
+cluster_id = j-02025102D1KMIV42E97Q
+cluster_name = inf2006-bigdata
+release = emr-7.10.0
+created_utc = 2026-10-28 06:02 UTC
+waiting_utc = 2026-10-28 06:09 UTC
+storage = EMR default, 64 GiB per core node (2 x 32 GiB gp2)
+primary_dns = ec2-52-91-240-125.compute-1.amazonaws.com
+distcp_application_id = application_1793167721813_0001
+staging_seconds = 44
+hdfs_configured_capacity = 124283478016 (115.75 GB)
+notebook_application_id = application_1793167721813_0002
+terminated_utc = 2026-10-28 07:58 UTC
+
+--- failed cluster ---
+failed_cluster_id = j-06371601XD1JEGSGGUW6
+failed_at_utc = 2026-10-28 03:15 UTC
+difference_from_working = core group had custom EBS volume: gp3, 200 GiB, 3000 IOPS, 125 MiB/s
+roles = EMR_DefaultRole / EMR_EC2_DefaultRole (same as working cluster)
+error_text = Amazon EMR Cluster j-06371601XD1JEGSGGUW6 (inf2006-bigdata) has terminated with errors at 2026-10-28 03:15 UTC with a reason of VALIDATION_ERROR.
+error_detail = Service role arn:aws:iam::209639421187:role/EMR_DefaultRole has insufficient EC2 permissions
+screenshot = screenshots/03_failed_cluster_ebs_error.png

@@ -12,7 +12,9 @@
       "spark.executor.cores": "2",
       "spark.executor.memory": "6g",
       "spark.dynamicAllocation.enabled": "false",
-      "spark.sql.catalogImplementation": "hive"
+      "spark.sql.catalogImplementation": "hive",
+      "spark.executor.memoryOverhead": "2g",
+      "spark.driver.memory": "2g"
     }
   },
   {

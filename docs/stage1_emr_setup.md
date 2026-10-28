@@ -12,31 +12,27 @@ Lab 7) but rejected the cluster when a custom 200 GiB gp3 volume (3000 IOPS, 125
 the core group ("insufficient EC2 permissions" / VALIDATION_ERROR). The assessed cluster therefore
 uses EMR's default instance storage. gp3's baseline performance is already 3000 IOPS / 125 MiB/s, so
 only capacity differs from the reference; the storage estimate in report section 6 shows the chosen
-corpus fits. (A dev profile on m5.large, `config/emr/cluster_configurations_dev_m5large.json`, is
-kept as the "justified alternative" for the Q&A Tip 1 comparison.)
-Evidence folders: `evidence/emr_ref_m5xlarge/` (assessed profile) and `evidence/emr_dev_m5large/`.
+corpus fits. Brief v1.1 states the reference configuration "has not yet been launched or timed in AWS
+Academy" and is provisional; this rejection has been reported to the teaching team.
+The brief's "justified alternative" must be a software change with hardware fixed, so no second hardware
+profile is used. Evidence folder: `evidence/emr_ref_m5xlarge/`.
 
 Fill in the blanks below as you go — they become the values in Appendix A.
 
 | Item | Value |
 |---|---|
-| Profile (reference m5.xlarge / dev m5.large) | reference m5.xlarge |
+| Profile (reference m5.xlarge / dev m5.large) | |
 | AWS account | AWS Academy Learner Lab |
-| Core-node storage | EMR default, 64 GiB per core node (2 x 32 GiB gp2); HDFS configured capacity 124,283,478,016 bytes (115.75 GB). Custom 200 GiB gp3 volume rejected by Academy (cluster j-06371601XD1JEGSGGUW6, 2026-10-28 03:15 UTC, "Service role EMR_DefaultRole has insufficient EC2 permissions") |
-| AWS region | us-east-1 |
-| S3 bucket name | inf2006-team07-bigdata |
-| Cluster ID (j-...) | j-02025102D1KMIV42E97Q |
-| Cluster created (UTC) | 2026-10-28 06:02 UTC |
-| Cluster "Waiting" at (UTC) | 2026-10-28 06:09 UTC |
-| Primary node public DNS | ec2-52-91-240-125.compute-1.amazonaws.com (changes with every cluster) |
-| Key pair name | vockey |
-| Staging seconds (from stage1_cluster.txt) | 44 |
-| distcp application id | application_1793167721813_0001 |
-| Notebook test application id | application_1793167721813_0002 |
-| IAM roles | EMR_DefaultRole (service) / EMR_EC2_DefaultRole (instance profile) |
-| Extra dependency on primary node | 'sudo dnf install -y git' |
-| Software versions | Hadoop 3.4.1, Hive 3.1.3, Tez 0.10.2, Spark 3.5.5, Livy 0.8.0, JupyterHub 1.5.0, Amazon Linux 2023.12 |
-| Subnet / AZ | subnet-0f34e41d889847b68 / us-east-1b (public) |
+| Core-node storage | EMR default (custom 200 GiB gp3 volume rejected by Academy) |
+| AWS region | |
+| S3 bucket name | |
+| Cluster ID (j-...) | |
+| Cluster created (UTC) | |
+| Cluster "Waiting" at (UTC) | |
+| Primary node public DNS | |
+| Key pair name | |
+| Staging seconds (from stage1_cluster.txt) | |
+| distcp application id | |
 
 ---
 
@@ -81,7 +77,7 @@ AWS console -> EMR -> Create cluster.
 4. **Cluster termination**: turn OFF auto-termination for now (you control it) but set an idle
    timeout of 1 hour as a safety net.
 5. **Software settings / Configurations**: choose "Enter configuration" and paste the contents of
-   the matching profile file in `config/emr/` (reference or dev), replacing `REPLACE-WITH-YOUR-BUCKET-NAME` with your
+   `config/emr/cluster_configurations_reference_m5xlarge.json`, replacing `REPLACE-WITH-YOUR-BUCKET-NAME` with your
    bucket. What each block does:
    - `hdfs-site dfs.replication=2` — the Q&A reference setting (every HDFS block on 2 nodes).
    - `spark-defaults` — 2 executors x 2 cores x 6 GiB, dynamic allocation off so the allocation is
@@ -180,6 +176,19 @@ Save the notebook as `inf2006_pipeline.ipynb`. Because of `jupyter-s3-conf` it i
 - Next session: create the cluster again with the same settings (clone from the terminated cluster:
   "Clone" button keeps every setting), then rerun section D (about 1-3 minutes for the copy).
 
+## Re-running on a new cluster
+
+1. Clone the terminated cluster in the EMR console (all settings kept) -> Create.
+2. Re-add the port 9443 inbound rule; copy the new primary DNS.
+3. `ssh`, then `sudo dnf install -y git`, `git clone ...` (or `git pull` in an existing clone — if git refuses
+   because of untracked evidence files, remove the cluster's `evidence/emr_ref_m5xlarge` folder ONLY if
+   that evidence is already pushed to GitHub).
+4. Rerun section D (staging, ~1 min) and `scripts/stage2_streaming_and_hive.sh` (~3 min): the Hive
+   metastore lives on the primary node and is lost with the cluster.
+5. Run order matters: Hadoop Streaming and Hive first, then the Spark notebook. The notebook's Spark
+   session holds the fixed 2 x (6+2) GiB executors and blocks MapReduce/Hive jobs; shut the kernel down
+   (Kernel -> Shutdown) before running the scripts.
+
 ## Troubleshooting
 
 | Symptom | Likely cause / fix |
@@ -187,6 +196,8 @@ Save the notebook as `inf2006_pipeline.ipynb`. Because of `jupyter-s3-conf` it i
 | "VPC/subnet configuration was invalid: No route to any external sources" | The subnet is private — clone the cluster and pick a different (public) subnet in the default VPC |
 | "insufficient EC2 permissions" / VALIDATION_ERROR (Academy) | Caused by the custom 200 GiB gp3 EBS volume on the core group — remove it and use default storage (m5.xlarge itself is allowed, as in Lab 7) |
 | Cluster "terminated by user" after the lab session ended | Ending/expiring the Academy session terminates all clusters. Clone the cluster, re-add the security-group rules, rerun section D |
+| Hadoop/Hive job stays at "Running job" with no progress | A Spark notebook session is holding the executors — `yarn application -list`, then `yarn application -kill <application_id of livy-session>` or Kernel -> Shutdown in JupyterHub |
+| Notebook error "Session '0' not found" | The Spark session was killed — Kernel -> Restart in JupyterHub |
 | "invalid instance profile LabRole" | LabRole is a service role, not an instance profile — use EMR_EC2_DefaultRole |
 | `ssh: connection timed out` | Security group has no port-22 rule for your IP, or your IP changed — re-add "My IP" |
 | `Permission denied (publickey)` | Wrong key file or wrong user — the user is `hadoop`, and the .pem must be chmod 400 |

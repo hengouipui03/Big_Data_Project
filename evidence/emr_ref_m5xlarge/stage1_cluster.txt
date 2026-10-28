@@ -1,0 +1,14 @@
+cluster_id=j-02025102D1KMIV42E97Q
+emr_release=emr-7.10.0
+s3_source=s3://inf2006-team07-bigdata/raw
+hdfs_destination=/raw
+distcp_application_id=application_1793167721813_0001
+staging_start_utc=2026-10-28T06:14:18Z
+staging_end_utc=2026-10-28T06:15:02Z
+staging_seconds=44
+hdfs_replication=2
+--- yarn nodes ---
+Total Nodes:2
+         Node-Id	     Node-State	Node-Http-Address	Number-of-Running-Containers
+ip-172-31-93-7.ec2.internal:8041	        RUNNING	ip-172-31-93-7.ec2.internal:8042	                           0
+ip-172-31-95-53.ec2.internal:8041	        RUNNING	ip-172-31-95-53.ec2.internal:8042	                           1

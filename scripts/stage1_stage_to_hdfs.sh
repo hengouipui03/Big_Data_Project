@@ -51,6 +51,10 @@ echo "== HDFS listing"
 hdfs dfs -ls -R "$DST" | tee "$EV/stage1_hdfs_listing.txt"
 hdfs dfs -du -h "$DST" | tee -a "$EV/stage1_hdfs_listing.txt"
 
+echo "== HDFS capacity and per-worker free space (brief: measure peak use and free space on each worker)"
+hdfs dfsadmin -report | tee "$EV/stage1_dfs_report.txt" >/dev/null
+head -12 "$EV/stage1_dfs_report.txt"
+
 echo "== Verifying every staged file (bytes, lines, sha256 read back from HDFS)"
 echo "hdfs_path,bytes,lines,sha256" > "$EV/stage1_hdfs_inventory.csv"
 hdfs dfs -ls -R "$DST" | awk '$1 !~ /^d/ {print $NF}' | while read -r f; do

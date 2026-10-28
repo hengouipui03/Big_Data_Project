@@ -54,6 +54,13 @@ print(spark.table("inf2006.prices_typed").count())   # expect 619040
 
 Save the notebook. Screenshot: `07_spark_reads_hive.png`.
 
+## Known behaviour
+
+- The Spark notebook session blocks the streaming/Hive jobs (fixed executor allocation fills YARN).
+  Shut the kernel down before running this script; restart it afterwards.
+- If the Hive transform step fails after the streaming job succeeded, resume with
+  `FROM=c bash scripts/stage2_streaming_and_hive.sh ...` (a = streaming, b = register, c = transform, d = results).
+
 ## Save evidence
 
 ```

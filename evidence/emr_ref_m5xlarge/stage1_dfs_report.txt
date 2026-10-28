@@ -1,0 +1,20 @@
+Configured Capacity: 124283478016 (115.75 GB)
+Present Capacity: 124031700992 (115.51 GB)
+DFS Remaining: 122840912752 (114.40 GB)
+DFS Used: 1190788240 (1.11 GB)
+DFS Used%: 0.96%
+Replicated Blocks:
+	Under replicated blocks: 0
+	Blocks with corrupt replicas: 0
+	Missing blocks: 0
+	Missing blocks (with replication factor 1): 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+Erasure Coded Block Groups: 
+	Low redundancy block groups: 0
+	Block groups with corrupt internal blocks: 0
+	Missing block groups: 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+
+-------------------------------------------------
