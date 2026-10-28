@@ -21,3 +21,7 @@ models/
 *.pem
 .env
 Project Instructions.pdf
+# Mac / editor junk
+.DS_Store
+.Rhistory
+__MACOSX/

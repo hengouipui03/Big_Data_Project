@@ -7,10 +7,21 @@ Reference configuration (from the course Q&A): emr-7.10.0; 1 primary + 2 core m5
 nodes, no autoscaling; one 200 GiB gp3 volume (3000 IOPS, 125 MiB/s) per core node; HDFS
 replication 2; Spark 2 executors x 2 cores x 6 GiB.
 
+**AWS Academy limitation (found 2026-10-28):** the Learner Lab account only allows EMR instance
+types up to *large* ("If you attempt to launch a larger instance type, it will be terminated").
+Therefore two cluster profiles are used — see `config/emr/README.md`:
+- **dev profile** (Academy): m5.large nodes, `config/emr/cluster_configurations_dev_m5large.json`
+- **reference profile** (standard AWS account, per Q&A "create a common AWS account and claim later"):
+  m5.xlarge nodes, `config/emr/cluster_configurations_reference_m5xlarge.json`
+Evidence from each profile is kept in separate folders: `evidence/emr_dev_m5large/` and
+`evidence/emr_ref_m5xlarge/`.
+
 Fill in the blanks below as you go — they become the values in Appendix A.
 
 | Item | Value |
 |---|---|
+| Profile (dev m5.large / reference m5.xlarge) | |
+| AWS account type (Academy / standard) | |
 | AWS region | |
 | S3 bucket name | |
 | Cluster ID (j-...) | |
@@ -56,15 +67,16 @@ AWS console -> EMR -> Create cluster.
 1. **Name**: `inf2006-bigdata`. **Release**: `emr-7.10.0`.
 2. **Applications**: tick Hadoop, Hive, Tez, Spark, Livy, JupyterHub. (Livy is required by JupyterHub's
    PySpark kernel.)
-3. **Cluster configuration** -> Instance groups:
-   - Primary: m5.xlarge, 1 instance.
-   - Core: m5.xlarge, 2 instances. Under EBS volumes for the core group add one volume:
+3. **Cluster configuration** -> Instance groups (m5.xlarge for the reference profile; m5.large for
+   the Academy dev profile — Academy terminates anything larger):
+   - Primary: 1 instance.
+   - Core: 2 instances. Under EBS volumes for the core group add one volume:
      gp3, 200 GiB, 3000 IOPS, 125 MiB/s.
    - Remove the Task group if one is shown. Do not enable cluster scaling.
 4. **Cluster termination**: turn OFF auto-termination for now (you control it) but set an idle
    timeout of 1 hour as a safety net.
 5. **Software settings / Configurations**: choose "Enter configuration" and paste the contents of
-   `config/emr/cluster_configurations.json`, replacing `REPLACE-WITH-YOUR-BUCKET-NAME` with your
+   the matching profile file in `config/emr/` (reference or dev), replacing `REPLACE-WITH-YOUR-BUCKET-NAME` with your
    bucket. What each block does:
    - `hdfs-site dfs.replication=2` — the Q&A reference setting (every HDFS block on 2 nodes).
    - `spark-defaults` — 2 executors x 2 cores x 6 GiB, dynamic allocation off so the allocation is
@@ -76,8 +88,9 @@ AWS console -> EMR -> Create cluster.
    the brief asks for ("unique IDs and traceable inputs and outputs").
 7. **Security / EC2 key pair**: choose the lab key pair (AWS Academy: `vockey`; download
    `labsuser.pem` from the lab page). You need it to ssh.
-8. **IAM roles**: use the lab's defaults (AWS Academy: service role `EMR_DefaultRole`, instance
-   profile `EMR_EC2_DefaultRole` — names may differ; use what the lab offers). Never type access keys
+8. **IAM roles**: AWS Academy: service role `EMR_DefaultRole`, instance profile `EMR_EC2_DefaultRole`
+   (confirmed working 2026-10-28; `LabRole` is not valid as an instance profile). Standard account:
+   the same two default roles, created automatically on first use. Never type access keys
    anywhere in the project.
 9. Create cluster. Note the **Cluster ID (j-...)** and the creation time. It takes 10-15 minutes to
    reach the status **Waiting**. Record that time too.
@@ -106,7 +119,7 @@ The prompt changes to `[hadoop@ip-... ~]$` — you are now typing on the cluster
 ```
 git clone https://github.com/hengouipui03/Big_Data_Project.git
 cd Big_Data_Project
-bash scripts/stage1_stage_to_hdfs.sh s3://<bucket>/raw /raw evidence/emr
+bash scripts/stage1_stage_to_hdfs.sh s3://<bucket>/raw /raw evidence/emr_dev_m5large   # or evidence/emr_ref_m5xlarge
 ```
 
 The script: copies S3 -> HDFS with `hadoop distcp` (a MapReduce job, so it gets a YARN application
@@ -166,7 +179,9 @@ Save the notebook as `inf2006_pipeline.ipynb`. Because of `jupyter-s3-conf` it i
 
 | Symptom | Likely cause / fix |
 |---|---|
-| Cluster goes to "Terminated with errors" | IAM role or subnet issue — check the cluster's "Events" tab; in AWS Academy use the lab's default roles and default VPC |
+| "VPC/subnet configuration was invalid: No route to any external sources" | The subnet is private — clone the cluster and pick a different (public) subnet in the default VPC |
+| "insufficient EC2 permissions" / VALIDATION_ERROR (Academy) | Instance type larger than *large* — Academy terminates it. Use m5.large (dev profile) or a standard account for m5.xlarge |
+| "invalid instance profile LabRole" | LabRole is a service role, not an instance profile — use EMR_EC2_DefaultRole |
 | `ssh: connection timed out` | Security group has no port-22 rule for your IP, or your IP changed — re-add "My IP" |
 | `Permission denied (publickey)` | Wrong key file or wrong user — the user is `hadoop`, and the .pem must be chmod 400 |
 | JupyterHub page does not load | Port 9443 rule missing; or use `https://` not `http://` |
