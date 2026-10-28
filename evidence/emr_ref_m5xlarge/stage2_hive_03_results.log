@@ -1,0 +1,128 @@
+Hive Session ID = f6d4e81b-882f-41ef-9c82-2c73ef425cf1
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j2.properties Async: true
+OK
+Time taken: 0.666 seconds
+OK
+tab_name
+gdelt_audit_rejects
+gdelt_daily_audit
+gdelt_daily_typed
+prices_typed
+prices_yearly_coverage
+raw_prices
+raw_prices_duplicates
+raw_prices_quality
+raw_prices_series_length
+Time taken: 0.095 seconds, Fetched: 9 row(s)
+OK
+tbl
+raw_prices_quality
+Time taken: 0.979 seconds, Fetched: 1 row(s)
+OK
+raw_prices_quality.rows_total	raw_prices_quality.tickers	raw_prices_quality.date_min	raw_prices_quality.date_max	raw_prices_quality.rows_up_to_2017_12_29	raw_prices_quality.empty_open	raw_prices_quality.empty_high	raw_prices_quality.empty_low	raw_prices_quality.empty_close	raw_prices_quality.empty_volume	raw_prices_quality.ohlc_inconsistent	raw_prices_quality.nonpositive
+619040	505	2013-02-08	2018-02-07	605910	11	8	8	0	0	12	0
+Time taken: 0.386 seconds, Fetched: 1 row(s)
+OK
+tbl
+raw_prices_duplicates
+Time taken: 0.084 seconds, Fetched: 1 row(s)
+OK
+raw_prices_duplicates.duplicate_ticker_date
+0
+Time taken: 0.098 seconds, Fetched: 1 row(s)
+OK
+tbl
+short_series
+Time taken: 0.087 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261028073307_b834f3c0-ef7e-400e-aa4b-4e5f6f00b459
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1793167721813_0008)
+
+Map 1: -/-	Reducer 2: 0/1	
+Map 1: 0/1	Reducer 2: 0/1	
+Map 1: 0(+1)/1	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 0(+1)/1	
+Map 1: 1/1	Reducer 2: 1/1	
+OK
+raw_prices_series_length.ticker	raw_prices_series_length.n_rows	raw_prices_series_length.first_day	raw_prices_series_length.last_day	raw_prices_series_length.short_series
+APTV	44	2017-12-05	2018-02-07	1
+BHF	143	2017-07-17	2018-02-07	1
+BHGE	152	2017-07-03	2018-02-07	1
+DWDP	109	2017-09-01	2018-02-07	1
+DXC	215	2017-04-03	2018-02-07	1
+EVHC	297	2016-12-02	2018-02-07	1
+FTV	404	2016-07-01	2018-02-07	1
+HLT	276	2017-01-04	2018-02-07	1
+UA	464	2016-04-07	2018-02-07	1
+Time taken: 7.519 seconds, Fetched: 9 row(s)
+OK
+tbl
+prices_yearly_coverage
+Time taken: 0.05 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261028073315_62cbf67b-1456-4cf2-87e7-ffc96579c0a7
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1793167721813_0008)
+
+Map 1: -/-	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 1/1	
+OK
+prices_yearly_coverage.yr	prices_yearly_coverage.n_rows	prices_yearly_coverage.tickers	prices_yearly_coverage.first_day	prices_yearly_coverage.last_day
+2013	108438	483	2013-02-08	2013-12-31
+2014	122397	488	2014-01-02	2014-12-31
+2015	123719	495	2015-01-02	2015-12-31
+2016	125324	499	2016-01-04	2016-12-30
+2017	126032	505	2017-01-03	2017-12-29
+2018	13130	505	2018-01-02	2018-02-07
+Time taken: 0.553 seconds, Fetched: 6 row(s)
+OK
+tbl
+gdelt_daily_typed
+Time taken: 0.049 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261028073316_680f7fd8-5cb7-41c3-be62-a7fb2bdbc44f
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1793167721813_0008)
+
+Map 1: -/-	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 0(+1)/1	
+Map 1: 1/1	Reducer 2: 1/1	
+OK
+gdelt_daily_typed.date_added	gdelt_daily_typed.events	gdelt_daily_typed.avg_tone	gdelt_daily_typed.lag_events
+2015-12-01	228333	-2.1441	8211
+2015-12-02	236578	-2.0437	8453
+2015-12-03	235400	-2.2298	8267
+2015-12-04	227122	-2.232	7707
+2015-12-05	149629	-2.4895	4642
+2015-12-06	134434	-2.3953	4271
+2015-12-07	213738	-2.1165	8079
+Time taken: 0.775 seconds, Fetched: 7 row(s)
+OK
+tbl
+gdelt_audit_rejects
+Time taken: 0.042 seconds, Fetched: 1 row(s)
+OK
+gdelt_audit_rejects.reject_reason	gdelt_audit_rejects.line_count
+Time taken: 0.05 seconds
+OK
+tbl
+row_counts
+Time taken: 0.05 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261028073316_9c2cefda-3b2b-41b0-bab6-c7379eb5f799
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1793167721813_0008)
+
+Map 1: -/-	Map 4: -/-	Map 6: -/-	Map 8: -/-	Reducer 2: 0/1	Reducer 5: 0/1	Reducer 7: 0/1	Reducer 9: 0/1	
+Map 1: 0(+1)/2	Map 4: 1/1	Map 6: 1/1	Map 8: 1/1	Reducer 2: 0/1	Reducer 5: 0/1	Reducer 7: 0/1	Reducer 9: 0/1	
+Map 1: 2/2	Map 4: 1/1	Map 6: 1/1	Map 8: 1/1	Reducer 2: 0(+1)/1	Reducer 5: 1/1	Reducer 7: 1/1	Reducer 9: 1/1	
+Map 1: 2/2	Map 4: 1/1	Map 6: 1/1	Map 8: 1/1	Reducer 2: 1/1	Reducer 5: 1/1	Reducer 7: 1/1	Reducer 9: 1/1	
+OK
+table_name	n
+raw_prices	619040
+gdelt_daily_audit	7
+prices_typed	619040
+gdelt_daily_typed	7
+Time taken: 1.8 seconds, Fetched: 4 row(s)

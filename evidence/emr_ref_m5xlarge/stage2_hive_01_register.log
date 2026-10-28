@@ -1,0 +1,97 @@
+Hive Session ID = ce30469a-54d0-48f7-a300-817bdf99bc4e
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j2.properties Async: true
+OK
+Time taken: 0.843 seconds
+OK
+Time taken: 0.022 seconds
+OK
+Time taken: 0.051 seconds
+OK
+Time taken: 0.166 seconds
+OK
+Time taken: 0.011 seconds
+OK
+Time taken: 0.039 seconds
+OK
+gdelt_daily_audit
+raw_prices
+Time taken: 0.067 seconds, Fetched: 2 row(s)
+OK
+# col_name            	data_type           	comment             
+trade_date          	string              	yyyy-MM-dd trading day (US market)
+open                	double              	opening price, USD  
+high                	double              	intraday high, USD  
+low                 	double              	intraday low, USD   
+close               	double              	closing price, USD  
+volume              	bigint              	shares traded       
+ticker              	string              	exchange ticker symbol (source column Name)
+	 	 
+# Detailed Table Information	 	 
+Database:           	inf2006             	 
+OwnerType:          	USER                	 
+Owner:              	hadoop              	 
+CreateTime:         	Wed Oct 28 07:28:07 UTC 2026	 
+LastAccessTime:     	UNKNOWN             	 
+Retention:          	0                   	 
+Location:           	hdfs://ip-172-31-90-187.ec2.internal:8020/raw/prices/v2026-10-27	 
+Table Type:         	EXTERNAL_TABLE      	 
+Table Parameters:	 	 
+	EXTERNAL            	TRUE                
+	bucketing_version   	2                   
+	comment             	Raw daily price bars as downloaded; blank numeric fields read as NULL
+	numFiles            	1                   
+	skip.header.line.count	1                   
+	totalSize           	29580549            
+	transient_lastDdlTime	1793172487          
+	 	 
+# Storage Information	 	 
+SerDe Library:      	org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe	 
+InputFormat:        	org.apache.hadoop.mapred.TextInputFormat	 
+OutputFormat:       	org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat	 
+Compressed:         	No                  	 
+Num Buckets:        	-1                  	 
+Bucket Columns:     	[]                  	 
+Sort Columns:       	[]                  	 
+Storage Desc Params:	 	 
+	field.delim         	,                   
+	line.delim          	\n                  
+	serialization.format	,                   
+Time taken: 0.138 seconds, Fetched: 39 row(s)
+OK
+# col_name            	data_type           	comment             
+audit_key           	string              	DATEADDED yyyymmdd, or BAD_<reason> counter key
+events              	bigint              	number of event rows
+avg_tone            	string              	mean AvgTone (NA for counter keys)
+lag_events          	bigint              	events whose SQLDATE differs from DATEADDED
+	 	 
+# Detailed Table Information	 	 
+Database:           	inf2006             	 
+OwnerType:          	USER                	 
+Owner:              	hadoop              	 
+CreateTime:         	Wed Oct 28 07:28:07 UTC 2026	 
+LastAccessTime:     	UNKNOWN             	 
+Retention:          	0                   	 
+Location:           	hdfs://ip-172-31-90-187.ec2.internal:8020/audit/gdelt_daily/v2026-10-27	 
+Table Type:         	EXTERNAL_TABLE      	 
+Table Parameters:	 	 
+	EXTERNAL            	TRUE                
+	bucketing_version   	2                   
+	comment             	Per-day GDELT audit summary produced by Hadoop Streaming
+	numFiles            	2                   
+	totalSize           	203                 
+	transient_lastDdlTime	1793172487          
+	 	 
+# Storage Information	 	 
+SerDe Library:      	org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe	 
+InputFormat:        	org.apache.hadoop.mapred.TextInputFormat	 
+OutputFormat:       	org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat	 
+Compressed:         	No                  	 
+Num Buckets:        	-1                  	 
+Bucket Columns:     	[]                  	 
+Sort Columns:       	[]                  	 
+Storage Desc Params:	 	 
+	field.delim         	\t                  
+	line.delim          	\n                  
+	serialization.format	\t                  
+Time taken: 0.055 seconds, Fetched: 35 row(s)
