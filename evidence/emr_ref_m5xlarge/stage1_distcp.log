@@ -1,0 +1,94 @@
+2026-10-28 06:14:19,675 INFO tools.DistCp: Input Options: DistCpOptions{atomicCommit=false, syncFolder=false, deleteMissing=false, ignoreFailures=false, overwrite=false, append=false, useDiff=false, useRdiff=false, fromSnapshot=null, toSnapshot=null, skipCRC=false, blocking=true, numListstatusThreads=0, maxMaps=20, mapBandwidth=0.0, copyStrategy='uniformsize', preserveStatus=[], atomicWorkPath=null, logPath=null, sourceFileListing=null, sourcePaths=[s3://inf2006-team07-bigdata/raw], targetPath=/raw, filtersFile='null', blocksPerChunk=0, copyBufferSize=8192, verboseLog=false, directWrite=false, useiterator=false, updateRoot=false}, sourcePaths=[s3://inf2006-team07-bigdata/raw], targetPathExists=false, preserveRawXattrs=false
+2026-10-28 06:14:19,885 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-90-187.ec2.internal/172.31.90.187:8032
+2026-10-28 06:14:20,027 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-90-187.ec2.internal/172.31.90.187:10200
+2026-10-28 06:14:20,218 INFO s3a.EMRFSToS3AConfigMapping: Mapping EMRFS config fs.s3.sts.endpoint to S3A config fs.s3a.assumed.role.sts.endpoint
+2026-10-28 06:14:20,219 INFO s3a.EMRFSToS3AConfigMapping: Mapping EMRFS config fs.s3.buffer.dir to S3A config fs.s3a.buffer.dir
+2026-10-28 06:14:20,313 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+2026-10-28 06:14:20,422 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 300 second(s).
+2026-10-28 06:14:20,422 INFO impl.MetricsSystemImpl: s3a-file-system metrics system started
+2026-10-28 06:14:22,372 INFO tools.SimpleCopyListing: Starting: Building listing using multi threaded approach for s3://inf2006-team07-bigdata/raw
+2026-10-28 06:14:22,464 INFO tools.SimpleCopyListing: Building listing using multi threaded approach for s3://inf2006-team07-bigdata/raw: duration 0:00.092s
+2026-10-28 06:14:22,573 INFO tools.SimpleCopyListing: Paths (files+dirs) cnt = 13; dirCnt = 5
+2026-10-28 06:14:22,573 INFO tools.SimpleCopyListing: Build file listing completed.
+2026-10-28 06:14:22,574 INFO Configuration.deprecation: io.sort.mb is deprecated. Instead, use mapreduce.task.io.sort.mb
+2026-10-28 06:14:22,574 INFO Configuration.deprecation: io.sort.factor is deprecated. Instead, use mapreduce.task.io.sort.factor
+2026-10-28 06:14:22,703 INFO tools.DistCp: Number of paths in the copy list: 13
+2026-10-28 06:14:22,756 INFO tools.DistCp: Number of paths in the copy list: 13
+2026-10-28 06:14:22,776 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-90-187.ec2.internal/172.31.90.187:8032
+2026-10-28 06:14:22,776 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-90-187.ec2.internal/172.31.90.187:10200
+2026-10-28 06:14:22,873 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoop/.staging/job_1793167721813_0001
+2026-10-28 06:14:22,985 INFO mapreduce.JobSubmitter: number of splits:12
+2026-10-28 06:14:23,153 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1793167721813_0001
+2026-10-28 06:14:23,153 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2026-10-28 06:14:23,336 INFO conf.Configuration: resource-types.xml not found
+2026-10-28 06:14:23,337 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2026-10-28 06:14:23,756 INFO impl.YarnClientImpl: Submitted application application_1793167721813_0001
+2026-10-28 06:14:23,794 INFO mapreduce.Job: The url to track the job: http://ip-172-31-90-187.ec2.internal:20888/proxy/application_1793167721813_0001/
+2026-10-28 06:14:23,794 INFO tools.DistCp: DistCp job-id: job_1793167721813_0001
+2026-10-28 06:14:23,802 INFO mapreduce.Job: Running job: job_1793167721813_0001
+2026-10-28 06:14:30,926 INFO mapreduce.Job: Job job_1793167721813_0001 running in uber mode : false
+2026-10-28 06:14:30,927 INFO mapreduce.Job:  map 0% reduce 0%
+2026-10-28 06:14:41,030 INFO mapreduce.Job:  map 8% reduce 0%
+2026-10-28 06:14:43,094 INFO mapreduce.Job:  map 17% reduce 0%
+2026-10-28 06:14:50,141 INFO mapreduce.Job:  map 25% reduce 0%
+2026-10-28 06:14:51,146 INFO mapreduce.Job:  map 33% reduce 0%
+2026-10-28 06:14:52,152 INFO mapreduce.Job:  map 42% reduce 0%
+2026-10-28 06:14:53,157 INFO mapreduce.Job:  map 50% reduce 0%
+2026-10-28 06:14:54,164 INFO mapreduce.Job:  map 67% reduce 0%
+2026-10-28 06:15:00,195 INFO mapreduce.Job:  map 83% reduce 0%
+2026-10-28 06:15:01,198 INFO mapreduce.Job:  map 92% reduce 0%
+2026-10-28 06:15:02,202 INFO mapreduce.Job:  map 100% reduce 0%
+2026-10-28 06:15:02,208 INFO mapreduce.Job: Job job_1793167721813_0001 completed successfully
+2026-10-28 06:15:02,274 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=0
+		FILE: Number of bytes written=3957266
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=7590
+		HDFS: Number of bytes written=566303198
+		HDFS: Number of read operations=137
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=54
+		HDFS: Number of bytes read erasure-coded=0
+		S3: Number of bytes read=566303198
+		S3: Number of bytes written=0
+		S3: Number of read operations=13
+		S3: Number of large read operations=0
+		S3: Number of write operations=0
+	Job Counters 
+		Launched map tasks=12
+		Other local map tasks=12
+		Total time spent by all maps in occupied slots (ms)=450969600
+		Total time spent by all reduces in occupied slots (ms)=0
+		Total time spent by all map tasks (ms)=146800
+		Total vcore-milliseconds taken by all map tasks=146800
+		Total megabyte-milliseconds taken by all map tasks=450969600
+	Map-Reduce Framework
+		Map input records=13
+		Map output records=0
+		Input split bytes=1644
+		Spilled Records=0
+		Failed Shuffles=0
+		Merged Map outputs=0
+		GC time elapsed (ms)=1454
+		CPU time spent (ms)=82700
+		Physical memory (bytes) snapshot=5292584960
+		Virtual memory (bytes) snapshot=54547308544
+		Total committed heap usage (bytes)=3986685952
+		Peak Map Physical memory (bytes)=554508288
+		Peak Map Virtual memory (bytes)=4555583488
+	File Input Format Counters 
+		Bytes Read=5946
+	File Output Format Counters 
+		Bytes Written=0
+	DistCp Counters
+		Bandwidth in Bytes=122014672
+		Bytes Copied=566303198
+		Bytes Expected=566303198
+		Files Copied=8
+		DIR_COPY=5
+2026-10-28 06:15:02,282 INFO impl.MetricsSystemImpl: Stopping s3a-file-system metrics system...
+2026-10-28 06:15:02,282 INFO impl.MetricsSystemImpl: s3a-file-system metrics system stopped.
+2026-10-28 06:15:02,282 INFO impl.MetricsSystemImpl: s3a-file-system metrics system shutdown complete.

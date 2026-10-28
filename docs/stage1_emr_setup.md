@@ -20,18 +20,23 @@ Fill in the blanks below as you go — they become the values in Appendix A.
 
 | Item | Value |
 |---|---|
-| Profile (reference m5.xlarge / dev m5.large) | |
+| Profile (reference m5.xlarge / dev m5.large) | reference m5.xlarge |
 | AWS account | AWS Academy Learner Lab |
-| Core-node storage | EMR default (custom 200 GiB gp3 volume rejected by Academy) |
-| AWS region | |
-| S3 bucket name | |
-| Cluster ID (j-...) | |
-| Cluster created (UTC) | |
-| Cluster "Waiting" at (UTC) | |
-| Primary node public DNS | |
-| Key pair name | |
-| Staging seconds (from stage1_cluster.txt) | |
-| distcp application id | |
+| Core-node storage | EMR default, 64 GiB per core node (2 x 32 GiB gp2); HDFS configured capacity 124,283,478,016 bytes (115.75 GB). Custom 200 GiB gp3 volume rejected by Academy (cluster j-06371601XD1JEGSGGUW6, 2026-10-28 03:15 UTC, "Service role EMR_DefaultRole has insufficient EC2 permissions") |
+| AWS region | us-east-1 |
+| S3 bucket name | inf2006-team07-bigdata |
+| Cluster ID (j-...) | j-02025102D1KMIV42E97Q |
+| Cluster created (UTC) | 2026-10-28 06:02 UTC |
+| Cluster "Waiting" at (UTC) | 2026-10-28 06:09 UTC |
+| Primary node public DNS | ec2-52-91-240-125.compute-1.amazonaws.com (changes with every cluster) |
+| Key pair name | vockey |
+| Staging seconds (from stage1_cluster.txt) | 44 |
+| distcp application id | application_1793167721813_0001 |
+| Notebook test application id | application_1793167721813_0002 |
+| IAM roles | EMR_DefaultRole (service) / EMR_EC2_DefaultRole (instance profile) |
+| Extra dependency on primary node | 'sudo dnf install -y git' |
+| Software versions | Hadoop 3.4.1, Hive 3.1.3, Tez 0.10.2, Spark 3.5.5, Livy 0.8.0, JupyterHub 1.5.0, Amazon Linux 2023.12 |
+| Subnet / AZ | subnet-0f34e41d889847b68 / us-east-1b (public) |
 
 ---
 
