@@ -8,8 +8,9 @@ USE inf2006;
 
 -- A. raw quality audit (same definitions as src/pipeline/t1_profile_raw.py)
 DROP TABLE IF EXISTS raw_prices_quality;
-CREATE TABLE raw_prices_quality STORED AS ORC
-COMMENT 'Table-level quality counts of raw_prices, computed in Hive' AS
+CREATE TABLE raw_prices_quality
+COMMENT 'Table-level quality counts of raw_prices, computed in Hive'
+STORED AS ORC AS
 SELECT
   COUNT(*)                                                      AS rows_total,
   COUNT(DISTINCT ticker)                                        AS tickers,
@@ -29,22 +30,25 @@ SELECT
 FROM raw_prices;
 
 DROP TABLE IF EXISTS raw_prices_duplicates;
-CREATE TABLE raw_prices_duplicates STORED AS ORC
-COMMENT 'Number of (ticker, trade_date) keys that appear more than once in raw_prices' AS
+CREATE TABLE raw_prices_duplicates
+COMMENT 'Number of (ticker, trade_date) keys that appear more than once in raw_prices'
+STORED AS ORC AS
 SELECT COUNT(*) AS duplicate_ticker_date
 FROM (SELECT ticker, trade_date FROM raw_prices GROUP BY ticker, trade_date HAVING COUNT(*) > 1) d;
 
 DROP TABLE IF EXISTS raw_prices_series_length;
-CREATE TABLE raw_prices_series_length STORED AS ORC
-COMMENT 'Rows per ticker in raw_prices (short series flagged below 500 rows)' AS
+CREATE TABLE raw_prices_series_length
+COMMENT 'Rows per ticker in raw_prices (short series flagged below 500 rows)'
+STORED AS ORC AS
 SELECT ticker, COUNT(*) AS n_rows, MIN(trade_date) AS first_day, MAX(trade_date) AS last_day,
        CASE WHEN COUNT(*) < 500 THEN 1 ELSE 0 END AS short_series
 FROM raw_prices GROUP BY ticker;
 
 -- B. typed columnar tables (all rows kept; Parquet so Spark reads them efficiently)
 DROP TABLE IF EXISTS prices_typed;
-CREATE TABLE prices_typed STORED AS PARQUET
-COMMENT 'raw_prices with typed date and year; no rows removed' AS
+CREATE TABLE prices_typed
+COMMENT 'raw_prices with typed date and year; no rows removed'
+STORED AS PARQUET AS
 SELECT ticker,
        CAST(trade_date AS DATE)          AS trade_date,
        YEAR(CAST(trade_date AS DATE))    AS yr,
@@ -52,8 +56,9 @@ SELECT ticker,
 FROM raw_prices;
 
 DROP TABLE IF EXISTS gdelt_daily_typed;
-CREATE TABLE gdelt_daily_typed STORED AS PARQUET
-COMMENT 'Streaming audit rows with a real DATE and numeric tone; BAD_* counters excluded' AS
+CREATE TABLE gdelt_daily_typed
+COMMENT 'Streaming audit rows with a real DATE and numeric tone; BAD_* counters excluded'
+STORED AS PARQUET AS
 SELECT CAST(CONCAT(SUBSTR(audit_key,1,4),'-',SUBSTR(audit_key,5,2),'-',SUBSTR(audit_key,7,2)) AS DATE) AS date_added,
        events,
        CAST(avg_tone AS DOUBLE) AS avg_tone,
@@ -62,16 +67,18 @@ FROM gdelt_daily_audit
 WHERE audit_key RLIKE '^[0-9]{8}$';
 
 DROP TABLE IF EXISTS gdelt_audit_rejects;
-CREATE TABLE gdelt_audit_rejects STORED AS ORC
-COMMENT 'Malformed GDELT lines counted by the streaming mapper, by reason' AS
+CREATE TABLE gdelt_audit_rejects
+COMMENT 'Malformed GDELT lines counted by the streaming mapper, by reason'
+STORED AS ORC AS
 SELECT audit_key AS reject_reason, events AS line_count
 FROM gdelt_daily_audit
 WHERE audit_key NOT RLIKE '^[0-9]{8}$';
 
 -- C. coverage per year (train 2013-2015 / validation 2016 / test 2017 reporting)
 DROP TABLE IF EXISTS prices_yearly_coverage;
-CREATE TABLE prices_yearly_coverage STORED AS ORC
-COMMENT 'Rows, tickers and date range per calendar year in prices_typed' AS
+CREATE TABLE prices_yearly_coverage
+COMMENT 'Rows, tickers and date range per calendar year in prices_typed'
+STORED AS ORC AS
 SELECT yr, COUNT(*) AS n_rows, COUNT(DISTINCT ticker) AS tickers,
        MIN(trade_date) AS first_day, MAX(trade_date) AS last_day
 FROM prices_typed GROUP BY yr;

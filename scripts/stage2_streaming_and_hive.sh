@@ -7,6 +7,8 @@
 # Arguments: 1 = raw version folder name under /raw/<source>/ (default v2026-10-27)
 #            2 = evidence folder (default evidence/emr_ref_m5xlarge)
 #            3 = number of reducers for the streaming job (default 2)
+# Resume:    FROM=c bash scripts/stage2_streaming_and_hive.sh ...   starts at sub-stage c
+#            (a = streaming, b = Hive register, c = Hive transform, d = Hive results)
 #
 # Produces in the evidence folder:
 #   stage2_streaming.log           full Hadoop Streaming job log (application id, counters)
@@ -27,6 +29,8 @@ RAW_PRICES=/raw/prices/$VER
 AUDIT_OUT=/audit/gdelt_daily/$VER
 STREAMING_JAR=$(ls /usr/lib/hadoop/hadoop-streaming.jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar 2>/dev/null | head -1)
 HIVE_CMD=${HIVE_CMD:-hive}
+FROM=${FROM:-a}
+runstep() { [[ "$1" < "$FROM" ]] && return 1 || return 0; }
 RUNLOG="$EV/run_log.csv"
 [ -f "$RUNLOG" ] || echo "stage,engine,start_utc,end_utc,seconds,application_ids,input,output,rows_out,notes" > "$RUNLOG"
 
@@ -34,6 +38,7 @@ now() { date -u +%FT%TZ; }
 appids() { grep -o 'application_[0-9_]*' "$1" | sort -u | tr '\n' ' ' | sed 's/ $//'; }
 logrow() { echo "$1,$2,$3,$4,$5,\"$6\",$7,$8,$9,\"${10}\"" >> "$RUNLOG"; }
 
+if runstep a; then
 echo "== Stage 2a: Hadoop Streaming audit over $RAW_GDELT -> $AUDIT_OUT ($REDUCERS reducers)"
 hdfs dfs -rm -r -f "$AUDIT_OUT" >/dev/null 2>&1 || true
 S=$(now); t0=$(date +%s)
@@ -73,25 +78,32 @@ for k in sorted(set(emr) | set(loc)):
     print(f"{k:14} {e[0] if e else '-':>11} {l[0] if l else '-':>13} {e[1] if e else '-':>9} {l[1] if l else '-':>11} {e[2] if e else '-':>8} {l[2] if l else '-':>10} {'yes' if m else 'NO'}")
 print("RESULT:", "EMR streaming output matches local run on every date key" if ok else "MISMATCH - investigate")
 EOF
+fi
 
+if runstep b; then
 echo "== Stage 2b: Hive register raw tables"
 S=$(now); t0=$(date +%s)
 $HIVE_CMD --hivevar raw_prices_path="$RAW_PRICES" --hivevar audit_path="$AUDIT_OUT" \
   -f sql/hive/01_register_raw.hql 2>&1 | tee "$EV/stage2_hive_01_register.log"
 t1=$(date +%s); E=$(now)
 logrow stage2b_hive_register hive_tez "$S" "$E" $((t1-t0)) "$(appids "$EV/stage2_hive_01_register.log")" "$RAW_PRICES;$AUDIT_OUT" "inf2006.raw_prices;inf2006.gdelt_daily_audit" "" "external tables, no data movement"
+fi
 
+if runstep c; then
 echo "== Stage 2c: Hive quality audit + typed tables (Tez)"
 S=$(now); t0=$(date +%s)
 $HIVE_CMD -f sql/hive/02_quality_and_typed.hql 2>&1 | tee "$EV/stage2_hive_02_transform.log"
 t1=$(date +%s); E=$(now)
 logrow stage2c_hive_transform hive_tez "$S" "$E" $((t1-t0)) "$(appids "$EV/stage2_hive_02_transform.log")" "inf2006.raw_prices;inf2006.gdelt_daily_audit" "inf2006.prices_typed;gdelt_daily_typed;raw_prices_quality;raw_prices_duplicates;raw_prices_series_length;gdelt_audit_rejects;prices_yearly_coverage" "" "CTAS on Tez"
+fi
 
+if runstep d; then
 echo "== Stage 2d: Hive results"
 S=$(now); t0=$(date +%s)
 $HIVE_CMD -f sql/hive/03_show_results.hql 2>&1 | tee "$EV/stage2_hive_03_results.log"
 t1=$(date +%s); E=$(now)
 logrow stage2d_hive_results hive_tez "$S" "$E" $((t1-t0)) "$(appids "$EV/stage2_hive_03_results.log")" "inf2006.*" "stdout" "" "SELECT evidence"
+fi
 
 echo "== Hive warehouse contents"
 hdfs dfs -ls -R /user/hive/warehouse/inf2006.db 2>/dev/null | tee "$EV/stage2_hive_warehouse_listing.txt" || true
