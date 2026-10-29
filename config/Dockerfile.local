@@ -1,0 +1,4 @@
+# Local development image only (the assessed run uses EMR's own Spark/Python).
+FROM apache/spark:3.5.3-scala2.12-java17-python3-ubuntu
+USER root
+RUN pip3 install --no-cache-dir numpy==1.26.4 pandas==2.2.3 pyarrow==17.0.0 matplotlib==3.9.2

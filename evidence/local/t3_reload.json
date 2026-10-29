@@ -1,0 +1,37 @@
+{
+  "model_path": "models/final_pipeline",
+  "tolerance": 1e-09,
+  "checks": [
+    {
+      "check": "model dir has metadata/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "model dir has stages/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "PipelineModel loads",
+      "passed": true,
+      "detail": "ImputerModel -> VectorAssembler -> StandardScalerModel -> LogisticRegressionModel"
+    },
+    {
+      "check": "row counts match",
+      "passed": true,
+      "detail": "new=25533 saved=25533 joined=25533"
+    },
+    {
+      "check": "max |prob diff| <= 1e-09",
+      "passed": true,
+      "detail": "max_abs_diff=0.0"
+    },
+    {
+      "check": "no class-label differences",
+      "passed": true,
+      "detail": "differing_predictions=0"
+    }
+  ],
+  "max_abs_prob_diff": 0.0
+}

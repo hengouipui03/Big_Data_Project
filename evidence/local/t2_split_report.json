@@ -1,0 +1,42 @@
+{
+  "train": {
+    "rows": 66424,
+    "first_anchor": "2013-05-10",
+    "last_anchor": "2015-12-18",
+    "last_outcome_date": "2015-12-28",
+    "tickers": 492,
+    "share_up": 0.5334517644224979,
+    "anchor_rows_total": 73356,
+    "excluded_by_reason": {
+      "insufficient_history": 6437,
+      "target_crosses_boundary": 492,
+      "gap_next_block": 3
+    }
+  },
+  "validation": {
+    "rows": 25805,
+    "first_anchor": "2016-01-04",
+    "last_anchor": "2016-12-23",
+    "last_outcome_date": "2016-12-30",
+    "tickers": 498,
+    "share_up": 0.5328037202092618,
+    "anchor_rows_total": 26359,
+    "excluded_by_reason": {
+      "insufficient_history": 56,
+      "target_crosses_boundary": 498
+    }
+  },
+  "test": {
+    "rows": 25533,
+    "first_anchor": "2017-01-06",
+    "last_anchor": "2017-12-22",
+    "last_outcome_date": "2017-12-29",
+    "tickers": 504,
+    "share_up": 0.5637410410057573,
+    "anchor_rows_total": 26116,
+    "excluded_by_reason": {
+      "no_next_anchor": 504,
+      "insufficient_history": 79
+    }
+  }
+}
