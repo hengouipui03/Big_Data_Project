@@ -38,3 +38,21 @@ Sizing evidence from the dev profile (reference cluster, default storage):
 | All 731 days | 731 | 54.7 | 109 GB — does not fit default storage | ~73 min |
 
 Decision to be recorded here with date, file list and checksums once confirmed.
+
+## Prepared candidate larger profile — 2016 Q1
+
+This is a locally acquired, checksum-verified candidate for the later full-profile
+run; it is **not yet the declared assessed full profile**. It provides genuine input
+growth relative to the seven-day development profile without exceeding the documented
+HDFS capacity of the current AWS Academy cluster.
+
+| Source | Dates / files | ZIP bytes | Expanded bytes | Event rows | Provenance |
+|---|---|---:|---:|---:|---|
+| GDELT 1.0 daily export | `20160101`–`20160331` (91 daily files) | 1,217,804,334 | 6,944,840,235 | 18,369,793 | `evidence/gdelt_manifest/q1_2016/manifest.tsv` (published MD5 = acquired MD5 for every file); `evidence/local/q1_2016/inventory.csv` (expanded-file SHA-256 and profile) |
+
+Before running it on EMR, upload the extracted files to a separate versioned S3/HDFS
+prefix (for example `raw/gdelt/v2026-10-29-q1-2016`) so the existing seven-day
+development input remains reproducible. Copy the verified price CSV to the matching
+`raw/prices/v2026-10-29-q1-2016/` prefix as well; Stage 2 deliberately uses one version
+label for both sources. Use `evidence/local/q1_2016/streaming_gdelt_audit.tsv` as the
+Stage 2 local comparison input for this profile.

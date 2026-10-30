@@ -1,6 +1,6 @@
 """Task 1: raw-corpus inventory, checksums and quality profile (pure Python, streaming).
 
-Usage: python -I src/pipeline/t1_profile_raw.py [raw_dir] [out_dir] [sources_json]
+Usage: python -I src/pipeline/t1_profile_raw.py [raw_dir] [out_dir] [sources_json] [gdelt_dir] [gdelt_manifest]
 Writes inventory.csv (per-file provenance: source URL, acquisition time, bytes, rows,
 sha256) and quality_summary.json.
 
@@ -13,6 +13,8 @@ import csv, collections, datetime, hashlib, json, os, sys
 RAW = sys.argv[1] if len(sys.argv) > 1 else "data/raw"
 OUT = sys.argv[2] if len(sys.argv) > 2 else "evidence/local"
 SOURCES = sys.argv[3] if len(sys.argv) > 3 else "config/sources.json"
+GDELT_DIR = sys.argv[4] if len(sys.argv) > 4 else os.path.join(RAW, "gdelt")
+GDELT_MANIFEST = sys.argv[5] if len(sys.argv) > 5 else None
 os.makedirs(OUT, exist_ok=True)
 
 with open(SOURCES) as f:
@@ -26,6 +28,16 @@ if os.path.exists(ACQ_LOG):
         for r in csv.DictReader(f):
             acq[(r["source"], r["file"])] = r
 
+# The range downloader records the official ZIP checksum and exact acquisition
+# time in a TSV manifest.  It is intentionally separate from acquisition_log.csv
+# because a full GDELT profile can contain many daily files.
+gdelt_acq = {}
+if GDELT_MANIFEST and os.path.exists(GDELT_MANIFEST):
+    with open(GDELT_MANIFEST, newline="") as f:
+        for r in csv.DictReader(f, delimiter="\t"):
+            if r["status"] == "OK":
+                gdelt_acq[r["date"] + ".export.CSV"] = r
+
 
 def provenance(src, name, path):
     """Source URL, version and acquisition time for one raw file.
@@ -36,6 +48,8 @@ def provenance(src, name, path):
     url = meta.get("url_template", "").format(file=name)
     if (src, name) in acq:
         return acq[(src, name)]["url"], meta.get("version", ""), acq[(src, name)]["acquired_utc"]
+    if src == "gdelt" and name in gdelt_acq:
+        return gdelt_acq[name]["url"], meta.get("version", ""), gdelt_acq[name]["acquired_utc"]
     acquired = meta.get("acquired_utc") or datetime.datetime.fromtimestamp(
         os.path.getmtime(path), datetime.timezone.utc).isoformat(timespec="seconds")
     return url, meta.get("version", ""), acquired
@@ -106,11 +120,18 @@ def profile_gdelt(path):
 inventory, summary = [], {"prices": None, "gdelt": {}}
 now = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
 for src in ("prices", "gdelt"):
-    d = os.path.join(RAW, src)
+    d = GDELT_DIR if src == "gdelt" else os.path.join(RAW, src)
     if not os.path.isdir(d):
         continue
-    for name in sorted(os.listdir(d)):
+    names = sorted(os.listdir(d))
+    # The brief-linked price snapshot has a canonical filename.  Prefer it if
+    # it is present so a leftover experimental CSV cannot alter the corpus.
+    if src == "prices" and "all_stocks_5yr.csv" in names:
+        names = ["all_stocks_5yr.csv"]
+    for name in names:
         p = os.path.join(d, name)
+        if not os.path.isfile(p):
+            continue
         prof = profile_prices(p) if src == "prices" else profile_gdelt(p)
         if src == "prices":
             summary["prices"] = prof

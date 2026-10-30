@@ -17,7 +17,7 @@ from pyspark.sql import SparkSession, Window, functions as F
 from pyspark.sql.types import StringType, StructField, StructType
 
 p = argparse.ArgumentParser()
-p.add_argument("--prices", default="data/raw/prices/all_stocks_5yrs.csv")
+p.add_argument("--prices", default="data/raw/prices/all_stocks_5yr.csv")
 p.add_argument("--out", default="work/prepared")
 p.add_argument("--evidence", default="evidence/local")
 p.add_argument("--data-end", default="2017-12-29")

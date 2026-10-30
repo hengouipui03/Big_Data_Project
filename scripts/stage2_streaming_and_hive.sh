@@ -7,6 +7,7 @@
 # Arguments: 1 = raw version folder name under /raw/<source>/ (default v2026-10-27)
 #            2 = evidence folder (default evidence/emr_ref_m5xlarge)
 #            3 = number of reducers for the streaming job (default 2)
+#            4 = matching local streaming-audit file (default development profile)
 # Resume:    FROM=c bash scripts/stage2_streaming_and_hive.sh ...   starts at sub-stage c
 #            (a = streaming, b = Hive register, c = Hive transform, d = Hive results)
 #
@@ -22,6 +23,7 @@ set -euo pipefail
 VER=${1:-v2026-10-27}
 EV=${2:-evidence/emr_ref_m5xlarge}
 REDUCERS=${3:-2}
+LOCAL_AUDIT=${4:-evidence/local/streaming_gdelt_audit.tsv}
 mkdir -p "$EV"
 
 RAW_GDELT=/raw/gdelt/$VER
@@ -57,7 +59,7 @@ logrow stage2a_streaming_audit hadoop_streaming "$S" "$E" $((t1-t0)) "$(appids "
 echo "   streaming took $((t1-t0)) s; $ROWS output rows"
 
 echo "== Stage 2a check: EMR streaming output vs local (laptop) run"
-python3 - "$EV/stage2_streaming_output.tsv" evidence/local/streaming_gdelt_audit.tsv <<'EOF' | tee "$EV/stage2_streaming_vs_local.txt"
+python3 - "$EV/stage2_streaming_output.tsv" "$LOCAL_AUDIT" <<'EOF' | tee "$EV/stage2_streaming_vs_local.txt"
 import sys
 def load(p):
     d = {}

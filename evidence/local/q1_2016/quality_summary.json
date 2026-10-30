@@ -1,0 +1,854 @@
+{
+  "prices": {
+    "rows": 619040,
+    "tickers": 505,
+    "date_min": "2013-02-08",
+    "date_max": "2018-02-07",
+    "rows_up_to_2017-12-29": 605910,
+    "duplicate_ticker_date": 0,
+    "rows_with_empty_field": {
+      "open": 11,
+      "high": 8,
+      "low": 8
+    },
+    "ohlc_inconsistent_rows": 12,
+    "nonpositive_rows": 0,
+    "series_length_min_median_max": [
+      44,
+      1259,
+      1259
+    ],
+    "short_series_lt_500": [
+      "APTV",
+      "BHF",
+      "BHGE",
+      "DWDP",
+      "DXC",
+      "EVHC",
+      "FTV",
+      "HLT",
+      "UA"
+    ]
+  },
+  "gdelt": {
+    "20160101.export.CSV": {
+      "rows": 114871,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 2914,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160101": 114871
+      }
+    },
+    "20160102.export.CSV": {
+      "rows": 109259,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 2479,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160102": 109259
+      }
+    },
+    "20160103.export.CSV": {
+      "rows": 117583,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 3052,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160103": 117583
+      }
+    },
+    "20160104.export.CSV": {
+      "rows": 194646,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 5838,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160104": 194646
+      }
+    },
+    "20160105.export.CSV": {
+      "rows": 213565,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7025,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160105": 213565
+      }
+    },
+    "20160106.export.CSV": {
+      "rows": 222359,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 6751,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160106": 222359
+      }
+    },
+    "20160107.export.CSV": {
+      "rows": 221844,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 6831,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160107": 221844
+      }
+    },
+    "20160108.export.CSV": {
+      "rows": 209919,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 6219,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160108": 209919
+      }
+    },
+    "20160109.export.CSV": {
+      "rows": 147184,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4265,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160109": 147184
+      }
+    },
+    "20160110.export.CSV": {
+      "rows": 129936,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4121,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160110": 129936
+      }
+    },
+    "20160111.export.CSV": {
+      "rows": 203378,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7397,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160111": 203378
+      }
+    },
+    "20160112.export.CSV": {
+      "rows": 220753,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8194,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160112": 220753
+      }
+    },
+    "20160113.export.CSV": {
+      "rows": 238975,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8608,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160113": 238975
+      }
+    },
+    "20160114.export.CSV": {
+      "rows": 230527,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7666,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160114": 230527
+      }
+    },
+    "20160115.export.CSV": {
+      "rows": 221313,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7309,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160115": 221313
+      }
+    },
+    "20160116.export.CSV": {
+      "rows": 155023,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4658,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160116": 155023
+      }
+    },
+    "20160117.export.CSV": {
+      "rows": 145357,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4544,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160117": 145357
+      }
+    },
+    "20160118.export.CSV": {
+      "rows": 211583,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 6919,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160118": 211583
+      }
+    },
+    "20160119.export.CSV": {
+      "rows": 225989,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8364,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160119": 225989
+      }
+    },
+    "20160120.export.CSV": {
+      "rows": 242048,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8614,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160120": 242048
+      }
+    },
+    "20160121.export.CSV": {
+      "rows": 240629,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7911,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160121": 240629
+      }
+    },
+    "20160122.export.CSV": {
+      "rows": 229845,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7937,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160122": 229845
+      }
+    },
+    "20160123.export.CSV": {
+      "rows": 148711,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4815,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160123": 148711
+      }
+    },
+    "20160124.export.CSV": {
+      "rows": 133979,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4261,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160124": 133979
+      }
+    },
+    "20160125.export.CSV": {
+      "rows": 204838,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7504,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160125": 204838
+      }
+    },
+    "20160126.export.CSV": {
+      "rows": 222230,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8357,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160126": 222230
+      }
+    },
+    "20160127.export.CSV": {
+      "rows": 234605,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7810,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160127": 234605
+      }
+    },
+    "20160128.export.CSV": {
+      "rows": 237972,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7959,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160128": 237972
+      }
+    },
+    "20160129.export.CSV": {
+      "rows": 213970,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 6530,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160129": 213970
+      }
+    },
+    "20160130.export.CSV": {
+      "rows": 146618,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4529,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160130": 146618
+      }
+    },
+    "20160131.export.CSV": {
+      "rows": 127082,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 3762,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160131": 127082
+      }
+    },
+    "20160201.export.CSV": {
+      "rows": 218534,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7578,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160201": 218534
+      }
+    },
+    "20160202.export.CSV": {
+      "rows": 230346,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8540,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160202": 230346
+      }
+    },
+    "20160203.export.CSV": {
+      "rows": 230247,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8149,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160203": 230247
+      }
+    },
+    "20160204.export.CSV": {
+      "rows": 244440,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7879,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160204": 244440
+      }
+    },
+    "20160205.export.CSV": {
+      "rows": 230332,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7764,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160205": 230332
+      }
+    },
+    "20160206.export.CSV": {
+      "rows": 148902,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4867,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160206": 148902
+      }
+    },
+    "20160207.export.CSV": {
+      "rows": 131873,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4310,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160207": 131873
+      }
+    },
+    "20160208.export.CSV": {
+      "rows": 204404,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7176,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160208": 204404
+      }
+    },
+    "20160209.export.CSV": {
+      "rows": 225438,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8382,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160209": 225438
+      }
+    },
+    "20160210.export.CSV": {
+      "rows": 236801,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8722,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160210": 236801
+      }
+    },
+    "20160211.export.CSV": {
+      "rows": 247039,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8749,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160211": 247039
+      }
+    },
+    "20160212.export.CSV": {
+      "rows": 244943,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7588,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160212": 244943
+      }
+    },
+    "20160213.export.CSV": {
+      "rows": 171283,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 5299,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160213": 171283
+      }
+    },
+    "20160214.export.CSV": {
+      "rows": 151552,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4380,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160214": 151552
+      }
+    },
+    "20160215.export.CSV": {
+      "rows": 208240,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 6932,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160215": 208240
+      }
+    },
+    "20160216.export.CSV": {
+      "rows": 243764,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8394,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160216": 243764
+      }
+    },
+    "20160217.export.CSV": {
+      "rows": 249814,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8399,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160217": 249814
+      }
+    },
+    "20160218.export.CSV": {
+      "rows": 253173,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8450,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160218": 253173
+      }
+    },
+    "20160219.export.CSV": {
+      "rows": 247608,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7743,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160219": 247608
+      }
+    },
+    "20160220.export.CSV": {
+      "rows": 164283,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4931,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160220": 164283
+      }
+    },
+    "20160221.export.CSV": {
+      "rows": 147902,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4093,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160221": 147902
+      }
+    },
+    "20160222.export.CSV": {
+      "rows": 215071,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 6950,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160222": 215071
+      }
+    },
+    "20160223.export.CSV": {
+      "rows": 239988,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8100,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160223": 239988
+      }
+    },
+    "20160224.export.CSV": {
+      "rows": 246672,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7837,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160224": 246672
+      }
+    },
+    "20160225.export.CSV": {
+      "rows": 247527,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8045,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160225": 247527
+      }
+    },
+    "20160226.export.CSV": {
+      "rows": 236914,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 6797,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160226": 236914
+      }
+    },
+    "20160227.export.CSV": {
+      "rows": 161239,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4403,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160227": 161239
+      }
+    },
+    "20160228.export.CSV": {
+      "rows": 138889,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 3966,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160228": 138889
+      }
+    },
+    "20160229.export.CSV": {
+      "rows": 209195,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 6825,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160229": 209195
+      }
+    },
+    "20160301.export.CSV": {
+      "rows": 233967,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8310,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160301": 233967
+      }
+    },
+    "20160302.export.CSV": {
+      "rows": 246662,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8515,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160302": 246662
+      }
+    },
+    "20160303.export.CSV": {
+      "rows": 241359,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8531,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160303": 241359
+      }
+    },
+    "20160304.export.CSV": {
+      "rows": 229908,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7675,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160304": 229908
+      }
+    },
+    "20160305.export.CSV": {
+      "rows": 143773,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4493,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160305": 143773
+      }
+    },
+    "20160306.export.CSV": {
+      "rows": 140120,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4414,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160306": 140120
+      }
+    },
+    "20160307.export.CSV": {
+      "rows": 214138,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8192,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160307": 214138
+      }
+    },
+    "20160308.export.CSV": {
+      "rows": 231102,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8933,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160308": 231102
+      }
+    },
+    "20160309.export.CSV": {
+      "rows": 238101,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8446,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160309": 238101
+      }
+    },
+    "20160310.export.CSV": {
+      "rows": 240694,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8030,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160310": 240694
+      }
+    },
+    "20160311.export.CSV": {
+      "rows": 225180,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7610,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160311": 225180
+      }
+    },
+    "20160312.export.CSV": {
+      "rows": 146917,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4374,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160312": 146917
+      }
+    },
+    "20160313.export.CSV": {
+      "rows": 134098,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 4153,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160313": 134098
+      }
+    },
+    "20160314.export.CSV": {
+      "rows": 221286,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7304,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160314": 221286
+      }
+    },
+    "20160315.export.CSV": {
+      "rows": 239103,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8267,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160315": 239103
+      }
+    },
+    "20160316.export.CSV": {
+      "rows": 240057,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8155,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160316": 240057
+      }
+    },
+    "20160317.export.CSV": {
+      "rows": 231119,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7541,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160317": 231119
+      }
+    },
+    "20160318.export.CSV": {
+      "rows": 216821,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 6460,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160318": 216821
+      }
+    },
+    "20160319.export.CSV": {
+      "rows": 134964,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 3685,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160319": 134964
+      }
+    },
+    "20160320.export.CSV": {
+      "rows": 126314,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 3978,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160320": 126314
+      }
+    },
+    "20160321.export.CSV": {
+      "rows": 206434,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 6691,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160321": 206434
+      }
+    },
+    "20160322.export.CSV": {
+      "rows": 236749,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7428,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160322": 236749
+      }
+    },
+    "20160323.export.CSV": {
+      "rows": 243355,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 8606,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160323": 243355
+      }
+    },
+    "20160324.export.CSV": {
+      "rows": 231373,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7292,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160324": 231373
+      }
+    },
+    "20160325.export.CSV": {
+      "rows": 197494,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 5750,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160325": 197494
+      }
+    },
+    "20160326.export.CSV": {
+      "rows": 133538,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 3501,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160326": 133538
+      }
+    },
+    "20160327.export.CSV": {
+      "rows": 120215,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 3428,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160327": 120215
+      }
+    },
+    "20160328.export.CSV": {
+      "rows": 187465,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 6135,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160328": 187465
+      }
+    },
+    "20160329.export.CSV": {
+      "rows": 223933,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7190,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160329": 223933
+      }
+    },
+    "20160330.export.CSV": {
+      "rows": 233459,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7092,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160330": 233459
+      }
+    },
+    "20160331.export.CSV": {
+      "rows": 237091,
+      "rows_not_58_cols": 0,
+      "rows_event_date_ne_dateadded": 7063,
+      "empty_source_url": 0,
+      "dateadded_values": {
+        "20160331": 237091
+      }
+    }
+  }
+}

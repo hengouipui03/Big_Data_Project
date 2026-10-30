@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html><head><link rel="stylesheet" href="https://templates.lcs.brightspace.com/lib/assets/css/styles.min.css"></head><body style="color: rgb(32, 33, 34); font-family: verdana, sans-serif; font-size: 12px;"><h1>Curation of questions and answers</h1>
+<p><strong>Q</strong>: For the dataset, are we supposed to source the stock-price data ourselves, or can we used the dataset provided in the project brief?</p>
+<p><strong>A</strong>: You are supposed to use the datasets (links) provided in the brief.</p>
+<p>----</p>
+<p><strong>Q</strong>: We should use the dataset provided in the project brief, but our group can decide whether to use the all the datasets or some of the datasets based on the project objectives our group come up with right?</p>
+<p><strong>A</strong>: Yes.</p>
+<p>----</p>
+<p><strong>Q</strong>. Does the 60-minute timed run start once the raw data is already in HDFS, or should the copy from S3 into HDFS count towards the 60 minutes too?</p>
+<p><strong>A:</strong> Downloading the data, copying it from S3 to HDFS, and starting the cluster are excluded. The timed run covers processing the raw inputs through MapReduce, Hive, feature preparation, training and final outputs. Record the staging time separately.</p>
+<p><strong>----</strong></p>
+<p><strong>Q</strong>. The brief mentions 311 10-K/10-Q filings from 303 issuers, but the EDGAR link goes to SEC’s general access page. Is there a list of the filings we should use? Or should we pick the filings for the 505 tickers ourselves?</p>
+<p><strong>A</strong>: Thanks for spotting the missing list. The brief refers to a fixed collection of 311 filings from 303 issuers, comprising 156 annual reports (10-K) and 155 quarterly reports (10-Q) filed during 2013–2017.</p>
+<p>I have shared the exact inventory, including company names, filing dates and direct SEC download links. You do not need to select another collection or find filings for all 505 tickers. The collection does not provide a verified mapping to every ticker, so any relationships you use must be supported and documented. Auxiliary sources remain optional, as stated in the brief.</p>
+<p><a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=213445&amp;type=content&amp;rcode=SIT-820876" target="_blank" rel="noopener">Link</a></p>
+<p>----<br><strong>Q</strong>. The brief also refers to an “assessed workload profile” and “issued runtime/storage settings”. Will these be released separately? We’re mainly asking about the EMR release version and EBS volume size, since those decide whether the GDELT data fits in HDFS.</p>
+<p><strong>A</strong>: For EMR, you may use emr-7.10.0.</p>
+<p>Estimating your resource needs and justifying your choices is a useful part of the project. Nonetheless, I’m happy to provide a common reference configuration so you have a starting point:</p>
+<p>- Cluster: one primary and two core m5.xlarge nodes; no task nodes or autoscaling<br>- Worker storage: one 200 GiB gp3 data volume per core node, with 3,000 IOPS and 125 MiB/s throughput<br>- HDFS replication: explicitly set to 2<br>- Spark starting allocation: two executors, each with two cores and 6 GiB heap memory</p>
+<p>If you are unable to provision sufficient resources from AWS Academy credit, create a common AWS account and claim later within the allowed budget.</p>
+<p>Tip 1: you should explain your storage and memory estimates, then compare the reference settings with a justified alternative using identical inputs and output checks. Report the median of three runs, resource use and any trade-offs. Marks will reward a sound comparison and supported reasoning; a faster run alone does not earn higher marks.</p>
+<p>Tip 2: if the workload can't reasonably meet the 60-minute limit, identify the bottlenecks and an enhanced resource plan.</p>
+<p>----</p>
+<p><br><strong>Q</strong>. Is Hive on Tez, the EMR default, acceptable for the Hive requirement?</p>
+<p><strong>A.</strong> Yes, Hive on Tez is acceptable. Use actual Hive execution and retain evidence of your queries and results. Spark SQL alone does not fulfil the Hive requirement, and the separate Hadoop Streaming requirement still applies. Tez is a supported Hive execution engine on EMR.</p>
+<p>----</p>
+<p><strong>Q</strong>. The labs used Zeppelin. Is it fine if we build and export our notebook as a JupyterHub .ipynb on EMR?</p>
+<p><strong>A</strong>: Yes, JupyterHub on EMR is fine. The exported .ipynb is a required submission, regardless of which notebook interface you use. Include any helper files and setup instructions, and verify that the notebook reruns successfully in a fresh EMR session.</p>
+<p>----</p>
+<p><strong>Q</strong>. For Task 3, can we have more than one model if we do more than one tasks?</p>
+<p><strong>A</strong>: Yes. As you are unlikely training a generative model, you should train one specialised model for each task.&nbsp;</p>
+<p>----</p>
+<p><strong>Q</strong>. For ML, can I have more than one approaches to solve one task?</p>
+<p><strong>A</strong>: Yes, you can have multiple approaches by training multiple models for the same task you choose. This is a good approach to demonstrate the technical depth and quality of your model.&nbsp;</p>
+<p>----</p>
+<p data-pm-slice="1 1 []"><strong>Q: </strong>EMR limits the EBS root volume to 100 GiB. Is that enough for the project?</p>
+<p><strong>A: </strong>Yes. The&nbsp;<strong>root volume</strong> holds the operating system and applications; it is separate from the storage used for project data.&nbsp;</p>
+<p>For the reference configuration:</p>
+<ul data-spread="false">
+<li>
+<p>Set the&nbsp;<strong>root volume to 30 GiB per node</strong>.</p>
+</li>
+<li>
+<p>Configure&nbsp;<strong>200 GiB of additional EBS data storage per core node</strong>&nbsp;separately, under the core-node storage settings.</p>
+</li>
+</ul></body></html>

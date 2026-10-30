@@ -7,3 +7,4 @@ gdelt,20151204.export.CSV,https://data.gdeltproject.org/events/20151204.export.C
 gdelt,20151205.export.CSV,https://data.gdeltproject.org/events/20151205.export.CSV.zip,2026-10-27T07:18:40+00:00,9528835,52c0b8ccfea53c06652a111babcfb7cc610d4f52c82ec9aa0009d9c06512457c
 gdelt,20151206.export.CSV,https://data.gdeltproject.org/events/20151206.export.CSV.zip,2026-10-27T07:18:42+00:00,8468061,aca79a16f424b30f919b6aa987a83d0f885f99dcc1eb95933733ed6302b39ddb
 gdelt,20151207.export.CSV,https://data.gdeltproject.org/events/20151207.export.CSV.zip,2026-10-27T07:18:46+00:00,14126683,197609330bb16987c52c372e383e1eef145c4c8b9f3c7008101f914d8f84e496
+prices,all_stocks_5yr.csv,https://raw.githubusercontent.com/plotly/datasets/master/all_stocks_5yr.csv,2026-10-29T12:10:28+00:00,29580549,6aea253cd19de60b568143991aaf1fa482456565c389205658d236e595e716cf
