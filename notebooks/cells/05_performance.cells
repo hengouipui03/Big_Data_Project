@@ -1,0 +1,117 @@
+#@@ md
+## 5. Performance, memory and repetitions (report Section 6)
+
+* **Stage timings** — every stage above was wall-clock timed with `stage(...)` (Spark actions run inside each stage, so lazy evaluation is included).
+* **Repetitions** — the brief asks for the **median of three** repetitions. The benchmark below re-runs the *same* pipeline three times from the staged inputs: Task 2 (clean → features → splits → news) and the final fit + test scoring of both models with the frozen configuration. (The 14-experiment model-selection search is a one-off development activity and is timed separately above.)
+* **Excluded** from timing, per the course Q&A: download, S3 → HDFS copy, cluster start-up. Hadoop Streaming and Hive times come from `run_log.csv` written by `scripts/stage2_streaming_and_hive.sh` and are added to give the end-to-end figure.
+* **Reference vs alternative** — a *software-only* change (shuffle partitions + adaptive execution); hardware, release, replication and storage are identical. Change `ACTIVE_CONFIG` in Section 0.1, run again, and the comparison table at the end of this section lists both.
+
+#@@ code
+MAIN_LOG = list(CURRENT_LOG)            # the timings of the main run above
+print(f"{'stage':62s} {'seconds':>9s}")
+for r in MAIN_LOG:
+    print(f"{r['stage']:62s} {r['seconds']:9.1f}")
+print(f"{'TOTAL (main run, includes the 14-experiment search)':62s} {sum(r['seconds'] for r in MAIN_LOG if not r['stage'].startswith('2 PREPARE')):9.1f}")
+
+#@@ md
+### 5.1 Three repetitions (median)
+
+#@@ code
+def run_benchmark_once(i):
+    global CURRENT_LOG
+    CURRENT_LOG = []
+    root = f"{PREP}_bench{i}"
+    t0 = time.time()
+    prep = prepare(root, log_prefix=f"rep{i} ")
+    for task in TASK_SPECS:
+        with stage(f"rep{i} 3 {task}: final fit + test score") as st:
+            fit_final(task, BEST[task], [], root=root)
+    total = time.time() - t0
+    return {"rep": i, "total_seconds": round(total, 2), "stages": {r["stage"].split(" ", 1)[1]: r["seconds"] for r in CURRENT_LOG}}
+
+BENCH = []
+for i in range(1, REPETITIONS + 1):
+    print(f"\n----- repetition {i} of {REPETITIONS} -----")
+    BENCH.append(run_benchmark_once(i))
+CURRENT_LOG = MAIN_LOG
+
+names = list(BENCH[0]["stages"])
+med = {n: statistics.median(b["stages"][n] for b in BENCH) for n in names}
+med_total = statistics.median(b["total_seconds"] for b in BENCH)
+print(f"\n{'stage':58s} " + " ".join(f"{'rep'+str(b['rep']):>8s}" for b in BENCH) + f" {'median':>8s}")
+for n in names:
+    print(f"{n:58s} " + " ".join(f"{b['stages'][n]:8.1f}" for b in BENCH) + f" {med[n]:8.1f}")
+print(f"{'END-TO-END (notebook stages)':58s} " + " ".join(f"{b['total_seconds']:8.1f}" for b in BENCH) + f" {med_total:8.1f}")
+check("Benchmark: median notebook end-to-end under the 60-minute marking timeout", "< 3600 s", f"{med_total:.0f} s", ok=med_total < 3600,
+      evidence="perf json")
+
+#@@ md
+### 5.2 Data sizes, shell-stage timings and measured memory
+
+#@@ code
+def dir_bytes(path):
+    try:
+        p = spark._jvm.org.apache.hadoop.fs.Path(path)
+        return p.getFileSystem(spark._jsc.hadoopConfiguration()).getContentSummary(p).getLength()
+    except Exception:
+        return None
+
+sizes = {"raw_prices_bytes": dir_bytes(f"hdfs:///raw/prices/{VERSION}") if IS_EMR else None,
+         "raw_gdelt_bytes":  dir_bytes(f"hdfs:///raw/gdelt/{VERSION}") if IS_EMR else None,
+         "prepared_bytes":   dir_bytes(PREP), "price_rows": REC["raw_rows"], "gdelt_days": gd_summary["days"],
+         "gdelt_events": gd_summary["events"]}
+print("data sizes:", sizes)
+
+shell_total, shell_rows = None, []
+try:    # run_log.csv from stage2_streaming_and_hive.sh (copied to HDFS by scripts/emr_run_all.sh)
+    rl = spark.read.option("header", True).csv(f"hdfs:///evidence/{VERSION}/run_log.csv")
+    shell_rows = [r.asDict() for r in rl.select("stage", "engine", "seconds", "application_ids").collect()]
+    shell_total = sum(float(r["seconds"]) for r in shell_rows)
+    for r in shell_rows:
+        print(f"  shell stage {r['stage']:28s} {r['engine']:18s} {float(r['seconds']):7.0f} s  {r['application_ids']}")
+except Exception as ex:
+    print("run_log.csv not found in HDFS (run scripts/emr_run_all.sh first). Shell-stage seconds not included:", str(ex)[:100])
+
+def executor_memory():
+    """Measured per-executor memory from the Spark UI REST API (peak JVM heap, storage memory used / max)."""
+    out = {}
+    try:
+        import urllib.request
+        url = f"{sc.uiWebUrl}/api/v1/applications/{sc.applicationId}/executors"
+        for e in json.load(urllib.request.urlopen(url, timeout=10)):
+            pm = e.get("peakMemoryMetrics", {}) or {}
+            out[e["id"]] = {"max_storage_MiB": round(e["maxMemory"] / 2**20), "storage_used_MiB": round(e["memoryUsed"] / 2**20),
+                            "peak_jvm_heap_MiB": round(pm.get("JVMHeapMemory", 0) / 2**20),
+                            "peak_offheap_MiB": round(pm.get("JVMOffHeapMemory", 0) / 2**20),
+                            "gc_time_s": round(e.get("totalGCTime", 0) / 1000, 1), "task_time_s": round(e.get("totalDuration", 0) / 1000, 1)}
+    except Exception as ex:
+        out["unavailable"] = str(ex)[:150]
+    return out
+
+MEMORY = executor_memory()
+print("measured executor memory (MiB):", json.dumps(MEMORY, indent=2))
+print("YARN view (cross-check): on the primary node run  yarn application -list  and open the Spark UI > Executors tab.")
+
+end_to_end = None if shell_total is None else shell_total + med_total
+PERF = {"version": VERSION, "config": ACTIVE_CONFIG, "config_note": CONFIGS[ACTIVE_CONFIG], "recorded_utc": utc_now(),
+        "application_id": sc.applicationId, "spark_version": spark.version, "is_emr": IS_EMR, "sizes": sizes,
+        "median_notebook_seconds": med_total, "repetition_seconds": [b["total_seconds"] for b in BENCH],
+        "median_stage_seconds": med, "shell_stage_seconds": shell_total, "end_to_end_median_seconds": end_to_end,
+        "executor_memory": MEMORY, "spark_conf": ENVIRONMENT["spark_conf"]}
+write_text(f"{OUT}/evidence/perf/{VERSION}_{ACTIVE_CONFIG}.json", json.dumps(PERF, indent=2, default=str))
+print(f"\nmedian notebook time {med_total:.0f} s" + ("" if end_to_end is None else f";  shell stages {shell_total:.0f} s;  END-TO-END {end_to_end:.0f} s ({end_to_end/60:.1f} min)"))
+
+#@@ md
+### 5.3 Comparison table: development vs full profile, reference vs alternative configuration
+
+This reads every `perf/*.json` saved so far (one per `VERSION` × `ACTIVE_CONFIG` run). To fill the table: run the notebook for the development profile and the full profile, each with `ACTIVE_CONFIG = "reference"` and then `"alternative"`. Compare only runs with identical inputs and identical output checks.
+
+#@@ code
+try:
+    pf = spark.read.option("multiLine", True).json(f"{OUT}/evidence/perf/*.json")
+    show(pf.select("version", "config", F.col("sizes.price_rows").alias("price_rows"), F.col("sizes.gdelt_days").alias("gdelt_days"),
+                   F.col("sizes.raw_gdelt_bytes").alias("raw_gdelt_bytes"), F.round("median_notebook_seconds", 1).alias("median_notebook_s"),
+                   F.round("shell_stage_seconds", 1).alias("shell_s"), F.round("end_to_end_median_seconds", 1).alias("end_to_end_s"),
+                   "repetition_seconds", "recorded_utc"), 20)
+except Exception as ex:
+    print("No comparison yet:", str(ex)[:120])

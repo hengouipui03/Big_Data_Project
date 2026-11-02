@@ -1,0 +1,255 @@
+#@@ md
+# INF2006 Big Data Project — Spark pipeline, model and analytics (AWS EMR)
+
+**Kernel:** PySpark (JupyterHub on EMR `emr-7.10.0`). **Run it with:** `Kernel → Restart & Run All` (or run the cells top to bottom).
+**Before this notebook** the two shell stages must already have run on the primary node (they use Hadoop Streaming and Hive, which need the cluster's command line):
+
+| Stage | Engine | Script (relative path in the ZIP) | Output used here |
+|---|---|---|---|
+| 1 | S3 → HDFS (DistCp) | `scripts/stage1_stage_to_hdfs.sh` | `/raw/prices/<version>/`, `/raw/gdelt/<version>/` |
+| 2 | Hadoop Streaming + Hive on Tez | `scripts/stage2_streaming_and_hive.sh` | Hive database `inf2006` (`prices_typed`, `gdelt_daily_typed`, …) |
+| 3–5 | **PySpark / Spark ML (this notebook)** | `notebooks/inf2006_pipeline.ipynb` | cleaned/rejected data, splits, models, analytics, timings |
+
+`scripts/emr_run_all.sh` runs stages 1–2 for you in one command. Full step-by-step guide: `docs/RUN_ON_EMR.md` (this is Appendix A).
+
+| Section | Brief reference |
+|---|---|
+| 0 Setup, environment, helper functions | Cloud resource constraints, reproducibility |
+| 1 Corpus checks (Task 1) | Task 1.2 |
+| 2 Cleaning, features, chronological splits (Task 2) | Task 2.1–2.3 |
+| 3 Models: weekly direction + high-volatility weeks (Task 3) | Task 3.1–3.3 |
+| 4 Analytics (Task 4) | Task 4.1–4.3 |
+| 5 Performance, memory, repetitions (Section 6 of the report) | Cloud resource constraints |
+| 6 Saved-model reload in a fresh session | Task 3.3 |
+| 7 Verification record | Submission requirements |
+
+> **Honesty rule used throughout:** every check prints *expected* and *actual*; failed checks are reported, never hidden.
+
+#@@ code
+%%configure -f
+{
+  "conf": {
+    "spark.executor.instances": "2",
+    "spark.executor.cores": "2",
+    "spark.executor.memory": "6g",
+    "spark.executor.memoryOverhead": "2g",
+    "spark.driver.memory": "2g",
+    "spark.dynamicAllocation.enabled": "false",
+    "spark.sql.catalogImplementation": "hive"
+  }
+}
+
+#@@ md
+## 0. Setup
+
+### 0.1 Parameters (the only cell you may need to edit)
+
+* `VERSION` — the raw-data version folder staged in HDFS (`/raw/prices/<VERSION>`). Must match what you gave Stage 1 and Stage 2.
+* `BUCKET` — your S3 bucket (outputs and models are saved there so they survive cluster termination).
+* `ACTIVE_CONFIG` — `"reference"` or `"alternative"` (the justified software alternative, Section 5). Everything else stays the same.
+
+#@@ code
+import json, time, datetime, math, statistics, os, socket, sys, itertools
+from pyspark.sql import functions as F, Window
+from pyspark.sql.types import StringType
+
+# ------------------------------------------------------------------ parameters
+VERSION       = "v2026-10-27"            # raw-data version (docs/input_profiles.md); Q1-2016 profile: "v2026-10-29-q1-2016"
+BUCKET        = "inf2006-team07-bigdata"
+ACTIVE_CONFIG = "reference"              # "reference" | "alternative"
+REPETITIONS   = 3                        # brief: median of three repetitions
+
+# ------------------------------------------------------------------ fixed project settings
+SEED          = 42
+TRAIN_END, VAL_START, VAL_END, TEST_START = "2015-12-31", "2016-01-01", "2016-12-31", "2017-01-01"
+DATA_END      = "2017-12-29"             # last day of the assessed price scope
+MIN_HISTORY   = 61                       # bars of history before the first usable weekly anchor
+HIGH_VOL_Q    = 0.67                     # "high-volatility week" = top third of TRAIN next-week volatility
+TOL           = 1e-9                     # numerical tolerance for the saved-model reload check
+CONFIGS = {                              # software-only comparison (hardware, release, replication fixed)
+    "reference":   {"shuffle_partitions": 200, "aqe": False,
+                    "why": "Spark default shuffle partitions; fixed 2 executors x 2 cores x 6 GiB"},
+    "alternative": {"shuffle_partitions": 8,   "aqe": True,
+                    "why": "8 partitions ~ 2x total cores for a ~30 MB shuffle; adaptive execution coalesces small partitions"},
+}
+
+IS_EMR = "amzn" in spark.version
+sc = spark.sparkContext
+spark.conf.set("spark.sql.shuffle.partitions", str(CONFIGS[ACTIVE_CONFIG]["shuffle_partitions"]))
+spark.conf.set("spark.sql.adaptive.enabled", str(CONFIGS[ACTIVE_CONFIG]["aqe"]).lower())
+
+if IS_EMR:
+    PREP        = f"hdfs:///prepared/{VERSION}/{ACTIVE_CONFIG}"
+    MODELS_HDFS = f"hdfs:///models/{VERSION}"
+    OUT_CANDIDATES = [f"s3://{BUCKET}/notebook_outputs/{VERSION}", f"hdfs:///project/notebook_outputs/{VERSION}"]
+else:                                    # local development only (never counts as the assessed run)
+    LOCAL_ROOT  = os.path.abspath("work/nb")
+    PREP        = f"file://{LOCAL_ROOT}/prepared/{VERSION}/{ACTIVE_CONFIG}"
+    MODELS_HDFS = f"file://{LOCAL_ROOT}/models/{VERSION}"
+    OUT_CANDIDATES = [f"file://{LOCAL_ROOT}/out/{VERSION}"]
+    LOCAL_PRICES = "data/raw/prices/all_stocks_5yr.csv"
+    LOCAL_GDELT_AUDIT = {"v2026-10-27": "evidence/local/streaming_gdelt_audit.tsv",
+                         "v2026-10-29-q1-2016": "evidence/local/q1_2016/streaming_gdelt_audit.tsv"}.get(
+                             VERSION, "evidence/local/streaming_gdelt_audit.tsv")
+
+#@@ md
+### 0.2 Helper functions (stage timer, file writer, checks)
+
+* `stage(...)` times each pipeline stage (wall clock) and records it for Section 5.
+* `write_text` / `read_text` write small evidence files to S3 / HDFS through Hadoop's file API (no extra libraries).
+* `check(...)` records one verification line: check, expected, actual, pass/fail.
+
+#@@ code
+def utc_now():
+    return datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
+
+# ---- output location: S3 if writable (survives cluster termination), else HDFS
+def write_text(path, text):
+    jvm, conf = spark._jvm, spark._jsc.hadoopConfiguration()
+    p = jvm.org.apache.hadoop.fs.Path(path)
+    out = p.getFileSystem(conf).create(p, True)
+    out.write(bytearray(text.encode("utf-8")))
+    out.close()
+
+def read_text(path):
+    return "\n".join(r[0] for r in spark.read.text(path).collect())
+
+OUT = None
+for cand in OUT_CANDIDATES:
+    try:
+        write_text(f"{cand}/_write_test.txt", utc_now())
+        OUT = cand
+        break
+    except Exception as ex:
+        print(f"WARNING: cannot write to {cand}: {str(ex)[:120]}")
+assert OUT, "No writable output location. Check the S3 bucket name / EMR role permissions (docs/RUN_ON_EMR.md, Troubleshooting)."
+MODELS_OUT = f"{OUT}/models"
+EV = f"{OUT}/evidence/{ACTIVE_CONFIG}"
+print("outputs  :", OUT)
+print("prepared :", PREP)
+print("models   :", MODELS_HDFS, "and", MODELS_OUT)
+
+def save_json(name, obj):
+    write_text(f"{EV}/{name}", json.dumps(obj, indent=2, default=str))
+
+# ---- stage timer
+CURRENT_LOG = []
+class stage:
+    def __init__(self, name, **meta):
+        self.name, self.meta = name, dict(meta)
+    def __enter__(self):
+        self.t0, self.start = time.time(), utc_now()
+        return self
+    def __exit__(self, exc_type, exc, tb):
+        rec = {"stage": self.name, "start_utc": self.start, "end_utc": utc_now(),
+               "seconds": round(time.time() - self.t0, 2), "ok": exc_type is None, **self.meta}
+        CURRENT_LOG.append(rec)
+        print(f"[stage] {self.name}: {rec['seconds']} s" + ("" if rec["ok"] else "  FAILED"))
+        return False
+
+# ---- verification record
+CHECKS = []
+def check(name, expected, actual, ok=None, evidence=""):
+    ok = (expected == actual) if ok is None else bool(ok)
+    CHECKS.append({"check": name, "expected": str(expected), "actual": str(actual), "passed": ok, "evidence": evidence})
+    print(("PASS  " if ok else "FAIL  ") + f"{name}: expected={expected} actual={actual}")
+    return ok
+
+def show(df, n=20):
+    df.show(n, truncate=False)
+
+#@@ md
+### 0.3 Environment and allocation (recorded as evidence)
+
+#@@ code
+conf_keys = ["spark.executor.instances", "spark.executor.cores", "spark.executor.memory", "spark.executor.memoryOverhead",
+             "spark.driver.memory", "spark.dynamicAllocation.enabled", "spark.sql.shuffle.partitions",
+             "spark.sql.adaptive.enabled", "spark.sql.catalogImplementation"]
+def _conf(k):
+    try:
+        return spark.conf.get(k)
+    except Exception:
+        return "<unset>"
+
+ENVIRONMENT = {
+    "run_started_utc": utc_now(), "is_emr": IS_EMR, "spark_version": spark.version, "python": sys.version.split()[0],
+    "application_id": sc.applicationId, "master": sc.master, "driver_host": socket.gethostname(),
+    "version": VERSION, "active_config": ACTIVE_CONFIG, "config_note": CONFIGS[ACTIVE_CONFIG],
+    "seed": SEED, "splits": {"train_end": TRAIN_END, "val": [VAL_START, VAL_END], "test_start": TEST_START, "data_end": DATA_END},
+    "spark_conf": {k: _conf(k) for k in conf_keys},
+}
+print(json.dumps(ENVIRONMENT, indent=2))
+save_json("environment.json", ENVIRONMENT)
+if not IS_EMR:
+    print("\n*** LOCAL DEVELOPMENT RUN - this is NOT the assessed EMR run ***")
+
+#@@ md
+## 1. Corpus checks (Task 1)
+
+The raw corpus was staged and verified by `scripts/stage1_stage_to_hdfs.sh` (bytes, lines and SHA-256 read back from HDFS → `evidence/emr_ref_m5xlarge/stage1_hdfs_inventory.csv`) and audited by `scripts/stage2_streaming_and_hive.sh` (Hadoop Streaming + Hive on Tez). Here the **Spark** engine independently re-derives the same quality numbers from the Hive table `inf2006.prices_typed`, so three engines (Hive, Spark, local Python) must agree.
+
+#@@ code
+def load_prices_typed():
+    """Hive table inf2006.prices_typed (EMR). Local development: the same schema built from the CSV."""
+    if IS_EMR:
+        return spark.table("inf2006.prices_typed")
+    return (spark.read.option("header", True).csv(LOCAL_PRICES)
+            .select(F.col("Name").alias("ticker"), F.to_date("date").alias("trade_date"),
+                    F.year(F.to_date("date")).alias("yr"),
+                    *[F.col(c).cast("double").alias(c) for c in ["open", "high", "low", "close", "volume"]]))
+
+def load_gdelt_daily():
+    """Hive table inf2006.gdelt_daily_typed (date_added, events, avg_tone, lag_events). Local: from the streaming audit TSV."""
+    if IS_EMR:
+        return spark.table("inf2006.gdelt_daily_typed")
+    raw = spark.read.option("sep", "\t").csv(LOCAL_GDELT_AUDIT).toDF("audit_key", "events", "avg_tone", "lag_events")
+    return (raw.where(F.col("audit_key").rlike("^[0-9]{8}$"))
+            .select(F.to_date("audit_key", "yyyyMMdd").alias("date_added"), F.col("events").cast("long").alias("events"),
+                    F.col("avg_tone").cast("double").alias("avg_tone"), F.col("lag_events").cast("long").alias("lag_events")))
+
+if IS_EMR:
+    tables = [r.tableName for r in spark.sql("SHOW TABLES IN inf2006").collect()]
+    print("Hive tables in inf2006:", tables)
+    missing = [t for t in ("prices_typed", "gdelt_daily_typed", "raw_prices_quality") if t not in tables]
+    assert not missing, (f"Hive tables {missing} not found. Stage 2 has not been run on this cluster: run "
+                         "'bash scripts/emr_run_all.sh' on the primary node first (docs/RUN_ON_EMR.md, step 6).")
+
+raw_prices = load_prices_typed()
+with stage("1a Spark quality audit of prices_typed") as st:
+    num = ["open", "high", "low", "close", "volume"]
+    q = raw_prices.agg(
+        F.count("*").alias("rows_total"), F.countDistinct("ticker").alias("tickers"),
+        F.min("trade_date").cast("string").alias("date_min"), F.max("trade_date").cast("string").alias("date_max"),
+        F.sum(F.when(F.col("trade_date") <= F.lit(DATA_END).cast("date"), 1).otherwise(0)).alias("rows_up_to_2017_12_29"),
+        *[F.sum(F.when(F.col(c).isNull(), 1).otherwise(0)).alias(f"empty_{c}") for c in num],
+        F.sum(F.when(F.col("open").isNotNull() & F.col("high").isNotNull() & F.col("low").isNotNull() & F.col("close").isNotNull()
+                     & ((F.col("high") < F.greatest("open", "close", "low")) | (F.col("low") > F.least("open", "close", "high"))), 1)
+              .otherwise(0)).alias("ohlc_inconsistent"),
+        F.sum(F.when((F.least("open", "high", "low", "close") <= 0) | (F.col("volume") < 0), 1).otherwise(0)).alias("nonpositive"),
+    ).first().asDict()
+    dup = (raw_prices.groupBy("ticker", "trade_date").count().where("count > 1").count())
+    q["duplicate_ticker_date"] = dup
+    st.meta["rows"] = q["rows_total"]
+spark_quality = q
+print(json.dumps(q, indent=2))
+
+EXPECTED = {"rows_total": 619040, "tickers": 505, "date_min": "2013-02-08", "date_max": "2018-02-07",
+            "rows_up_to_2017_12_29": 605910, "empty_open": 11, "empty_high": 8, "empty_low": 8, "empty_close": 0,
+            "empty_volume": 0, "ohlc_inconsistent": 12, "nonpositive": 0, "duplicate_ticker_date": 0}
+for k, v in EXPECTED.items():
+    check(f"Task1 prices {k} (Spark vs local Python profile)", v, q[k], evidence="evidence/local/quality_summary.json")
+
+if IS_EMR:
+    hq = spark.table("inf2006.raw_prices_quality").first().asDict()
+    for k in ("rows_total", "tickers", "rows_up_to_2017_12_29", "empty_open", "empty_high", "empty_low", "ohlc_inconsistent"):
+        check(f"Task1 {k}: Hive table vs Spark", hq[k], q[k], evidence="evidence/emr_ref_m5xlarge/stage2_hive_03_results.log")
+    print("\nHive raw-data audit tables:")
+    show(spark.table("inf2006.raw_prices_series_length").where("short_series = 1").orderBy("ticker"))
+    show(spark.table("inf2006.gdelt_audit_rejects"))
+
+gd = load_gdelt_daily()
+gd_summary = gd.agg(F.count("*").alias("days"), F.min("date_added").cast("string").alias("first"),
+                    F.max("date_added").cast("string").alias("last"), F.sum("events").alias("events"),
+                    F.sum("lag_events").alias("events_with_older_event_date")).first().asDict()
+print("GDELT daily audit:", gd_summary)
+check("Task1 GDELT days loaded > 0", ">0", gd_summary["days"], ok=gd_summary["days"] > 0, evidence="Hive gdelt_daily_typed")

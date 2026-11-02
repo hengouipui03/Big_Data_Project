@@ -10,6 +10,10 @@ End-to-end pipeline: raw financial data -> HDFS on AWS EMR -> Hadoop Streaming /
 | `src/acquire/download_raw.py` | Downloads raw sources and records exact download time + checksum |
 | `src/pipeline/t1_profile_raw.py` | Task 1 checker: inventory, checksums and raw-data quality summary |
 | `src/streaming/gdelt_mapper.py`, `gdelt_reducer.py` | Hadoop Streaming scripts: daily GDELT audit summary |
+| `notebooks/inf2006_pipeline.ipynb` | **The PySpark notebook** (Tasks 2-4, model reload, timings). Built from `notebooks/cells/*.cells` by `scripts/build_notebook.py` |
+| `scripts/emr_run_all.sh` | One command on the EMR primary node: Stage 1 (S3->HDFS) + Stage 2 (Hadoop Streaming, Hive). Run BEFORE the notebook |
+| `docs/RUN_ON_EMR.md` | **Step-by-step EMR guide (Appendix A draft)** - start here |
+| `scripts/run_notebook_local.py` | Local-only test harness (Docker Spark); never counts as the assessed run |
 | `evidence/local/` | Outputs produced on a laptop (labelled *local*; not the assessed EMR run) |
 | `data/` | Raw data. **Never committed** (see `.gitignore`) |
 
