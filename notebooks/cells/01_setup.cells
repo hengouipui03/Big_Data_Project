@@ -54,8 +54,8 @@ from pyspark.sql import functions as F, Window
 from pyspark.sql.types import StringType
 
 # ------------------------------------------------------------------ parameters
-VERSION       = "v2026-10-27"            # raw-data version (docs/input_profiles.md); Q1-2016 profile: "v2026-10-29-q1-2016"
-BUCKET        = "inf2006-team07-bigdata"
+VERSION       = "v2026-10-29-q1-2016"            # raw-data version (docs/input_profiles.md); Q1-2016 profile: "v2026-10-29-q1-2016"
+BUCKET        = "inf2006-team07-bigdata-1-310947418945-us-east-1-an"
 ACTIVE_CONFIG = "reference"              # "reference" | "alternative"
 REPETITIONS   = 3                        # brief: median of three repetitions
 
