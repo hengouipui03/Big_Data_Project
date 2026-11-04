@@ -1,0 +1,50 @@
+[
+  {
+    "label": 0.0,
+    "prediction": 0.0,
+    "count": 36,
+    "task": "direction"
+  },
+  {
+    "label": 0.0,
+    "prediction": 1.0,
+    "count": 11103,
+    "task": "direction"
+  },
+  {
+    "label": 1.0,
+    "prediction": 0.0,
+    "count": 52,
+    "task": "direction"
+  },
+  {
+    "label": 1.0,
+    "prediction": 1.0,
+    "count": 14342,
+    "task": "direction"
+  },
+  {
+    "label": 0.0,
+    "prediction": 0.0,
+    "count": 18067,
+    "task": "high_vol"
+  },
+  {
+    "label": 0.0,
+    "prediction": 1.0,
+    "count": 932,
+    "task": "high_vol"
+  },
+  {
+    "label": 1.0,
+    "prediction": 0.0,
+    "count": 4694,
+    "task": "high_vol"
+  },
+  {
+    "label": 1.0,
+    "prediction": 1.0,
+    "count": 1336,
+    "task": "high_vol"
+  }
+]

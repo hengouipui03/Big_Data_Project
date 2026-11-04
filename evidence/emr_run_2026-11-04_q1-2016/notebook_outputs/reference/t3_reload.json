@@ -1,0 +1,157 @@
+{
+  "application_id_reload_session": "application_1793775642011_0010",
+  "checked_utc": "2026-11-04T08:34:04",
+  "tolerance": 1e-09,
+  "results": [
+    {
+      "task": "direction",
+      "model_path": "hdfs:///models/v2026-10-29-q1-2016/direction",
+      "checks": [
+        {
+          "check": "model folder has metadata/",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "model folder has stages/",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "PipelineModel.load (no retraining)",
+          "passed": true,
+          "detail": "ImputerModel -> VectorAssembler -> StandardScalerModel -> LogisticRegressionModel"
+        },
+        {
+          "check": "row counts match (re-scored / saved / joined)",
+          "passed": true,
+          "detail": "25533/25533/25533"
+        },
+        {
+          "check": "max |probability difference| <= 1e-09",
+          "passed": true,
+          "detail": "max_abs_diff=0.0"
+        },
+        {
+          "check": "class predictions identical",
+          "passed": true,
+          "detail": "differing=0"
+        }
+      ],
+      "max_abs_prob_diff": 0.0
+    },
+    {
+      "task": "direction",
+      "model_path": "s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/notebook_outputs/v2026-10-29-q1-2016/models/direction",
+      "checks": [
+        {
+          "check": "model folder has metadata/",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "model folder has stages/",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "PipelineModel.load (no retraining)",
+          "passed": true,
+          "detail": "ImputerModel -> VectorAssembler -> StandardScalerModel -> LogisticRegressionModel"
+        },
+        {
+          "check": "row counts match (re-scored / saved / joined)",
+          "passed": true,
+          "detail": "25533/25533/25533"
+        },
+        {
+          "check": "max |probability difference| <= 1e-09",
+          "passed": true,
+          "detail": "max_abs_diff=0.0"
+        },
+        {
+          "check": "class predictions identical",
+          "passed": true,
+          "detail": "differing=0"
+        }
+      ],
+      "max_abs_prob_diff": 0.0
+    },
+    {
+      "task": "high_vol",
+      "model_path": "hdfs:///models/v2026-10-29-q1-2016/high_vol",
+      "checks": [
+        {
+          "check": "model folder has metadata/",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "model folder has stages/",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "PipelineModel.load (no retraining)",
+          "passed": true,
+          "detail": "ImputerModel -> VectorAssembler -> StandardScalerModel -> LogisticRegressionModel"
+        },
+        {
+          "check": "row counts match (re-scored / saved / joined)",
+          "passed": true,
+          "detail": "25029/25029/25029"
+        },
+        {
+          "check": "max |probability difference| <= 1e-09",
+          "passed": true,
+          "detail": "max_abs_diff=0.0"
+        },
+        {
+          "check": "class predictions identical",
+          "passed": true,
+          "detail": "differing=0"
+        }
+      ],
+      "max_abs_prob_diff": 0.0
+    },
+    {
+      "task": "high_vol",
+      "model_path": "s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/notebook_outputs/v2026-10-29-q1-2016/models/high_vol",
+      "checks": [
+        {
+          "check": "model folder has metadata/",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "model folder has stages/",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "PipelineModel.load (no retraining)",
+          "passed": true,
+          "detail": "ImputerModel -> VectorAssembler -> StandardScalerModel -> LogisticRegressionModel"
+        },
+        {
+          "check": "row counts match (re-scored / saved / joined)",
+          "passed": true,
+          "detail": "25029/25029/25029"
+        },
+        {
+          "check": "max |probability difference| <= 1e-09",
+          "passed": true,
+          "detail": "max_abs_diff=0.0"
+        },
+        {
+          "check": "class predictions identical",
+          "passed": true,
+          "detail": "differing=0"
+        }
+      ],
+      "max_abs_prob_diff": 0.0
+    }
+  ],
+  "application_id_training_session": "application_1793775642011_0010",
+  "all_checks_passed": true
+}

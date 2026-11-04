@@ -1,0 +1,11 @@
+{
+  "raw_rows": 619040,
+  "clean_rows": 605887,
+  "rejected_rows": 13153,
+  "rejected_by_reason": {
+    "out_of_scope_date": 13130,
+    "missing_ohlc_field": 11,
+    "ohlc_inconsistent": 12
+  },
+  "reconciles": true
+}

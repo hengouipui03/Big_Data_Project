@@ -1,0 +1,810 @@
+{
+  "environment": {
+    "run_started_utc": "2026-11-04T08:23:02+00:00",
+    "is_emr": true,
+    "spark_version": "3.5.5-amzn-1",
+    "python": "3.9.25",
+    "application_id": "application_1793775642011_0010",
+    "master": "yarn",
+    "driver_host": "ip-172-31-30-98.ec2.internal",
+    "version": "v2026-10-29-q1-2016",
+    "active_config": "reference",
+    "config_note": {
+      "shuffle_partitions": 200,
+      "aqe": false,
+      "why": "Spark default shuffle partitions; fixed 2 executors x 2 cores x 6 GiB"
+    },
+    "seed": 42,
+    "splits": {
+      "train_end": "2015-12-31",
+      "val": [
+        "2016-01-01",
+        "2016-12-31"
+      ],
+      "test_start": "2017-01-01",
+      "data_end": "2017-12-29"
+    },
+    "spark_conf": {
+      "spark.executor.instances": "2",
+      "spark.executor.cores": "2",
+      "spark.executor.memory": "6g",
+      "spark.executor.memoryOverhead": "2g",
+      "spark.driver.memory": "2g",
+      "spark.dynamicAllocation.enabled": "false",
+      "spark.sql.shuffle.partitions": "200",
+      "spark.sql.adaptive.enabled": "false",
+      "spark.sql.catalogImplementation": "hive"
+    }
+  },
+  "stage_timings_main_run": [
+    {
+      "stage": "1a Spark quality audit of prices_typed",
+      "start_utc": "2026-11-04T08:23:46+00:00",
+      "end_utc": "2026-11-04T08:23:56+00:00",
+      "seconds": 10.01,
+      "ok": true,
+      "rows": 619040
+    },
+    {
+      "stage": "2a clean+reject (PySpark)",
+      "start_utc": "2026-11-04T08:24:03+00:00",
+      "end_utc": "2026-11-04T08:24:16+00:00",
+      "seconds": 13.0,
+      "ok": true,
+      "rows": 619040
+    },
+    {
+      "stage": "2b features + weekly targets (PySpark)",
+      "start_utc": "2026-11-04T08:24:16+00:00",
+      "end_utc": "2026-11-04T08:24:47+00:00",
+      "seconds": 30.27,
+      "ok": true,
+      "rows": 125831
+    },
+    {
+      "stage": "2 PREPARE (whole Task 2 in PySpark)",
+      "start_utc": "2026-11-04T08:24:03+00:00",
+      "end_utc": "2026-11-04T08:25:01+00:00",
+      "seconds": 57.17,
+      "ok": true
+    },
+    {
+      "stage": "2d GDELT news features by anchor (PySpark)",
+      "start_utc": "2026-11-04T08:25:09+00:00",
+      "end_utc": "2026-11-04T08:25:14+00:00",
+      "seconds": 4.65,
+      "ok": true,
+      "rows": 282
+    },
+    {
+      "stage": "3 direction: 14 experiments (train->validation)",
+      "start_utc": "2026-11-04T08:25:20+00:00",
+      "end_utc": "2026-11-04T08:26:58+00:00",
+      "seconds": 98.89,
+      "ok": true
+    },
+    {
+      "stage": "3 direction: final fit (train) + test score + save model",
+      "start_utc": "2026-11-04T08:26:58+00:00",
+      "end_utc": "2026-11-04T08:27:07+00:00",
+      "seconds": 8.79,
+      "ok": true
+    },
+    {
+      "stage": "3 high_vol: 14 experiments (train->validation)",
+      "start_utc": "2026-11-04T08:27:10+00:00",
+      "end_utc": "2026-11-04T08:28:35+00:00",
+      "seconds": 85.1,
+      "ok": true
+    },
+    {
+      "stage": "3 high_vol: final fit (train) + test score + save model",
+      "start_utc": "2026-11-04T08:28:35+00:00",
+      "end_utc": "2026-11-04T08:28:42+00:00",
+      "seconds": 6.76,
+      "ok": true
+    },
+    {
+      "stage": "4 Q1 volume vs absolute return (PySpark)",
+      "start_utc": "2026-11-04T08:30:10+00:00",
+      "end_utc": "2026-11-04T08:30:17+00:00",
+      "seconds": 6.55,
+      "ok": true,
+      "rows": 575629
+    },
+    {
+      "stage": "4 Q2 news volume vs subsequent behaviour (PySpark)",
+      "start_utc": "2026-11-04T08:30:20+00:00",
+      "end_utc": "2026-11-04T08:30:22+00:00",
+      "seconds": 2.65,
+      "ok": true,
+      "rows": 13
+    },
+    {
+      "stage": "4 Q3 model reliability by quarter / volatility group (PySpark)",
+      "start_utc": "2026-11-04T08:30:25+00:00",
+      "end_utc": "2026-11-04T08:30:30+00:00",
+      "seconds": 4.97,
+      "ok": true,
+      "rows": 14
+    }
+  ],
+  "checks": [
+    {
+      "check": "Task1 prices rows_total (Spark vs local Python profile)",
+      "expected": "619040",
+      "actual": "619040",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices tickers (Spark vs local Python profile)",
+      "expected": "505",
+      "actual": "505",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices date_min (Spark vs local Python profile)",
+      "expected": "2013-02-08",
+      "actual": "2013-02-08",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices date_max (Spark vs local Python profile)",
+      "expected": "2018-02-07",
+      "actual": "2018-02-07",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices rows_up_to_2017_12_29 (Spark vs local Python profile)",
+      "expected": "605910",
+      "actual": "605910",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices empty_open (Spark vs local Python profile)",
+      "expected": "11",
+      "actual": "11",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices empty_high (Spark vs local Python profile)",
+      "expected": "8",
+      "actual": "8",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices empty_low (Spark vs local Python profile)",
+      "expected": "8",
+      "actual": "8",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices empty_close (Spark vs local Python profile)",
+      "expected": "0",
+      "actual": "0",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices empty_volume (Spark vs local Python profile)",
+      "expected": "0",
+      "actual": "0",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices ohlc_inconsistent (Spark vs local Python profile)",
+      "expected": "12",
+      "actual": "12",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices nonpositive (Spark vs local Python profile)",
+      "expected": "0",
+      "actual": "0",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices duplicate_ticker_date (Spark vs local Python profile)",
+      "expected": "0",
+      "actual": "0",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 rows_total: Hive table vs Spark",
+      "expected": "619040",
+      "actual": "619040",
+      "passed": true,
+      "evidence": "evidence/emr_ref_m5xlarge/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 tickers: Hive table vs Spark",
+      "expected": "505",
+      "actual": "505",
+      "passed": true,
+      "evidence": "evidence/emr_ref_m5xlarge/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 rows_up_to_2017_12_29: Hive table vs Spark",
+      "expected": "605910",
+      "actual": "605910",
+      "passed": true,
+      "evidence": "evidence/emr_ref_m5xlarge/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 empty_open: Hive table vs Spark",
+      "expected": "11",
+      "actual": "11",
+      "passed": true,
+      "evidence": "evidence/emr_ref_m5xlarge/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 empty_high: Hive table vs Spark",
+      "expected": "8",
+      "actual": "8",
+      "passed": true,
+      "evidence": "evidence/emr_ref_m5xlarge/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 empty_low: Hive table vs Spark",
+      "expected": "8",
+      "actual": "8",
+      "passed": true,
+      "evidence": "evidence/emr_ref_m5xlarge/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 ohlc_inconsistent: Hive table vs Spark",
+      "expected": "12",
+      "actual": "12",
+      "passed": true,
+      "evidence": "evidence/emr_ref_m5xlarge/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 GDELT days loaded > 0",
+      "expected": ">0",
+      "actual": "91",
+      "passed": true,
+      "evidence": "Hive gdelt_daily_typed"
+    },
+    {
+      "check": "Task2 raw = clean + rejected",
+      "expected": "True",
+      "actual": "True",
+      "passed": true,
+      "evidence": "reconciliation.json"
+    },
+    {
+      "check": "Task2 clean rows equal the brief's accepted bars (605,887)",
+      "expected": "605887",
+      "actual": "605887",
+      "passed": true,
+      "evidence": "reconciliation.json"
+    },
+    {
+      "check": "Leakage[direction]: every training outcome is known by 2015-12-31",
+      "expected": "<= 2015-12-31",
+      "actual": "2015-12-28",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[direction]: validation starts after training outcomes end",
+      "expected": "> 2015-12-28",
+      "actual": "2016-01-04",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[direction]: validation outcomes known by 2016-12-31; test starts after",
+      "expected": "<= 2016-12-31 < test start",
+      "actual": "2016-12-30 / 2017-01-06",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[direction]: no identifier or target in the feature list",
+      "expected": "ticker/label/target absent",
+      "actual": "[]",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[high_vol]: every training outcome is known by 2015-12-31",
+      "expected": "<= 2015-12-31",
+      "actual": "2015-12-28",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[high_vol]: validation starts after training outcomes end",
+      "expected": "> 2015-12-28",
+      "actual": "2016-01-04",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[high_vol]: validation outcomes known by 2016-12-31; test starts after",
+      "expected": "<= 2016-12-31 < test start",
+      "actual": "2016-12-23 / 2017-01-06",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[high_vol]: no identifier or target in the feature list",
+      "expected": "ticker/label/target absent",
+      "actual": "[]",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Q1 very-high-volume days move more than low-volume days (mean |return|)",
+      "expected": "True",
+      "actual": "True",
+      "passed": true,
+      "evidence": "t4_q1_volume_vs_abs_return.json"
+    },
+    {
+      "check": "Q2 coverage guard (>= 9 usable weeks to interpret)",
+      "expected": ">= 9",
+      "actual": "13",
+      "passed": true,
+      "evidence": "informational: below 9 the notebook refuses to interpret"
+    },
+    {
+      "check": "Benchmark: median notebook end-to-end under the 60-minute marking timeout",
+      "expected": "< 3600 s",
+      "actual": "47 s",
+      "passed": true,
+      "evidence": "perf json"
+    }
+  ],
+  "prepared": {
+    "reconciliation": {
+      "raw_rows": 619040,
+      "clean_rows": 605887,
+      "rejected_rows": 13153,
+      "rejected_by_reason": {
+        "out_of_scope_date": 13130,
+        "missing_ohlc_field": 11,
+        "ohlc_inconsistent": 12
+      },
+      "reconciles": true
+    },
+    "high_vol_cutoff": 0.01393419085284733,
+    "split_report": {
+      "direction": {
+        "train": {
+          "rows": 66424,
+          "first_anchor": "2013-05-10",
+          "last_anchor": "2015-12-18",
+          "last_outcome_date": "2015-12-28",
+          "tickers": 492,
+          "share_positive": 0.5334517644224979,
+          "anchor_rows_total": 73356,
+          "excluded_by_reason": {
+            "target_crosses_boundary": 492,
+            "gap_next_block": 3,
+            "insufficient_history": 6437
+          }
+        },
+        "validation": {
+          "rows": 25805,
+          "first_anchor": "2016-01-04",
+          "last_anchor": "2016-12-23",
+          "last_outcome_date": "2016-12-30",
+          "tickers": 498,
+          "share_positive": 0.5328037202092618,
+          "anchor_rows_total": 26359,
+          "excluded_by_reason": {
+            "target_crosses_boundary": 498,
+            "insufficient_history": 56
+          }
+        },
+        "test": {
+          "rows": 25533,
+          "first_anchor": "2017-01-06",
+          "last_anchor": "2017-12-22",
+          "last_outcome_date": "2017-12-29",
+          "tickers": 504,
+          "share_positive": 0.5637410410057573,
+          "anchor_rows_total": 26116,
+          "excluded_by_reason": {
+            "no_next_anchor": 504,
+            "insufficient_history": 79
+          }
+        }
+      },
+      "high_vol": {
+        "train": {
+          "rows": 66412,
+          "first_anchor": "2013-05-10",
+          "last_anchor": "2015-12-18",
+          "last_outcome_date": "2015-12-28",
+          "tickers": 492,
+          "share_positive": 0.33042221285309886,
+          "anchor_rows_total": 73356,
+          "excluded_by_reason": {
+            "short_next_block": 6,
+            "target_crosses_boundary": 492,
+            "no_prev_vol": 6,
+            "gap_next_block": 3,
+            "insufficient_history": 6437
+          }
+        },
+        "validation": {
+          "rows": 25307,
+          "first_anchor": "2016-01-04",
+          "last_anchor": "2016-12-16",
+          "last_outcome_date": "2016-12-23",
+          "tickers": 498,
+          "share_positive": 0.3833326747540206,
+          "anchor_rows_total": 26359,
+          "excluded_by_reason": {
+            "target_crosses_boundary": 996,
+            "insufficient_history": 56
+          }
+        },
+        "test": {
+          "rows": 25029,
+          "first_anchor": "2017-01-06",
+          "last_anchor": "2017-12-15",
+          "last_outcome_date": "2017-12-22",
+          "tickers": 504,
+          "share_positive": 0.2409205321826681,
+          "anchor_rows_total": 26116,
+          "excluded_by_reason": {
+            "short_next_block": 504,
+            "no_next_anchor": 504,
+            "insufficient_history": 79
+          }
+        }
+      }
+    }
+  },
+  "model_results": {
+    "direction": {
+      "seed": 42,
+      "majority_class_from_train": 1.0,
+      "baselines": {
+        "validation": {
+          "majority_class": {
+            "auc": 0.5,
+            "accuracy": 0.5328037202092618,
+            "f1": 0.37040594373045155
+          },
+          "momentum_sign(mom5>0)": {
+            "auc": 0.5063993584524672,
+            "accuracy": 0.5080410773105988,
+            "f1": 0.5080246204942594
+          }
+        },
+        "test": {
+          "majority_class": {
+            "auc": 0.5,
+            "accuracy": 0.5637410410057573,
+            "f1": 0.406466228078086
+          },
+          "momentum_sign(mom5>0)": {
+            "auc": 0.48668517095038516,
+            "accuracy": 0.49531978224258805,
+            "f1": 0.4956296385452436
+          }
+        }
+      },
+      "selected": {
+        "feature_set": "all_price",
+        "model": "logreg",
+        "params": {
+          "regParam": 0.0
+        }
+      },
+      "selected_validation": {
+        "auc": 0.5246484053880398,
+        "accuracy": 0.5310598721178066,
+        "f1": 0.37471249887184915,
+        "rows": 25805
+      },
+      "test_final": {
+        "auc": 0.5000597842890795,
+        "accuracy": 0.5631144009712921,
+        "f1": 0.40869019472330165,
+        "rows": 25533
+      }
+    },
+    "high_vol": {
+      "seed": 42,
+      "majority_class_from_train": 0.0,
+      "baselines": {
+        "validation": {
+          "majority_class": {
+            "auc": 0.5,
+            "accuracy": 0.6166673252459793,
+            "f1": 0.47044754859280685
+          },
+          "persistence(prev_week_vol>=cutoff)": {
+            "auc": 0.6484007707686538,
+            "accuracy": 0.6287983561860355,
+            "f1": 0.6295883175452852
+          }
+        },
+        "test": {
+          "majority_class": {
+            "auc": 0.5,
+            "accuracy": 0.7590794678173319,
+            "f1": 0.6551172348987684
+          },
+          "persistence(prev_week_vol>=cutoff)": {
+            "auc": 0.637841295129699,
+            "accuracy": 0.7019856965919533,
+            "f1": 0.7027274509696382
+          }
+        }
+      },
+      "selected": {
+        "feature_set": "all_price",
+        "model": "logreg",
+        "params": {
+          "regParam": 0.01
+        }
+      },
+      "selected_validation": {
+        "auc": 0.7330581609131357,
+        "accuracy": 0.6997273481645394,
+        "f1": 0.6774753547722818,
+        "rows": 25307
+      },
+      "test_final": {
+        "auc": 0.7260768372464744,
+        "accuracy": 0.775220743937033,
+        "f1": 0.7343922839094503,
+        "rows": 25029
+      }
+    }
+  },
+  "performance": {
+    "version": "v2026-10-29-q1-2016",
+    "config": "reference",
+    "config_note": {
+      "shuffle_partitions": 200,
+      "aqe": false,
+      "why": "Spark default shuffle partitions; fixed 2 executors x 2 cores x 6 GiB"
+    },
+    "recorded_utc": "2026-11-04T08:33:43+00:00",
+    "application_id": "application_1793775642011_0010",
+    "spark_version": "3.5.5-amzn-1",
+    "is_emr": true,
+    "sizes": {
+      "raw_prices_bytes": 29580549,
+      "raw_gdelt_bytes": 6944840235,
+      "prepared_bytes": 52071634,
+      "price_rows": 619040,
+      "gdelt_days": 91,
+      "gdelt_events": 18369793
+    },
+    "median_notebook_seconds": 46.91,
+    "repetition_seconds": [
+      46.91,
+      47.87,
+      44.91
+    ],
+    "median_stage_seconds": {
+      "2a clean+reject (PySpark)": 7.95,
+      "2b features + weekly targets (PySpark)": 20.6,
+      "3 direction: final fit + test score": 3.79,
+      "3 high_vol: final fit + test score": 3.78
+    },
+    "shell_stage_seconds": 285.0,
+    "end_to_end_median_seconds": 331.90999999999997,
+    "executor_memory": {
+      "driver": {
+        "max_storage_MiB": 1049,
+        "storage_used_MiB": 268,
+        "peak_jvm_heap_MiB": 1355,
+        "peak_offheap_MiB": 370,
+        "gc_time_s": 6.1,
+        "task_time_s": 687.3
+      },
+      "2": {
+        "max_storage_MiB": 3097,
+        "storage_used_MiB": 267,
+        "peak_jvm_heap_MiB": 2442,
+        "peak_offheap_MiB": 265,
+        "gc_time_s": 8.1,
+        "task_time_s": 518.6
+      },
+      "1": {
+        "max_storage_MiB": 3097,
+        "storage_used_MiB": 263,
+        "peak_jvm_heap_MiB": 2669,
+        "peak_offheap_MiB": 283,
+        "gc_time_s": 5.8,
+        "task_time_s": 458.4
+      }
+    },
+    "spark_conf": {
+      "spark.executor.instances": "2",
+      "spark.executor.cores": "2",
+      "spark.executor.memory": "6g",
+      "spark.executor.memoryOverhead": "2g",
+      "spark.driver.memory": "2g",
+      "spark.dynamicAllocation.enabled": "false",
+      "spark.sql.shuffle.partitions": "200",
+      "spark.sql.adaptive.enabled": "false",
+      "spark.sql.catalogImplementation": "hive"
+    }
+  },
+  "reload": {
+    "application_id_reload_session": "application_1793775642011_0010",
+    "checked_utc": "2026-11-04T08:34:04",
+    "tolerance": 1e-09,
+    "results": [
+      {
+        "task": "direction",
+        "model_path": "hdfs:///models/v2026-10-29-q1-2016/direction",
+        "checks": [
+          {
+            "check": "model folder has metadata/",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "model folder has stages/",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "PipelineModel.load (no retraining)",
+            "passed": true,
+            "detail": "ImputerModel -> VectorAssembler -> StandardScalerModel -> LogisticRegressionModel"
+          },
+          {
+            "check": "row counts match (re-scored / saved / joined)",
+            "passed": true,
+            "detail": "25533/25533/25533"
+          },
+          {
+            "check": "max |probability difference| <= 1e-09",
+            "passed": true,
+            "detail": "max_abs_diff=0.0"
+          },
+          {
+            "check": "class predictions identical",
+            "passed": true,
+            "detail": "differing=0"
+          }
+        ],
+        "max_abs_prob_diff": 0.0
+      },
+      {
+        "task": "direction",
+        "model_path": "s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/notebook_outputs/v2026-10-29-q1-2016/models/direction",
+        "checks": [
+          {
+            "check": "model folder has metadata/",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "model folder has stages/",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "PipelineModel.load (no retraining)",
+            "passed": true,
+            "detail": "ImputerModel -> VectorAssembler -> StandardScalerModel -> LogisticRegressionModel"
+          },
+          {
+            "check": "row counts match (re-scored / saved / joined)",
+            "passed": true,
+            "detail": "25533/25533/25533"
+          },
+          {
+            "check": "max |probability difference| <= 1e-09",
+            "passed": true,
+            "detail": "max_abs_diff=0.0"
+          },
+          {
+            "check": "class predictions identical",
+            "passed": true,
+            "detail": "differing=0"
+          }
+        ],
+        "max_abs_prob_diff": 0.0
+      },
+      {
+        "task": "high_vol",
+        "model_path": "hdfs:///models/v2026-10-29-q1-2016/high_vol",
+        "checks": [
+          {
+            "check": "model folder has metadata/",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "model folder has stages/",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "PipelineModel.load (no retraining)",
+            "passed": true,
+            "detail": "ImputerModel -> VectorAssembler -> StandardScalerModel -> LogisticRegressionModel"
+          },
+          {
+            "check": "row counts match (re-scored / saved / joined)",
+            "passed": true,
+            "detail": "25029/25029/25029"
+          },
+          {
+            "check": "max |probability difference| <= 1e-09",
+            "passed": true,
+            "detail": "max_abs_diff=0.0"
+          },
+          {
+            "check": "class predictions identical",
+            "passed": true,
+            "detail": "differing=0"
+          }
+        ],
+        "max_abs_prob_diff": 0.0
+      },
+      {
+        "task": "high_vol",
+        "model_path": "s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/notebook_outputs/v2026-10-29-q1-2016/models/high_vol",
+        "checks": [
+          {
+            "check": "model folder has metadata/",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "model folder has stages/",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "PipelineModel.load (no retraining)",
+            "passed": true,
+            "detail": "ImputerModel -> VectorAssembler -> StandardScalerModel -> LogisticRegressionModel"
+          },
+          {
+            "check": "row counts match (re-scored / saved / joined)",
+            "passed": true,
+            "detail": "25029/25029/25029"
+          },
+          {
+            "check": "max |probability difference| <= 1e-09",
+            "passed": true,
+            "detail": "max_abs_diff=0.0"
+          },
+          {
+            "check": "class predictions identical",
+            "passed": true,
+            "detail": "differing=0"
+          }
+        ],
+        "max_abs_prob_diff": 0.0
+      }
+    ],
+    "application_id_training_session": "application_1793775642011_0010",
+    "all_checks_passed": true
+  },
+  "outputs": {
+    "evidence": "s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/notebook_outputs/v2026-10-29-q1-2016/evidence/reference",
+    "models_s3_or_primary": "s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/notebook_outputs/v2026-10-29-q1-2016/models",
+    "models_hdfs": "hdfs:///models/v2026-10-29-q1-2016",
+    "prepared": "hdfs:///prepared/v2026-10-29-q1-2016/reference"
+  }
+}

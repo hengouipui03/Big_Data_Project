@@ -1,0 +1,140 @@
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+26/11/02 15:04:33 INFO EMRParamSideChannel: Setting FGAC mode to false
+26/11/02 15:04:33 INFO SparkContext: Running Spark version 3.5.5-amzn-1
+26/11/02 15:04:33 INFO SparkContext: OS info Linux, 6.1.189-236.399.amzn2023.x86_64, amd64
+26/11/02 15:04:33 INFO SparkContext: Java version 17.0.21
+26/11/02 15:04:33 INFO ResourceUtils: ==============================================================
+26/11/02 15:04:33 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/11/02 15:04:33 INFO ResourceUtils: ==============================================================
+26/11/02 15:04:33 INFO SparkContext: Submitted application: t4_analytics
+26/11/02 15:04:34 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 2, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: , memoryOverhead -> name: memoryOverhead, amount: 2048, script: , vendor: , executorType -> name: executorType, amount: 1, script: , vendor: , memory -> name: memory, amount: 6144, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/11/02 15:04:34 INFO ResourceProfile: Limiting resource is cpus at 2 tasks per executor
+26/11/02 15:04:34 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/11/02 15:04:34 INFO ResourceProfile: User executor ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 2, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: , memoryOverhead -> name: memoryOverhead, amount: 2048, script: , vendor: , executorType -> name: executorType, amount: 1, script: , vendor: , memory -> name: memory, amount: 6144, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/11/02 15:04:34 INFO ResourceProfile: Limiting resource is cpus at 2 tasks per executor
+26/11/02 15:04:34 INFO ResourceProfileManager: Added ResourceProfile id: 1
+26/11/02 15:04:34 INFO SecurityManager: Changing view acls to: hadoop
+26/11/02 15:04:34 INFO SecurityManager: Changing modify acls to: hadoop
+26/11/02 15:04:34 INFO SecurityManager: Changing view acls groups to: 
+26/11/02 15:04:34 INFO SecurityManager: Changing modify acls groups to: 
+26/11/02 15:04:34 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: hadoop; groups with view permissions: EMPTY; users with modify permissions: hadoop; groups with modify permissions: EMPTY
+26/11/02 15:04:34 INFO Utils: Successfully started service 'sparkDriver' on port 38383.
+26/11/02 15:04:34 INFO SparkEnv: Registering MapOutputTracker
+26/11/02 15:04:34 INFO SparkEnv: Registering BlockManagerMaster
+26/11/02 15:04:34 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/11/02 15:04:34 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/11/02 15:04:34 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/11/02 15:04:34 INFO DiskBlockManager: Created local directory at /mnt/tmp/blockmgr-a9b823bc-971e-4094-9e6f-2bb948127129
+26/11/02 15:04:34 INFO MemoryStore: MemoryStore started with capacity 1048.8 MiB
+26/11/02 15:04:34 INFO SparkEnv: Registering OutputCommitCoordinator
+26/11/02 15:04:34 INFO SubResultCacheManager: Sub-result caches are disabled.
+26/11/02 15:04:34 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/11/02 15:04:34 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/11/02 15:04:35 INFO DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-67-50.ec2.internal/172.31.67.50:8032
+26/11/02 15:04:35 INFO Configuration: resource-types.xml not found
+26/11/02 15:04:35 INFO ResourceUtils: Unable to find 'resource-types.xml'.
+26/11/02 15:04:35 INFO Client: Verifying our application has not requested more than the maximum memory capability of the cluster (12288 MB per container)
+26/11/02 15:04:35 INFO Client: Will allocate AM container, with 896 MB memory including 384 MB overhead
+26/11/02 15:04:35 INFO Client: Setting up container launch context for our AM
+26/11/02 15:04:35 INFO Client: Setting up the launch environment for our AM container
+26/11/02 15:04:35 INFO Client: Preparing resources for our AM container
+26/11/02 15:04:35 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+26/11/02 15:04:37 INFO Client: Uploading resource file:/mnt/tmp/spark-41dbb03f-37b6-4db0-9183-dd14c90a99d0/__spark_libs__15362257876873810668.zip -> hdfs://ip-172-31-67-50.ec2.internal:8020/user/hadoop/.sparkStaging/application_1793624796048_0010/__spark_libs__15362257876873810668.zip
+26/11/02 15:04:38 INFO Client: Uploading resource file:/etc/spark/conf.dist/hive-site.xml -> hdfs://ip-172-31-67-50.ec2.internal:8020/user/hadoop/.sparkStaging/application_1793624796048_0010/hive-site.xml
+26/11/02 15:04:38 INFO Client: Uploading resource file:/etc/hudi/conf.dist/hudi-defaults.conf -> hdfs://ip-172-31-67-50.ec2.internal:8020/user/hadoop/.sparkStaging/application_1793624796048_0010/hudi-defaults.conf
+26/11/02 15:04:38 INFO Client: Uploading resource s3://inf2006-team07-bigdata-test2/dependencies/numpy_py39.tar.gz#numpy_py39 -> hdfs://ip-172-31-67-50.ec2.internal:8020/user/hadoop/.sparkStaging/application_1793624796048_0010/numpy_py39.tar.gz
+26/11/02 15:04:39 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/pyspark.zip -> hdfs://ip-172-31-67-50.ec2.internal:8020/user/hadoop/.sparkStaging/application_1793624796048_0010/pyspark.zip
+26/11/02 15:04:39 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/py4j-0.10.9.7-src.zip -> hdfs://ip-172-31-67-50.ec2.internal:8020/user/hadoop/.sparkStaging/application_1793624796048_0010/py4j-0.10.9.7-src.zip
+26/11/02 15:04:39 INFO Client: Uploading resource file:/mnt/tmp/spark-41dbb03f-37b6-4db0-9183-dd14c90a99d0/__spark_conf__13400609335429379417.zip -> hdfs://ip-172-31-67-50.ec2.internal:8020/user/hadoop/.sparkStaging/application_1793624796048_0010/__spark_conf__.zip
+26/11/02 15:04:39 INFO SecurityManager: Changing view acls to: hadoop
+26/11/02 15:04:39 INFO SecurityManager: Changing modify acls to: hadoop
+26/11/02 15:04:39 INFO SecurityManager: Changing view acls groups to: 
+26/11/02 15:04:39 INFO SecurityManager: Changing modify acls groups to: 
+26/11/02 15:04:39 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: hadoop; groups with view permissions: EMPTY; users with modify permissions: hadoop; groups with modify permissions: EMPTY
+26/11/02 15:04:39 INFO Client: Submitting application application_1793624796048_0010 to ResourceManager
+26/11/02 15:04:39 INFO YarnClientImpl: Submitted application application_1793624796048_0010
+26/11/02 15:04:40 INFO Client: Application report for application_1793624796048_0010 (state: ACCEPTED)
+26/11/02 15:04:40 INFO Client: 
+	 client token: N/A
+	 diagnostics: AM container is launched, waiting for AM container to Register with RM
+	 ApplicationMaster host: N/A
+	 ApplicationMaster RPC port: -1
+	 queue: root.default
+	 start time: 1793631879875
+	 final status: UNDEFINED
+	 tracking URL: http://ip-172-31-67-50.ec2.internal:20888/proxy/application_1793624796048_0010/
+	 user: hadoop
+26/11/02 15:04:46 INFO YarnClientSchedulerBackend: Add WebUI Filter. org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter, Map(PROXY_HOSTS -> ip-172-31-67-50.ec2.internal, PROXY_URI_BASES -> http://ip-172-31-67-50.ec2.internal:20888/proxy/application_1793624796048_0010), /proxy/application_1793624796048_0010
+26/11/02 15:04:46 INFO YarnSchedulerBackend$YarnSchedulerEndpoint: ApplicationMaster registered as NettyRpcEndpointRef(spark-client://YarnAM)
+26/11/02 15:04:46 INFO Client: Application report for application_1793624796048_0010 (state: RUNNING)
+26/11/02 15:04:46 INFO Client: 
+	 client token: N/A
+	 diagnostics: N/A
+	 ApplicationMaster host: 172.31.69.39
+	 ApplicationMaster RPC port: -1
+	 queue: root.default
+	 start time: 1793631879875
+	 final status: UNDEFINED
+	 tracking URL: http://ip-172-31-67-50.ec2.internal:20888/proxy/application_1793624796048_0010/
+	 user: hadoop
+26/11/02 15:04:46 INFO YarnClientSchedulerBackend: Application application_1793624796048_0010 has started running.
+26/11/02 15:04:46 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 35745.
+26/11/02 15:04:46 INFO NettyBlockTransferService: Server created on ip-172-31-67-50.ec2.internal:35745
+26/11/02 15:04:46 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/11/02 15:04:46 INFO BlockManager: external shuffle service port = 7337
+26/11/02 15:04:46 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, ip-172-31-67-50.ec2.internal, 35745, None)
+26/11/02 15:04:46 INFO BlockManagerMasterEndpoint: Registering block manager ip-172-31-67-50.ec2.internal:35745 with 1048.8 MiB RAM, BlockManagerId(driver, ip-172-31-67-50.ec2.internal, 35745, None)
+26/11/02 15:04:46 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, ip-172-31-67-50.ec2.internal, 35745, None)
+26/11/02 15:04:46 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, ip-172-31-67-50.ec2.internal, 35745, None)
+26/11/02 15:04:47 INFO SingleEventLogFileWriter: Logging events to hdfs:/var/log/spark/apps/application_1793624796048_0010.inprogress
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /jobs: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /jobs/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /jobs/job: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /jobs/job/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /stages: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /stages/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /stages/stage: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /stages/stage/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /stages/pool: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /stages/pool/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /storage: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /storage/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /storage/rdd: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /storage/rdd/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /environment: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /environment/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /executors: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /executors/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /executors/threadDump: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /executors/threadDump/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /executors/heapHistogram: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /executors/heapHistogram/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /static: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /api: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /jobs/job/kill: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /stages/stage/kill: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO ServerInfo: Adding filter to /metrics/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/02 15:04:47 INFO YarnClientSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+           bucket      n  mean_abs_ret  median_abs_ret  p90_abs_ret
+     1_low (z<-1)  54956      0.005782        0.004403     0.012454
+2_normal (|z|<=1) 448720      0.009614        0.007280     0.020737
+  3_high (1<z<=2)  42877      0.015958        0.012508     0.033823
+4_very_high (z>2)  29076      0.026854        0.019010     0.058288
+vol20 tercile cut-points from TRAIN: 0.01060, 0.01494; majority class = 1.0
+vol_group     n  model_acc  baseline_acc  share_up  share_pred_up  model_minus_baseline
+ high_vol  6260   0.550160      0.552077  0.552077       0.982428             -0.001917
+  low_vol 12115   0.505737      0.565910  0.565910       0.561948             -0.060173
+  mid_vol  7158   0.567896      0.570271  0.570271       0.972199             -0.002375
+quarter    n  model_acc  baseline_acc  share_up  share_pred_up  model_minus_baseline
+ 2017Q1 6479   0.528940      0.553172  0.553172       0.804136             -0.024232
+ 2017Q2 6501   0.502692      0.530534  0.530534       0.730657             -0.027842
+ 2017Q3 6514   0.556801      0.587504  0.587504       0.803807             -0.030703
+ 2017Q4 6039   0.548766      0.585196  0.585196       0.781752             -0.036430
+ label  prediction  count
+   0.0         0.0   2429
+   0.0         1.0   8710
+   1.0         0.0   3187
+   1.0         1.0  11207

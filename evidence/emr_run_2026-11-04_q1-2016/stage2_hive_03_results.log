@@ -1,0 +1,212 @@
+Hive Session ID = 329a6ad7-6160-4411-b743-06c201bdb740
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j2.properties Async: true
+OK
+Time taken: 0.537 seconds
+OK
+tab_name
+gdelt_audit_rejects
+gdelt_daily_audit
+gdelt_daily_typed
+prices_typed
+prices_yearly_coverage
+raw_prices
+raw_prices_duplicates
+raw_prices_quality
+raw_prices_series_length
+Time taken: 0.089 seconds, Fetched: 9 row(s)
+OK
+tbl
+raw_prices_quality
+Time taken: 0.878 seconds, Fetched: 1 row(s)
+OK
+raw_prices_quality.rows_total	raw_prices_quality.tickers	raw_prices_quality.date_min	raw_prices_quality.date_max	raw_prices_quality.rows_up_to_2017_12_29	raw_prices_quality.empty_open	raw_prices_quality.empty_high	raw_prices_quality.empty_low	raw_prices_quality.empty_close	raw_prices_quality.empty_volume	raw_prices_quality.ohlc_inconsistent	raw_prices_quality.nonpositive
+619040	505	2013-02-08	2018-02-07	605910	11	8	8	0	0	12	0
+Time taken: 0.254 seconds, Fetched: 1 row(s)
+OK
+tbl
+raw_prices_duplicates
+Time taken: 0.055 seconds, Fetched: 1 row(s)
+OK
+raw_prices_duplicates.duplicate_ticker_date
+0
+Time taken: 0.072 seconds, Fetched: 1 row(s)
+OK
+tbl
+short_series
+Time taken: 0.074 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261104073601_267e8136-5c36-42fa-91db-68dee6ab3bbc
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1793775642011_0005)
+
+Map 1: -/-	Reducer 2: 0/1	
+Map 1: 0/1	Reducer 2: 0/1	
+Map 1: 0/1	Reducer 2: 0/1	
+Map 1: 0(+1)/1	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 1/1	
+OK
+raw_prices_series_length.ticker	raw_prices_series_length.n_rows	raw_prices_series_length.first_day	raw_prices_series_length.last_day	raw_prices_series_length.short_series
+APTV	44	2017-12-05	2018-02-07	1
+BHF	143	2017-07-17	2018-02-07	1
+BHGE	152	2017-07-03	2018-02-07	1
+DWDP	109	2017-09-01	2018-02-07	1
+DXC	215	2017-04-03	2018-02-07	1
+EVHC	297	2016-12-02	2018-02-07	1
+FTV	404	2016-07-01	2018-02-07	1
+HLT	276	2017-01-04	2018-02-07	1
+UA	464	2016-04-07	2018-02-07	1
+Time taken: 8.349 seconds, Fetched: 9 row(s)
+OK
+tbl
+prices_yearly_coverage
+Time taken: 0.063 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261104073610_e6de04fa-ed25-49f9-8654-1922a5f41605
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1793775642011_0005)
+
+Map 1: -/-	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 1/1	
+OK
+prices_yearly_coverage.yr	prices_yearly_coverage.n_rows	prices_yearly_coverage.tickers	prices_yearly_coverage.first_day	prices_yearly_coverage.last_day
+2013	108438	483	2013-02-08	2013-12-31
+2014	122397	488	2014-01-02	2014-12-31
+2015	123719	495	2015-01-02	2015-12-31
+2016	125324	499	2016-01-04	2016-12-30
+2017	126032	505	2017-01-03	2017-12-29
+2018	13130	505	2018-01-02	2018-02-07
+Time taken: 0.632 seconds, Fetched: 6 row(s)
+OK
+tbl
+gdelt_daily_typed
+Time taken: 0.065 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261104073611_e0d31000-a0ea-4bfd-92fd-e628b4a1bbe0
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1793775642011_0005)
+
+Map 1: -/-	Reducer 2: 0/1	
+Map 1: 0(+1)/1	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 1/1	
+OK
+gdelt_daily_typed.date_added	gdelt_daily_typed.events	gdelt_daily_typed.avg_tone	gdelt_daily_typed.lag_events
+2016-01-01	114871	-2.5845	2914
+2016-01-02	109259	-3.0041	2479
+2016-01-03	117583	-3.3507	3052
+2016-01-04	194646	-2.9763	5838
+2016-01-05	213565	-2.8045	7025
+2016-01-06	222359	-2.5232	6751
+2016-01-07	221844	-2.5111	6831
+2016-01-08	209919	-2.5895	6219
+2016-01-09	147184	-2.9542	4265
+2016-01-10	129936	-2.6724	4121
+2016-01-11	203378	-2.2473	7397
+2016-01-12	220753	-2.3402	8194
+2016-01-13	238975	-2.3436	8608
+2016-01-14	230527	-2.3218	7666
+2016-01-15	221313	-2.3269	7309
+2016-01-16	155023	-2.4897	4658
+2016-01-17	145357	-2.5414	4544
+2016-01-18	211583	-2.2472	6919
+2016-01-19	225989	-2.1236	8364
+2016-01-20	242048	-2.2832	8614
+2016-01-21	240629	-2.2481	7911
+2016-01-22	229845	-2.369	7937
+2016-01-23	148711	-2.4602	4815
+2016-01-24	133979	-2.2206	4261
+2016-01-25	204838	-2.1267	7504
+2016-01-26	222230	-2.1144	8357
+2016-01-27	234605	-2.2504	7810
+2016-01-28	237972	-2.1832	7959
+2016-01-29	213970	-2.1892	6530
+2016-01-30	146618	-2.2909	4529
+2016-01-31	127082	-2.2495	3762
+2016-02-01	218534	-2.1265	7578
+2016-02-02	230346	-2.002	8540
+2016-02-03	230247	-2.1262	8149
+2016-02-04	244440	-2.1991	7879
+2016-02-05	230332	-2.1356	7764
+2016-02-06	148902	-2.4087	4867
+2016-02-07	131873	-2.3104	4310
+2016-02-08	204404	-2.1062	7176
+2016-02-09	225438	-2.1633	8382
+2016-02-10	236801	-2.0085	8722
+2016-02-11	247039	-2.1282	8749
+2016-02-12	244943	-2.2224	7588
+2016-02-13	171283	-2.2606	5299
+2016-02-14	151552	-2.1697	4380
+2016-02-15	208240	-2.1421	6932
+2016-02-16	243764	-2.0913	8394
+2016-02-17	249814	-2.0196	8399
+2016-02-18	253173	-2.1239	8450
+2016-02-19	247608	-2.1455	7743
+2016-02-20	164283	-2.4232	4931
+2016-02-21	147902	-2.2608	4093
+2016-02-22	215071	-2.0672	6950
+2016-02-23	239988	-2.179	8100
+2016-02-24	246672	-2.0719	7837
+2016-02-25	247527	-2.1269	8045
+2016-02-26	236914	-2.2168	6797
+2016-02-27	161239	-2.3982	4403
+2016-02-28	138889	-2.1796	3966
+2016-02-29	209195	-1.984	6825
+2016-03-01	233967	-2.0284	8310
+2016-03-02	246662	-1.9511	8515
+2016-03-03	241359	-2.056	8531
+2016-03-04	229908	-2.129	7675
+2016-03-05	143773	-2.2109	4493
+2016-03-06	140120	-2.1035	4414
+2016-03-07	214138	-1.9727	8192
+2016-03-08	231102	-2.0618	8933
+2016-03-09	238101	-2.0055	8446
+2016-03-10	240694	-2.0254	8030
+2016-03-11	225180	-2.0942	7610
+2016-03-12	146917	-2.3516	4374
+2016-03-13	134098	-2.3355	4153
+2016-03-14	221286	-2.2529	7304
+2016-03-15	239103	-2.2123	8267
+2016-03-16	240057	-1.9911	8155
+2016-03-17	231119	-2.0087	7541
+2016-03-18	216821	-2.1395	6460
+2016-03-19	134964	-2.4939	3685
+2016-03-20	126314	-2.4573	3978
+2016-03-21	206434	-2.072	6691
+2016-03-22	236749	-2.5017	7428
+2016-03-23	243355	-2.4471	8606
+2016-03-24	231373	-2.4246	7292
+2016-03-25	197494	-2.6351	5750
+2016-03-26	133538	-2.6918	3501
+2016-03-27	120215	-2.5651	3428
+2016-03-28	187465	-2.5146	6135
+2016-03-29	223933	-2.3255	7190
+2016-03-30	233459	-2.1922	7092
+2016-03-31	237091	-2.1838	7063
+Time taken: 0.876 seconds, Fetched: 91 row(s)
+OK
+tbl
+gdelt_audit_rejects
+Time taken: 0.044 seconds, Fetched: 1 row(s)
+OK
+gdelt_audit_rejects.reject_reason	gdelt_audit_rejects.line_count
+Time taken: 0.058 seconds
+OK
+tbl
+row_counts
+Time taken: 0.043 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261104073612_ca80b82f-80c6-4348-b687-5012af212264
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1793775642011_0005)
+
+Map 1: -/-	Map 4: -/-	Map 6: -/-	Map 8: -/-	Reducer 2: 0/1	Reducer 5: 0/1	Reducer 7: 0/1	Reducer 9: 0/1	
+Map 1: 0(+1)/2	Map 4: 1/1	Map 6: 1/1	Map 8: 1/1	Reducer 2: 0/1	Reducer 5: 0/1	Reducer 7: 0/1	Reducer 9: 0/1	
+Map 1: 2/2	Map 4: 1/1	Map 6: 1/1	Map 8: 1/1	Reducer 2: 0/1	Reducer 5: 0/1	Reducer 7: 0/1	Reducer 9: 0(+1)/1	
+Map 1: 2/2	Map 4: 1/1	Map 6: 1/1	Map 8: 1/1	Reducer 2: 1/1	Reducer 5: 1/1	Reducer 7: 1/1	Reducer 9: 1/1	
+OK
+table_name	n
+prices_typed	619040
+raw_prices	619040
+gdelt_daily_audit	91
+gdelt_daily_typed	91
+Time taken: 2.081 seconds, Fetched: 4 row(s)

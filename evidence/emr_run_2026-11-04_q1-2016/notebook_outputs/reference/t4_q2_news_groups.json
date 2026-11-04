@@ -1,0 +1,34 @@
+{
+  "n_weeks": 13,
+  "corr_vol": -0.1290505242100532,
+  "corr_ret": 0.6790941417544352,
+  "groups": [
+    {
+      "news_group": "T1",
+      "weeks": 5,
+      "ticker_weeks": 2470,
+      "avg_news_events": 1337678.0,
+      "avg_next_week_return_pct": -1.361,
+      "share_up": 0.424,
+      "avg_next_week_vol_pct": 1.833
+    },
+    {
+      "news_group": "T2",
+      "weeks": 4,
+      "ticker_weeks": 1978,
+      "avg_news_events": 1428141.0,
+      "avg_next_week_return_pct": 1.716,
+      "share_up": 0.673,
+      "avg_next_week_vol_pct": 1.554
+    },
+    {
+      "news_group": "T3",
+      "weeks": 4,
+      "ticker_weeks": 1979,
+      "avg_news_events": 1485497.0,
+      "avg_next_week_return_pct": 1.778,
+      "share_up": 0.701,
+      "avg_next_week_vol_pct": 1.862
+    }
+  ]
+}
