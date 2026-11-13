@@ -12,7 +12,7 @@ from pyspark.ml import PipelineModel
 from pyspark.ml.functions import vector_to_array
 from pyspark.sql import functions as F
 
-_VERSION, _BUCKET, _CONFIG = globals().get("VERSION", "v2026-10-27"), globals().get("BUCKET", "inf2006-team07-bigdata"), globals().get("ACTIVE_CONFIG", "reference")
+_VERSION, _BUCKET, _CONFIG = globals().get("VERSION", "v2026-10-29-q1-2016"), globals().get("BUCKET", "inf2006-team07-bigdata-1-310947418945-us-east-1-an"), globals().get("ACTIVE_CONFIG", "reference")
 _TOL = globals().get("TOL", 1e-9)
 _EMR = "amzn" in spark.version
 if _EMR:
@@ -36,9 +36,20 @@ RELOAD = {"application_id_reload_session": spark.sparkContext.applicationId, "ch
           "tolerance": _TOL, "results": []}
 try:
     env = json.loads("\n".join(r[0] for r in spark.read.text(f"{_EVD}/environment.json").collect()))
-    RELOAD["application_id_training_session"] = env["application_id"]
-    print("training session :", env["application_id"], "\nreload session   :", RELOAD["application_id_reload_session"],
-          "\nfresh session    :", env["application_id"] != RELOAD["application_id_reload_session"])
+    _TRAINING_SESSION_PATH = (
+    f"s3://{_BUCKET}/notebook_outputs/{_VERSION}/"
+    f"evidence/{_CONFIG}/training_session.json"
+    )
+    _training_record = json.loads(
+        "\n".join(
+            r[0] for r in spark.read.text(
+                _TRAINING_SESSION_PATH
+            ).collect()
+        )
+    )
+    _training_id = _training_record["application_id"]
+    print("training session :",_training_id , "\nreload session   :", RELOAD["application_id_reload_session"],
+          "\nfresh session    :", _training_id != RELOAD["application_id_reload_session"])
 except Exception as ex:
     print("environment.json not found (training evidence missing?):", str(ex)[:100])
 
