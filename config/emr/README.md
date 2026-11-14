@@ -19,7 +19,3 @@ Matches the brief v1.1 "provisional reference configuration" (Cloud resource con
 
 Other settings: applications Hadoop, Hive, Tez, Spark, Livy, JupyterHub; logs to s3://<bucket>/emr-logs/;
 termination = manual; AWS Academy roles EMR_DefaultRole / EMR_EC2_DefaultRole; key pair vockey.
-
-The brief (v1.1) requires the "justified alternative" to be a **software** change (executor allocation,
-partitions, joins, intermediate storage) with hardware, release, replication and storage performance fixed.
-The alternative configuration will be added here as a second JSON file once chosen (Stage 6).
