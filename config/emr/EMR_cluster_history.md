@@ -33,6 +33,9 @@ The root volume size is not recorded in the
 exported cluster metadata and has not been independently
 verified.
 
+## S3 emr-logs
+put into s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/emr-logs/
+
 ## Spark configuration
 
 - Driver memory: 2 GB
