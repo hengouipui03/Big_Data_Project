@@ -1,0 +1,90 @@
+﻿[
+    {
+        "Id": "ig-02532782A9Y1KGCRH68K",
+        "Name": "Primary",
+        "Market": "ON_DEMAND",
+        "InstanceGroupType": "MASTER",
+        "InstanceType": "m5.xlarge",
+        "RequestedInstanceCount": 1,
+        "RunningInstanceCount": 0,
+        "Status": {
+            "State": "TERMINATED",
+            "StateChangeReason": {
+                "Code": "CLUSTER_TERMINATED",
+                "Message": "Job flow terminated"
+            },
+            "Timeline": {
+                "CreationDateTime": "2026-11-13T22:09:13.909000+08:00",
+                "ReadyDateTime": "2026-11-13T22:16:46.264000+08:00",
+                "EndDateTime": "2026-11-14T02:10:55.018000+08:00"
+            }
+        },
+        "Configurations": [],
+        "ConfigurationsVersion": 0,
+        "LastSuccessfullyAppliedConfigurations": [],
+        "LastSuccessfullyAppliedConfigurationsVersion": 0,
+        "EbsBlockDevices": [
+            {
+                "VolumeSpecification": {
+                    "VolumeType": "gp2",
+                    "SizeInGB": 32
+                },
+                "Device": "/dev/sdb"
+            },
+            {
+                "VolumeSpecification": {
+                    "VolumeType": "gp2",
+                    "SizeInGB": 32
+                },
+                "Device": "/dev/sdc"
+            }
+        ],
+        "ShrinkPolicy": {}
+    },
+    {
+        "Id": "ig-05057161M0EK0SAVI9JI",
+        "Name": "Core",
+        "Market": "ON_DEMAND",
+        "InstanceGroupType": "CORE",
+        "InstanceType": "m5.xlarge",
+        "RequestedInstanceCount": 2,
+        "RunningInstanceCount": 0,
+        "Status": {
+            "State": "TERMINATED",
+            "StateChangeReason": {
+                "Code": "CLUSTER_TERMINATED",
+                "Message": "Job flow terminated"
+            },
+            "Timeline": {
+                "CreationDateTime": "2026-11-13T22:09:13.909000+08:00",
+                "ReadyDateTime": "2026-11-13T22:17:32.354000+08:00",
+                "EndDateTime": "2026-11-14T02:10:55.018000+08:00"
+            }
+        },
+        "Configurations": [],
+        "ConfigurationsVersion": 0,
+        "LastSuccessfullyAppliedConfigurations": [],
+        "LastSuccessfullyAppliedConfigurationsVersion": 0,
+        "EbsBlockDevices": [
+            {
+                "VolumeSpecification": {
+                    "VolumeType": "gp3",
+                    "Iops": 3000,
+                    "SizeInGB": 100,
+                    "Throughput": 125
+                },
+                "Device": "/dev/sdb"
+            },
+            {
+                "VolumeSpecification": {
+                    "VolumeType": "gp3",
+                    "Iops": 3000,
+                    "SizeInGB": 100,
+                    "Throughput": 125
+                },
+                "Device": "/dev/sdc"
+            }
+        ],
+        "ShrinkPolicy": {}
+    }
+]

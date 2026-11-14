@@ -1,0 +1,103 @@
+﻿{
+    "Instances": [
+        {
+            "Id": "ci-01815331L1Z85VBTXSAE",
+            "Ec2InstanceId": "i-0bfa3771300f414a1",
+            "PublicDnsName": "ec2-18-234-35-249.compute-1.amazonaws.com",
+            "PublicIpAddress": "18.234.35.249",
+            "PrivateDnsName": "ip-172-31-30-124.ec2.internal",
+            "PrivateIpAddress": "172.31.30.124",
+            "Status": {
+                "State": "TERMINATED",
+                "StateChangeReason": {
+                    "Code": "INSTANCE_FAILURE",
+                    "Message": "Instance was terminated."
+                },
+                "Timeline": {
+                    "CreationDateTime": "2026-11-04T14:53:33.717000+08:00",
+                    "ReadyDateTime": "2026-11-04T15:01:14.586000+08:00",
+                    "EndDateTime": "2026-11-04T17:30:24.850000+08:00"
+                }
+            },
+            "InstanceGroupId": "ig-0932448905XREUGSB9R",
+            "Market": "ON_DEMAND",
+            "InstanceType": "m5.xlarge",
+            "EbsVolumes": [
+                {
+                    "Device": "/dev/sdb",
+                    "VolumeId": "vol-00337e75c8f2380a1"
+                },
+                {
+                    "Device": "/dev/sdc",
+                    "VolumeId": "vol-0c58e134262c74faa"
+                }
+            ]
+        },
+        {
+            "Id": "ci-08612293BPJMTK446L4O",
+            "Ec2InstanceId": "i-0908e0c2a0686319c",
+            "PublicDnsName": "ec2-98-93-17-193.compute-1.amazonaws.com",
+            "PublicIpAddress": "98.93.17.193",
+            "PrivateDnsName": "ip-172-31-30-98.ec2.internal",
+            "PrivateIpAddress": "172.31.30.98",
+            "Status": {
+                "State": "TERMINATED",
+                "StateChangeReason": {
+                    "Code": "INSTANCE_FAILURE",
+                    "Message": "Instance was terminated."
+                },
+                "Timeline": {
+                    "CreationDateTime": "2026-11-04T14:53:33.733000+08:00",
+                    "ReadyDateTime": "2026-11-04T15:01:14.585000+08:00",
+                    "EndDateTime": "2026-11-04T17:30:24.850000+08:00"
+                }
+            },
+            "InstanceGroupId": "ig-0932448905XREUGSB9R",
+            "Market": "ON_DEMAND",
+            "InstanceType": "m5.xlarge",
+            "EbsVolumes": [
+                {
+                    "Device": "/dev/sdb",
+                    "VolumeId": "vol-0829cdd4068e5a310"
+                },
+                {
+                    "Device": "/dev/sdc",
+                    "VolumeId": "vol-0672b15ef27618410"
+                }
+            ]
+        },
+        {
+            "Id": "ci-06020722C6SMZX48YDK8",
+            "Ec2InstanceId": "i-08f1af9c580bba363",
+            "PublicDnsName": "ec2-98-89-38-58.compute-1.amazonaws.com",
+            "PublicIpAddress": "98.89.38.58",
+            "PrivateDnsName": "ip-172-31-28-213.ec2.internal",
+            "PrivateIpAddress": "172.31.28.213",
+            "Status": {
+                "State": "TERMINATED",
+                "StateChangeReason": {
+                    "Code": "INSTANCE_FAILURE",
+                    "Message": "Instance was terminated."
+                },
+                "Timeline": {
+                    "CreationDateTime": "2026-11-04T14:53:33.736000+08:00",
+                    "ReadyDateTime": "2026-11-04T15:01:07.512000+08:00",
+                    "EndDateTime": "2026-11-04T17:30:24.850000+08:00"
+                }
+            },
+            "InstanceGroupId": "ig-028874818I80Z0XJHZM2",
+            "Market": "ON_DEMAND",
+            "InstanceType": "m5.xlarge",
+            "EbsVolumes": [
+                {
+                    "Device": "/dev/sdc",
+                    "VolumeId": "vol-03853752430596b8b"
+                },
+                {
+                    "Device": "/dev/sdb",
+                    "VolumeId": "vol-03e19ea02edbb5966"
+                }
+            ]
+        }
+    ]
+}
