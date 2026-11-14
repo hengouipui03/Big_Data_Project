@@ -17,7 +17,6 @@ derby.log
 __pycache__/
 .ipynb_checkpoints/
 work/
-models/
 # credentials
 *.pem
 .env
