@@ -108,6 +108,18 @@ for task in TASK_SPECS:
 print("\nmodels saved to:", MODELS_HDFS, "and", MODELS_OUT)
 
 #@@ md
+### 3.0 Record the training session (evidence for the fresh-session proof in Section 6)
+
+Writes the Spark `application_id` of **this** (training) session next to the other evidence files. Section 6 compares it with the `application_id` of the session that reloads the model: they must differ. The cell is **idempotent** - re-running the notebook simply replaces the record, so "Run All" never stops here.
+
+#@@ code
+TRAINING_SESSION = {"application_id": sc.applicationId, "role": "training session (experiments, final fit, model save)",
+                    "captured_utc": utc_now()}
+save_json("training_session.json", TRAINING_SESSION)           # write_text() overwrites: safe to re-run
+print("Training session recorded ->", f"{EV}/training_session.json")
+print(TRAINING_SESSION)
+
+#@@ md
 ### 3.1 Model vs baseline on the held-out test set
 
 Compare the frozen model with the simple baselines on **identical rows**. Read AUC first (0.5 = no ranking skill); accuracy alone is misleading when classes are unbalanced.

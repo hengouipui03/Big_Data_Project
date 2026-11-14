@@ -6,16 +6,26 @@ End-to-end pipeline: raw financial data -> HDFS on AWS EMR -> Hadoop Streaming /
 
 | Path | What it is |
 |---|---|
-| `config/sources.json` | Download link and version note for every raw source (from the project brief) |
-| `src/acquire/download_raw.py` | Downloads raw sources and records exact download time + checksum |
-| `src/pipeline/t1_profile_raw.py` | Task 1 checker: inventory, checksums and raw-data quality summary |
-| `src/streaming/gdelt_mapper.py`, `gdelt_reducer.py` | Hadoop Streaming scripts: daily GDELT audit summary |
-| `notebooks/inf2006_pipeline.ipynb` | **The PySpark notebook** (Tasks 2-4, model reload, timings). Built from `notebooks/cells/*.cells` by `scripts/build_notebook.py` |
-| `scripts/emr_run_all.sh` | One command on the EMR primary node: Stage 1 (S3->HDFS) + Stage 2 (Hadoop Streaming, Hive). Run BEFORE the notebook |
-| `docs/RUN_ON_EMR.md` | **Step-by-step EMR guide (Appendix A draft)** - start here |
-| `scripts/run_notebook_local.py` | Local-only test harness (Docker Spark); never counts as the assessed run |
-| `evidence/local/` | Outputs produced on a laptop (labelled *local*; not the assessed EMR run) |
-| `data/` | Raw data. **Never committed** (see `.gitignore`) |
+| `report.pdf` | the report (cover, sections 1-7, references, Appendices A-D) - added at submission |
+| `notebooks/inf2006_pipeline.ipynb` | **The PySpark notebook** (Tasks 2-4, model reload, timings), exported from EMR. Source of truth: `notebooks/cells/*.cells`, built by `scripts/build_notebook.py` (a rebuild erases outputs - re-run on EMR and export again) |
+| `models/v2026-10-29-q1-2016/{direction,high_vol}/` | the saved Spark ML `PipelineModel`s (complete, including `stages/*/data/` parameter files) |
+| `docs/RUN_ON_EMR.md` | **Appendix A source** - numbered EMR setup, run, reload and cleanup guide |
+| `docs/data_dictionary.md` | corpus scope, schemas, units, time semantics (Task 1.2) |
+| `docs/input_profiles.md` | frozen input profiles, measured rates and the 731-day projection |
+| `config/emr/` | cluster configuration JSON, `EMR_cluster_history.md`, exported cluster metadata (`metadata/`) |
+| `scripts/emr_run_all.sh` | on the primary node: Stage 1 (S3 -> HDFS) + Stage 2 (Hadoop Streaming, Hive). Run BEFORE the notebook |
+| `scripts/build_numpy_env.sh` | builds/uploads the numpy environment the notebook needs on the executors (once per bucket) |
+| `scripts/build_submission_zip.py` | pre-submission checks and ZIP builder (`--check` to only check) |
+| `src/streaming/`, `sql/hive/` | Hadoop Streaming mapper/reducer; Hive HQL |
+| `src/acquire/`, `src/pipeline/t1_profile_raw.py` | download with checksums; Task 1 inventory and quality profile |
+| `evidence/emr_run_2026-11-04_q1-2016/` | shell-stage logs and `notebook_outputs/` of the 4 Nov run (reload in the training session) |
+| `evidence/fresh_EMR_run_2026-11-14/` | notebook evidence of the 13/14 Nov run with a separate reload session |
+| `evidence/gdelt_manifest/`, `evidence/local/` | acquisition manifests; laptop inventory/quality profile (local development, not the assessed run) |
+| `evidence/old_emr_evidence_run_02/` | 28 Oct development-profile run (historical) |
+| `report/figures/nb_*.png` | figures extracted from the executed notebook |
+| `superseded/` | earlier script-based run kept for the record - **not evidence**, see its README |
+| `scripts/run_notebook_local.py` | local-only test harness (Docker Spark); never counts as the assessed run |
+| `data/`, `work/` | raw data and scratch. **Never committed or shipped** |
 
 ## Task 1 on a laptop (local evidence)
 

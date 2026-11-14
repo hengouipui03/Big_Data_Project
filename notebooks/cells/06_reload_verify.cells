@@ -9,11 +9,13 @@ The complete `PipelineModel` (median `Imputer` → `VectorAssembler` → `Standa
 # ---- self-contained: works right after a kernel restart (does not need any earlier cell)
 import json, datetime
 from pyspark.ml import PipelineModel
+from pyspark.ml.evaluation import BinaryClassificationEvaluator, MulticlassClassificationEvaluator
 from pyspark.ml.functions import vector_to_array
 from pyspark.sql import functions as F
 
 _VERSION, _BUCKET, _CONFIG = globals().get("VERSION", "v2026-10-29-q1-2016"), globals().get("BUCKET", "inf2006-team07-bigdata-1-310947418945-us-east-1-an"), globals().get("ACTIVE_CONFIG", "reference")
 _TOL = globals().get("TOL", 1e-9)
+_MTOL = 1e-6                                     # tolerance for re-computed aggregate metrics (AUC / accuracy)
 _EMR = "amzn" in spark.version
 if _EMR:
     _PREP, _MODEL_PATHS = f"hdfs:///prepared/{_VERSION}/{_CONFIG}", [f"hdfs:///models/{_VERSION}", f"s3://{_BUCKET}/notebook_outputs/{_VERSION}/models"]
@@ -33,27 +35,25 @@ def _wt(path, text):
     o = jp.getFileSystem(spark._jsc.hadoopConfiguration()).create(jp, True); o.write(bytearray(text.encode("utf-8"))); o.close()
 
 RELOAD = {"application_id_reload_session": spark.sparkContext.applicationId, "checked_utc": datetime.datetime.utcnow().isoformat(timespec="seconds"),
-          "tolerance": _TOL, "results": []}
-try:
-    env = json.loads("\n".join(r[0] for r in spark.read.text(f"{_EVD}/environment.json").collect()))
-    _TRAINING_SESSION_PATH = (
-    f"s3://{_BUCKET}/notebook_outputs/{_VERSION}/"
-    f"evidence/{_CONFIG}/training_session.json"
-    )
-    _training_record = json.loads(
-        "\n".join(
-            r[0] for r in spark.read.text(
-                _TRAINING_SESSION_PATH
-            ).collect()
-        )
-    )
-    _training_id = _training_record["application_id"]
-    print("training session :",_training_id , "\nreload session   :", RELOAD["application_id_reload_session"],
-          "\nfresh session    :", _training_id != RELOAD["application_id_reload_session"])
-except Exception as ex:
-    print("environment.json not found (training evidence missing?):", str(ex)[:100])
-
+          "tolerance": _TOL, "metric_tolerance": _MTOL, "results": []}
 all_ok = True
+def _read_json(path):
+    return json.loads("\n".join(r[0] for r in spark.read.text(path).collect()))
+
+try:                                              # 1) is this really a different Spark session from the training one?
+    _training_id = _read_json(f"{_EVD}/training_session.json")["application_id"]
+    RELOAD["application_id_training_session"] = _training_id
+    RELOAD["fresh_session"] = _training_id != RELOAD["application_id_reload_session"]
+    print("training session :", _training_id, "\nreload session   :", RELOAD["application_id_reload_session"],
+          "\nfresh session    :", RELOAD["fresh_session"])
+    if not RELOAD["fresh_session"]:
+        print("NOTE: this is the SAME Spark session that trained the model (e.g. 'Run All'). To prove reproduction in a fresh session: "
+              "Kernel -> Restart, then run ONLY this cell (docs/RUN_ON_EMR.md, step 9). The flag is recorded as FAIL until you do.")
+except Exception as ex:
+    RELOAD["fresh_session"] = None
+    print("FAIL training_session.json not found - run Section 3.0 in the training session first:", str(ex)[:100])
+all_ok &= bool(RELOAD["fresh_session"])           # not proven fresh = not verified
+
 for task in ("direction", "high_vol"):
     for base in _MODEL_PATHS:
         path = f"{base}/{task}"
@@ -81,6 +81,19 @@ for task in ("direction", "high_vol"):
         chk(f"max |probability difference| <= {_TOL}", mx is not None and mx <= _TOL, f"max_abs_diff={mx}")
         flips = j.where(F.col("prediction") != F.col("pred_saved")).count()
         chk("class predictions identical", flips == 0, f"differing={flips}")
+        # independent check: re-compute the headline test metrics from the LOADED model and compare with the ones
+        # recorded by the training session (t3_results_<task>.json) - not with predictions produced by the loaded model itself
+        try:
+            ref = _read_json(f"{_EVD}/t3_results_{task}.json")["test_final"]
+            auc_new = BinaryClassificationEvaluator(labelCol="label", rawPredictionCol="rawPrediction", metricName="areaUnderROC").evaluate(new)
+            acc_new = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy").evaluate(new)
+            chk(f"test AUC re-computed from loaded model matches training-session result (tol {_MTOL})", abs(auc_new - ref["auc"]) <= _MTOL,
+                f"loaded={auc_new:.10f} recorded={ref['auc']:.10f}")
+            chk(f"test accuracy re-computed from loaded model matches training-session result (tol {_MTOL})", abs(acc_new - ref["accuracy"]) <= _MTOL,
+                f"loaded={acc_new:.10f} recorded={ref['accuracy']:.10f}")
+            rec["recomputed_test_metrics"] = {"auc": auc_new, "accuracy": acc_new, "recorded": {"auc": ref["auc"], "accuracy": ref["accuracy"]}}
+        except Exception as ex:
+            chk("re-computed test metrics vs t3_results_<task>.json", False, "could not compare: " + str(ex)[:100])
         rec["max_abs_prob_diff"] = mx
         RELOAD["results"].append(rec)
 RELOAD["all_checks_passed"] = all_ok

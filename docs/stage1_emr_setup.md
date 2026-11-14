@@ -1,5 +1,9 @@
 # Stage 1 — EMR cluster and raw corpus in HDFS
 
+> **HISTORICAL RECORD (28 Oct 2026 development-profile run).** The current setup guide is `docs/RUN_ON_EMR.md`; the two assessed clusters are in `config/emr/EMR_cluster_history.md`. The 28 Oct evidence now lives in `evidence/old_emr_evidence_run_02/`.
+> **Update 2026-11-14 - storage finding resolved:** the 4 and 13 Nov clusters were created with two 100 GiB gp3 EBS volumes per core node (`config/emr/metadata/nov04-instance-groups.json`, `nov13-instance-groups.json`) and reported 387.75 GB of HDFS capacity (`evidence/emr_run_2026-11-04_q1-2016/stage1_dfs_report.txt`). The "rejected by AWS Academy" statement below applies to the failed 28 Oct attempt only.
+
+
 Goal: establish a running EMR cluster with raw files in HDFS and preserve dated proof of that run.
 This document is an **Appendix A** (EMR setup and rerun guide) working draft populated with the
 historical evidence from the successful 2026-10-28 Stage 1 run.
@@ -13,7 +17,7 @@ to the specified 200 GiB gp3 volume at 3000 IOPS and 125 MiB/s. The small develo
 on the observed HDFS capacity; do not claim that the full reference hardware requirement or an
 assessed full-profile run has been met. The project notes say this issue was raised with teaching
 staff; the brief itself is not included in this repository ZIP. Evidence is under
-`evidence/emr_ref_m5xlarge/`.
+`evidence/old_emr_evidence_run_02/`.
 
 ## Recorded setup from the successful Stage 1 run (28 October 2026)
 
@@ -24,49 +28,49 @@ inferred from the successful node hostname and should be checked in the console.
 
 | Item | Recorded value | Where the value comes from |
 |---|---|---|
-| Profile | Reference **m5.xlarge** (1 primary + 2 core, no task; not m5.large dev) | `config/emr/README.md` lines 6–14; `evidence/emr_ref_m5xlarge/stage1_cluster.txt` lines 10–14 |
+| Profile | Reference **m5.xlarge** (1 primary + 2 core, no task; not m5.large dev) | `config/emr/README.md` lines 6–14; `evidence/old_emr_evidence_run_02/stage1_cluster.txt` lines 10–14 |
 | AWS account | AWS Academy Learner Lab | `config/emr/README.md` lines 12, 19–20; original setup notes in this document |
-| EMR release | `emr-7.10.0` | `evidence/emr_ref_m5xlarge/stage1_cluster.txt` line 2 |
-| Core-node storage | EMR default: **2 × 32 GiB gp2 per core**, not the reference 200 GiB gp3 | `evidence/emr_ref_m5xlarge/stage1_notes.txt` line 7; `config/emr/README.md` line 12 |
-| AWS region | **`us-east-1` (consistent with the recorded primary-node DNS; verify the region in the AWS Console for any new run)** | `evidence/emr_ref_m5xlarge/stage1_notes.txt` line 8 records a `compute-1.amazonaws.com` hostname |
-| S3 bucket name | `inf2006-team07-bigdata` | `evidence/emr_ref_m5xlarge/stage1_cluster.txt` line 3; `stage1_distcp.log` line 1 |
-| Cluster ID | `j-02025102D1KMIV42E97Q` | `evidence/emr_ref_m5xlarge/stage1_cluster.txt` line 1; `stage1_notes.txt` line 2 |
-| Cluster created (UTC) | `2026-10-28 06:02 UTC` | `evidence/emr_ref_m5xlarge/stage1_notes.txt` line 5 |
-| Cluster **Waiting** (UTC) | `2026-10-28 06:09 UTC` | `evidence/emr_ref_m5xlarge/stage1_notes.txt` line 6 |
-| Primary node public DNS | `ec2-52-91-240-125.compute-1.amazonaws.com` | `evidence/emr_ref_m5xlarge/stage1_notes.txt` line 8 |
+| EMR release | `emr-7.10.0` | `evidence/old_emr_evidence_run_02/stage1_cluster.txt` line 2 |
+| Core-node storage | EMR default: **2 × 32 GiB gp2 per core**, not the reference 200 GiB gp3 | `evidence/old_emr_evidence_run_02/stage1_notes.txt` line 7; `config/emr/README.md` line 12 |
+| AWS region | **`us-east-1` (consistent with the recorded primary-node DNS; verify the region in the AWS Console for any new run)** | `evidence/old_emr_evidence_run_02/stage1_notes.txt` line 8 records a `compute-1.amazonaws.com` hostname |
+| S3 bucket name | `inf2006-team07-bigdata` | `evidence/old_emr_evidence_run_02/stage1_cluster.txt` line 3; `stage1_distcp.log` line 1 |
+| Cluster ID | `j-02025102D1KMIV42E97Q` | `evidence/old_emr_evidence_run_02/stage1_cluster.txt` line 1; `stage1_notes.txt` line 2 |
+| Cluster created (UTC) | `2026-10-28 06:02 UTC` | `evidence/old_emr_evidence_run_02/stage1_notes.txt` line 5 |
+| Cluster **Waiting** (UTC) | `2026-10-28 06:09 UTC` | `evidence/old_emr_evidence_run_02/stage1_notes.txt` line 6 |
+| Primary node public DNS | `ec2-52-91-240-125.compute-1.amazonaws.com` | `evidence/old_emr_evidence_run_02/stage1_notes.txt` line 8 |
 | Key pair name | `vockey` (**documented setup; console verification not saved**) | `config/emr/README.md` line 20; setup instructions in section B below |
-| Staging start (UTC) | `2026-10-28 06:14:18 UTC` | `evidence/emr_ref_m5xlarge/stage1_cluster.txt` line 6 |
-| Staging end (UTC) | `2026-10-28 06:15:02 UTC` | `evidence/emr_ref_m5xlarge/stage1_cluster.txt` line 7 |
-| Staging duration (excluded from assessed 60 minutes) | **44 seconds** | `evidence/emr_ref_m5xlarge/stage1_cluster.txt` line 8; `stage1_notes.txt` line 10 |
-| DistCp YARN application ID | `application_1793167721813_0001` | `evidence/emr_ref_m5xlarge/stage1_cluster.txt` line 5; `stage1_distcp.log` line 25 |
-| HDFS replication | **2** | `evidence/emr_ref_m5xlarge/stage1_cluster.txt` line 9; `config/emr/cluster_configurations_reference_m5xlarge.json` lines 2–6 |
-| Two core nodes running | **2 × RUNNING** when tested | `evidence/emr_ref_m5xlarge/stage1_cluster.txt` lines 10–14 |
-| Cluster terminated (UTC) | `2026-10-28 07:58 UTC` | `evidence/emr_ref_m5xlarge/stage1_notes.txt` line 13 |
+| Staging start (UTC) | `2026-10-28 06:14:18 UTC` | `evidence/old_emr_evidence_run_02/stage1_cluster.txt` line 6 |
+| Staging end (UTC) | `2026-10-28 06:15:02 UTC` | `evidence/old_emr_evidence_run_02/stage1_cluster.txt` line 7 |
+| Staging duration (excluded from assessed 60 minutes) | **44 seconds** | `evidence/old_emr_evidence_run_02/stage1_cluster.txt` line 8; `stage1_notes.txt` line 10 |
+| DistCp YARN application ID | `application_1793167721813_0001` | `evidence/old_emr_evidence_run_02/stage1_cluster.txt` line 5; `stage1_distcp.log` line 25 |
+| HDFS replication | **2** | `evidence/old_emr_evidence_run_02/stage1_cluster.txt` line 9; `config/emr/cluster_configurations_reference_m5xlarge.json` lines 2–6 |
+| Two core nodes running | **2 × RUNNING** when tested | `evidence/old_emr_evidence_run_02/stage1_cluster.txt` lines 10–14 |
+| Cluster terminated (UTC) | `2026-10-28 07:58 UTC` | `evidence/old_emr_evidence_run_02/stage1_notes.txt` line 13 |
 
 ### Verified outcomes and input traceability
 
 - **S3 → HDFS DistCp succeeded:** 8 raw files; **566,303,198 bytes copied**; **44 s** wall-clock staging.
-  Check `evidence/emr_ref_m5xlarge/stage1_distcp.log` lines 40–41, 49–56, and 86–91.
+  Check `evidence/old_emr_evidence_run_02/stage1_distcp.log` lines 40–41, 49–56, and 86–91.
 - **Inputs in HDFS:** 1 price file at `/raw/prices/v2026-10-27/all_stocks_5yr.csv`
   (**29,580,549 bytes**, **619,041 lines including header**), plus seven unzipped GDELT files dated
   2015-12-01 through 2015-12-07 under `/raw/gdelt/v2026-10-27/`
   (**536,722,649 bytes**, **1,425,234 event lines**). See
-  `evidence/emr_ref_m5xlarge/stage1_hdfs_inventory.csv` lines 2–9 and
+  `evidence/old_emr_evidence_run_02/stage1_hdfs_inventory.csv` lines 2–9 and
   `docs/input_profiles.md` lines 6–17.
 - **Byte-for-byte validation:** all **8 of 8** staged HDFS files have the **same size and SHA-256**
   as the downloaded/unzipped files listed in `evidence/local/inventory.csv` (lines 2–9).
-  The HDFS inventory is `evidence/emr_ref_m5xlarge/stage1_hdfs_inventory.csv` (lines 2–9).
+  The HDFS inventory is `evidence/old_emr_evidence_run_02/stage1_hdfs_inventory.csv` (lines 2–9).
   The original download URLs and acquisition timestamps are in
   `evidence/local/acquisition_log.csv` (lines 2–9) and `config/sources.json`.
 - **Capacity/health:** configured HDFS capacity **124,283,478,016 bytes (115.75 GiB)**,
   used **1,190,788,240 bytes (1.11 GiB)** at the recorded check, with **zero under-replicated,
-  missing, or corrupt blocks**. See `evidence/emr_ref_m5xlarge/stage1_dfs_report.txt` lines 1–11.
+  missing, or corrupt blocks**. See `evidence/old_emr_evidence_run_02/stage1_dfs_report.txt` lines 1–11.
   This is a snapshot for the small development corpus, **not** proof that the complete workload fits.
 - **Jupyter/PySpark smoke test:** the screenshot
-  `evidence/emr_ref_m5xlarge/screenshots/06_notebook_first_cell.png` shows Spark
+  `evidence/old_emr_evidence_run_02/screenshots/06_notebook_first_cell.png` shows Spark
   `3.5.5-amzn-1`, application `application_1793167721813_0002`, and a text-line count of
   **619,041** for the HDFS price CSV; the application ID is also noted in `stage1_notes.txt` line 12.
-- **Screenshots:** Under `evidence/emr_ref_m5xlarge/screenshots/`, `03_failed_cluster_ebs_error.png`
+- **Screenshots:** Under `evidence/old_emr_evidence_run_02/screenshots/`, `03_failed_cluster_ebs_error.png`
   documents the rejected EBS setup; `04_staging_done.png`, `05_hdfs_inventory.png`, and
   `06_notebook_first_cell.png` document the successful processing. `02_instance_groups.png`
   shows the one-primary/two-core group layout. The cluster creation, Waiting and termination
@@ -177,7 +181,7 @@ The prompt changes to `[hadoop@ip-... ~]$` — you are now typing on the cluster
 ```
 git clone https://github.com/hengouipui03/Big_Data_Project.git
 cd Big_Data_Project
-bash scripts/stage1_stage_to_hdfs.sh s3://<bucket>/raw /raw evidence/emr_ref_m5xlarge
+bash scripts/stage1_stage_to_hdfs.sh s3://<bucket>/raw /raw evidence/old_emr_evidence_run_02
 ```
 
 The script: copies S3 -> HDFS with `hadoop distcp` (a MapReduce job, so it gets a YARN application
@@ -195,7 +199,7 @@ Expected results:
 | `yarn node -list` | 2 nodes RUNNING |
 
 In the recorded 2026-10-28 run, every SHA-256 in
-`evidence/emr_ref_m5xlarge/stage1_hdfs_inventory.csv` matched
+`evidence/old_emr_evidence_run_02/stage1_hdfs_inventory.csv` matched
 `evidence/local/inventory.csv`. That is the Task 1 traceability chain:
 source URL -> download (`acquisition_log.csv`) -> laptop (`inventory.csv`)
 -> S3 -> HDFS (`stage1_hdfs_inventory.csv`).
@@ -204,7 +208,7 @@ Preserve the generated evidence before the cluster is terminated. For example, f
 primary node, copy it to S3:
 
 ```bash
-aws s3 cp evidence/emr_ref_m5xlarge/ s3://<bucket>/evidence/emr_ref_m5xlarge/ --recursive
+aws s3 cp evidence/old_emr_evidence_run_02/ s3://<bucket>/evidence/old_emr_evidence_run_02/ --recursive
 ```
 
 Then download or sync the evidence into your **local** Git clone, review the changed paths,
@@ -242,7 +246,7 @@ Save the notebook as `inf2006_pipeline.ipynb`. Because of `jupyter-s3-conf` it i
 1. Clone the terminated cluster in the EMR console (all settings kept) -> Create.
 2. Re-add the port 9443 inbound rule; copy the new primary DNS.
 3. `ssh`, then `sudo dnf install -y git`, `git clone ...` (or `git pull` in an existing clone — if git refuses
-   because of untracked evidence files, remove the cluster's `evidence/emr_ref_m5xlarge` folder ONLY if
+   because of untracked evidence files, remove the cluster's `evidence/old_emr_evidence_run_02` folder ONLY if
    that evidence is already pushed to GitHub).
 4. Rerun section D (staging, ~1 min) and `scripts/stage2_streaming_and_hive.sh` (~3 min): the Hive
    metastore lives on the primary node and is lost with the cluster.

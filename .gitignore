@@ -1,5 +1,6 @@
 # raw data must never be committed or shipped in the ZIP
-data/
+# (anchored: an unanchored 'data/' also hid models/**/stages/*/data/ - the Spark ML parameter files)
+/data/
 *.zip
 *.CSV
 all_stocks_5yrs.csv
@@ -16,7 +17,7 @@ metastore_db/
 derby.log
 __pycache__/
 .ipynb_checkpoints/
-work/
+/work/
 # credentials
 *.pem
 .env

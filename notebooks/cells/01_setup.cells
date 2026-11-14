@@ -12,6 +12,8 @@
 
 `scripts/emr_run_all.sh` runs stages 1–2 for you in one command. Full step-by-step guide: `docs/RUN_ON_EMR.md` (this is Appendix A).
 
+> **Dependency (do this once per cluster, before the first cell):** PySpark on EMR needs `numpy` on the Python workers. It is shipped to the executors as a packed Python 3.9 virtual environment from S3 by the three `spark.yarn.dist.archives` / `spark.pyspark.python` / `spark.executorEnv.PYSPARK_PYTHON` keys in the next cell. Build and upload that archive with `scripts/build_numpy_env.sh <your-bucket>` (about 2 minutes, on the primary node), and replace the bucket name in the `%%configure` cell **and** in cell 0.1 with your own bucket. Without the archive the Spark session fails to start. See `docs/RUN_ON_EMR.md`, step 5.
+
 | Section | Brief reference |
 |---|---|
 | 0 Setup, environment, helper functions | Cloud resource constraints, reproducibility |
@@ -35,7 +37,11 @@
     "spark.executor.memoryOverhead": "2g",
     "spark.driver.memory": "2g",
     "spark.dynamicAllocation.enabled": "false",
-    "spark.sql.catalogImplementation": "hive"
+    "spark.sql.catalogImplementation": "hive",
+
+    "spark.yarn.dist.archives": "s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/dependencies/spark-numpy-env.tar.gz#environment",
+    "spark.pyspark.python": "./environment/bin/python",
+    "spark.executorEnv.PYSPARK_PYTHON": "./environment/bin/python"
   }
 }
 
@@ -186,7 +192,7 @@ if not IS_EMR:
 #@@ md
 ## 1. Corpus checks (Task 1)
 
-The raw corpus was staged and verified by `scripts/stage1_stage_to_hdfs.sh` (bytes, lines and SHA-256 read back from HDFS → `evidence/emr_ref_m5xlarge/stage1_hdfs_inventory.csv`) and audited by `scripts/stage2_streaming_and_hive.sh` (Hadoop Streaming + Hive on Tez). Here the **Spark** engine independently re-derives the same quality numbers from the Hive table `inf2006.prices_typed`, so three engines (Hive, Spark, local Python) must agree.
+The raw corpus was staged and verified by `scripts/stage1_stage_to_hdfs.sh` (bytes, lines and SHA-256 read back from HDFS → `evidence/<emr-run-folder>/stage1_hdfs_inventory.csv`) and audited by `scripts/stage2_streaming_and_hive.sh` (Hadoop Streaming + Hive on Tez). Here the **Spark** engine independently re-derives the same quality numbers from the Hive table `inf2006.prices_typed`, so three engines (Hive, Spark, local Python) must agree.
 
 #@@ code
 def load_prices_typed():
@@ -242,7 +248,7 @@ for k, v in EXPECTED.items():
 if IS_EMR:
     hq = spark.table("inf2006.raw_prices_quality").first().asDict()
     for k in ("rows_total", "tickers", "rows_up_to_2017_12_29", "empty_open", "empty_high", "empty_low", "ohlc_inconsistent"):
-        check(f"Task1 {k}: Hive table vs Spark", hq[k], q[k], evidence="evidence/emr_ref_m5xlarge/stage2_hive_03_results.log")
+        check(f"Task1 {k}: Hive table vs Spark", hq[k], q[k], evidence="evidence/<emr-run-folder>/stage2_hive_03_results.log")
     print("\nHive raw-data audit tables:")
     show(spark.table("inf2006.raw_prices_series_length").where("short_series = 1").orderBy("ticker"))
     show(spark.table("inf2006.gdelt_audit_rejects"))

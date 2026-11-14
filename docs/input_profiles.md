@@ -11,7 +11,7 @@ Each profile is an exact list of raw files identified by sha256, so any run can 
 | GDELT 1.0 daily export | `20151201`–`20151207.export.CSV` (7 days) | 536,722,649 (zips: ~140 MB) | 1,425,234 events | `evidence/local/acquisition_log.csv` (zip sha256), `evidence/local/inventory.csv` (expanded sha256) |
 
 HDFS layout: `/raw/prices/v2026-10-27/`, `/raw/gdelt/v2026-10-27/`. S3 mirror: `s3://<bucket>/raw/...`.
-HDFS verification of every file: `evidence/emr_ref_m5xlarge/stage1_hdfs_inventory.csv` (all 8 sha256 equal the laptop values).
+HDFS verification of every file: `evidence/old_emr_evidence_run_02/stage1_hdfs_inventory.csv` (all 8 sha256 equal the laptop values).
 
 Why these 7 days: a contiguous week inside the GDELT window (Jul 2015–Jun 2017) that overlaps the price
 data, small enough (0.5 GB) to test every pipeline stage in minutes on the reference cluster.
@@ -22,20 +22,21 @@ Brief v1.1: "Any common assessed workload will be confirmed by the teaching team
 and "develop on a small sample until then". The full profile will be frozen here once the teaching team
 confirms the assessed workload. Candidate: prices (same file) + a contiguous GDELT range of N days.
 
-Sizing evidence from the dev profile (reference cluster, default storage):
-- Streaming audit: 42 s for 0.51 GB expanded (≈ 80 s/GB) — `evidence/emr_ref_m5xlarge/run_log.csv`
-- HDFS: 115.75 GB physical across 2 workers ≈ 58 GB logical at replication 2 (default storage; the
-  200 GiB gp3 reference volume was rejected by AWS Academy) — `stage1_dfs_report.txt`
-- GDELT expanded size ≈ 75 MB/day average (54.71 GB / 731 days); zip ≈ 13 MB/day
-- Budget rule (brief): raw + prepared files + simultaneous copies + shuffle + temp + logs must fit the
-  logical ceiling; compressed and expanded sizes are not interchangeable.
+Sizing evidence (measured on the reference cluster; costs in seconds are wall clock):
+- Hadoop Streaming audit, development profile: 42 s for 0.51 GB expanded (≈ 80 s/GB, dominated by job start-up) - `evidence/old_emr_evidence_run_02/run_log.csv`.
+- Hadoop Streaming audit, Q1-2016 profile: **212 s for 6.94 GB expanded (≈ 30.5 s/GB, ≈ 33 MB/s)** - `evidence/emr_run_2026-11-04_q1-2016/run_log.csv`. This is the rate to use for projections; the 80 s/GB figure is start-up dominated and must not be extrapolated.
+- HDFS capacity on the assessed clusters (2 x 100 GiB gp3 per core node): **387.75 GB configured = about 194 GB of logical data at replication 2** - `evidence/emr_run_2026-11-04_q1-2016/stage1_dfs_report.txt` (26.4 GB used at that moment = the 6.9 GB profile staged twice - versioned plus the unused flat copies, see `stage1_hdfs_inventory_flat_copies_unused.csv` - at replication 2). The earlier 115.75 GB figure belonged to the failed 28 Oct default-storage attempt only.
+- GDELT expanded size ≈ 75 MB/day average (54.71 GB / 731 days; Q1-2016 averages 76 MB/day); zip ≈ 13 MB/day.
+- Budget rule (brief): raw + prepared files + simultaneous copies + shuffle + temp + logs must fit the logical ceiling; compressed and expanded sizes are not interchangeable.
 
-| Candidate full range | Days | Expanded GB | ×2 replication | Est. streaming time |
-|---|---|---|---|---|
-| 2016 Q1 | 91 | ~6.8 | ~13.6 GB | ~9 min |
-| 2016 H1 | 182 | ~13.6 | ~27 GB | ~18 min |
-| 2016 full year | 366 | ~27 | ~55 GB (exceeds 58 GB logical ceiling with working space) | ~36 min |
-| All 731 days | 731 | 54.7 | 109 GB — does not fit default storage | ~73 min |
+| Range | Days | Expanded GB | x2 replication | Streaming time (30.5 s/GB, linear projection) | Fits 194 GB logical ceiling? |
+|---|---|---|---|---|---|
+| 7-day development profile (measured) | 7 | 0.54 | 1.1 GB | measured 42 s (start-up dominated) | yes |
+| 2016 Q1 (measured, "larger profile") | 91 | 6.94 | 13.9 GB | **measured 212 s** | yes |
+| 2016 full year | 366 | ~27 | ~55 GB | ~14 min | yes |
+| **All 731 days (brief's reference scope)** | 731 | 54.7 | 109 GB (+ prepared data < 0.1 GB, Hive/Spark scratch) | **~28 min** (projection, assumes linear scaling and no skew) | yes: 109 GB of 387.75 GB physical, leaving ~280 GB for staging copies/shuffle/logs |
+
+Only the Hadoop Streaming stage scales with GDELT volume (Hive and Spark work on the 91-row daily audit table and the 619,040-row price table), so the projected full-workload run is about 28 min streaming + ~1 min Hive + ~5 min notebook, i.e. **~35 min against the 60-minute marking timeout** if the linear assumption holds. The projection is **not measured**; the main risk is mapper throughput (one Python process per map task; 4 vCores in total). Enhanced resource plan if the projection fails: more reducers and map-side parallelism first (`mapreduce.job.reduces`, split size), then additional core nodes only if the course allows exceeding the 1 primary + 2 core limit.
 
 Decision to be recorded here with date, file list and checksums once confirmed.
 

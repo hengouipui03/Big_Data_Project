@@ -62,3 +62,12 @@ The full AWS CLI exports are retained separately:
 - nov13-instance-groups.json
 - nov13-instances.json
 - nov13-steps.json
+
+## Which evidence belongs to which cluster
+
+| Evidence folder | Cluster | Spark application ids | Note |
+|---|---|---|---|
+| `evidence/emr_run_2026-11-04_q1-2016/` (shell stages) | 4 Nov `j-06878942C5H7E0OZ24GA` | 0001 (DistCp), 0002 (streaming), 0004/0005 (Hive) | Stage 1-2 logs, `run_log.csv` |
+| `evidence/emr_run_2026-11-04_q1-2016/notebook_outputs/` | 4 Nov | `application_1793775642011_0010` | reload ran **in the training session** (not a fresh-session proof) |
+| `evidence/fresh_EMR_run_2026-11-14/reference/` | 13 Nov `j-0116410E858ST6KQS49` | training `application_1794579383226_0007`, reload `..._0008` | fresh-session reload proof |
+| `evidence/fresh_EMR_run_2026-11-14/perf/` | **not this cluster**: application `application_1794126035760_0016`, recorded 2026-11-08 | - | no cluster of 8 Nov is documented above; the timings (final fit 185 s vs 3.8 s on 4 Nov) come from a different notebook version. Treat as unattributed until explained |

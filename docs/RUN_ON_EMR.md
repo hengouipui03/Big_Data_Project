@@ -1,242 +1,167 @@
-# Run the whole project on AWS EMR — idiot-proof guide
+# Appendix A source - EMR setup and rerun guide
 
-*(This is the working draft of **Appendix A: EMR setup and rerun guide**.)*
+*(This file is the working source of **Appendix A** of the report. Every `<ANGLE-BRACKET>` value is yours to replace. Never write access keys into any file, notebook or chat.)*
 
-**What you will do, in one picture**
+**What you will do**
 
 ```
-laptop ── git push ──► GitHub ──► (cluster) git clone
-                                      │
-   S3 bucket (raw data) ──► [emr_run_all.sh]  Stage 1 S3→HDFS  +  Stage 2 Hadoop Streaming + Hive      ~10 min
-                                      │
-                         JupyterHub ► notebook "Run All"  (PySpark, Spark ML, analytics, timings)       ~35–50 min
-                                      │
-          outputs saved to S3  ◄──────┘  → download .ipynb + models + evidence  → terminate cluster
+ laptop: download raw data ──► S3 bucket  raw/prices/<VER>/  raw/gdelt/<VER>/
+                                   │
+ primary node: build numpy env ────┤ (once per bucket)          scripts/build_numpy_env.sh
+ primary node: emr_run_all.sh ─────┤ Stage 1 S3→HDFS  +  Stage 2 Hadoop Streaming + Hive on Tez     ~5 min (+ ~2 min staging, excluded)
+ JupyterHub: notebook "Run All" ───┤ PySpark cleaning · features · splits · Spark ML · analytics     ~5 min (+ 3 benchmark repetitions ~3 min)
+ JupyterHub: restart kernel, run section 6 only ──► fresh-session reload proof                       ~1 min
+                                   ▼
+ outputs saved to S3 ──► download notebook + models + evidence ──► terminate the cluster
 ```
 
-**Total hands-on time:** about 25 minutes of clicking and typing, plus about 1 hour of waiting (cluster start 10–15 min, scripts ~10 min, notebook ~40 min).
-
-**Rules that prevent 90 % of problems**
-
-1. Copy-paste commands exactly. Anything in `<ANGLE BRACKETS>` is yours to replace.
-2. **Never run the notebook and the shell scripts at the same time.** The notebook holds the cluster's memory (`2 executors × 8 GiB`); Hadoop/Hive jobs then wait forever. Order: **scripts first, notebook second.**
-3. Everything on the cluster's disk and HDFS **disappears when you terminate it**. S3 does not. The notebook saves its outputs to S3 for this reason.
-4. AWS Academy ends your session after ~4 h and kills the cluster. Start the clock when you start the cluster.
-5. Never put access keys in any file, notebook or chat.
+Order rule: **shell scripts first, notebook second, never both at the same time** (the notebook's Spark session holds the cluster's memory and Hadoop/Hive jobs would wait).
+Everything on the cluster disk/HDFS disappears at termination; S3 does not - that is why the notebook writes its outputs to S3.
 
 ---
 
-## Step 0 — before touching AWS (laptop, 5 min)
-
-1. Make sure everything is pushed so the cluster can clone it:
-   ```bash
-   cd Big_Data_Project
-   git add notebooks scripts docs src sql config evidence/local
-   git commit -m "Notebook, scripts, docs"
-   git push
-   ```
-2. Check the raw data is already in S3 (AWS Console → S3 → your bucket, here `inf2006-team07-bigdata`). You must see:
-   ```
-   raw/prices/v2026-10-27/all_stocks_5yr.csv                 (29,580,549 bytes)
-   raw/gdelt/v2026-10-27/20151201.export.CSV … 20151207.export.CSV   (7 files, 536,722,649 bytes in total)
-   ```
-   If not: upload them (unzipped GDELT files!) following `docs/stage1_emr_setup.md` section A.
-3. Have `labsuser.pem` downloaded (AWS Academy → AWS Details → Download PEM).
-
-## Step 1 — start AWS Academy and open the console
-
-AWS Academy → your course → **Learner Lab → Start Lab** → wait for the green dot → click **AWS**. Region: **us-east-1**.
-
-## Step 2 — create the cluster (10 min of clicking, then 10–15 min of waiting)
-
-EMR → **Create cluster**. Settings (identical to `docs/stage1_emr_setup.md` section B):
-
-| Field | Value |
-|---|---|
-| Name | `inf2006-bigdata` |
-| Release | `emr-7.10.0` |
-| Applications | tick **Hadoop, Hive, Tez, Spark, Livy, JupyterHub** (Livy is required by the PySpark notebook) |
-| Primary | m5.xlarge × 1 |
-| Core | m5.xlarge × 2 — **do NOT add a custom EBS volume** (AWS Academy rejects it; leave the default) |
-| Task group | remove it. No scaling. |
-| Termination | manual |
-| Software settings | "Enter configuration" → paste `config/emr/cluster_configurations_reference_m5xlarge.json`, replacing `REPLACE-WITH-YOUR-BUCKET-NAME` with `inf2006-team07-bigdata` |
-| Logs | `s3://inf2006-team07-bigdata/emr-logs/` |
-| Key pair | `vockey` |
-| IAM | service role `EMR_DefaultRole`, instance profile `EMR_EC2_DefaultRole` |
-
-Click **Create cluster**. **Write down the Cluster ID (`j-…`) and the time.** Wait until the status is **Waiting** (green). Cluster page → copy the **Primary node public DNS** (`ec2-…compute-1.amazonaws.com`).
-
-> If creation fails with *VALIDATION_ERROR*: you added a custom EBS volume. Clone the cluster and remove it.
-> If it fails with *No route to any external sources*: pick a public subnet (see Troubleshooting).
-
-## Step 3 — open the doors (2 min)
-
-Cluster page → **Network and security → Primary node security group → Edit inbound rules → Add rule** (twice):
-
-| Type | Port | Source |
-|---|---|---|
-| SSH | 22 | My IP |
-| Custom TCP | 9443 | My IP |
-
-(If your IP changes — e.g. you move Wi-Fi — redo this with the new "My IP".)
-
-## Step 4 — log in to the primary node (laptop terminal)
-
-```bash
-chmod 400 ~/Downloads/labsuser.pem
-ssh -i ~/Downloads/labsuser.pem hadoop@<PRIMARY-DNS>
-```
-*Windows PowerShell:* `ssh -i $HOME\Downloads\labsuser.pem hadoop@<PRIMARY-DNS>` (if "permissions too open", right-click the .pem → Properties → Security → keep only yourself).
-
-The prompt becomes `[hadoop@ip-… ~]$` — you are now on the cluster. Answer `yes` to the fingerprint question.
-
-## Step 5 — get the code onto the cluster
-
-```bash
-sudo dnf install -y git
-git clone https://github.com/hengouipui03/Big_Data_Project.git
-cd Big_Data_Project
-```
-(Already cloned from an earlier cluster? Not possible — the disk was wiped. Always clone.)
-
-## Step 6 — run Stages 1 and 2 with ONE command (~10 min)
-
-```bash
-bash scripts/emr_run_all.sh inf2006-team07-bigdata v2026-10-27
-```
-
-What it does, in order (and prints a heading for each): stops leftover Spark sessions → copies S3→HDFS and verifies every file's SHA-256 (**Stage 1**, ~1 min) → runs the **Hadoop Streaming** audit job (~1–2 min) → runs the **Hive** scripts on Tez (~3–5 min; the first Tez start is slow) → copies `run_log.csv` to HDFS → checks the Hive tables → copies the evidence to S3.
-
-**You are done with this step when you see a green line:** `ALL GOOD. Now open JupyterHub …`
-
-Expected values it checks (so you can compare with the screen):
-
-| What | Expected |
-|---|---|
-| `/raw/prices/v2026-10-27/all_stocks_5yr.csv` | 29,580,549 bytes; 619,041 lines (619,040 rows + header) |
-| `stage2_streaming_vs_local.txt` last line | `RESULT: EMR streaming output matches local run on every date key` |
-| `inf2006.prices_typed` | 619040 rows |
-| `inf2006.gdelt_daily_typed` | 7 days (dev profile) |
-
-If it stops with a red `STOP:` message, read the message — it says what to do. More in Troubleshooting.
-
-## Step 7 — open JupyterHub (2 min)
-
-Browser: `https://<PRIMARY-DNS>:9443` → ignore the certificate warning ("Advanced → Proceed").
-Login: user **`jovyan`**, password **`jupyter`**. Click **Start My Server** if asked.
-
-## Step 8 — upload and run the notebook (~35–50 min of waiting)
-
-1. In the JupyterHub file browser click **Upload** (up arrow) → choose `notebooks/inf2006_pipeline.ipynb` from your laptop (the copy in your git clone).
-2. Open it. Top right must say **PySpark**. If it says another kernel: *Kernel → Change kernel → PySpark*.
-3. Look at the cell titled **0.1 Parameters**: `VERSION = "v2026-10-27"` and `BUCKET = "inf2006-team07-bigdata"` must be what you used in Step 6. `ACTIVE_CONFIG = "reference"` for the first run.
-4. **Kernel → Restart Kernel and Run All Cells.**
-5. Walk away. The first cell starts the Spark session (1–2 min), then each section prints progress. Expected total: dev profile **~30–50 min** (the 3-repetition benchmark in Section 5 is the longest part).
-
-What good looks like:
-
-| Section | You should see |
-|---|---|
-| 0.3 Environment | `is_emr: true`, Spark `3.5.5-amzn-1`, an `application_…` id, 2 executors × 2 cores × 6g |
-| 1 Corpus | `PASS` lines; prices rows 619040; Hive vs Spark numbers equal |
-| 2 Pipeline | `raw = clean + rejected` PASS; clean rows **605,887**; split table; all `Leakage[…]` lines PASS |
-| 3 Models | 14 experiment lines per task; "frozen choice"; a test table comparing model vs baselines |
-| 4 Analytics | tables + 3 figures (Q2 says INSUFFICIENT COVERAGE on the 7-day profile — that is correct and honest) |
-| 5 Performance | stage timings, 3 repetitions, medians, memory per executor |
-| 6 Reload | `RELOAD VERDICT: ALL PASSED` |
-| 7 Verification | "N of N checks passed" |
-
-If a figure cell prints `Plot skipped`, run this once in a new cell and rerun that cell:
-```
-%%local
-!pip install --user matplotlib
-```
-A failed check (`FAIL`) is **not** a reason to hide it — it goes in the report as a failed check with the actual value.
-
-## Step 9 — fresh-session reload proof (3 min)
-
-1. *Kernel → Restart Kernel* (do not run all).
-2. Run only the cell titled **6. Saved-model reload** (it is self-contained).
-3. Expected: `fresh session : True`, all `PASS`, `RELOAD VERDICT: ALL PASSED`. Take a screenshot with the date visible.
-
-## Step 10 — second configuration and (when the teaching team confirms it) the full profile
-
-* **Alternative configuration** (software-only comparison): in cell 0.1 change `ACTIVE_CONFIG = "alternative"` → Restart & Run All. Section 5.3 then lists reference and alternative side by side. Same inputs, same checks.
-* **Full profile:** acquire the larger GDELT range (`scripts/acquire_gdelt.sh`, `docs/input_profiles.md`), upload it to `s3://<bucket>/raw/{prices,gdelt}/<new-version>/`, run Step 6 with the new version name (`bash scripts/emr_run_all.sh <bucket> <new-version>`), change `VERSION` in cell 0.1 to the same name, and run the notebook again (both configurations). Do not run two configurations at once.
-
-## Step 11 — save everything BEFORE terminating
-
-1. **Notebook with outputs:** JupyterHub → *File → Download → Notebook (.ipynb)*. Save it as `notebooks/inf2006_pipeline.ipynb` (this executed copy is what goes in the ZIP; it is also in `s3://<bucket>/jupyter/jovyan/`).
-2. **Models, evidence JSON, timings** are already in S3:
-   ```
-   s3://inf2006-team07-bigdata/notebook_outputs/<VERSION>/models/direction/
-   s3://inf2006-team07-bigdata/notebook_outputs/<VERSION>/models/high_vol/
-   s3://inf2006-team07-bigdata/notebook_outputs/<VERSION>/evidence/
-   ```
-   Copy them to the primary node and then to your laptop:
-   ```bash
-   # on the primary node
-   aws s3 sync s3://inf2006-team07-bigdata/notebook_outputs/<VERSION> ~/outputs
-   # on your LAPTOP (new terminal)
-   scp -i ~/Downloads/labsuser.pem -r hadoop@<PRIMARY-DNS>:~/outputs ./outputs_<VERSION>
-   scp -i ~/Downloads/labsuser.pem -r hadoop@<PRIMARY-DNS>:~/Big_Data_Project/evidence/emr_ref_m5xlarge ./evidence_emr
-   ```
-   Put `models/` under `models/` in the submission folder, the evidence under `evidence/`, and commit the small evidence files (not the data).
-3. Take screenshots: EMR cluster page (Waiting, with ID), notebook Section 0.3, 5, 6 and 7 outputs, with the date visible.
-
-## Step 12 — terminate (stops the billing)
-
-EMR console → select the cluster → **Terminate**. Wait for **Terminated**. (~USD 1 per hour while running.)
-
----
-
-## What to put in the ZIP (paths relative to the ZIP root)
-
-| File | Meaning |
-|---|---|
-| `report.pdf` | the report with Appendices A–D |
-| `notebooks/inf2006_pipeline.ipynb` | **the executed copy exported from EMR (Step 11.1)** |
-| `models/direction/`, `models/high_vol/` | saved `PipelineModel`s |
-| `scripts/*.sh`, `src/streaming/*.py`, `sql/hive/*.hql`, `config/**` | helper scripts and configuration |
-| `evidence/emr_ref_m5xlarge/` | Stage 1–2 logs, `run_log.csv`, screenshots |
-| `evidence/notebook/` | the JSON files from `notebook_outputs/<VERSION>/evidence/` (verification record, reload, performance) |
-| `docs/RUN_ON_EMR.md` | this guide (Appendix A) |
-
-No credentials, no raw data (`data/`, the zips), no machine-specific paths.
-
----
-
-## Troubleshooting
-
-| Symptom | Cause → fix |
-|---|---|
-| `Permission denied (publickey)` on ssh | wrong user or key: use `hadoop@`, the `labsuser.pem` of the *current* lab session, and `chmod 400` |
-| ssh / browser times out | the security group has no rule for your current IP (Step 3) |
-| JupyterHub login fails | user `jovyan`, password `jupyter`; use `https://` and port **9443** |
-| Cluster creation: *VALIDATION_ERROR* | custom EBS volume — remove it (Academy rejects it) |
-| Cluster creation: *No route to any external sources* | private subnet — clone the cluster and choose a public subnet |
-| `emr_run_all.sh`: `/raw/prices/<version> is missing` | the version folder name differs from S3. `aws s3 ls s3://<bucket>/raw/prices/` shows the real names |
-| Stage 1: `AccessDenied` / `NoSuchBucket` | bucket name typo; or the EMR role cannot read it — recheck IAM roles (Step 2) |
-| A Hadoop/Hive step sits at "Running job" and never moves | a notebook session holds the memory. `emr_run_all.sh` kills it automatically; manually: `yarn application -list` then `yarn application -kill <application_…>` |
-| Stage 2 failed after streaming succeeded | resume: `FROM=c bash scripts/stage2_streaming_and_hive.sh <version> evidence/emr_ref_m5xlarge 2 evidence/local/streaming_gdelt_audit.tsv` |
-| `hive: command not found` | `HIVE_CMD="beeline -u jdbc:hive2://localhost:10000 -n hadoop --silent=true" bash scripts/stage2_streaming_and_hive.sh …` |
-| Notebook cell 1: *Hive tables … not found* | Step 6 was not run on **this** cluster (the Hive metastore dies with the cluster). Run `emr_run_all.sh` again, then re-run the notebook from the top |
-| Notebook: *No writable output location* | the EMR instance role cannot write to the bucket. The notebook already falls back to HDFS (`hdfs:///project/notebook_outputs/<VERSION>`); copy results out with `hdfs dfs -get` before terminating |
-| `Session … has been dead` / kernel dies mid-run | the Livy session was killed (idle timeout or out of memory). Restart the kernel and *Run All* (all outputs are recreated; ~40 min) |
-| A cell is very slow | normal for the 3-repetition benchmark (Section 5). Check progress in the Spark UI: Cluster page → Application user interfaces |
-| `matplotlib` missing in figure cells | `%%local` cell with `!pip install --user matplotlib`, rerun the figure cell |
-| Q2 says INSUFFICIENT COVERAGE | correct on the 7-day profile; needs the larger GDELT range (Step 10) |
-| Everything vanished | the cluster was terminated (Academy session ended). Create a new cluster (Clone), repeat from Step 3 |
-
-## Reproducibility record (fill in after your run — Appendix A item 5)
+## 1. Prerequisites and cluster configuration
 
 | Item | Value |
 |---|---|
-| EMR release | `emr-7.10.0` (Spark 3.5.5-amzn-1, Hive on Tez) |
-| Raw data version | `v2026-10-27` (7 GDELT days 2015-12-01..07; prices `all_stocks_5yr.csv`, sha256 `6aea253c…716cf`) |
-| Training cutoff | training anchors ≤ 2015-12-31 (outcomes known by that date); validation 2016; test 2017 (≤ 2017-12-29) |
-| Random seed | 42 (logistic regression is deterministic) |
-| Saved models | `s3://<bucket>/notebook_outputs/<VERSION>/models/{direction,high_vol}` and `hdfs:///models/<VERSION>/` |
-| Cluster ID / date of the assessed run | _fill in_ |
-| Date of the fresh-session rerun | _fill in_ (notebook Section 6 output + screenshot) |
+| Region | `us-east-1` |
+| EMR release | `emr-7.10.0` (permitted by the course Q&A) |
+| Applications | Hadoop 3.4.1, Hive 3.1.3 (execution engine **Tez**), Spark 3.5.5 (`3.5.5-amzn-1`), Livy 0.8.0, JupyterHub 1.5.0 (+ JupyterEnterpriseGateway 2.6.0). Python on the nodes: 3.9.x |
+| Nodes | **1 primary + 2 core `m5.xlarge`**, no task nodes, no autoscaling (manual cluster size), manual termination |
+| Root volume | 30 GiB per node (Q&A reference). *The 4 and 13 Nov clusters did not record this value in the exported metadata (`config/emr/EMR_cluster_history.md`); set it explicitly.* |
+| Core data storage | Q&A reference: one 200 GiB gp3 volume per core node (3,000 IOPS, 125 MiB/s). **The 4 and 13 Nov clusters used two 100 GiB gp3 volumes per core node** (3,000 IOPS / 125 MiB/s each) = 200 GiB per node, so capacity matches but aggregate IOPS/throughput is double the reference; HDFS reported 387.75 GB configured capacity (`evidence/emr_run_2026-11-04_q1-2016/stage1_dfs_report.txt`). Primary: default 2 x 32 GiB gp2 |
+| Software settings | paste `config/emr/cluster_configurations_reference_m5xlarge.json` into *Software settings → Enter configuration*, replacing `REPLACE-WITH-YOUR-BUCKET-NAME`. It sets HDFS replication 2, Spark 2 executors x 2 cores x 6 GiB heap + 2 GiB overhead, driver 2 GiB, dynamic allocation off, Hive on Tez, notebook persistence to S3 |
+| Bootstrap actions | none |
+| IAM | service role `EMR_DefaultRole`, instance profile `EMR_EC2_DefaultRole`, key pair `vockey` (AWS Academy defaults). The instance role needs read/write on your bucket |
+| Cost | about USD 1 per hour while the cluster runs; the whole rerun takes under 1 hour of cluster time |
+| Exact cluster exports of the two runs | `config/emr/metadata/nov04-*.json`, `nov13-*.json`; summary `config/emr/EMR_cluster_history.md` |
+
+Resource names you must choose: **`<BUCKET>`** (an S3 bucket in us-east-1), **`<VER>`** = raw-data version folder, here `v2026-10-29-q1-2016`.
+
+## 2. Prepare the environment
+
+1. **Create the cluster** (AWS Academy → Start Lab → AWS console → EMR → Create cluster) with the table above. Note the cluster ID and time; wait for **Waiting**.
+2. **Open ports** on the primary node's security group (inbound): SSH 22 and TCP 9443 from *My IP*.
+3. **Log in:** `ssh -i <KEY>.pem hadoop@<PRIMARY-DNS>` (PowerShell: same command; if "permissions too open", restrict the .pem to your own user).
+4. **Copy the project onto the primary node** (the cluster may not reach GitHub, so use the submission ZIP):
+   ```bash
+   # on your laptop
+   scp -i <KEY>.pem submission.zip hadoop@<PRIMARY-DNS>:~
+   # on the primary node
+   sudo dnf install -y unzip   # only if unzip is missing
+   unzip -q submission.zip -d project && cd project
+   ```
+   All commands below run from this folder. (If you prefer git: `git clone <your-repository-url>`.)
+5. **Python dependency for the notebook (once per bucket).** PySpark's ML layer needs `numpy` on the Python workers; EMR's Python 3.9 has none. The notebook ships a packed virtual environment to the executors from S3:
+   ```bash
+   bash scripts/build_numpy_env.sh <BUCKET>      # ~2 min; uploads s3://<BUCKET>/dependencies/spark-numpy-env.tar.gz
+   ```
+   The notebook's first cell (`%%configure -f`) then sets `spark.yarn.dist.archives`, `spark.pyspark.python` and `spark.executorEnv.PYSPARK_PYTHON` to use it. **Edit the bucket name in that cell and in cell 0.1.** Without the archive the Spark session cannot start.
+   Execution order of all helper files: `build_numpy_env.sh` → `emr_run_all.sh` (calls `stage1_stage_to_hdfs.sh`, then `stage2_streaming_and_hive.sh`, which call `src/streaming/gdelt_mapper.py` / `gdelt_reducer.py` and `sql/hive/01…03_*.hql`) → notebook.
+
+## 3. Acquire and stage the data
+
+**Sources and versions** (full provenance: `config/sources.json`, `evidence/local/acquisition_log.csv`, `evidence/gdelt_manifest/q1_2016/manifest.tsv`, data dictionary `docs/data_dictionary.md`):
+
+| Source | Version / files | Expected size and count |
+|---|---|---|
+| Daily price CSV | `all_stocks_5yr.csv` (plotly/datasets, as linked in the brief) | 29,580,549 bytes, 619,040 rows + header, 505 tickers, 2013-02-08 … 2018-02-07; sha256 `6aea253cd19de60b568143991aaf1fa482456565c389205658d236e595e716cf` |
+| GDELT 1.0 events | daily exports `20160101` … `20160331` (91 files, 2016 Q1) | 1,217,804,334 bytes zipped, 6,944,840,235 bytes expanded, 18,369,793 event rows; every file's md5 equals the published index |
+
+**Download (laptop, Python 3.8+ and bash; no extra packages):**
+```bash
+python -I src/acquire/download_raw.py prices
+bash scripts/acquire_gdelt.sh 20160101 20160331 data/raw/gdelt_q1_2016        # verifies md5 per day, writes evidence/gdelt_manifest/
+python -I src/pipeline/t1_profile_raw.py data/raw evidence/local/q1_2016 config/sources.json data/raw/gdelt_q1_2016 evidence/gdelt_manifest/q1_2016/manifest.tsv   # inventory + quality summary (Task 1)
+```
+**Upload to S3 with exactly this layout** (and *nothing else* under `raw/` - an earlier staging also left unversioned copies, which doubled the HDFS inventory; see `evidence/emr_run_2026-11-04_q1-2016/stage1_hdfs_inventory_flat_copies_unused.csv`):
+```
+s3://<BUCKET>/raw/prices/<VER>/all_stocks_5yr.csv
+s3://<BUCKET>/raw/gdelt/<VER>/20160101.export.CSV … 20160331.export.CSV     (unzipped files)
+```
+**Load into HDFS and create the Hive tables** - one command on the primary node (`emr_run_all.sh` Stage 1 = `hadoop distcp` S3 → `/raw/...` with bytes/lines/SHA-256 read back from HDFS; Stage 2 = Hadoop Streaming audit, then Hive external tables `inf2006.raw_prices`, `inf2006.gdelt_daily_audit`, then typed Parquet tables `inf2006.prices_typed`, `gdelt_daily_typed` that Spark reads through the Hive metastore):
+```bash
+bash scripts/emr_run_all.sh <BUCKET> <VER> evidence/emr_run_$(date -u +%F)
+```
+Done when it prints `ALL GOOD`. Expected: 92 files verified identical to the laptop SHA-256 (`stage1_hdfs_inventory.csv` vs `evidence/local/q1_2016/inventory.csv`), `RESULT: EMR streaming output matches local run on every date key`, Hive `rows_total=619040 tickers=505 rows_up_to_2017_12_29=605910 empty_open=11 empty_high=8 empty_low=8 ohlc_inconsistent=12 nonpositive=0 duplicate_ticker_date=0`.
+
+## 4. Upload and execute the project
+
+1. Browser → `https://<PRIMARY-DNS>:9443` (accept the certificate warning). Login: user `jovyan`, password `jupyter`. *Start My Server* if asked.
+2. **Upload** `notebooks/inf2006_pipeline.ipynb`; open it; kernel must be **PySpark**.
+3. Check the parameters: `VERSION = "<VER>"`, `BUCKET = "<BUCKET>"`, `ACTIVE_CONFIG = "reference"` (cell 0.1) and the bucket in the `%%configure` cell.
+4. **Kernel → Restart Kernel and Run All Cells.** Sections run in this order: 0 setup · 1 corpus checks (Spark vs Hive vs local) · 2 cleaning, features, chronological splits, leakage checks · 3 model experiments (14 per task, validation only), frozen final fit, test, **3.0 training-session record**, baselines · 4 analytics Q1-Q3 + figures · 5 performance (3 repetitions, memory) · 6 reload · 7 verification record.
+   *Section 6 inside "Run All" runs in the training session, so it records `fresh_session = False` and prints a note: that is expected - do step 9 for the real proof.*
+5. **Expected outputs (2016-Q1 profile, reference configuration):**
+
+| Section | Expected |
+|---|---|
+| 0.3 | `is_emr: true`, Spark `3.5.5-amzn-1`, 2 executors x 2 cores x 6g, new `application_…` id |
+| 1 | all `PASS`; 619,040 raw rows; Hive = Spark = local Python |
+| 2 | raw 619,040 = clean 605,887 + rejected 13,153; direction train/val/test = 66,424 / 25,805 / 25,533 rows; high-vol = 66,412 / 25,307 / 25,029; high-vol cut-off ≈ 0.01393; all `Leakage[...]` PASS |
+| 3 | frozen choices: direction logistic regression/all_price, regParam 0; high-vol logistic regression/all_price, regParam 0.01. Test AUC direction **0.5001** (majority baseline 0.5000), high-vol **0.7261** (persistence baseline 0.6378) |
+| 4 | Q1 table (4 groups), Q2 13 weekly points, Q3 14 subgroup rows + confusion matrices, 3 figures |
+| 5 | main run ≈ 270 s (includes 2 x 14 experiments); 3 repetitions of prepare + final fit ≈ 47 s each; memory per executor |
+| 7 | `34 of 34 checks passed` |
+
+   **Approximate runtimes:** staging S3 → HDFS ≈ 2 min (excluded from the 60-minute run) · Stage 2 shell stages ≈ 285 s (Hadoop Streaming 212 s, Hive 15 + 33 + 25 s) · notebook main run ≈ 272 s · benchmark ≈ 3 x 47 s.
+6. **Alternative configuration** (software-only comparison, identical inputs and checks): set `ACTIVE_CONFIG = "alternative"` in cell 0.1, Restart & Run All. Section 5.3 lists both configurations side by side.
+
+## 5. Reload the saved model and verify results
+
+1. **Models are written by section 3** to `hdfs:///models/<VER>/{direction,high_vol}` and `s3://<BUCKET>/notebook_outputs/<VER>/models/{direction,high_vol}` (complete `PipelineModel`: median Imputer → VectorAssembler → StandardScaler → LogisticRegression, learned parameters included).
+2. **Fresh session (step 9 of the run):** *Kernel → Restart Kernel* (do **not** run all), then run only the cell of **section 6** - it is self-contained. It starts a new Spark application, loads both models **without retraining**, re-scores the 2017 test set and compares with the predictions saved at training time (`pred_<task>`).
+3. **Expected result:** `fresh session : True` (reload `application_id` ≠ training `application_id` in `training_session.json`), all `PASS`, `RELOAD VERDICT: ALL PASSED`, which means for each task and each of the two model locations (HDFS, S3): metadata + stages present; row counts equal (25,533 direction / 25,029 high-vol); max |probability difference| = 0.0 (tolerance 1e-9); 0 differing class predictions; **test AUC and accuracy re-computed from the loaded model equal the training-session results within 1e-6** (direction 0.50006 / 0.56311, high-vol 0.72608 / 0.77522).
+4. **Dated evidence of the team's own fresh-session reruns** (all from the same code; the metric re-computation check in item 3 was added after these runs):
+   * 2026-11-13 cluster `j-0116410E858ST6KQS49`: training session `application_1794579383226_0007`, reload session `application_1794579383226_0008` → `evidence/fresh_EMR_run_2026-11-14/reference/training_session.json`, `t3_reload.json` (`all_checks_passed: true`, max difference 0.0).
+   * 2026-11-04 cluster `j-06878942C5H7E0OZ24GA` (earlier run, reload in the same session as training - **not** a fresh-session proof) → `evidence/emr_run_2026-11-04_q1-2016/notebook_outputs/`.
+   * *Final rehearsal run (with the metric re-computation check): to be added after the next cluster run.*
+
+## 6. Troubleshooting and cleanup
+
+| Symptom | Cause → fix |
+|---|---|
+| `Permission denied (publickey)` | use `hadoop@`, the `.pem` of the current lab session, restrict its file permissions |
+| ssh / JupyterHub time out | the security group lacks your current IP (step 2.2); JupyterHub is `https://…:9443` |
+| Cluster creation `VALIDATION_ERROR` | check EBS settings (volume type/size/count) and that you picked the AWS Academy roles |
+| `No route to any external sources` | choose a public subnet and clone the cluster |
+| Notebook cell 1 (`%%configure`) / session never starts | the numpy archive is missing or the bucket name is wrong → rerun `build_numpy_env.sh`, check `aws s3 ls s3://<BUCKET>/dependencies/`; check Livy log: *Application user interfaces → YARN → application → logs* |
+| `ModuleNotFoundError: numpy` in a stage | executors are not using `./environment/bin/python`; check the three keys in the `%%configure` cell |
+| `emr_run_all.sh`: `/raw/prices/<VER> is missing` | S3 version folder name differs: `aws s3 ls s3://<BUCKET>/raw/prices/` |
+| Stage 1 `AccessDenied` / `NoSuchBucket` | bucket typo or the EC2 instance role cannot read it |
+| A Hadoop/Hive step never progresses | a notebook session holds the memory: `yarn application -list`, then `yarn application -kill <application_…>` (`emr_run_all.sh` does this automatically at the start) |
+| Stage 2 failed after streaming succeeded | resume: `FROM=c bash scripts/stage2_streaming_and_hive.sh <VER> <evidence-dir> 2 evidence/local/q1_2016/streaming_gdelt_audit.tsv` (a=streaming b=register c=transform d=results) |
+| `hive: command not found` | `HIVE_CMD="beeline -u jdbc:hive2://localhost:10000 -n hadoop --silent=true" bash scripts/stage2_streaming_and_hive.sh …` |
+| Notebook: *Hive tables not found* | Stage 2 was not run on **this** cluster (the metastore dies with the cluster) → run `emr_run_all.sh`, then the notebook from the top |
+| Notebook: *No writable output location* | the instance role cannot write to the bucket; the notebook falls back to `hdfs:///project/notebook_outputs/<VER>` - copy results out with `hdfs dfs -get` **before** terminating |
+| `Session … has been dead` | the Livy session was killed (idle timeout / memory); restart the kernel and Run All (~10 min) |
+| `matplotlib` missing in figure cells | in a `%%local` cell: `!pip install --user matplotlib`, rerun the figure cells |
+| Section 6 says `fresh session : False` | you ran it in the training session; restart the kernel and run only that cell |
+
+**Preserve outputs, then clean up (do this before terminating):**
+1. JupyterHub → *File → Download as → Notebook (.ipynb)*; save as `notebooks/inf2006_pipeline.ipynb` (this executed export goes in the ZIP; a copy also persists under `s3://<BUCKET>/jupyter/`).
+2. Models, evidence JSON, timings are already in S3. Pull them to the primary node and then to your laptop:
+   ```bash
+   aws s3 sync s3://<BUCKET>/notebook_outputs/<VER> ~/outputs                         # on the primary node
+   scp -i <KEY>.pem -r hadoop@<PRIMARY-DNS>:~/outputs ./outputs_<VER>                 # on your laptop
+   scp -i <KEY>.pem -r hadoop@<PRIMARY-DNS>:~/project/evidence/emr_run_<DATE> ./       # shell-stage evidence
+   ```
+   Place the models under `models/<VER>/{direction,high_vol}/` (**check that each `stages/*/data/` folder came along** - the repository's `.gitignore` once hid them) and the evidence JSON under `evidence/<run-folder>/`.
+3. Take dated screenshots (cluster *Waiting* with ID, notebook sections 0.3, 5, 6, 7) - screenshots support but never replace the evidence files.
+4. Save cluster metadata: `aws emr describe-cluster --cluster-id <j-…> > config/emr/metadata/<date>-cluster.json` (and `list-instance-groups`).
+5. **Terminate:** EMR console → select the cluster → *Terminate*; wait for *Terminated*. Optionally delete `s3://<BUCKET>/notebook_outputs/` and `dependencies/` and any extra EBS/security-group rules to avoid charges.
+
+---
+
+## Reproducibility record
+
+| Item | Value |
+|---|---|
+| EMR release / software | `emr-7.10.0`; Hadoop 3.4.1, Hive 3.1.3 on Tez, Spark 3.5.5-amzn-1, Livy 0.8.0, JupyterHub 1.5.0; Python 3.9.25 (+ numpy, `scripts/build_numpy_env.sh`) |
+| Raw data version | `v2026-10-29-q1-2016`: prices `all_stocks_5yr.csv` (sha256 `6aea253c…716cf`) + GDELT 1.0 `20160101`-`20160331` (91 days, 6,944,840,235 bytes) |
+| Training cutoff | training anchors ≤ 2015-12-31 with outcomes known by that date (last known 2015-12-28); validation 2016; test 2017 (≤ 2017-12-29) |
+| Random seed | 42 (random forest / GBT seeds; logistic regression is deterministic) |
+| Tolerances | predictions: 1e-9 on probabilities; re-computed AUC/accuracy: 1e-6 |
+| Saved models | `hdfs:///models/<VER>/{direction,high_vol}`; `s3://<BUCKET>/notebook_outputs/<VER>/models/{direction,high_vol}`; submission copy `models/<VER>/{direction,high_vol}/` |
+| Assessed clusters | 2026-11-04 `j-06878942C5H7E0OZ24GA`; 2026-11-13/14 `j-0116410E858ST6KQS49` (both `config/emr/EMR_cluster_history.md`) |
+| Final rehearsal cluster / date | *to be filled after the next run* |

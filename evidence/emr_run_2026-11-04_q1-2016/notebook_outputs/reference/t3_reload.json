@@ -1,6 +1,6 @@
 {
-  "application_id_reload_session": "application_1794579383226_0008",
-  "checked_utc": "2026-11-13T17:34:46",
+  "application_id_reload_session": "application_1793775642011_0010",
+  "checked_utc": "2026-11-04T08:34:04",
   "tolerance": 1e-09,
   "results": [
     {
@@ -152,5 +152,6 @@
       "max_abs_prob_diff": 0.0
     }
   ],
+  "application_id_training_session": "application_1793775642011_0010",
   "all_checks_passed": true
 }

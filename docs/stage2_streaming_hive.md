@@ -15,7 +15,7 @@ PySpark in Stage 3, so each engine's role stays distinct and justifiable.
 
 ```
 cd ~/Big_Data_Project && git pull
-bash scripts/stage2_streaming_and_hive.sh v2026-10-27 evidence/emr_ref_m5xlarge
+bash scripts/stage2_streaming_and_hive.sh v2026-10-29-q1-2016 evidence/emr_run_<date>
 ```
 
 Approximate time: streaming 1-2 min for 7 GDELT days; Hive 2-4 min (first Tez session start is slow).
@@ -64,9 +64,9 @@ Save the notebook. Screenshot: `07_spark_reads_hive.png`.
 ## Save evidence
 
 ```
-aws s3 cp evidence/emr_ref_m5xlarge s3://<bucket>/evidence/emr_ref_m5xlarge/ --recursive
+aws s3 cp evidence/emr_run_<date> s3://<bucket>/evidence/emr_run_<date>/ --recursive
 ```
-then from the Mac: `scp -i ~/Downloads/labsuser.pem -r hadoop@<dns>:Big_Data_Project/evidence/emr_ref_m5xlarge evidence/`
+then from the Mac: `scp -i ~/Downloads/labsuser.pem -r hadoop@<dns>:project/evidence/emr_run_<date> evidence/`
 and commit.
 
 ## Notes for the report / Appendix A

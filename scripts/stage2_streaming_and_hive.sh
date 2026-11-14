@@ -2,10 +2,10 @@
 # Stage 2: Hadoop Streaming audit job + Hive registration and SQL transforms, with evidence.
 #
 # Run ON THE EMR PRIMARY NODE from the repo folder (after Stage 1 has staged /raw):
-#     bash scripts/stage2_streaming_and_hive.sh v2026-10-27 evidence/emr_ref_m5xlarge
+#     bash scripts/stage2_streaming_and_hive.sh v2026-10-29-q1-2016 evidence/emr_run_latest
 #
-# Arguments: 1 = raw version folder name under /raw/<source>/ (default v2026-10-27)
-#            2 = evidence folder (default evidence/emr_ref_m5xlarge)
+# Arguments: 1 = raw version folder name under /raw/<source>/ (default v2026-10-29-q1-2016)
+#            2 = evidence folder (default evidence/emr_run_latest)
 #            3 = number of reducers for the streaming job (default 2)
 #            4 = matching local streaming-audit file (default development profile)
 # Resume:    FROM=c bash scripts/stage2_streaming_and_hive.sh ...   starts at sub-stage c
@@ -20,8 +20,8 @@
 #   stage2_hive_03_results.log     Hive query results (quality audit, coverage, row counts)
 #   run_log.csv                    one line per stage: engine, start/end UTC, seconds, app ids, in/out
 set -euo pipefail
-VER=${1:-v2026-10-27}
-EV=${2:-evidence/emr_ref_m5xlarge}
+VER=${1:-v2026-10-29-q1-2016}
+EV=${2:-evidence/emr_run_latest}
 REDUCERS=${3:-2}
 LOCAL_AUDIT=${4:-evidence/local/streaming_gdelt_audit.tsv}
 mkdir -p "$EV"

@@ -9,8 +9,7 @@ Matches the brief v1.1 "provisional reference configuration" (Cloud resource con
 |---|---|---|
 | EMR release | emr-7.10.0 | emr-7.10.0 |
 | Cluster | 1 primary + 2 core m5.xlarge, no task nodes, no autoscaling | same ("Set cluster size manually") |
-| Worker data storage | 100 GiB gp3 per core node, 3000 IOPS / 125 MiB/s | 
- EMR default storage used: 2 × 32 GiB gp2 per core node; HDFS capacity 115.75 GB physical ≈ 58 GB logical at replication 2 |
+| Worker data storage | one 200 GiB gp3 per core node, 3000 IOPS / 125 MiB/s | **2 x 100 GiB gp3 per core node** (3000 IOPS / 125 MiB/s each) on the 4 and 13 Nov clusters: same 200 GiB capacity, aggregate IOPS/throughput 2x the reference; HDFS capacity 387.75 GB. Root volume: not recorded in the exports - set 30 GiB explicitly (Q&A). History: `EMR_cluster_history.md` |
 | HDFS replication | dfs.replication = 2 | hdfs-site dfs.replication=2 |
 | Spark starting allocation | 2 executors × 2 cores × 6 GiB heap; dynamic allocation off | spark.executor.instances=2, cores=2, memory=6g, dynamicAllocation=false |
 | Memory allowance | 2 GiB overhead per executor, 2 GiB driver heap | spark.executor.memoryOverhead=2g, spark.driver.memory=2g |
