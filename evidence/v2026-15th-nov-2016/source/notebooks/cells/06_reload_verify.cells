@@ -1,0 +1,108 @@
+#@@ md
+## 6. Saved-model reload in a fresh session (Task 3.3)
+
+The complete `PipelineModel` (median `Imputer` → `VectorAssembler` → `StandardScaler` → classifier) was saved above to HDFS **and** S3. This section loads it **without retraining** and re-scores the test set.
+
+**To make it a true fresh-session test:** `Kernel → Restart`, run only the **Section 0.1 parameters cell and its two following cells (0.2 helpers, 0.3 environment)** — or simply run this cell alone, it is self-contained — and then this section. A new Spark `application_id` proves the session is fresh. Expected: identical class predictions and probabilities within `TOL = 1e-9`.
+
+#@@ code
+# ---- self-contained: works right after a kernel restart (does not need any earlier cell)
+import json, datetime
+from pyspark.ml import PipelineModel
+from pyspark.ml.functions import vector_to_array
+from pyspark.sql import functions as F
+
+_VERSION, _BUCKET, _CONFIG = globals().get("VERSION", "v2026-10-27"), globals().get("BUCKET", "inf2006-team07-bigdata"), globals().get("ACTIVE_CONFIG", "reference")
+_TOL = globals().get("TOL", 1e-9)
+_EMR = "amzn" in spark.version
+if _EMR:
+    _PREP, _MODEL_PATHS = f"hdfs:///prepared/{_VERSION}/{_CONFIG}", [f"hdfs:///models/{_VERSION}", f"s3://{_BUCKET}/notebook_outputs/{_VERSION}/models"]
+    _EVD = f"s3://{_BUCKET}/notebook_outputs/{_VERSION}/evidence/{_CONFIG}"
+else:
+    import os
+    _R = os.path.abspath("work/nb")
+    _PREP, _MODEL_PATHS = f"file://{_R}/prepared/{_VERSION}/{_CONFIG}", [f"file://{_R}/models/{_VERSION}", f"file://{_R}/out/{_VERSION}/models"]
+    _EVD = f"file://{_R}/out/{_VERSION}/evidence/{_CONFIG}"
+
+def _exists(p):
+    jp = spark._jvm.org.apache.hadoop.fs.Path(p)
+    return jp.getFileSystem(spark._jsc.hadoopConfiguration()).exists(jp)
+
+def _wt(path, text):
+    jp = spark._jvm.org.apache.hadoop.fs.Path(path)
+    o = jp.getFileSystem(spark._jsc.hadoopConfiguration()).create(jp, True); o.write(bytearray(text.encode("utf-8"))); o.close()
+
+RELOAD = {"application_id_reload_session": spark.sparkContext.applicationId, "checked_utc": datetime.datetime.utcnow().isoformat(timespec="seconds"),
+          "tolerance": _TOL, "results": []}
+try:
+    env = json.loads("\n".join(r[0] for r in spark.read.text(f"{_EVD}/environment.json").collect()))
+    RELOAD["application_id_training_session"] = env["application_id"]
+    print("training session :", env["application_id"], "\nreload session   :", RELOAD["application_id_reload_session"],
+          "\nfresh session    :", env["application_id"] != RELOAD["application_id_reload_session"])
+except Exception as ex:
+    print("environment.json not found (training evidence missing?):", str(ex)[:100])
+
+all_ok = True
+for task in ("direction", "high_vol"):
+    for base in _MODEL_PATHS:
+        path = f"{base}/{task}"
+        rec = {"task": task, "model_path": path, "checks": []}
+        def chk(name, ok, detail=""):
+            global all_ok
+            rec["checks"].append({"check": name, "passed": bool(ok), "detail": str(detail)}); all_ok &= bool(ok)
+            print(("PASS " if ok else "FAIL ") + f"[{task}] {name} {detail}   <- {path}")
+        has_meta, has_stages = _exists(f"{path}/metadata"), _exists(f"{path}/stages")
+        chk("model folder has metadata/", has_meta); chk("model folder has stages/", has_stages)
+        if not (has_meta and has_stages):
+            rec["error"] = "MISSING or INCOMPATIBLE model files"; RELOAD["results"].append(rec); continue
+        try:
+            model = PipelineModel.load(path)
+        except Exception as ex:
+            chk("PipelineModel.load (no retraining)", False, str(ex)[:150]); RELOAD["results"].append(rec); continue
+        chk("PipelineModel.load (no retraining)", True, " -> ".join(type(s).__name__ for s in model.stages))
+        test = spark.read.parquet(f"{_PREP}/{task}/test")
+        saved = spark.read.parquet(f"{_PREP}/pred_{task}").select("ticker", "anchor_date", F.col("prediction").alias("pred_saved"), F.col("prob").alias("prob_saved"))
+        new = model.transform(test).withColumn("prob_new", vector_to_array("probability")[1])
+        j = new.join(saved, ["ticker", "anchor_date"])
+        n_new, n_saved, n_join = new.count(), saved.count(), j.count()
+        chk("row counts match (re-scored / saved / joined)", n_new == n_saved == n_join, f"{n_new}/{n_saved}/{n_join}")
+        mx = j.agg(F.max(F.abs(F.col("prob_new") - F.col("prob_saved")))).first()[0]
+        chk(f"max |probability difference| <= {_TOL}", mx is not None and mx <= _TOL, f"max_abs_diff={mx}")
+        flips = j.where(F.col("prediction") != F.col("pred_saved")).count()
+        chk("class predictions identical", flips == 0, f"differing={flips}")
+        rec["max_abs_prob_diff"] = mx
+        RELOAD["results"].append(rec)
+RELOAD["all_checks_passed"] = all_ok
+print("\nRELOAD VERDICT:", "ALL PASSED" if all_ok else "SOME CHECKS FAILED - see FAIL lines above")
+_wt(f"{_EVD}/t3_reload.json", json.dumps(RELOAD, indent=2, default=str))
+
+#@@ md
+## 7. Verification record and run summary
+
+Every check printed in this notebook, in the format the brief asks for (check · expected · actual · pass/fail · evidence location). **Failed checks are reported, not hidden.** If you restarted the kernel for Section 6, this table lists only checks run since then — for the full record use the saved `verification_record.json` from the main run.
+
+#@@ code
+try:
+    n_pass = sum(c["passed"] for c in CHECKS)
+    print(f"{n_pass} of {len(CHECKS)} checks passed\n")
+    for c in CHECKS:
+        print(("PASS" if c["passed"] else "FAIL"), "|", c["check"], "| expected:", c["expected"], "| actual:", c["actual"], "|", c["evidence"])
+    summary = {"environment": ENVIRONMENT, "stage_timings_main_run": MAIN_LOG, "checks": CHECKS,
+               "prepared": PREPARED, "model_results": {t: {k: v for k, v in r.items() if k != "experiments"} for t, r in MODEL_RESULTS.items()},
+               "performance": PERF, "reload": RELOAD, "outputs": {"evidence": EV, "models_s3_or_primary": MODELS_OUT, "models_hdfs": MODELS_HDFS,
+                                                                   "prepared": PREP}}
+    save_json("verification_record.json", summary)
+    print("\nsaved:", f"{EV}/verification_record.json")
+except NameError as ex:
+    print("Main-run variables are not in this session (kernel was restarted). Open the saved record instead:", ex)
+
+#@@ md
+### Where everything is saved (copy into the submission ZIP, see `docs/RUN_ON_EMR.md` step 10)
+
+| Artefact | Location |
+|---|---|
+| Notebook with outputs | JupyterHub → File → Download as `.ipynb` (also auto-saved to `s3://<bucket>/jupyter/`) |
+| Evidence JSON (reconciliation, splits, model results, reload, verification, performance) | `s3://<bucket>/notebook_outputs/<VERSION>/evidence/` |
+| Saved `PipelineModel`s (direction, high_vol) | `s3://<bucket>/notebook_outputs/<VERSION>/models/` and `hdfs:///models/<VERSION>/` |
+| Prepared datasets, predictions | `hdfs:///prepared/<VERSION>/<config>/` |
+| Shell-stage evidence (Stage 1–2) | `evidence/<cluster-folder>/` in the repo clone on the primary node |

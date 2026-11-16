@@ -1,0 +1,128 @@
+#@@ md
+## 3. Models (Task 3, Spark ML)
+
+Two specialised models, one per task (allowed by the course Q&A):
+
+| Task | Predict | Horizon | Baselines (same observations) | Primary metric |
+|---|---|---|---|---|
+| `direction` | will the stock's open rise from this anchor's open to the next anchor's open? | next week | (1) majority class from train, (2) sign of 5-bar momentum | AUC (accuracy, F1 also reported) |
+| `high_vol` | will next week's realised volatility be in the top third (train-defined cut-off)? | next week | (1) majority class from train, (2) **persistence**: last week's volatility ≥ cut-off | AUC (F1, accuracy also reported) |
+
+**Protocol.** Preprocessing (median `Imputer` → `VectorAssembler` → `StandardScaler`) and model parameters are learned on **train only**; 14 feature-set × model × parameter combinations are compared on **validation only**; the best is frozen, then scored **once** on test. The complete `PipelineModel` (preprocessing included) is saved and reloaded in Section 6.
+The `direction` outputs are not converted to portfolio weights: this project reports classification diagnostics only (the brief asks for source-price-ratio diagnostics, not investability claims).
+
+#@@ code
+from pyspark.ml import Pipeline, PipelineModel
+from pyspark.ml.classification import GBTClassifier, LogisticRegression, RandomForestClassifier
+from pyspark.ml.evaluation import BinaryClassificationEvaluator, MulticlassClassificationEvaluator
+from pyspark.ml.feature import Imputer, StandardScaler, VectorAssembler
+from pyspark.ml.functions import array_to_vector, vector_to_array
+
+FEATURE_SETS = {
+    "direction": {"momentum": ["mom1", "mom5", "mom20", "ma20gap"],
+                  "all_price": ["mom1", "mom5", "mom20", "ma20gap", "vol5", "vol20", "volratio", "range5", "gap_days"]},
+    "high_vol":  {"vol_core": ["vol5", "vol20", "prev_block_vol"],
+                  "all_price": ["mom1", "mom5", "mom20", "ma20gap", "vol5", "vol20", "volratio", "range5", "gap_days", "prev_block_vol"]},
+}
+GRID = {"logreg": [{"regParam": r} for r in (0.0, 0.01, 0.1)],
+        "rf":     [{"numTrees": n, "maxDepth": d} for n, d in ((50, 4), (100, 6))],
+        "gbt":    [{"maxIter": 30, "maxDepth": d} for d in (2, 3)]}
+
+auc_ev = BinaryClassificationEvaluator(labelCol="label", rawPredictionCol="rawPrediction", metricName="areaUnderROC")
+mc_ev = lambda m: MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName=m)
+
+def load_ds(task, split, root=None):
+    return spark.read.parquet(f"{root or PREP}/{task}/{split}")
+
+def build(cols, kind, params):
+    stages = [Imputer(strategy="median", inputCols=cols, outputCols=[c + "_i" for c in cols]),
+              VectorAssembler(inputCols=[c + "_i" for c in cols], outputCol="raw_features"),
+              StandardScaler(inputCol="raw_features", outputCol="features", withMean=True, withStd=True)]
+    clf = {"logreg": lambda: LogisticRegression(maxIter=100, **params),
+           "rf":     lambda: RandomForestClassifier(seed=SEED, **params),
+           "gbt":    lambda: GBTClassifier(seed=SEED, **params)}[kind]()
+    return Pipeline(stages=stages + [clf])
+
+def metrics(df):
+    return {"auc": auc_ev.evaluate(df), "accuracy": mc_ev("accuracy").evaluate(df), "f1": mc_ev("f1").evaluate(df), "rows": df.count()}
+
+def baseline_scores(task, df, majority, cutoff):
+    """Majority class and a simple rule, scored on exactly the same rows as the model."""
+    m = df.withColumn("prediction", F.lit(float(majority)))
+    score = F.col("mom5") if task == "direction" else F.col("prev_block_vol")
+    thr = 0.0 if task == "direction" else float(cutoff)
+    r = (df.withColumn("prediction", F.when(score > thr, 1.0).otherwise(0.0))
+         .withColumn("rawPrediction", array_to_vector(F.array(-score, score))))
+    name = "momentum_sign(mom5>0)" if task == "direction" else "persistence(prev_week_vol>=cutoff)"
+    return {"majority_class": {"auc": 0.5, "accuracy": mc_ev("accuracy").evaluate(m), "f1": mc_ev("f1").evaluate(m)},
+            name: {"auc": auc_ev.evaluate(r), "accuracy": mc_ev("accuracy").evaluate(r), "f1": mc_ev("f1").evaluate(r)}}
+
+def run_experiments(task):
+    """Fit on train, score on validation ONLY. Returns the list of results."""
+    train, val = load_ds(task, "train").cache(), load_ds(task, "validation").cache()
+    res = []
+    for fs, kind in itertools.product(FEATURE_SETS[task], GRID):
+        for params in GRID[kind]:
+            m = build(FEATURE_SETS[task][fs], kind, params).fit(train)
+            r = {"feature_set": fs, "model": kind, "params": params,
+                 "train": metrics(m.transform(train)), "validation": metrics(m.transform(val))}
+            res.append(r)
+            print(f"  [{task}] {fs:9s} {kind:6s} {str(params):38s} val AUC={r['validation']['auc']:.4f}  acc={r['validation']['accuracy']:.4f}  f1={r['validation']['f1']:.4f}")
+    return res
+
+def fit_final(task, best, save_paths, root=None):
+    """Refit the frozen configuration on TRAIN only, save the PipelineModel, score test once, write predictions."""
+    root = root or PREP
+    train, test = load_ds(task, "train", root), load_ds(task, "test", root)
+    model = build(FEATURE_SETS[task][best["feature_set"]], best["model"], best["params"]).fit(train)
+    for p in save_paths:
+        model.write().overwrite().save(p)
+    scored = model.transform(test)
+    pred = (scored.withColumn("prob", vector_to_array("probability")[1])
+            .withColumn("base_majority", F.lit(float(MAJORITY[task])))
+            .withColumn("base_persist", F.when((F.col("mom5") if task == "direction" else F.col("prev_block_vol")) >
+                                               (0.0 if task == "direction" else float(PREPARED["high_vol_cutoff"])), 1.0).otherwise(0.0))
+            .select("ticker", "anchor_date", "label", "prediction", "prob", "base_majority", "base_persist",
+                    "target_value", "vol20", "volratio"))
+    pred.write.mode("overwrite").parquet(f"{root}/pred_{task}")
+    return metrics(scored)
+
+MAJORITY = {t: (1.0 if load_ds(t, "train").agg(F.avg("label")).first()[0] >= 0.5 else 0.0) for t in TASK_SPECS}
+MODEL_RESULTS, BEST = {}, {}
+for task in TASK_SPECS:
+    print(f"\n######## {task}: experiments on VALIDATION only ########")
+    with stage(f"3 {task}: 14 experiments (train->validation)") as st:
+        results = run_experiments(task)
+    best = max(results, key=lambda r: r["validation"]["auc"])
+    BEST[task] = {k: best[k] for k in ("feature_set", "model", "params")}
+    print(f"  -> frozen choice for {task}: {BEST[task]}  (validation AUC {best['validation']['auc']:.4f})")
+    with stage(f"3 {task}: final fit (train) + test score + save model") as st:
+        test_m = fit_final(task, BEST[task], [f"{MODELS_HDFS}/{task}", f"{MODELS_OUT}/{task}"])
+    bl = {"validation": baseline_scores(task, load_ds(task, "validation"), MAJORITY[task], PREPARED["high_vol_cutoff"]),
+          "test": baseline_scores(task, load_ds(task, "test"), MAJORITY[task], PREPARED["high_vol_cutoff"])}
+    MODEL_RESULTS[task] = {"seed": SEED, "majority_class_from_train": MAJORITY[task], "baselines": bl, "experiments": results,
+                           "selected": BEST[task], "selected_validation": best["validation"], "test_final": test_m}
+    print(f"\n[{task}] TEST (scored once): {json.dumps({k: round(v, 4) if isinstance(v, float) else v for k, v in test_m.items()})}")
+    print(f"[{task}] baselines on TEST:  {json.dumps(bl['test'], default=lambda v: round(v, 4))}")
+    save_json(f"t3_results_{task}.json", MODEL_RESULTS[task])
+print("\nmodels saved to:", MODELS_HDFS, "and", MODELS_OUT)
+
+#@@ md
+### 3.1 Model vs baseline on the held-out test set
+
+Compare the frozen model with the simple baselines on **identical rows**. Read AUC first (0.5 = no ranking skill); accuracy alone is misleading when classes are unbalanced.
+
+#@@ code
+rows = []
+for task, r in MODEL_RESULTS.items():
+    t = r["test_final"]
+    rows.append((task, "MODEL " + r["selected"]["model"] + "/" + r["selected"]["feature_set"], t["auc"], t["accuracy"], t["f1"], t["rows"]))
+    for name, b in r["baselines"]["test"].items():
+        rows.append((task, "baseline " + name, b["auc"], b["accuracy"], b["f1"], t["rows"]))
+cmp_df = spark.createDataFrame(rows, ["task", "approach", "auc", "accuracy", "f1", "test_rows"])
+show(cmp_df.select("task", "approach", F.round("auc", 4).alias("auc"), F.round("accuracy", 4).alias("accuracy"),
+                   F.round("f1", 4).alias("f1"), "test_rows"), 20)
+for task, r in MODEL_RESULTS.items():
+    best_base_auc = max(b["auc"] for b in r["baselines"]["test"].values())
+    print(f"[{task}] model test AUC {r['test_final']['auc']:.4f} vs best baseline AUC {best_base_auc:.4f}  "
+          f"-> {'model BEATS baseline' if r['test_final']['auc'] > best_base_auc + 0.005 else 'model does NOT clearly beat baseline (report honestly)'}")

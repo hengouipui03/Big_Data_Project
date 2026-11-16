@@ -1,0 +1,124 @@
+===== RUN RESOURCE SNAPSHOT =====
+Captured UTC:
+Mon Nov 16 08:38:01 UTC 2026
+
+===== PRIMARY NODE =====
+ip-172-31-31-40.ec2.internal
+
+===== MEMORY =====
+               total        used        free      shared  buff/cache   available
+Mem:     16558235648  7369826304   882630656     1130496  8305778688  8850911232
+Swap:              0           0           0
+MemTotal:       16170152 kB
+MemAvailable:    8643216 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+
+===== LOCAL DISK =====
+Filesystem          1-blocks        Used   Available Capacity Mounted on
+devtmpfs             4194304           0     4194304       0% /dev
+tmpfs             8279117824           0  8279117824       0% /dev/shm
+tmpfs             3311648768      745472  3310903296       1% /run
+efivarfs              131072        3341      122611       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1   16026415104  9649889280  6376525824      61% /
+/dev/nvme0n1p128    10446848     1349632     9097216      13% /boot/efi
+/dev/nvme1n1p1    5301600256   103645184  5197955072       2% /emr
+/dev/nvme1n1p2   28922851328 11482365952 17440485376      40% /mnt
+/dev/nvme2n1     34292629504   278102016 34014527488       1% /mnt1
+tmpfs             1655820288           0  1655820288       0% /run/user/993
+
+===== BLOCK DEVICES =====
+NAME                 SIZE TYPE FSTYPE MOUNTPOINT
+nvme0n1       16106127360 disk        
+├─nvme0n1p1   16093527552 part xfs    /
+├─nvme0n1p127     1048576 part        
+└─nvme0n1p128    10485760 part vfat   /boot/efi
+nvme1n1       34359738368 disk        
+├─nvme1n1p1    5368709120 part xfs    /emr
+└─nvme1n1p2   28989963776 part xfs    /mnt
+nvme2n1       34359738368 disk xfs    /mnt1
+
+===== HDFS STORAGE =====
+Configured Capacity: 416341254144 (387.75 GB)
+Present Capacity: 411637884149 (383.37 GB)
+DFS Remaining: 395299759618 (368.15 GB)
+DFS Used: 16338124531 (15.22 GB)
+DFS Used%: 3.97%
+Replicated Blocks:
+	Under replicated blocks: 0
+	Blocks with corrupt replicas: 0
+	Missing blocks: 0
+	Missing blocks (with replication factor 1): 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+Erasure Coded Block Groups: 
+	Low redundancy block groups: 0
+	Block groups with corrupt internal blocks: 0
+	Missing block groups: 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+
+-------------------------------------------------
+Live datanodes (2):
+
+Name: 172.31.17.27:9866 (ip-172-31-17-27.ec2.internal)
+Hostname: ip-172-31-17-27.ec2.internal
+Decommission Status : Normal
+Configured Capacity: 208170627072 (193.87 GB)
+DFS Used: 8169136138 (7.61 GB)
+Non DFS Used: 2254942198 (2.10 GB)
+DFS Remaining: 197617384193 (184.05 GB)
+DFS Used%: 3.92%
+DFS Remaining%: 94.93%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 2
+Last contact: Mon Nov 16 08:38:01 UTC 2026
+Last Block Report: Mon Nov 16 06:41:43 UTC 2026
+Num of Blocks: 2052
+
+
+Name: 172.31.21.212:9866 (ip-172-31-21-212.ec2.internal)
+Hostname: ip-172-31-21-212.ec2.internal
+Decommission Status : Normal
+Configured Capacity: 208170627072 (193.87 GB)
+DFS Used: 8168988393 (7.61 GB)
+Non DFS Used: 2190098711 (2.04 GB)
+DFS Remaining: 197682375425 (184.11 GB)
+DFS Used%: 3.92%
+DFS Remaining%: 94.96%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 2
+Last contact: Mon Nov 16 08:38:01 UTC 2026
+Last Block Report: Mon Nov 16 06:41:43 UTC 2026
+Num of Blocks: 2052
+
+
+
+===== YARN NODES =====
+2026-11-16 08:38:04,540 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-31-40.ec2.internal/172.31.31.40:8032
+2026-11-16 08:38:04,692 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-31-40.ec2.internal/172.31.31.40:10200
+Total Nodes:2
+         Node-Id	     Node-State	Node-Http-Address	Number-of-Running-Containers
+ip-172-31-21-212.ec2.internal:8041	        RUNNING	ip-172-31-21-212.ec2.internal:8042	                           1
+ip-172-31-17-27.ec2.internal:8041	        RUNNING	ip-172-31-17-27.ec2.internal:8042	                           2
+
+===== YARN APPLICATIONS =====
+2026-11-16 08:38:06,131 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-31-40.ec2.internal/172.31.31.40:8032
+2026-11-16 08:38:06,297 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-31-40.ec2.internal/172.31.31.40:10200
+Total number of applications (application-types: [], states: [NEW, NEW_SAVING, SUBMITTED, ACCEPTED, RUNNING, FINISHED, FAILED, KILLED] and tags: []):7
+                Application-Id	    Application-Name	    Application-Type	      User	     Queue	             State	       Final-State	       Progress	                       Tracking-URL	Tags
+application_1794811368122_0005	HIVE-bb2831ba-bbc3-40c2-b448-d188b3fe24ae	                 TEZ	    hadoop	root.default	          FINISHED	         SUCCEEDED	           100%	http://ip-172-31-31-40.ec2.internal:8080/tez-ui/#/tez-app/application_1794811368122_0005	[]
+application_1794811368122_0004	HIVE-86dadd60-0521-414d-9547-0d158cffc7cb	                 TEZ	    hadoop	root.default	          FINISHED	         SUCCEEDED	           100%	http://ip-172-31-31-40.ec2.internal:8080/tez-ui/#/tez-app/application_1794811368122_0004	[]
+application_1794811368122_0007	      livy-session-1	               SPARK	      livy	root.default	           RUNNING	         UNDEFINED	            10%	http://ip-172-31-17-27.ec2.internal:43439	[livy-session-1-1pub8wg4]
+application_1794811368122_0006	      livy-session-0	               SPARK	      livy	root.default	          FINISHED	         SUCCEEDED	           100%	ip-172-31-31-40.ec2.internal:18080/history/application_1794811368122_0006/1	[livy-session-0-lvyhhfaz]
+application_1794811368122_0001	              distcp	           MAPREDUCE	    hadoop	root.default	          FINISHED	         SUCCEEDED	           100%	http://ip-172-31-31-40.ec2.internal:19888/jobhistory/job/job_1794811368122_0001	[]
+application_1794811368122_0003	HIVE-3bc7a751-b456-415c-96a0-b7d5798bce0f	                 TEZ	    hadoop	root.default	            KILLED	            KILLED	           100%	http://ip-172-31-31-40.ec2.internal:8088/cluster/app/application_1794811368122_0003	[]
+application_1794811368122_0002	inf2006_gdelt_daily_audit_v2026-10-29-q1-2016	           MAPREDUCE	    hadoop	root.default	          FINISHED	         SUCCEEDED	           100%	http://ip-172-31-31-40.ec2.internal:19888/jobhistory/job/job_1794811368122_0002	[]

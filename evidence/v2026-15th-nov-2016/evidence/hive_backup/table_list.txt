@@ -1,0 +1,10 @@
+Hive Session ID = a9c7ad27-9f39-413c-a1f4-459e157d1b12
+gdelt_audit_rejects
+gdelt_daily_audit
+gdelt_daily_typed
+prices_typed
+prices_yearly_coverage
+raw_prices
+raw_prices_duplicates
+raw_prices_quality
+raw_prices_series_length

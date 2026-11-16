@@ -1,0 +1,92 @@
+===== APPLICATION STATUS POST-RUN =====
+Mon Nov 16 08:49:41 UTC 2026
+
+========== application_1794811368122_0003 ==========
+2026-11-16 08:49:42,625 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-31-40.ec2.internal/172.31.31.40:8032
+2026-11-16 08:49:42,804 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-31-40.ec2.internal/172.31.31.40:10200
+2026-11-16 08:49:43,006 INFO conf.Configuration: resource-types.xml not found
+2026-11-16 08:49:43,006 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+Application Report : 
+	Application-Id : application_1794811368122_0003
+	Application-Name : HIVE-3bc7a751-b456-415c-96a0-b7d5798bce0f
+	Application-Type : TEZ
+	User : hadoop
+	Queue : root.default
+	Application Priority : 0
+	Start-Time : 1794813435328
+	Finish-Time : 1794813437094
+	Progress : 100%
+	State : KILLED
+	Final-State : KILLED
+	Tracking-URL : http://ip-172-31-31-40.ec2.internal:8088/cluster/app/application_1794811368122_0003
+	RPC Port : -1
+	AM Host : N/A
+	Aggregate Resource Allocation : 10788 MB-seconds, 1 vcore-seconds
+	Aggregate Resource Preempted : 0 MB-seconds, 0 vcore-seconds
+	Log Aggregation Status : SUCCEEDED
+	Diagnostics : Application application_1794811368122_0003 was killed by user hadoop at 172.31.31.40
+	Unmanaged Application : false
+	Application Node Label Expression : <Not set>
+	AM container Node Label Expression : <DEFAULT_PARTITION>
+	TimeoutType : LIFETIME	ExpiryTime : UNLIMITED	RemainingTime : -1seconds
+
+
+========== application_1794811368122_0006 ==========
+2026-11-16 08:49:44,292 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-31-40.ec2.internal/172.31.31.40:8032
+2026-11-16 08:49:44,448 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-31-40.ec2.internal/172.31.31.40:10200
+2026-11-16 08:49:44,617 INFO conf.Configuration: resource-types.xml not found
+2026-11-16 08:49:44,617 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+Application Report : 
+	Application-Id : application_1794811368122_0006
+	Application-Name : livy-session-0
+	Application-Type : SPARK
+	User : livy
+	Queue : root.default
+	Application Priority : 0
+	Start-Time : 1794815454326
+	Finish-Time : 1794818010866
+	Progress : 100%
+	State : FINISHED
+	Final-State : SUCCEEDED
+	Tracking-URL : ip-172-31-31-40.ec2.internal:18080/history/application_1794811368122_0006/1
+	RPC Port : 46349
+	AM Host : ip-172-31-21-212.ec2.internal
+	Aggregate Resource Allocation : 47881128 MB-seconds, 7641 vcore-seconds
+	Aggregate Resource Preempted : 0 MB-seconds, 0 vcore-seconds
+	Log Aggregation Status : SUCCEEDED
+	Diagnostics : 
+	Unmanaged Application : false
+	Application Node Label Expression : <Not set>
+	AM container Node Label Expression : <DEFAULT_PARTITION>
+	TimeoutType : LIFETIME	ExpiryTime : UNLIMITED	RemainingTime : -1seconds
+
+
+========== application_1794811368122_0007 ==========
+2026-11-16 08:49:46,002 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-31-40.ec2.internal/172.31.31.40:8032
+2026-11-16 08:49:46,188 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-31-40.ec2.internal/172.31.31.40:10200
+2026-11-16 08:49:46,395 INFO conf.Configuration: resource-types.xml not found
+2026-11-16 08:49:46,396 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+Application Report : 
+	Application-Id : application_1794811368122_0007
+	Application-Name : livy-session-1
+	Application-Type : SPARK
+	User : livy
+	Queue : root.default
+	Application Priority : 0
+	Start-Time : 1794818028842
+	Finish-Time : 0
+	Progress : 10%
+	State : RUNNING
+	Final-State : UNDEFINED
+	Tracking-URL : http://ip-172-31-17-27.ec2.internal:43439
+	RPC Port : 34275
+	AM Host : ip-172-31-17-27.ec2.internal
+	Aggregate Resource Allocation : 17803256 MB-seconds, 2845 vcore-seconds
+	Aggregate Resource Preempted : 0 MB-seconds, 0 vcore-seconds
+	Log Aggregation Status : NOT_START
+	Diagnostics : 
+	Unmanaged Application : false
+	Application Node Label Expression : <Not set>
+	AM container Node Label Expression : <DEFAULT_PARTITION>
+	TimeoutType : LIFETIME	ExpiryTime : UNLIMITED	RemainingTime : -1seconds
+

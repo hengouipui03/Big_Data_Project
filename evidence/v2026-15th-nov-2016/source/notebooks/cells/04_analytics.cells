@@ -1,0 +1,211 @@
+#@@ md
+## 4. Data analytics (Task 4)
+
+All aggregation runs in Spark on the full prepared data; only small aggregated tables are pulled to the notebook server for plotting (`%%spark -o` then `%%local` matplotlib). If a plotting library is missing, the printed tables are still the evidence.
+
+| Question | Tool | Why |
+|---|---|---|
+| **Q1** When is trading activity unusual, and how does it relate to price moves? | PySpark window functions over `clean/` | needs a per-ticker rolling baseline (60 prior bars); raw volume is not comparable across securities |
+| **Q2** Do news-volume signals help explain subsequent market behaviour? | PySpark join of `weekly_all` with GDELT daily counts (Hive table) | timing must be strictly "before the anchor" |
+| **Q3** Where is each model most / least reliable vs its baseline? | PySpark groupBy on the held-out predictions | subgroup sizes, quarters, volatility groups, confusion matrix |
+
+### Q1 — unusual volume vs price moves
+
+Volume z-score = (volume − mean of the **previous** 60 bars) / std of the previous 60 bars, per ticker. Buckets: low (z<−1), normal, high (1<z≤2), very high (z>2). Outcome: absolute same-day return. This is an *association* on the same day, not a forecast and not causal.
+
+#@@ code
+with stage("4 Q1 volume vs absolute return (PySpark)") as st:
+    clean_q = spark.read.parquet(f"{PREP}/clean")
+    wq = Window.partitionBy("ticker").orderBy("date")
+    prev60 = wq.rowsBetween(-60, -1)
+    v = (clean_q.withColumn("n_prev", F.count("volume").over(prev60))
+         .withColumn("vz", (F.col("volume") - F.avg("volume").over(prev60)) / F.stddev("volume").over(prev60))
+         .withColumn("abs_ret", F.abs(F.col("close") / F.lag("close", 1).over(wq) - 1))
+         .where("n_prev = 60 and abs_ret is not null and vz is not null"))
+    bucket = (F.when(F.col("vz") < -1, "1_low (z<-1)").when(F.col("vz") <= 1, "2_normal (|z|<=1)")
+              .when(F.col("vz") <= 2, "3_high (1<z<=2)").otherwise("4_very_high (z>2)"))
+    q1_sdf = (v.withColumn("bucket", bucket).groupBy("bucket")
+              .agg(F.count("*").alias("n"), F.avg("abs_ret").alias("mean_abs_ret"),
+                   F.expr("percentile_approx(abs_ret, 0.5)").alias("median_abs_ret"),
+                   F.expr("percentile_approx(abs_ret, 0.9)").alias("p90_abs_ret")).orderBy("bucket")).cache()
+    st.meta["rows"] = q1_sdf.agg(F.sum("n")).first()[0]
+show(q1_sdf)
+save_json("t4_q1_volume_vs_abs_return.json", [r.asDict() for r in q1_sdf.collect()])
+Q1_ROWS = q1_sdf.collect()
+check("Q1 very-high-volume days move more than low-volume days (mean |return|)", True,
+      Q1_ROWS[-1]["mean_abs_ret"] > Q1_ROWS[0]["mean_abs_ret"], evidence="t4_q1_volume_vs_abs_return.json")
+
+#@@ md
+### Q2 — do news-volume signals help explain subsequent behaviour?
+
+Each weekly anchor is joined to the GDELT events **added in the 7 days before it** (Section 2.2). Because the signal is market-wide, the unit of analysis is the **week**: weeks are split into terciles of news volume, then next-week return and next-week volatility are compared across the groups. Group sizes (weeks and ticker-weeks) are shown. **Association only — no causal claim**; with few weeks the result is indicative at best (a guard below refuses to draw conclusions from fewer than 9 weeks).
+
+#@@ code
+with stage("4 Q2 news volume vs subsequent behaviour (PySpark)") as st:
+    wk = (spark.read.parquet(f"{PREP}/weekly_all")
+          .join(spark.read.parquet(f"{PREP}/news_by_anchor").where("news_days = 7"), "anchor_date"))
+    per_week = (wk.groupBy("anchor_date")
+                .agg(F.first("news_events").alias("news_events"), F.first("news_tone").alias("news_tone"),
+                     F.sum(F.when(F.col("status_dir") == "ok", 1).otherwise(0)).alias("n_dir"),
+                     F.sum(F.when(F.col("status_vol") == "ok", 1).otherwise(0)).alias("n_vol"),
+                     F.avg(F.when(F.col("status_dir") == "ok", F.col("ret_next"))).alias("mean_ret_next"),
+                     F.avg(F.when(F.col("status_dir") == "ok", F.col("label_dir"))).alias("share_up"),
+                     F.avg(F.when(F.col("status_vol") == "ok", F.col("next_block_vol"))).alias("mean_next_vol"))
+                .where("n_dir > 0 and n_vol > 0"))
+    N_WEEKS = per_week.count()
+    enough = N_WEEKS >= 9
+    q2_week_sdf = per_week.withColumn("news_group", F.when(F.lit(enough),
+                    F.concat(F.lit("T"), F.ntile(3).over(Window.orderBy("news_events")).cast("string"))).otherwise(F.lit("n/a"))).cache()
+    q2_week_sdf.count()
+    st.meta["rows"] = N_WEEKS
+print(f"weeks with a fully covered news window and usable outcomes: {N_WEEKS}")
+Q2_GROUPS = None
+if not enough:
+    print("INSUFFICIENT COVERAGE: the acquired GDELT window gives fewer than 9 usable weeks, so no news conclusion is drawn.\n"
+          "(Acquire a longer contiguous GDELT range - docs/input_profiles.md - and rerun with VERSION set to that profile.)")
+else:
+    Q2_GROUPS = (q2_week_sdf.groupBy("news_group")
+                 .agg(F.count("*").alias("weeks"), F.sum("n_dir").alias("ticker_weeks"), F.round(F.avg("news_events"), 0).alias("avg_news_events"),
+                      F.round(F.avg("mean_ret_next") * 100, 3).alias("avg_next_week_return_pct"),
+                      F.round(F.avg("share_up"), 3).alias("share_up"), F.round(F.avg("mean_next_vol") * 100, 3).alias("avg_next_week_vol_pct"))
+                 .orderBy("news_group"))
+    show(Q2_GROUPS)
+    c_vol = q2_week_sdf.stat.corr("news_events", "mean_next_vol"); c_ret = q2_week_sdf.stat.corr("news_events", "mean_ret_next")
+    print(f"weekly Pearson correlation: news volume vs next-week volatility = {c_vol:.3f};  vs next-week return = {c_ret:.3f}  (n = {N_WEEKS} weeks)")
+    save_json("t4_q2_news_groups.json", {"n_weeks": N_WEEKS, "corr_vol": c_vol, "corr_ret": c_ret,
+                                          "groups": [r.asDict() for r in Q2_GROUPS.collect()]})
+check("Q2 coverage guard (>= 9 usable weeks to interpret)", ">= 9", N_WEEKS, ok=True,
+      evidence="informational: below 9 the notebook refuses to interpret")
+
+#@@ md
+### Q3 — where is each model most and least reliable?
+
+For both models on the **test** set, compare the model with the baselines by **quarter** and by **volatility group** (terciles of `vol20`, cut-points taken from the **training** set, so the test set does not influence them), with subgroup sizes and the confusion matrix. This is diagnosis only — nothing here is used to retune the models.
+
+#@@ code
+def reliability(task):
+    tr = load_ds(task, "train")
+    c1, c2 = tr.approxQuantile("vol20", [0.33, 0.67], 0.001)
+    p = (spark.read.parquet(f"{PREP}/pred_{task}")
+         .withColumn("vol_group", F.when(F.col("vol20") <= c1, "1_low_vol").when(F.col("vol20") <= c2, "2_mid_vol").otherwise("3_high_vol"))
+         .withColumn("quarter", F.concat(F.year("anchor_date").cast("string"), F.lit("Q"), F.quarter("anchor_date").cast("string")))
+         .withColumn("model_ok", (F.col("prediction") == F.col("label")).cast("int"))
+         .withColumn("major_ok", (F.col("base_majority") == F.col("label")).cast("int"))
+         .withColumn("persist_ok", (F.col("base_persist") == F.col("label")).cast("int")))
+    def by(dim):
+        return (p.groupBy(F.col(dim).alias("grp"))
+                .agg(F.count("*").alias("n"), F.avg("model_ok").alias("model_acc"), F.avg("major_ok").alias("majority_acc"),
+                     F.avg("persist_ok").alias("rule_acc"), F.avg("label").alias("share_positive"),
+                     F.avg("prediction").alias("share_pred_positive"),
+                     F.avg(F.when(F.col("label") == 1, F.col("prediction"))).alias("recall_positive"))
+                .withColumn("dim", F.lit(dim)).withColumn("task", F.lit(task)))
+    stats = by("vol_group").unionByName(by("quarter"))
+    cm = p.groupBy("label", "prediction").count().withColumn("task", F.lit(task))
+    return stats, cm, (c1, c2)
+
+with stage("4 Q3 model reliability by quarter / volatility group (PySpark)") as st:
+    s1, cm1, cuts1 = reliability("direction")
+    s2, cm2, cuts2 = reliability("high_vol")
+    q3_sdf = s1.unionByName(s2).select("task", "dim", "grp", "n", "model_acc", "majority_acc", "rule_acc",
+                                       "share_positive", "share_pred_positive", "recall_positive").orderBy("task", "dim", "grp").cache()
+    cm_sdf = cm1.unionByName(cm2).orderBy("task", "label", "prediction").cache()
+    st.meta["rows"] = q3_sdf.count()
+print("vol20 tercile cut-points from TRAIN: direction", [round(x, 5) for x in cuts1], " high_vol", [round(x, 5) for x in cuts2])
+show(q3_sdf.select("task", "dim", "grp", "n", *[F.round(c, 4).alias(c) for c in
+                   ("model_acc", "majority_acc", "rule_acc", "share_positive", "share_pred_positive", "recall_positive")]), 40)
+show(cm_sdf, 20)
+save_json("t4_q3_reliability.json", [r.asDict() for r in q3_sdf.collect()])
+save_json("t4_q3_confusion.json", [r.asDict() for r in cm_sdf.collect()])
+
+#@@ md
+### Charts (pulled to the notebook server, aggregated data only)
+
+The next cells use sparkmagic's `%%spark -o` to bring the small result tables to the notebook server, then plot with matplotlib. If matplotlib is missing, run once in a new cell: `%%local` then `!pip install --user matplotlib`.
+
+#@@ code
+%%spark -o q1_sdf
+print(q1_sdf.count(), "Q1 rows pulled for plotting")
+
+#@@ code
+%%spark -o q2_week_sdf
+print(q2_week_sdf.count(), "Q2 weekly rows pulled for plotting")
+
+#@@ code
+%%spark -o q3_sdf
+print(q3_sdf.count(), "Q3 rows pulled for plotting")
+
+#@@ code
+%%spark -o cm_sdf
+print(cm_sdf.count(), "confusion-matrix rows pulled for plotting")
+
+#@@ code
+%%local
+try:
+    import matplotlib
+    import matplotlib.pyplot as plt
+    q1 = q1_sdf.sort_values("bucket")
+    fig, ax = plt.subplots(figsize=(7.5, 4))
+    ax.bar(q1["bucket"], q1["mean_abs_ret"] * 100, color="#4C78A8", label="mean |daily return|")
+    ax.plot(q1["bucket"], q1["median_abs_ret"] * 100, "o-", color="#F58518", label="median")
+    for i, n in enumerate(q1["n"]):
+        ax.annotate(f"n={int(n):,}", (i, 0.02), ha="center", va="bottom", fontsize=8, color="white")
+    ax.set_ylabel("absolute same-day return (%)")
+    ax.set_title("Figure 1 (Q1): unusual volume (z vs own prior 60 bars) and absolute price moves")
+    ax.legend(); plt.xticks(rotation=12); plt.tight_layout(); plt.show()
+except Exception as ex:
+    print("Plot skipped (the table above is the evidence):", ex)
+
+#@@ code
+%%local
+try:
+    import matplotlib.pyplot as plt
+    q2 = q2_week_sdf
+    if len(q2) < 9:
+        print(f"Figure 2 skipped: only {len(q2)} usable weeks (need >= 9 to interpret).")
+    else:
+        fig, axes = plt.subplots(1, 2, figsize=(11, 4))
+        axes[0].scatter(q2["news_events"] / 1e6, q2["mean_next_vol"] * 100, c="#4C78A8")
+        axes[0].set_xlabel("GDELT events added in the 7 days before the anchor (millions)")
+        axes[0].set_ylabel("mean next-week volatility (%)")
+        axes[0].set_title(f"Figure 2a (Q2): one point per week (n={len(q2)})")
+        g = q2.groupby("news_group").agg(weeks=("anchor_date", "count"), vol=("mean_next_vol", "mean"), ret=("mean_ret_next", "mean")).reset_index()
+        axes[1].bar(g["news_group"] + "\n(" + g["weeks"].astype(str) + " weeks)", g["vol"] * 100, color="#72B7B2")
+        axes[1].set_ylabel("mean next-week volatility (%)")
+        axes[1].set_title("Figure 2b (Q2): by news-volume tercile (T1 low .. T3 high)")
+        plt.tight_layout(); plt.show()
+except Exception as ex:
+    print("Plot skipped (the table above is the evidence):", ex)
+
+#@@ code
+%%local
+try:
+    import matplotlib.pyplot as plt
+    fig, axes = plt.subplots(2, 3, figsize=(15, 7.5))
+    for r, task in enumerate(["direction", "high_vol"]):
+        for c, dim in enumerate(["vol_group", "quarter"]):
+            d = q3_sdf[(q3_sdf["task"] == task) & (q3_sdf["dim"] == dim)].sort_values("grp")
+            ax, x = axes[r][c], range(len(d))
+            ax.bar([i - 0.27 for i in x], d["model_acc"], 0.27, label="model", color="#4C78A8")
+            ax.bar([i for i in x], d["majority_acc"], 0.27, label="majority", color="#BAB0AC")
+            ax.bar([i + 0.27 for i in x], d["rule_acc"], 0.27, label="simple rule", color="#F58518")
+            ax.set_xticks(list(x)); ax.set_xticklabels([f"{g}\nn={int(n):,}" for g, n in zip(d["grp"], d["n"])], fontsize=7)
+            ax.set_ylim(0.3, 1.0); ax.set_title(f"Figure 3 (Q3) {task}: test accuracy by {dim}", fontsize=9); ax.legend(fontsize=7)
+        m = cm_sdf[cm_sdf["task"] == task].pivot_table(index="label", columns="prediction", values="count", fill_value=0)
+        axes[r][2].imshow(m.values, cmap="Blues")
+        for i in range(m.shape[0]):
+            for j in range(m.shape[1]):
+                axes[r][2].text(j, i, f"{int(m.values[i, j]):,}", ha="center", va="center")
+        axes[r][2].set_xticks(range(m.shape[1])); axes[r][2].set_xticklabels([f"pred {int(v)}" for v in m.columns])
+        axes[r][2].set_yticks(range(m.shape[0])); axes[r][2].set_yticklabels([f"actual {int(v)}" for v in m.index])
+        axes[r][2].set_title(f"Figure 3 (Q3) {task}: test confusion matrix", fontsize=9)
+    plt.tight_layout(); plt.show()
+except Exception as ex:
+    print("Plot skipped (the table above is the evidence):", ex)
+
+#@@ md
+### How to read the results (limitations, uncertainty, no causal claims)
+
+* **Q1** shows that days with unusually high volume (relative to the same ticker's own recent history) coincide with larger absolute price moves. This is contemporaneous association; it is not evidence that volume *causes* moves.
+* **Q2** is interpretable only if the acquired GDELT window gives enough weeks (guard above). The news signal is market-wide, so the effective sample is the number of weeks; alternative explanations (market-wide events, seasonality, the GDELT upward trend in volume) are not controlled.
+* **Q3** shows where each model is reliable. A model that merely predicts the majority class matches the majority baseline everywhere — compare `model_acc`, `majority_acc`, `rule_acc` and `recall_positive`, not accuracy alone. Nothing is retuned on test results.
+* Reported numbers are **source-price-ratio / model diagnostics**, not economic returns, and are not proof of historical investability.

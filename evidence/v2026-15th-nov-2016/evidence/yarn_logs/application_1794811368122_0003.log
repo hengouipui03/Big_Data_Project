@@ -1,0 +1,298 @@
+2026-11-16 10:03:59,431 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-31-40.ec2.internal/172.31.31.40:8032
+2026-11-16 10:03:59,591 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-31-40.ec2.internal/172.31.31.40:10200
+Container: container_1794811368122_0003_01_000001 on ip-172-31-17-27.ec2.internal_8041
+LogAggregationType: AGGREGATED
+======================================================================================
+LogType:directory.info
+LogLastModifiedTime:Mon Nov 16 07:17:17 +0000 2026
+LogLength:11886
+LogContents:
+ls -l:
+total 24
+lrwxrwxrwx. 1 yarn yarn   78 Nov 16 07:17 aws-glue-datacatalog-hive3-client.jar -> /mnt1/yarn/usercache/hadoop/filecache/19/aws-glue-datacatalog-hive3-client.jar
+-rw-r--r--. 1 yarn yarn  174 Nov 16 07:17 container_tokens
+-rwx------. 1 yarn yarn  649 Nov 16 07:17 default_container_executor.sh
+-rwx------. 1 yarn yarn  594 Nov 16 07:17 default_container_executor_session.sh
+lrwxrwxrwx. 1 yarn yarn   57 Nov 16 07:17 emr-ddb-hive.jar -> /mnt1/yarn/usercache/hadoop/filecache/15/emr-ddb-hive.jar
+lrwxrwxrwx. 1 yarn yarn   61 Nov 16 07:17 emr-hive-goodies.jar -> /mnt1/yarn/usercache/hadoop/filecache/13/emr-hive-goodies.jar
+lrwxrwxrwx. 1 yarn yarn   60 Nov 16 07:17 emr-kinesis-hive.jar -> /mnt/yarn/usercache/hadoop/filecache/20/emr-kinesis-hive.jar
+lrwxrwxrwx. 1 yarn yarn   73 Nov 16 07:17 emr-s3-select-hive-connector.jar -> /mnt1/yarn/usercache/hadoop/filecache/21/emr-s3-select-hive-connector.jar
+lrwxrwxrwx. 1 yarn yarn  132 Nov 16 07:17 hive-exec-3.1.3-amzn-19-1f8e27d8e2ad806c7bf346ab8338d8cdccc0264f0be971fbfa0ffc501f631537.jar -> /mnt/yarn/usercache/hadoop/filecache/16/hive-exec-3.1.3-amzn-19-1f8e27d8e2ad806c7bf346ab8338d8cdccc0264f0be971fbfa0ffc501f631537.jar
+lrwxrwxrwx. 1 yarn yarn   76 Nov 16 07:17 hive-hcatalog-core-3.1.3-amzn-19.jar -> /mnt/yarn/usercache/hadoop/filecache/14/hive-hcatalog-core-3.1.3-amzn-19.jar
+lrwxrwxrwx. 1 yarn yarn   84 Nov 16 07:17 hive-hcatalog-pig-adapter-3.1.3-amzn-19.jar -> /mnt1/yarn/usercache/hadoop/filecache/17/hive-hcatalog-pig-adapter-3.1.3-amzn-19.jar
+lrwxrwxrwx. 1 yarn yarn   89 Nov 16 07:17 hive-hcatalog-server-extensions-3.1.3-amzn-19.jar -> /mnt/yarn/usercache/hadoop/filecache/12/hive-hcatalog-server-extensions-3.1.3-amzn-19.jar
+lrwxrwxrwx. 1 yarn yarn   82 Nov 16 07:17 hive-hcatalog-streaming-3.1.3-amzn-19.jar -> /mnt1/yarn/usercache/hadoop/filecache/23/hive-hcatalog-streaming-3.1.3-amzn-19.jar
+lrwxrwxrwx. 1 yarn yarn   60 Nov 16 07:17 hive-openx-serde.jar -> /mnt/yarn/usercache/hadoop/filecache/18/hive-openx-serde.jar
+lrwxrwxrwx. 1 yarn yarn   65 Nov 16 07:17 hudi-hadoop-mr-bundle.jar -> /mnt/yarn/usercache/hadoop/filecache/22/hudi-hadoop-mr-bundle.jar
+-rwx------. 1 yarn yarn 8439 Nov 16 07:17 launch_container.sh
+lrwxrwxrwx. 1 yarn yarn   91 Nov 16 07:17 tez-conf.pb -> /mnt/yarn/usercache/hadoop/appcache/application_1794811368122_0003/filecache/10/tez-conf.pb
+lrwxrwxrwx. 1 yarn yarn  111 Nov 16 07:17 tez.session.local-resources.pb -> /mnt1/yarn/usercache/hadoop/appcache/application_1794811368122_0003/filecache/11/tez.session.local-resources.pb
+lrwxrwxrwx. 1 yarn yarn   33 Nov 16 07:17 tezlib -> /mnt/yarn/filecache/10/tez.tar.gz
+drwx--x---. 2 yarn yarn    6 Nov 16 07:17 tmp
+find -L . -maxdepth 5 -ls:
+100663425      4 drwx--x---   3 yarn     yarn         4096 Nov 16 07:17 .
+117440642      0 drwx--x---   2 yarn     yarn            6 Nov 16 07:17 ./tmp
+100663426      4 -rw-r--r--   1 yarn     yarn          174 Nov 16 07:17 ./container_tokens
+100663427      4 -rw-r--r--   1 yarn     yarn           12 Nov 16 07:17 ./.container_tokens.crc
+100663428     12 -rwx------   1 yarn     yarn         8439 Nov 16 07:17 ./launch_container.sh
+100663429      4 -rw-r--r--   1 yarn     yarn           76 Nov 16 07:17 ./.launch_container.sh.crc
+100663430      4 -rwx------   1 yarn     yarn          594 Nov 16 07:17 ./default_container_executor_session.sh
+100663431      4 -rw-r--r--   1 yarn     yarn           16 Nov 16 07:17 ./.default_container_executor_session.sh.crc
+100663432      4 -rwx------   1 yarn     yarn          649 Nov 16 07:17 ./default_container_executor.sh
+100663433      4 -rw-r--r--   1 yarn     yarn           16 Nov 16 07:17 ./.default_container_executor.sh.crc
+251662486    272 -r-x------   1 yarn     yarn       275197 Nov 16 07:17 ./hive-hcatalog-core-3.1.3-amzn-19.jar
+234881154    556 -r-x------   1 yarn     yarn       566745 Nov 16 07:17 ./emr-ddb-hive.jar
+251658370     60 -r-x------   1 yarn     yarn        59455 Nov 16 07:17 ./hive-hcatalog-pig-adapter-3.1.3-amzn-19.jar
+ 50331940  42120 -r-x------   1 yarn     yarn     43127553 Nov 16 07:17 ./hudi-hadoop-mr-bundle.jar
+     6093  56672 -r-x------   1 yarn     yarn     58030587 Nov 16 07:17 ./hive-exec-3.1.3-amzn-19-1f8e27d8e2ad806c7bf346ab8338d8cdccc0264f0be971fbfa0ffc501f631537.jar
+ 16779205     84 -r-x------   1 yarn     yarn        85855 Nov 16 07:17 ./hive-openx-serde.jar
+201333251      4 drwxr-xr-x   3 yarn     yarn         4096 Oct 31 21:26 ./tezlib
+234959632      4 drwxr-xr-x   2 yarn     yarn         4096 Oct 31 21:26 ./tezlib/lib
+234959633    320 -r-xr-xr-x   1 yarn     yarn       325335 Jan 22  2020 ./tezlib/lib/RoaringBitmap-0.7.45.jar
+234959634    444 -r-xr-xr-x   1 yarn     yarn       451655 Jan 22  2020 ./tezlib/lib/async-http-client-2.12.3.jar
+234959635     12 -r-xr-xr-x   1 yarn     yarn         9939 Jan 22  2020 ./tezlib/lib/async-http-client-netty-utils-2.12.3.jar
+234959636     60 -r-xr-xr-x   1 yarn     yarn        58284 Jan 22  2020 ./tezlib/lib/commons-cli-1.5.0.jar
+234959637    328 -r-xr-xr-x   1 yarn     yarn       335042 Jan 22  2020 ./tezlib/lib/commons-codec-1.11.jar
+234959638    736 -r-xr-xr-x   1 yarn     yarn       751238 Jan 22  2020 ./tezlib/lib/commons-collections4-4.1.jar
+234959639    280 -r-xr-xr-x   1 yarn     yarn       285424 Jan 22  2020 ./tezlib/lib/commons-io-2.8.0.jar
+234959640    280 -r-xr-xr-x   1 yarn     yarn       284220 Jan 22  2020 ./tezlib/lib/commons-lang-2.6.jar
+234959641   2892 -r-xr-xr-x   1 yarn     yarn      2959479 Jan 22  2020 ./tezlib/lib/guava-31.1-jre.jar
+234959644   5456 -r-xr-xr-x   1 yarn     yarn      5584851 Jan 22  2020 ./tezlib/lib/hadoop-hdfs-client-3.4.1-amzn-2.jar
+234959645    772 -r-xr-xr-x   1 yarn     yarn       789746 Jan 22  2020 ./tezlib/lib/hadoop-mapreduce-client-common-3.4.1-amzn-2.jar
+234959647   1824 -r-xr-xr-x   1 yarn     yarn      1866066 Jan 22  2020 ./tezlib/lib/hadoop-mapreduce-client-core-3.4.1-amzn-2.jar
+234959648     72 -r-xr-xr-x   1 yarn     yarn        71309 Jan 22  2020 ./tezlib/lib/hadoop-yarn-server-timeline-pluginstorage-3.4.1-amzn-2.jar
+234959651     96 -r-xr-xr-x   1 yarn     yarn        95806 Jan 22  2020 ./tezlib/lib/javax.servlet-api-3.1.0.jar
+234959652    132 -r-xr-xr-x   1 yarn     yarn       134066 Jan 22  2020 ./tezlib/lib/jersey-client-1.19.4.jar
+234959653    164 -r-xr-xr-x   1 yarn     yarn       165348 Jan 22  2020 ./tezlib/lib/jersey-json-1.19.4.jar
+234959654     80 -r-xr-xr-x   1 yarn     yarn        81743 Jan 22  2020 ./tezlib/lib/jettison-1.3.4.jar
+234959655     36 -r-xr-xr-x   1 yarn     yarn        33031 Jan 22  2020 ./tezlib/lib/jsr305-3.0.0.jar
+234959656    112 -r-xr-xr-x   1 yarn     yarn       111908 Jan 22  2020 ./tezlib/lib/metrics-core-3.1.0.jar
+234959657      8 -r-xr-xr-x   1 yarn     yarn         4473 Jan 22  2020 ./tezlib/lib/netty-all-4.1.100.Final.jar
+234959658     24 -r-xr-xr-x   1 yarn     yarn        21842 Jan 22  2020 ./tezlib/lib/netty-reactive-streams-2.0.4.jar
+234959659    524 -r-xr-xr-x   1 yarn     yarn       533455 Jan 22  2020 ./tezlib/lib/protobuf-java-2.5.0.jar
+234959660     12 -r-xr-xr-x   1 yarn     yarn        11369 Jan 22  2020 ./tezlib/lib/reactive-streams-1.0.3.jar
+234959661     44 -r-xr-xr-x   1 yarn     yarn        41125 Jan 22  2020 ./tezlib/lib/slf4j-api-1.7.36.jar
+ 16839072   1824 -rw-r--r--   1 root     root      1866065 Apr 22  2026 ./tezlib/lib/hhadoop-mapreduce-client-core.jar
+  1689206     64 -rw-r--r--   1 root     root        61822 Apr 22  2026 ./tezlib/lib/hadoop-yarn-server-web-proxy.jar
+ 16839070    772 -rw-r--r--   1 root     root       789747 Apr 22  2026 ./tezlib/lib/hadoop-mapreduce-client-common.jar
+  1688984    108 -rw-r--r--   1 root     root       110080 Apr 22  2026 ./tezlib/lib/hadoop-auth.jar
+  1688978     28 -rw-r--r--   1 root     root        25483 Apr 22  2026 ./tezlib/lib/hadoop-annotations.jar
+201333260     16 -r-xr-xr-x   1 yarn     yarn        15021 Jan 22  2020 ./tezlib/LICENSE
+201333277      4 -r-xr-xr-x   1 yarn     yarn         1465 Jan 22  2020 ./tezlib/LICENSE-BSD-3clause
+201333278     36 -r-xr-xr-x   1 yarn     yarn        36261 Jan 22  2020 ./tezlib/LICENSE-CDDLv1.1-GPLv2_withCPE
+201333279      4 -r-xr-xr-x   1 yarn     yarn         1045 Jan 22  2020 ./tezlib/LICENSE-MIT
+201333280      8 -r-xr-xr-x   1 yarn     yarn         4128 Jan 22  2020 ./tezlib/LICENSE-SIL_OpenFontLicense-v1.1
+201333281      4 -r-xr-xr-x   1 yarn     yarn          804 Jan 22  2020 ./tezlib/NOTICE
+201333282     16 -r-xr-xr-x   1 yarn     yarn        15915 Jan 22  2020 ./tezlib/hadoop-shim-0.10.2-amzn-17.jar
+201333283     16 -r-xr-xr-x   1 yarn     yarn        13504 Jan 22  2020 ./tezlib/hadoop-shim-2.8-0.10.2-amzn-17.jar
+201333284   1072 -r-xr-xr-x   1 yarn     yarn      1094263 Jan 22  2020 ./tezlib/tez-api-0.10.2-amzn-17.jar
+201333285   4028 -r-xr-xr-x   1 yarn     yarn      4123001 Jan 22  2020 ./tezlib/tez-aux-services-0.10.2-amzn-17.jar
+201333285   4028 -r-xr-xr-x   1 yarn     yarn      4123001 Jan 22  2020 ./tezlib/tez-aux-services.jar
+201333287     12 -r-xr-xr-x   1 yarn     yarn         9943 Jan 22  2020 ./tezlib/tez-build-tools-0.10.2-amzn-17.jar
+201333288    112 -r-xr-xr-x   1 yarn     yarn       114648 Jan 22  2020 ./tezlib/tez-common-0.10.2-amzn-17.jar
+201333289   1444 -r-xr-xr-x   1 yarn     yarn      1474687 Jan 22  2020 ./tezlib/tez-dag-0.10.2-amzn-17.jar
+201333290     68 -r-xr-xr-x   1 yarn     yarn        65859 Jan 22  2020 ./tezlib/tez-examples-0.10.2-amzn-17.jar
+201333291     96 -r-xr-xr-x   1 yarn     yarn        94579 Jan 22  2020 ./tezlib/tez-history-parser-0.10.2-amzn-17.jar
+201333292     24 -r-xr-xr-x   1 yarn     yarn        23451 Jan 22  2020 ./tezlib/tez-javadoc-tools-0.10.2-amzn-17.jar
+201333293    104 -r-xr-xr-x   1 yarn     yarn       105252 Jan 22  2020 ./tezlib/tez-job-analyzer-0.10.2-amzn-17.jar
+201333294    304 -r-xr-xr-x   1 yarn     yarn       309959 Jan 22  2020 ./tezlib/tez-mapreduce-0.10.2-amzn-17.jar
+201333295     92 -r-xr-xr-x   1 yarn     yarn        93459 Jan 22  2020 ./tezlib/tez-protobuf-history-plugin-0.10.2-amzn-17.jar
+201333296    212 -r-xr-xr-x   1 yarn     yarn       215799 Jan 22  2020 ./tezlib/tez-runtime-internals-0.10.2-amzn-17.jar
+201333297    796 -r-xr-xr-x   1 yarn     yarn       813116 Jan 22  2020 ./tezlib/tez-runtime-library-0.10.2-amzn-17.jar
+201333298    168 -r-xr-xr-x   1 yarn     yarn       168161 Jan 22  2020 ./tezlib/tez-tests-0.10.2-amzn-17.jar
+201333299   1800 -r-xr-xr-x   1 yarn     yarn      1842145 Jan 22  2020 ./tezlib/tez-ui-0.10.2-amzn-17.war
+201333300     20 -r-xr-xr-x   1 yarn     yarn        20397 Jan 22  2020 ./tezlib/tez-yarn-timeline-cache-plugin-0.10.2-amzn-17.jar
+201333301     40 -r-xr-xr-x   1 yarn     yarn        37276 Jan 22  2020 ./tezlib/tez-yarn-timeline-history-0.10.2-amzn-17.jar
+201333302     20 -r-xr-xr-x   1 yarn     yarn        16860 Jan 22  2020 ./tezlib/tez-yarn-timeline-history-with-acls-0.10.2-amzn-17.jar
+201333303     32 -r-xr-xr-x   1 yarn     yarn        32726 Jan 22  2020 ./tezlib/tez-yarn-timeline-history-with-fs-0.10.2-amzn-17.jar
+      137    192 -r-x------   1 yarn     yarn       192939 Nov 16 07:17 ./aws-glue-datacatalog-hive3-client.jar
+219785415     80 -r-x------   1 yarn     yarn        80449 Nov 16 07:17 ./hive-hcatalog-server-extensions-3.1.3-amzn-19.jar
+ 33735497     12 -r-x------   1 yarn     yarn         8851 Nov 16 07:17 ./emr-kinesis-hive.jar
+ 67111233    160 -r-x------   1 yarn     yarn       160536 Nov 16 07:17 ./tez-conf.pb
+ 16777348     24 -r-x------   1 yarn     yarn        22241 Nov 16 07:17 ./emr-s3-select-hive-connector.jar
+ 33554562    136 -r-x------   1 yarn     yarn       137098 Nov 16 07:17 ./hive-hcatalog-streaming-3.1.3-amzn-19.jar
+ 50331778      4 -r-x------   1 yarn     yarn         2815 Nov 16 07:17 ./tez.session.local-resources.pb
+218103938     60 -r-x------   1 yarn     yarn        59648 Nov 16 07:17 ./emr-hive-goodies.jar
+broken symlinks(find -L . -maxdepth 5 -type l -ls):
+
+End of LogType:directory.info
+*******************************************************************************
+
+Container: container_1794811368122_0003_01_000001 on ip-172-31-17-27.ec2.internal_8041
+LogAggregationType: AGGREGATED
+======================================================================================
+LogType:launch_container.sh
+LogLastModifiedTime:Mon Nov 16 07:17:17 +0000 2026
+LogLength:8439
+LogContents:
+#!/bin/bash
+
+set -o pipefail -e
+export PRELAUNCH_OUT="/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001/prelaunch.out"
+exec >"${PRELAUNCH_OUT}"
+export PRELAUNCH_ERR="/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001/prelaunch.err"
+exec 2>"${PRELAUNCH_ERR}"
+echo "Setting up env variables"
+export JAVA_HOME=${JAVA_HOME:-"/usr/lib/jvm/jre-17"}
+export HADOOP_COMMON_HOME=${HADOOP_COMMON_HOME:-"/usr/lib/hadoop"}
+export HADOOP_HDFS_HOME=${HADOOP_HDFS_HOME:-"/usr/lib/hadoop-hdfs"}
+export HADOOP_CONF_DIR=${HADOOP_CONF_DIR:-"/etc/hadoop/conf"}
+export HADOOP_YARN_HOME=${HADOOP_YARN_HOME:-"/usr/lib/hadoop-yarn"}
+export PATH=${PATH:-"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"}
+export HADOOP_TOKEN_FILE_LOCATION="/mnt1/yarn/usercache/hadoop/appcache/application_1794811368122_0003/container_1794811368122_0003_01_000001/container_tokens"
+export CONTAINER_ID="container_1794811368122_0003_01_000001"
+export NM_PORT="8041"
+export NM_HOST="ip-172-31-17-27.ec2.internal"
+export NM_HTTP_PORT="8042"
+export LOCAL_DIRS="/mnt/yarn/usercache/hadoop/appcache/application_1794811368122_0003,/mnt1/yarn/usercache/hadoop/appcache/application_1794811368122_0003"
+export LOCAL_USER_DIRS="/mnt/yarn/usercache/hadoop/,/mnt1/yarn/usercache/hadoop/"
+export LOG_DIRS="/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001"
+export USER="hadoop"
+export LOGNAME="hadoop"
+export HOME="/home/"
+export PWD="/mnt1/yarn/usercache/hadoop/appcache/application_1794811368122_0003/container_1794811368122_0003_01_000001"
+export LOCALIZATION_COUNTERS="129363787,0,15,0,675"
+export JVM_PID="$$"
+export NM_AUX_SERVICE_spark_shuffle=""
+export NM_AUX_SERVICE_mapreduce_shuffle="AAA0+gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+export NM_AUX_SERVICE_tez_shuffle="AAA0+wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+export APPLICATION_WEB_PROXY_BASE="/proxy/application_1794811368122_0003"
+export TEZ_CLIENT_VERSION="0.10.2-amzn-17"
+export HADOOP_MAPRED_HOME="/usr/lib/hadoop-mapreduce"
+export CLASSPATH="$PWD:$PWD/*:$PWD/tezlib/*:$PWD/tezlib/lib/*:$HADOOP_CONF_DIR:$HADOOP_COMMON_HOME/*:$HADOOP_COMMON_HOME/lib/*:$HADOOP_HDFS_HOME/*:$HADOOP_HDFS_HOME/lib/*:$HADOOP_MAPRED_HOME/*:$HADOOP_MAPRED_HOME/lib/*:$HADOOP_YARN_HOME/*:$HADOOP_YARN_HOME/lib/*:/usr/lib/hadoop-lzo/lib/*:/usr/share/aws/emr/emrfs/conf:/usr/share/aws/emr/emrfs/lib/*:/usr/share/aws/emr/emrfs/auxlib/*:/usr/share/aws/emr/lib/*:/usr/share/aws/emr/ddb/lib/emr-ddb-hadoop.jar:/usr/share/aws/emr/goodies/lib/emr-hadoop-goodies.jar:/usr/share/aws/emr/kinesis/lib/emr-kinesis-hadoop.jar:/usr/lib/spark/yarn/lib/datanucleus-api-jdo.jar:/usr/lib/spark/yarn/lib/datanucleus-core.jar:/usr/lib/spark/yarn/lib/datanucleus-rdbms.jar:/usr/share/aws/emr/cloudwatch-sink/lib/*:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/aws-java-sdk-v2/*:"
+export APP_SUBMIT_TIME_ENV="1794813435327"
+export LD_LIBRARY_PATH="$PWD:$PWD:$HADOOP_COMMON_HOME/lib/native/"
+export MALLOC_ARENA_MAX="4"
+echo "Setting up job resources"
+ln -sf -- "/mnt/yarn/usercache/hadoop/filecache/14/hive-hcatalog-core-3.1.3-amzn-19.jar" "hive-hcatalog-core-3.1.3-amzn-19.jar"
+ln -sf -- "/mnt1/yarn/usercache/hadoop/filecache/15/emr-ddb-hive.jar" "emr-ddb-hive.jar"
+ln -sf -- "/mnt1/yarn/usercache/hadoop/filecache/17/hive-hcatalog-pig-adapter-3.1.3-amzn-19.jar" "hive-hcatalog-pig-adapter-3.1.3-amzn-19.jar"
+ln -sf -- "/mnt/yarn/usercache/hadoop/filecache/22/hudi-hadoop-mr-bundle.jar" "hudi-hadoop-mr-bundle.jar"
+ln -sf -- "/mnt/yarn/usercache/hadoop/filecache/16/hive-exec-3.1.3-amzn-19-1f8e27d8e2ad806c7bf346ab8338d8cdccc0264f0be971fbfa0ffc501f631537.jar" "hive-exec-3.1.3-amzn-19-1f8e27d8e2ad806c7bf346ab8338d8cdccc0264f0be971fbfa0ffc501f631537.jar"
+ln -sf -- "/mnt/yarn/usercache/hadoop/filecache/18/hive-openx-serde.jar" "hive-openx-serde.jar"
+ln -sf -- "/mnt/yarn/filecache/10/tez.tar.gz" "tezlib"
+ln -sf -- "/mnt1/yarn/usercache/hadoop/filecache/19/aws-glue-datacatalog-hive3-client.jar" "aws-glue-datacatalog-hive3-client.jar"
+ln -sf -- "/mnt/yarn/usercache/hadoop/filecache/12/hive-hcatalog-server-extensions-3.1.3-amzn-19.jar" "hive-hcatalog-server-extensions-3.1.3-amzn-19.jar"
+ln -sf -- "/mnt/yarn/usercache/hadoop/filecache/20/emr-kinesis-hive.jar" "emr-kinesis-hive.jar"
+ln -sf -- "/mnt/yarn/usercache/hadoop/appcache/application_1794811368122_0003/filecache/10/tez-conf.pb" "tez-conf.pb"
+ln -sf -- "/mnt1/yarn/usercache/hadoop/filecache/21/emr-s3-select-hive-connector.jar" "emr-s3-select-hive-connector.jar"
+ln -sf -- "/mnt1/yarn/usercache/hadoop/filecache/23/hive-hcatalog-streaming-3.1.3-amzn-19.jar" "hive-hcatalog-streaming-3.1.3-amzn-19.jar"
+ln -sf -- "/mnt1/yarn/usercache/hadoop/appcache/application_1794811368122_0003/filecache/11/tez.session.local-resources.pb" "tez.session.local-resources.pb"
+ln -sf -- "/mnt1/yarn/usercache/hadoop/filecache/13/emr-hive-goodies.jar" "emr-hive-goodies.jar"
+echo "Copying debugging information"
+# Creating copy of launch script
+cp "launch_container.sh" "/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001/launch_container.sh"
+chmod 640 "/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001/launch_container.sh"
+# Determining directory contents
+echo "ls -l:" 1>"/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001/directory.info"
+ls -l 1>>"/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001/directory.info"
+echo "find -L . -maxdepth 5 -ls:" 1>>"/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001/directory.info"
+find -L . -maxdepth 5 -ls 1>>"/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001/directory.info"
+echo "broken symlinks(find -L . -maxdepth 5 -type l -ls):" 1>>"/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001/directory.info"
+find -L . -maxdepth 5 -type l -ls 1>>"/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001/directory.info"
+echo "Launching container"
+exec /bin/bash -c "$JAVA_HOME/bin/java -verbose:gc -Xlog:gc*,safepoint::time,uptime -XX:+UseNUMA -XX:+UseParallelGC -Djava.io.tmpdir=$PWD/tmp -server -Djava.net.preferIPv4Stack=true -Dhadoop.metrics.log.level=WARN  -Xmx4915m -XX:+IgnoreUnrecognizedVMOptions --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.math=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/sun.nio.cs=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.regex=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/jdk.internal=ALL-UNNAMED --add-opens=java.base/jdk.internal.util=ALL-UNNAMED --add-opens=java.base/jdk.internal.util.random=ALL-UNNAMED --add-opens=java.base/jdk.internal.ref=ALL-UNNAMED --add-opens=java.base/jdk.internal.reflect=ALL-UNNAMED --add-opens=java.base/sun.util.calendar=ALL-UNNAMED --add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED --add-opens=java.sql/java.sql=ALL-UNNAMED --add-exports=java.base/sun.security.x509=ALL-UNNAMED --add-exports=java.base/sun.security.util=ALL-UNNAMED -Dio.netty.tryReflectionSetAccessible=true -Dlog4j.configuratorClass=org.apache.tez.common.TezLog4jConfigurator -Dlog4j.configuration=tez-container-log4j.properties -Dyarn.app.container.log.dir=/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001 -Dtez.root.logger=INFO,CLA -Dsun.nio.ch.bugLevel='' org.apache.tez.dag.app.DAGAppMaster --session 1>/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001/stdout 2>/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001/stderr "
+
+End of LogType:launch_container.sh
+************************************************************************************
+
+Container: container_1794811368122_0003_01_000001 on ip-172-31-17-27.ec2.internal_8041
+LogAggregationType: AGGREGATED
+======================================================================================
+LogType:prelaunch.err
+LogLastModifiedTime:Mon Nov 16 07:17:17 +0000 2026
+LogLength:0
+LogContents:
+
+End of LogType:prelaunch.err
+******************************************************************************
+
+Container: container_1794811368122_0003_01_000001 on ip-172-31-17-27.ec2.internal_8041
+LogAggregationType: AGGREGATED
+======================================================================================
+LogType:prelaunch.out
+LogLastModifiedTime:Mon Nov 16 07:17:17 +0000 2026
+LogLength:100
+LogContents:
+Setting up env variables
+Setting up job resources
+Copying debugging information
+Launching container
+
+End of LogType:prelaunch.out
+******************************************************************************
+
+Container: container_1794811368122_0003_01_000001 on ip-172-31-17-27.ec2.internal_8041
+LogAggregationType: AGGREGATED
+======================================================================================
+LogType:stderr
+LogLastModifiedTime:Mon Nov 16 07:17:17 +0000 2026
+LogLength:0
+LogContents:
+
+End of LogType:stderr
+***********************************************************************
+
+Container: container_1794811368122_0003_01_000001 on ip-172-31-17-27.ec2.internal_8041
+LogAggregationType: AGGREGATED
+======================================================================================
+LogType:stdout
+LogLastModifiedTime:Mon Nov 16 07:17:17 +0000 2026
+LogLength:4089
+LogContents:
+[2026-11-16T07:17:16.169+0000][0.004s] Using Parallel
+[2026-11-16T07:17:16.170+0000][0.004s] Version: 17.0.21+11-LTS (release)
+[2026-11-16T07:17:16.170+0000][0.004s] CPUs: 4 total, 4 available
+[2026-11-16T07:17:16.170+0000][0.004s] Memory: 15791M
+[2026-11-16T07:17:16.170+0000][0.004s] Large Page Support: Disabled
+[2026-11-16T07:17:16.170+0000][0.004s] NUMA Support: Disabled
+[2026-11-16T07:17:16.170+0000][0.004s] Compressed Oops: Enabled (Zero based)
+[2026-11-16T07:17:16.170+0000][0.004s] Alignments: Space 512K, Generation 512K, Heap 2M
+[2026-11-16T07:17:16.170+0000][0.004s] Heap Min Capacity: 8M
+[2026-11-16T07:17:16.170+0000][0.004s] Heap Initial Capacity: 248M
+[2026-11-16T07:17:16.170+0000][0.004s] Heap Max Capacity: 4916M
+[2026-11-16T07:17:16.170+0000][0.004s] Pre-touch: Disabled
+[2026-11-16T07:17:16.170+0000][0.004s] Parallel Workers: 4
+[2026-11-16T07:17:16.177+0000][0.012s] CDS archive(s) mapped at: [0x00007f159d000000-0x00007f159dbbf000-0x00007f159dbbf000), size 12316672, SharedBaseAddress: 0x00007f159d000000, ArchiveRelocationMode: 1.
+[2026-11-16T07:17:16.177+0000][0.012s] Compressed class space mapped at: 0x00007f159e000000-0x00007f15de000000, reserved size: 1073741824
+[2026-11-16T07:17:16.177+0000][0.012s] Narrow klass base: 0x00007f159d000000, Narrow klass shift: 0, Narrow klass range: 0x100000000
+[2026-11-16T07:17:16.649+0000][0.483s] GC(0) Pause Young (Allocation Failure)
+[2026-11-16T07:17:16.669+0000][0.503s] GC(0) PSYoungGen: 62903K(74240K)->10227K(74240K) Eden: 62903K(64000K)->0K(64000K) From: 0K(10240K)->10227K(10240K)
+[2026-11-16T07:17:16.669+0000][0.503s] GC(0) ParOldGen: 0K(169472K)->39423K(169472K)
+[2026-11-16T07:17:16.669+0000][0.503s] GC(0) Metaspace: 1101K(1216K)->1101K(1216K) NonClass: 1040K(1088K)->1040K(1088K) Class: 61K(128K)->61K(128K)
+[2026-11-16T07:17:16.669+0000][0.503s] GC(0) Pause Young (Allocation Failure) 61M->48M(238M) 20.025ms
+[2026-11-16T07:17:16.669+0000][0.503s] GC(0) User=0.01s Sys=0.06s Real=0.02s
+[2026-11-16T07:17:16.669+0000][0.503s] Safepoint "ParallelGCFailedAllocation", Time since last: 466047239 ns, Reaching safepoint: 2973 ns, Cleanup: 58067 ns, At safepoint: 20084851 ns, Total: 20145891 ns
+[2026-11-16T07:17:16.916+0000][0.750s] GC(1) Pause Young (Allocation Failure)
+[2026-11-16T07:17:16.960+0000][0.795s] GC(1) PSYoungGen: 74227K(74240K)->10220K(138240K) Eden: 64000K(64000K)->0K(128000K) From: 10227K(10240K)->10220K(10240K)
+[2026-11-16T07:17:16.960+0000][0.795s] GC(1) ParOldGen: 39423K(169472K)->97712K(169472K)
+[2026-11-16T07:17:16.960+0000][0.795s] GC(1) Metaspace: 2960K(3136K)->2960K(3136K) NonClass: 2677K(2752K)->2677K(2752K) Class: 282K(384K)->282K(384K)
+[2026-11-16T07:17:16.960+0000][0.795s] GC(1) Pause Young (Allocation Failure) 110M->105M(300M) 44.363ms
+[2026-11-16T07:17:16.960+0000][0.795s] GC(1) User=0.12s Sys=0.03s Real=0.05s
+[2026-11-16T07:17:16.960+0000][0.795s] Safepoint "ParallelGCFailedAllocation", Time since last: 246836857 ns, Reaching safepoint: 2493 ns, Cleanup: 27342 ns, At safepoint: 44423115 ns, Total: 44452950 ns
+[2026-11-16T07:17:17.146+0000][0.981s] Heap
+[2026-11-16T07:17:17.146+0000][0.981s]  PSYoungGen      total 138240K, used 24962K [0x0000000799980000, 0x00000007a2a80000, 0x0000000800000000)
+[2026-11-16T07:17:17.146+0000][0.981s]   eden space 128000K, 11% used [0x0000000799980000,0x000000079a7e5550,0x00000007a1680000)
+[2026-11-16T07:17:17.146+0000][0.981s]   from space 10240K, 99% used [0x00000007a2080000,0x00000007a2a7b3b8,0x00000007a2a80000)
+[2026-11-16T07:17:17.146+0000][0.981s]   to   space 10240K, 0% used [0x00000007a1680000,0x00000007a1680000,0x00000007a2080000)
+[2026-11-16T07:17:17.146+0000][0.981s]  ParOldGen       total 169472K, used 97712K [0x00000006ccc00000, 0x00000006d7180000, 0x0000000799980000)
+[2026-11-16T07:17:17.146+0000][0.981s]   object space 169472K, 57% used [0x00000006ccc00000,0x00000006d2b6c038,0x00000006d7180000)
+[2026-11-16T07:17:17.146+0000][0.981s]  Metaspace       used 4644K, committed 4800K, reserved 1114112K
+[2026-11-16T07:17:17.146+0000][0.981s]   class space    used 436K, committed 512K, reserved 1048576K
+
+End of LogType:stdout
+***********************************************************************
+
+Container: container_1794811368122_0003_01_000001 on ip-172-31-17-27.ec2.internal_8041
+LogAggregationType: AGGREGATED
+======================================================================================
+LogType:syslog
+LogLastModifiedTime:Mon Nov 16 07:17:17 +0000 2026
+LogLength:878
+LogContents:
+2026-11-16 07:17:16,882 [INFO] [main] |common.TezClassLoader|: Created TezClassLoader with parent classloader: jdk.internal.loader.ClassLoaders$AppClassLoader@c387f44, thread: 1, system classloader: jdk.internal.loader.ClassLoaders$AppClassLoader@c387f44
+2026-11-16 07:17:17,077 [INFO] [main] |app.DAGAppMaster|: Creating DAGAppMaster for applicationId=application_1794811368122_0003, attemptNum=1, AMContainerId=container_1794811368122_0003_01_000001, jvmPid=23358, userFromEnv=hadoop, cliSessionOption=true, pwd=/mnt1/yarn/usercache/hadoop/appcache/application_1794811368122_0003/container_1794811368122_0003_01_000001, localDirs=/mnt/yarn/usercache/hadoop/appcache/application_1794811368122_0003,/mnt1/yarn/usercache/hadoop/appcache/application_1794811368122_0003, logDirs=/var/log/hadoop-yarn/containers/application_1794811368122_0003/container_1794811368122_0003_01_000001
+
+End of LogType:syslog
+***********************************************************************
+

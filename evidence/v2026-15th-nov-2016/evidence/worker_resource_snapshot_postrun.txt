@@ -1,0 +1,10 @@
+===== WORKER RESOURCE SNAPSHOTS =====
+Mon Nov 16 09:12:34 UTC 2026
+
+========== ip-172-31-17-27.ec2.internal ==========
+Warning: Permanently added 'ip-172-31-17-27.ec2.internal' (ED25519) to the list of known hosts.
+hadoop@ip-172-31-17-27.ec2.internal: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+
+========== ip-172-31-21-212.ec2.internal ==========
+Warning: Permanently added 'ip-172-31-21-212.ec2.internal' (ED25519) to the list of known hosts.
+hadoop@ip-172-31-21-212.ec2.internal: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).

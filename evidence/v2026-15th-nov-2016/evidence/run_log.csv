@@ -1,0 +1,5 @@
+stage,engine,start_utc,end_utc,seconds,application_ids,input,output,rows_out,notes
+stage2a_streaming_audit,hadoop_streaming,2026-11-16T07:13:41Z,2026-11-16T07:17:03Z,202,"application_1794811368122_0002",/raw/gdelt,/audit/gdelt_daily/v2026-10-29-q1-2016,91,"mapper=gdelt_mapper.py reducer=gdelt_reducer.py reducers=2"
+stage2b_hive_register,hive_tez,2026-11-16T07:17:05Z,2026-11-16T07:17:17Z,12,"",/raw/prices;/audit/gdelt_daily/v2026-10-29-q1-2016,inf2006.raw_prices;inf2006.gdelt_daily_audit,,"external tables, no data movement"
+stage2c_hive_transform,hive_tez,2026-11-16T07:17:17Z,2026-11-16T07:17:58Z,41,"application_1794811368122_0004",inf2006.raw_prices;inf2006.gdelt_daily_audit,inf2006.prices_typed;gdelt_daily_typed;raw_prices_quality;raw_prices_duplicates;raw_prices_series_length;gdelt_audit_rejects;prices_yearly_coverage,,"CTAS on Tez"
+stage2d_hive_results,hive_tez,2026-11-16T07:17:58Z,2026-11-16T07:18:24Z,26,"application_1794811368122_0005",inf2006.*,stdout,,"SELECT evidence"
