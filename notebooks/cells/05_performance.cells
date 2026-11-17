@@ -5,17 +5,14 @@
 * **Repetitions** — the brief asks for the **median of three** repetitions. The benchmark below re-runs the *same* pipeline three times from the staged inputs: Task 2 (clean → features → splits → news) and the final fit + test scoring of both models with the frozen configuration. (The 14-experiment model-selection search is a one-off development activity and is timed separately above.)
 * **Excluded** from timing, per the course Q&A: download, S3 → HDFS copy, cluster start-up. Hadoop Streaming and Hive times come from `run_log.csv` written by `scripts/stage2_streaming_and_hive.sh` and are added to give the end-to-end figure.
 * **Reference vs alternative** — a *software-only* change (shuffle partitions + adaptive execution); hardware, release, replication and storage are identical. Change `ACTIVE_CONFIG` in Section 0.1, run again, and the comparison table at the end of this section lists both.
-
 #@@ code
 MAIN_LOG = list(CURRENT_LOG)            # the timings of the main run above
 print(f"{'stage':62s} {'seconds':>9s}")
 for r in MAIN_LOG:
     print(f"{r['stage']:62s} {r['seconds']:9.1f}")
 print(f"{'TOTAL (main run, includes the 14-experiment search)':62s} {sum(r['seconds'] for r in MAIN_LOG if not r['stage'].startswith('2 PREPARE')):9.1f}")
-
 #@@ md
 ### 5.1 Three repetitions (median)
-
 #@@ code
 def run_benchmark_once(i):
     global CURRENT_LOG
@@ -44,10 +41,8 @@ for n in names:
 print(f"{'END-TO-END (notebook stages)':58s} " + " ".join(f"{b['total_seconds']:8.1f}" for b in BENCH) + f" {med_total:8.1f}")
 check("Benchmark: median notebook end-to-end under the 60-minute marking timeout", "< 3600 s", f"{med_total:.0f} s", ok=med_total < 3600,
       evidence="perf json")
-
 #@@ md
 ### 5.2 Data sizes, shell-stage timings and measured memory
-
 #@@ code
 def dir_bytes(path):
     try:
@@ -100,12 +95,10 @@ PERF = {"version": VERSION, "config": ACTIVE_CONFIG, "config_note": CONFIGS[ACTI
         "executor_memory": MEMORY, "spark_conf": ENVIRONMENT["spark_conf"]}
 write_text(f"{OUT}/evidence/perf/{VERSION}_{ACTIVE_CONFIG}.json", json.dumps(PERF, indent=2, default=str))
 print(f"\nmedian notebook time {med_total:.0f} s" + ("" if end_to_end is None else f";  shell stages {shell_total:.0f} s;  END-TO-END {end_to_end:.0f} s ({end_to_end/60:.1f} min)"))
-
 #@@ md
-### 5.3 Comparison table: development vs full profile, reference vs alternative configuration
+### 5.3 table: full profile
 
-This reads every `perf/*.json` saved so far (one per `VERSION` × `ACTIVE_CONFIG` run). To fill the table: run the notebook for the development profile and the full profile, each with `ACTIVE_CONFIG = "reference"` and then `"alternative"`. Compare only runs with identical inputs and identical output checks.
-
+This reads every `perf/*.json` saved in HDFS so far.
 #@@ code
 try:
     pf = spark.read.option("multiLine", True).json(f"{OUT}/evidence/perf/*.json")

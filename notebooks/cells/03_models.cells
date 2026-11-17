@@ -10,7 +10,6 @@ Two specialised models, one per task (allowed by the course Q&A):
 
 **Protocol.** Preprocessing (median `Imputer` → `VectorAssembler` → `StandardScaler`) and model parameters are learned on **train only**; 14 feature-set × model × parameter combinations are compared on **validation only**; the best is frozen, then scored **once** on test. The complete `PipelineModel` (preprocessing included) is saved and reloaded in Section 6.
 The `direction` outputs are not converted to portfolio weights: this project reports classification diagnostics only (the brief asks for source-price-ratio diagnostics, not investability claims).
-
 #@@ code
 from pyspark.ml import Pipeline, PipelineModel
 from pyspark.ml.classification import GBTClassifier, LogisticRegression, RandomForestClassifier
@@ -106,24 +105,57 @@ for task in TASK_SPECS:
     print(f"[{task}] baselines on TEST:  {json.dumps(bl['test'], default=lambda v: round(v, 4))}")
     save_json(f"t3_results_{task}.json", MODEL_RESULTS[task])
 print("\nmodels saved to:", MODELS_HDFS, "and", MODELS_OUT)
-
 #@@ md
-### 3.0 Record the training session (evidence for the fresh-session proof in Section 6)
-
-Writes the Spark `application_id` of **this** (training) session next to the other evidence files. Section 6 compares it with the `application_id` of the session that reloads the model: they must differ. The cell is **idempotent** - re-running the notebook simply replaces the record, so "Run All" never stops here.
-
+## Save training Session
 #@@ code
-TRAINING_SESSION = {"application_id": sc.applicationId, "role": "training session (experiments, final fit, model save)",
-                    "captured_utc": utc_now()}
-save_json("training_session.json", TRAINING_SESSION)           # write_text() overwrites: safe to re-run
-print("Training session recorded ->", f"{EV}/training_session.json")
-print(TRAINING_SESSION)
+import json
+import datetime
 
+_VERSION = VERSION
+_BUCKET = BUCKET
+_CONFIG = ACTIVE_CONFIG
+
+_TRAINING_SESSION_PATH = (
+    f"s3://{_BUCKET}/notebook_outputs/{_VERSION}/"
+    f"evidence/{_CONFIG}/training_session.json"
+)
+
+_training_record = {
+    "application_id": spark.sparkContext.applicationId,
+    "captured_utc": datetime.datetime.now(
+        datetime.timezone.utc
+    ).isoformat(timespec="seconds"),
+    "version": _VERSION,
+    "config": _CONFIG
+}
+
+_path = spark._jvm.org.apache.hadoop.fs.Path(
+    _TRAINING_SESSION_PATH
+)
+_fs = _path.getFileSystem(
+    spark._jsc.hadoopConfiguration()
+)
+
+if _fs.exists(_path):
+    raise RuntimeError(
+        "Training session record already exists. "
+        "Refusing to overwrite it."
+    )
+
+_fs.mkdirs(_path.getParent())
+
+_out = _fs.create(_path, False)
+_out.write(bytearray(
+    json.dumps(_training_record, indent=2).encode("utf-8")
+))
+_out.close()
+
+print("Training session recorded:")
+print(_training_record)
 #@@ md
 ### 3.1 Model vs baseline on the held-out test set
 
 Compare the frozen model with the simple baselines on **identical rows**. Read AUC first (0.5 = no ranking skill); accuracy alone is misleading when classes are unbalanced.
-
 #@@ code
 rows = []
 for task, r in MODEL_RESULTS.items():
@@ -137,4 +169,4 @@ show(cmp_df.select("task", "approach", F.round("auc", 4).alias("auc"), F.round("
 for task, r in MODEL_RESULTS.items():
     best_base_auc = max(b["auc"] for b in r["baselines"]["test"].values())
     print(f"[{task}] model test AUC {r['test_final']['auc']:.4f} vs best baseline AUC {best_base_auc:.4f}  "
-          f"-> {'model BEATS baseline' if r['test_final']['auc'] > best_base_auc + 0.005 else 'model does NOT clearly beat baseline (report honestly)'}")
+          f"-> {'model BEATS baseline' if r['test_final']['auc'] > best_base_auc + 0.005 else 'model does NOT clearly beat baseline'}")

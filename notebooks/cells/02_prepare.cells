@@ -25,7 +25,6 @@ All features describe information up to the bar **before** the anchor. Two predi
 * `high_vol`: realised volatility of the **next** week block (std of its daily returns); label 1 if it is ≥ the 67th percentile of **training** next-week volatility (cut-off learned on the training split only).
 
 A row is kept in a split only if its outcome is fully known **inside that split's period**; others are excluded with a reason (`target_crosses_boundary`, `gap_next_block`, `missing_open`, `short_next_block`, …).
-
 #@@ code
 FEATS = ["mom1", "mom5", "mom20", "vol5", "vol20", "volratio", "range5", "ma20gap", "gap_days", "prev_block_vol"]
 TASK_SPECS = {
@@ -166,12 +165,10 @@ print(json.dumps(REC, indent=2))
 check("Task2 raw = clean + rejected", True, REC["reconciles"], evidence="reconciliation.json")
 check("Task2 clean rows equal the brief's accepted bars (605,887)", 605887, REC["clean_rows"], evidence="reconciliation.json")
 save_json("t2_reconciliation.json", REC)
-
 #@@ md
 ### 2.1 Chronological splits, exclusions and leakage controls
 
 Train = weekly anchors 2013-2015, validation = 2016, test = 2017 (no shuffling). Report below: date coverage, row counts, exclusions, label balance.
-
 #@@ code
 print("High-volatility cut-off learned on TRAIN only (next-week std of daily returns, 67th percentile): %.6f" % PREPARED["high_vol_cutoff"])
 for task, rep in PREPARED["split_report"].items():
@@ -194,13 +191,11 @@ for task in TASK_SPECS:
     check(f"Leakage[{task}]: no identifier or target in the feature list", "ticker/label/target absent",
           [c for c in FEATS if c in ("ticker", "label", "target_value", "ret_next", "next_block_vol")],
           ok=not any(c in ("ticker", "label", "target_value", "ret_next", "next_block_vol") for c in FEATS))
-
 #@@ md
 ### 2.2 Optional auxiliary signal: GDELT news volume available *before* each anchor
 
 For every weekly anchor `A` we sum GDELT events whose **date added** lies in `[A−7, A−1]` (strictly before the anchor day) — so only information available when the prediction is made is used. `news_days = 7` means the 7-day window is fully covered by the acquired GDELT files.
 This is **market-wide** (one value per week for all tickers), so the number of *independent* observations is the number of weeks, not the number of rows. It is used for descriptive analysis (Section 4, Q2), not as a model feature, because the acquired GDELT window does not overlap the training period (see Section 4 limitations).
-
 #@@ code
 with stage("2d GDELT news features by anchor (PySpark)") as st:
     anchors_d = spark.read.parquet(f"{PREP}/weekly_all").select("anchor_date").distinct()

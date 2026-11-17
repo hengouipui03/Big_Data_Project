@@ -12,7 +12,6 @@ All aggregation runs in Spark on the full prepared data; only small aggregated t
 ### Q1 — unusual volume vs price moves
 
 Volume z-score = (volume − mean of the **previous** 60 bars) / std of the previous 60 bars, per ticker. Buckets: low (z<−1), normal, high (1<z≤2), very high (z>2). Outcome: absolute same-day return. This is an *association* on the same day, not a forecast and not causal.
-
 #@@ code
 with stage("4 Q1 volume vs absolute return (PySpark)") as st:
     clean_q = spark.read.parquet(f"{PREP}/clean")
@@ -34,12 +33,10 @@ save_json("t4_q1_volume_vs_abs_return.json", [r.asDict() for r in q1_sdf.collect
 Q1_ROWS = q1_sdf.collect()
 check("Q1 very-high-volume days move more than low-volume days (mean |return|)", True,
       Q1_ROWS[-1]["mean_abs_ret"] > Q1_ROWS[0]["mean_abs_ret"], evidence="t4_q1_volume_vs_abs_return.json")
-
 #@@ md
 ### Q2 — do news-volume signals help explain subsequent behaviour?
 
 Each weekly anchor is joined to the GDELT events **added in the 7 days before it** (Section 2.2). Because the signal is market-wide, the unit of analysis is the **week**: weeks are split into terciles of news volume, then next-week return and next-week volatility are compared across the groups. Group sizes (weeks and ticker-weeks) are shown. **Association only — no causal claim**; with few weeks the result is indicative at best (a guard below refuses to draw conclusions from fewer than 9 weeks).
-
 #@@ code
 with stage("4 Q2 news volume vs subsequent behaviour (PySpark)") as st:
     wk = (spark.read.parquet(f"{PREP}/weekly_all")
@@ -76,12 +73,10 @@ else:
                                           "groups": [r.asDict() for r in Q2_GROUPS.collect()]})
 check("Q2 coverage guard (>= 9 usable weeks to interpret)", ">= 9", N_WEEKS, ok=True,
       evidence="informational: below 9 the notebook refuses to interpret")
-
 #@@ md
 ### Q3 — where is each model most and least reliable?
 
 For both models on the **test** set, compare the model with the baselines by **quarter** and by **volatility group** (terciles of `vol20`, cut-points taken from the **training** set, so the test set does not influence them), with subgroup sizes and the confusion matrix. This is diagnosis only — nothing here is used to retune the models.
-
 #@@ code
 def reliability(task):
     tr = load_ds(task, "train")
@@ -116,28 +111,22 @@ show(q3_sdf.select("task", "dim", "grp", "n", *[F.round(c, 4).alias(c) for c in
 show(cm_sdf, 20)
 save_json("t4_q3_reliability.json", [r.asDict() for r in q3_sdf.collect()])
 save_json("t4_q3_confusion.json", [r.asDict() for r in cm_sdf.collect()])
-
 #@@ md
 ### Charts (pulled to the notebook server, aggregated data only)
 
 The next cells use sparkmagic's `%%spark -o` to bring the small result tables to the notebook server, then plot with matplotlib. If matplotlib is missing, run once in a new cell: `%%local` then `!pip install --user matplotlib`.
-
 #@@ code
 %%spark -o q1_sdf
 print(q1_sdf.count(), "Q1 rows pulled for plotting")
-
 #@@ code
 %%spark -o q2_week_sdf
 print(q2_week_sdf.count(), "Q2 weekly rows pulled for plotting")
-
 #@@ code
 %%spark -o q3_sdf
 print(q3_sdf.count(), "Q3 rows pulled for plotting")
-
 #@@ code
 %%spark -o cm_sdf
 print(cm_sdf.count(), "confusion-matrix rows pulled for plotting")
-
 #@@ code
 %%local
 try:
@@ -154,7 +143,6 @@ try:
     ax.legend(); plt.xticks(rotation=12); plt.tight_layout(); plt.show()
 except Exception as ex:
     print("Plot skipped (the table above is the evidence):", ex)
-
 #@@ code
 %%local
 try:
@@ -175,7 +163,6 @@ try:
         plt.tight_layout(); plt.show()
 except Exception as ex:
     print("Plot skipped (the table above is the evidence):", ex)
-
 #@@ code
 %%local
 try:
@@ -201,9 +188,8 @@ try:
     plt.tight_layout(); plt.show()
 except Exception as ex:
     print("Plot skipped (the table above is the evidence):", ex)
-
 #@@ md
-### How to read the results (limitations, uncertainty, no causal claims)
+### How to read the results
 
 * **Q1** shows that days with unusually high volume (relative to the same ticker's own recent history) coincide with larger absolute price moves. This is contemporaneous association; it is not evidence that volume *causes* moves.
 * **Q2** is interpretable only if the acquired GDELT window gives enough weeks (guard above). The news signal is market-wide, so the effective sample is the number of weeks; alternative explanations (market-wide events, seasonality, the GDELT upward trend in volume) are not controlled.

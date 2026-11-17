@@ -2,9 +2,9 @@
 # Stage 2: Hadoop Streaming audit job + Hive registration and SQL transforms, with evidence.
 #
 # Run ON THE EMR PRIMARY NODE from the repo folder (after Stage 1 has staged /raw):
-#     bash scripts/stage2_streaming_and_hive.sh v2026-10-29-q1-2016 evidence/emr_run_latest
+#     bash scripts/stage2_streaming_and_hive.sh v2026-15th-nov-2016 evidence/emr_run_latest
 #
-# Arguments: 1 = raw version folder name under /raw/<source>/ (default v2026-10-29-q1-2016)
+# Arguments: 1 = raw version folder name under /raw/<source>/ (default v2026-15th-nov-2016)
 #            2 = evidence folder (default evidence/emr_run_latest)
 #            3 = number of reducers for the streaming job (default 2)
 #            4 = matching local streaming-audit file (default development profile)
@@ -20,10 +20,10 @@
 #   stage2_hive_03_results.log     Hive query results (quality audit, coverage, row counts)
 #   run_log.csv                    one line per stage: engine, start/end UTC, seconds, app ids, in/out
 set -euo pipefail
-VER=${1:-v2026-10-29-q1-2016}
+VER=${1:-v2026-15th-nov-2016}
 EV=${2:-evidence/emr_run_latest}
 REDUCERS=${3:-2}
-LOCAL_AUDIT=${4:-evidence/local/streaming_gdelt_audit.tsv}
+LOCAL_AUDIT=${4:-evidence/local/q1_2016/streaming_gdelt_audit.tsv}
 mkdir -p "$EV"
 
 RAW_GDELT=/raw/gdelt/$VER
@@ -79,6 +79,7 @@ for k in sorted(set(emr) | set(loc)):
     ok &= m
     print(f"{k:14} {e[0] if e else '-':>11} {l[0] if l else '-':>13} {e[1] if e else '-':>9} {l[1] if l else '-':>11} {e[2] if e else '-':>8} {l[2] if l else '-':>10} {'yes' if m else 'NO'}")
 print("RESULT:", "EMR streaming output matches local run on every date key" if ok else "MISMATCH - investigate")
+sys.exit(0 if ok else 1)
 EOF
 fi
 

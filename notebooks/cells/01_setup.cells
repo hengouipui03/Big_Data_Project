@@ -12,8 +12,6 @@
 
 `scripts/emr_run_all.sh` runs stages 1–2 for you in one command. Full step-by-step guide: `docs/RUN_ON_EMR.md` (this is Appendix A).
 
-> **Dependency (do this once per cluster, before the first cell):** PySpark on EMR needs `numpy` on the Python workers. It is shipped to the executors as a packed Python 3.9 virtual environment from S3 by the three `spark.yarn.dist.archives` / `spark.pyspark.python` / `spark.executorEnv.PYSPARK_PYTHON` keys in the next cell. Build and upload that archive with `scripts/build_numpy_env.sh <your-bucket>` (about 2 minutes, on the primary node), and replace the bucket name in the `%%configure` cell **and** in cell 0.1 with your own bucket. Without the archive the Spark session fails to start. See `docs/RUN_ON_EMR.md`, step 5.
-
 | Section | Brief reference |
 |---|---|
 | 0 Setup, environment, helper functions | Cloud resource constraints, reproducibility |
@@ -24,9 +22,6 @@
 | 5 Performance, memory, repetitions (Section 6 of the report) | Cloud resource constraints |
 | 6 Saved-model reload in a fresh session | Task 3.3 |
 | 7 Verification record | Submission requirements |
-
-> **Honesty rule used throughout:** every check prints *expected* and *actual*; failed checks are reported, never hidden.
-
 #@@ code
 %%configure -f
 {
@@ -44,7 +39,6 @@
     "spark.executorEnv.PYSPARK_PYTHON": "./environment/bin/python"
   }
 }
-
 #@@ md
 ## 0. Setup
 
@@ -53,14 +47,13 @@
 * `VERSION` — the raw-data version folder staged in HDFS (`/raw/prices/<VERSION>`). Must match what you gave Stage 1 and Stage 2.
 * `BUCKET` — your S3 bucket (outputs and models are saved there so they survive cluster termination).
 * `ACTIVE_CONFIG` — `"reference"` or `"alternative"` (the justified software alternative, Section 5). Everything else stays the same.
-
 #@@ code
 import json, time, datetime, math, statistics, os, socket, sys, itertools
 from pyspark.sql import functions as F, Window
 from pyspark.sql.types import StringType
 
 # ------------------------------------------------------------------ parameters
-VERSION       = "v2026-10-29-q1-2016"            # raw-data version (docs/input_profiles.md); Q1-2016 profile: "v2026-10-29-q1-2016"
+VERSION       = "v2026-15th-nov-2016"            # raw-data version;
 BUCKET        = "inf2006-team07-bigdata-1-310947418945-us-east-1-an"
 ACTIVE_CONFIG = "reference"              # "reference" | "alternative"
 REPETITIONS   = 3                        # brief: median of three repetitions
@@ -95,16 +88,14 @@ else:                                    # local development only (never counts 
     OUT_CANDIDATES = [f"file://{LOCAL_ROOT}/out/{VERSION}"]
     LOCAL_PRICES = "data/raw/prices/all_stocks_5yr.csv"
     LOCAL_GDELT_AUDIT = {"v2026-10-27": "evidence/local/streaming_gdelt_audit.tsv",
-                         "v2026-10-29-q1-2016": "evidence/local/q1_2016/streaming_gdelt_audit.tsv"}.get(
+                         "v2026-15th-nov-2016": "evidence/local/q1_2016/streaming_gdelt_audit.tsv"}.get(
                              VERSION, "evidence/local/streaming_gdelt_audit.tsv")
-
 #@@ md
 ### 0.2 Helper functions (stage timer, file writer, checks)
 
 * `stage(...)` times each pipeline stage (wall clock) and records it for Section 5.
 * `write_text` / `read_text` write small evidence files to S3 / HDFS through Hadoop's file API (no extra libraries).
 * `check(...)` records one verification line: check, expected, actual, pass/fail.
-
 #@@ code
 def utc_now():
     return datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
@@ -163,10 +154,8 @@ def check(name, expected, actual, ok=None, evidence=""):
 
 def show(df, n=20):
     df.show(n, truncate=False)
-
 #@@ md
 ### 0.3 Environment and allocation (recorded as evidence)
-
 #@@ code
 conf_keys = ["spark.executor.instances", "spark.executor.cores", "spark.executor.memory", "spark.executor.memoryOverhead",
              "spark.driver.memory", "spark.dynamicAllocation.enabled", "spark.sql.shuffle.partitions",
@@ -188,12 +177,10 @@ print(json.dumps(ENVIRONMENT, indent=2))
 save_json("environment.json", ENVIRONMENT)
 if not IS_EMR:
     print("\n*** LOCAL DEVELOPMENT RUN - this is NOT the assessed EMR run ***")
-
 #@@ md
 ## 1. Corpus checks (Task 1)
 
-The raw corpus was staged and verified by `scripts/stage1_stage_to_hdfs.sh` (bytes, lines and SHA-256 read back from HDFS → `evidence/<emr-run-folder>/stage1_hdfs_inventory.csv`) and audited by `scripts/stage2_streaming_and_hive.sh` (Hadoop Streaming + Hive on Tez). Here the **Spark** engine independently re-derives the same quality numbers from the Hive table `inf2006.prices_typed`, so three engines (Hive, Spark, local Python) must agree.
-
+The raw corpus was staged and verified by `scripts/stage1_stage_to_hdfs.sh` (bytes, lines and SHA-256 read back from HDFS → `evidence/emr_ref_m5xlarge/stage1_hdfs_inventory.csv`) and audited by `scripts/stage2_streaming_and_hive.sh` (Hadoop Streaming + Hive on Tez). Here the **Spark** engine independently re-derives the same quality numbers from the Hive table `inf2006.prices_typed`, so three engines (Hive, Spark, local Python) must agree.
 #@@ code
 def load_prices_typed():
     """Hive table inf2006.prices_typed (EMR). Local development: the same schema built from the CSV."""
@@ -248,7 +235,7 @@ for k, v in EXPECTED.items():
 if IS_EMR:
     hq = spark.table("inf2006.raw_prices_quality").first().asDict()
     for k in ("rows_total", "tickers", "rows_up_to_2017_12_29", "empty_open", "empty_high", "empty_low", "ohlc_inconsistent"):
-        check(f"Task1 {k}: Hive table vs Spark", hq[k], q[k], evidence="evidence/<emr-run-folder>/stage2_hive_03_results.log")
+        check(f"Task1 {k}: Hive table vs Spark", hq[k], q[k], evidence="evidence/emr_ref_m5xlarge/stage2_hive_03_results.log")
     print("\nHive raw-data audit tables:")
     show(spark.table("inf2006.raw_prices_series_length").where("short_series = 1").orderBy("ticker"))
     show(spark.table("inf2006.gdelt_audit_rejects"))

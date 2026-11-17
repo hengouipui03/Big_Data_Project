@@ -1,46 +1,33 @@
-"""Build notebooks/inf2006_pipeline.ipynb from notebooks/cells/*.cells (no dependencies).
-
-Cell format: a line '#@@ md' or '#@@ code' starts a cell; everything until the next marker is its source.
-Usage: python -I scripts/build_notebook.py
-"""
-import glob
+"""Build an unexecuted source copy; never overwrite the submitted EMR export."""
+import argparse
 import json
-import os
+from pathlib import Path
+import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-cells = []
-for path in sorted(glob.glob(os.path.join(ROOT, "notebooks", "cells", "*.cells"))):
-    kind, buf = None, []
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from build_submission_zip import source_cells, ROOT
 
-    def flush():
-        if kind is None:
-            return
-        src = "\n".join(buf).strip("\n")
-        lines = src.split("\n")
-        cell = {"cell_type": "markdown" if kind == "md" else "code", "id": f"cell-{len(cells):03d}", "metadata": {},
-                "source": [l + "\n" for l in lines[:-1]] + [lines[-1]]}
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", default="notebooks/inf2006_pipeline_source.ipynb")
+    args = parser.parse_args()
+    output = (ROOT / args.output).resolve()
+    if output == (ROOT / "notebooks/inf2006_pipeline.ipynb").resolve():
+        raise SystemExit("Refusing to overwrite the executed submission notebook")
+    if not output.is_relative_to(ROOT):
+        raise SystemExit("Output must be inside the project")
+    cells = []
+    for kind, source in source_cells():
+        cell = {"cell_type": kind, "id": f"source-{len(cells):03d}", "metadata": {}, "source": source.splitlines(keepends=True)}
         if kind == "code":
-            cell.update({"execution_count": None, "outputs": []})
+            cell.update(execution_count=None, outputs=[])
         cells.append(cell)
+    nb = {"cells": cells, "metadata": {"kernelspec": {"display_name": "PySpark", "language": "python", "name": "pysparkkernel"}}, "nbformat": 4, "nbformat_minor": 5}
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(nb, indent=1) + "\n", encoding="utf8")
+    print(f"Wrote {len(cells)} unexecuted cells to {output.relative_to(ROOT)}")
 
-    for line in open(path, encoding="utf-8").read().split("\n"):
-        if line.startswith("#@@ "):
-            flush()
-            kind, buf = line[4:].strip(), []
-        else:
-            buf.append(line)
-    flush()
 
-nb = {
-    "cells": cells,
-    "metadata": {
-        "kernelspec": {"display_name": "PySpark", "language": "python", "name": "pysparkkernel"},
-        "language_info": {"codemirror_mode": {"name": "python", "version": 3}, "mimetype": "text/x-python",
-                          "name": "pyspark", "pygments_lexer": "python3"},
-    },
-    "nbformat": 4, "nbformat_minor": 5,
-}
-out = os.path.join(ROOT, "notebooks", "inf2006_pipeline.ipynb")
-with open(out, "w", encoding="utf-8") as f:
-    json.dump(nb, f, indent=1)
-print(f"wrote {out}: {len(cells)} cells ({sum(c['cell_type']=='code' for c in cells)} code)")
+if __name__ == "__main__":
+    main()

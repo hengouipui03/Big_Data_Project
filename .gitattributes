@@ -1,2 +1,7 @@
-# Auto detect text files and perform LF normalization
 * text=auto
+*.sh text eol=lf
+*.py text eol=lf
+*.hql text eol=lf
+*.ipynb -text
+*.parquet binary
+*.png binary

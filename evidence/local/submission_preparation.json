@@ -1,0 +1,22 @@
+{
+  "scope": "Local submission preparation only; no new cloud execution",
+  "selected_version": "v2026-15th-nov-2016",
+  "checks": {
+    "original_emr_notebook_preserved": true,
+    "matching_model_metadata_and_parameter_files_present": true,
+    "all_92_cloud_inventory_rows_reconcile_with_local_checksums_bytes_and_rows": true,
+    "all_91_streaming_day_outputs_reconcile_with_local_audit": true,
+    "all_python_sources_parse": true,
+    "all_json_files_load": true,
+    "shell_helper_syntax_checks_pass": true,
+    "streaming_synthetic_edge_cases_pass": true,
+    "source_builder_matches_50_cells_allowing_terminal_newlines": true,
+    "credential_and_personal_machine_path_scans_pass": true,
+    "report_present": false
+  },
+  "not_verified_locally": [
+    "No new Spark model reload or EMR run was performed.",
+    "PDF content/layout cannot be checked because report.pdf is absent.",
+    "Full-pipeline benchmark/configuration comparison limitations are documented."
+  ]
+}

@@ -7,16 +7,16 @@
 #   4. sanity-check the Hive tables the notebook needs, and save the evidence to S3
 #
 # Run on the primary node, from the repository folder:
-#     bash scripts/emr_run_all.sh <bucket> v2026-10-29-q1-2016
-# Arguments: 1 = S3 bucket name (no s3:// prefix)   2 = raw-data version (default v2026-10-29-q1-2016)
+#     bash scripts/emr_run_all.sh <bucket> v2026-15th-nov-2016
+# Arguments: 1 = S3 bucket name (no s3:// prefix)   2 = raw-data version (default v2026-15th-nov-2016)
 #            3 = evidence folder (default evidence/emr_run_latest)
 # Re-running is safe: HDFS and Hive outputs are recreated.
 set -uo pipefail
 BUCKET=${1:?usage: bash scripts/emr_run_all.sh <bucket> [version] [evidence_dir]}
-VER=${2:-v2026-10-29-q1-2016}
+VER=${2:-v2026-15th-nov-2016}
 EV=${3:-evidence/emr_run_latest}
 case "$VER" in
-  *q1-2016*) LOCAL_AUDIT=evidence/local/q1_2016/streaming_gdelt_audit.tsv ;;
+  *q1-2016*|v2026-15th-nov-2016) LOCAL_AUDIT=evidence/local/q1_2016/streaming_gdelt_audit.tsv ;;
   *)         LOCAL_AUDIT=evidence/local/streaming_gdelt_audit.tsv ;;
 esac
 say() { printf '\n\033[1m== %s\033[0m\n' "$*"; }
@@ -53,7 +53,7 @@ say "4/4 sanity checks"
 N=$(hive -S -e "SELECT COUNT(*) FROM inf2006.prices_typed" 2>/dev/null | tail -1)
 D=$(hive -S -e "SELECT COUNT(*) FROM inf2006.gdelt_daily_typed" 2>/dev/null | tail -1)
 echo "inf2006.prices_typed rows      : $N   (expected 619040)"
-echo "inf2006.gdelt_daily_typed days : $D   (expected 91 for v2026-10-29-q1-2016; 7 for the old v2026-10-27 development profile)"
+echo "inf2006.gdelt_daily_typed days : $D   (expected 91 for v2026-15th-nov-2016; 7 for the old v2026-10-27 development profile)"
 tail -1 "$EV/stage2_streaming_vs_local.txt"
 aws s3 cp "$EV" "s3://$BUCKET/evidence/$(basename "$EV")/" --recursive --only-show-errors && echo "evidence copied to s3://$BUCKET/evidence/$(basename "$EV")/" || echo "WARNING: could not copy evidence to S3 (check the EMR role); copy it by scp instead."
 

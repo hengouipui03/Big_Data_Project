@@ -1,0 +1,55 @@
+{
+  "provenance": "Local transcription of retained notebook and shell logs; not an original cloud JSON export or a new execution",
+  "notebook": "notebooks/inf2006_pipeline.ipynb",
+  "version": "v2026-15th-nov-2016",
+  "cluster_id": "j-0713228OYIMPDIUL3VF",
+  "training_application_id": "application_1794811368122_0006",
+  "reload_application_id": "application_1794811368122_0007",
+  "notebook_sha256": "9f171cab8b555c6721c018e052b416c35ee6f035047659a6e39da7e42bca9b2a",
+  "verification_checks": {
+    "passed": 34,
+    "total": 34,
+    "notebook_cell_zero_based": 48
+  },
+  "reload": {
+    "fresh_session_reported": true,
+    "max_probability_difference_reported": 0.0,
+    "class_changes_reported": 0,
+    "tolerance": 1e-09,
+    "notebook_cell_zero_based": 46
+  },
+  "rows": {
+    "raw_prices": 619040,
+    "clean_prices": 605887,
+    "rejected_prices": 13153,
+    "gdelt_days": 91,
+    "gdelt_events": 18369793,
+    "direction_test": 25533,
+    "high_vol_test": 25029
+  },
+  "performance": {
+    "shell_stage_seconds": [
+      202,
+      12,
+      41,
+      26
+    ],
+    "shell_stage_sum_seconds": 281,
+    "main_notebook_stage_sum_seconds": 276.1,
+    "benchmark_repetitions_seconds": [
+      46.62,
+      45.14,
+      41.56
+    ],
+    "benchmark_median_seconds": 45.14,
+    "complete_pipeline_median_seconds": null
+  },
+  "limitations": [
+    "Original notebook contains null raw byte and complete timing fields due path mismatch.",
+    "Three repetitions cover notebook preparation and final fits, not the complete Hadoop/Hive/analytics pipeline.",
+    "No completed alternative-configuration comparison is retained for this final run.",
+    "Reload fallback VERSION is older than the executed output: set VERSION, BUCKET and ACTIVE_CONFIG explicitly before reload.",
+    "Some verification output locators use the old evidence directory; use docs/EVIDENCE_INDEX.md to locate retained files."
+  ],
+  "handover_archive_sha256": "bb9304df4e769e8eedd92d65abcb62a0b12957877d501e838173b40058e4073c"
+}

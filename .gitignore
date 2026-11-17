@@ -1,28 +1,17 @@
-# raw data must never be committed or shipped in the ZIP
-# (anchored: an unanchored 'data/' also hid models/**/stages/*/data/ - the Spark ML parameter files)
+/_recovery/
+/submission/
+/*.zip
 /data/
-*.zip
-*.CSV
-all_stocks_5yrs.csv
-all_stocks_5yr.csv
-# ...but small evidence tables (inventory.csv, audit outputs) MUST be committed
-!evidence/**/*.csv
-!evidence/**/*.CSV
-!evidence/**/*.tsv
-!evidence/**/*.txt
-!evidence/**/*.log
-# local spark/hive artefacts
+/work/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
 spark-warehouse/
 metastore_db/
 derby.log
-__pycache__/
-.ipynb_checkpoints/
-/work/
-# credentials
 *.pem
 .env
-Project Instructions.pdf
-# Mac / editor junk
 .DS_Store
-.Rhistory
 __MACOSX/
+/notebooks/inf2006_pipeline_source.ipynb
+/reload_verification.json
