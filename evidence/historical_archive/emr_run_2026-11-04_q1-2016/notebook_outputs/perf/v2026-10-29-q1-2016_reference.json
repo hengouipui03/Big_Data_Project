@@ -1,0 +1,72 @@
+{
+  "version": "v2026-10-29-q1-2016",
+  "config": "reference",
+  "config_note": {
+    "shuffle_partitions": 200,
+    "aqe": false,
+    "why": "Spark default shuffle partitions; fixed 2 executors x 2 cores x 6 GiB"
+  },
+  "recorded_utc": "2026-11-04T08:33:43+00:00",
+  "application_id": "application_1793775642011_0010",
+  "spark_version": "3.5.5-amzn-1",
+  "is_emr": true,
+  "sizes": {
+    "raw_prices_bytes": 29580549,
+    "raw_gdelt_bytes": 6944840235,
+    "prepared_bytes": 52071634,
+    "price_rows": 619040,
+    "gdelt_days": 91,
+    "gdelt_events": 18369793
+  },
+  "median_notebook_seconds": 46.91,
+  "repetition_seconds": [
+    46.91,
+    47.87,
+    44.91
+  ],
+  "median_stage_seconds": {
+    "2a clean+reject (PySpark)": 7.95,
+    "2b features + weekly targets (PySpark)": 20.6,
+    "3 direction: final fit + test score": 3.79,
+    "3 high_vol: final fit + test score": 3.78
+  },
+  "shell_stage_seconds": 285.0,
+  "end_to_end_median_seconds": 331.90999999999997,
+  "executor_memory": {
+    "driver": {
+      "max_storage_MiB": 1049,
+      "storage_used_MiB": 268,
+      "peak_jvm_heap_MiB": 1355,
+      "peak_offheap_MiB": 370,
+      "gc_time_s": 6.1,
+      "task_time_s": 687.3
+    },
+    "2": {
+      "max_storage_MiB": 3097,
+      "storage_used_MiB": 267,
+      "peak_jvm_heap_MiB": 2442,
+      "peak_offheap_MiB": 265,
+      "gc_time_s": 8.1,
+      "task_time_s": 518.6
+    },
+    "1": {
+      "max_storage_MiB": 3097,
+      "storage_used_MiB": 263,
+      "peak_jvm_heap_MiB": 2669,
+      "peak_offheap_MiB": 283,
+      "gc_time_s": 5.8,
+      "task_time_s": 458.4
+    }
+  },
+  "spark_conf": {
+    "spark.executor.instances": "2",
+    "spark.executor.cores": "2",
+    "spark.executor.memory": "6g",
+    "spark.executor.memoryOverhead": "2g",
+    "spark.driver.memory": "2g",
+    "spark.dynamicAllocation.enabled": "false",
+    "spark.sql.shuffle.partitions": "200",
+    "spark.sql.adaptive.enabled": "false",
+    "spark.sql.catalogImplementation": "hive"
+  }
+}

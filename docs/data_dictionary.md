@@ -1,6 +1,6 @@
 # Data dictionary and corpus scope (Task 1.2)
 
-Scope: the friend's completed 91-day handover. Final notebook/model version: v2026-15th-nov-2016; original shell paths use older or unversioned raw prefixes. Evidence locations below refer to retained files. Counts transcribed from notebook output are not newly generated cloud JSON records. Raw data is never shipped (`data/` is not in the submission).
+Scope: the 91-day GDELT project dataset. Final notebook/model version: v2026-15th-nov-2016; original shell paths use older or unversioned raw prefixes. Evidence locations below refer to retained files. Counts transcribed from notebook output are not newly generated cloud JSON records. Raw data is never shipped (`data/` is not in the submission).
 
 ## 1. Scope: what is in the corpus and what is not
 

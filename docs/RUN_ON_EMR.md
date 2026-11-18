@@ -1,6 +1,6 @@
 # Appendix A source - setup and rerun guide
 
-The actual executed notebook is [inf2006_pipeline.ipynb](../notebooks/inf2006_pipeline.ipynb); its byte-identical export and historical outputs are preserved. This guide was updated locally for the curated handover. A fresh reproduction generates new evidence; it does not change the original run.
+The actual executed notebook is [inf2006_pipeline.ipynb](../notebooks/inf2006_pipeline.ipynb); its byte-identical export and historical outputs are preserved.  A fresh reproduction generates new evidence; it does not change the original run.
 
 ## 1. Prerequisites and configuration
 
@@ -49,7 +49,7 @@ Upload/open the notebook, select PySpark, set VERSION to your staged version, BU
 
 Expected raw/clean/rejected counts: 619,040 / 605,887 / 13,153. Direction train/validation/test: 66,424 / 25,805 / 25,533; high_vol: 66,412 / 25,307 / 25,029. Train outcomes must be known by 2015-12-31, validation outcomes by 2016-12-31; test ends 2017-12-29. Random seed 42. High-volatility cutoff is learned only on training data, about 0.013936. The saved PipelineModel includes imputer, assembler, scaler and logistic regression.
 
-Historical final choices were logistic regression/all_price with regParam 0 for direction and 0.01 for high_vol. Test AUC was approximately 0.5001 and 0.7261 respectively. All-price feature columns differ by task; the checkpoint stores the actual ordered inputs. See the data dictionary for targets, units and the next-block volatility horizon used in this handover.
+Historical final choices were logistic regression/all_price with regParam 0 for direction and 0.01 for high_vol. Test AUC was approximately 0.5001 and 0.7261 respectively. All-price feature columns differ by task; the checkpoint stores the actual ordered inputs. See the data dictionary for targets, units and the next-block volatility horizon used in this project.
 
 Historical component timing: staging 97 s (excluded); shell processing 281 s; reported main-notebook stage sum 276.1 s. The three prepare/final-fit benchmark repetitions had median 45.14 s. These are component records, not a complete median-of-three end-to-end measurement. Consult [EVIDENCE_INDEX.md](EVIDENCE_INDEX.md) before interpreting performance. A fresh run must record its own timings and memory.
 

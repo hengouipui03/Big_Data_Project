@@ -1,6 +1,6 @@
 # Input profiles and performance
 
-This submission follows the completed friend's handover: prices plus GDELT 2016 Q1. It does not incorporate the separate 731-day preparation workflow.
+The selected profiles use the price snapshot and GDELT daily events; the full profile covers 2016 Q1.
 
 | Profile | GDELT coverage | Expanded GDELT bytes | Events | Evidence |
 |---|---|---:|---:|---|
@@ -15,4 +15,4 @@ The final notebook/model output version is `v2026-15th-nov-2016`. Its actual she
 
 The final [shell run log](../evidence/final_run/run_log.csv) records Streaming 202 s, Hive registration 12 s, Hive transform 41 s and result queries 26 s: 281 s in total for those components. Staging was 97 s and is excluded from timed processing. The notebook reports a main-stage sum of 276.1 s and three prepare/final-fit benchmark repetitions of 46.62, 45.14 and 41.56 s (median 45.14 s). These quantities have different coverage and must be labelled separately.
 
-The seven-day development Streaming stage took 42 s. This is genuine input growth, but one shell run at each size is not a median-of-three full-pipeline comparison. The final handover lacks the full timing/configuration comparison required for a stronger scalability claim. No unmeasured 731-day projection is presented as execution evidence. See [EVIDENCE_INDEX.md](EVIDENCE_INDEX.md) for all limitations and exact notebook cells.
+The seven-day development Streaming stage took 42 s. This is genuine input growth, but one shell run at each size is not a median-of-three full-pipeline comparison. The recorded results do not include a full timing/configuration comparison. No unmeasured 731-day projection is presented as execution evidence. See [EVIDENCE_INDEX.md](EVIDENCE_INDEX.md) for all limitations and exact notebook cells.

@@ -50,6 +50,5 @@
     "No completed alternative-configuration comparison is retained for this final run.",
     "Reload fallback VERSION is older than the executed output: set VERSION, BUCKET and ACTIVE_CONFIG explicitly before reload.",
     "Some verification output locators use the old evidence directory; use docs/EVIDENCE_INDEX.md to locate retained files."
-  ],
-  "handover_archive_sha256": "bb9304df4e769e8eedd92d65abcb62a0b12957877d501e838173b40058e4073c"
+  ]
 }

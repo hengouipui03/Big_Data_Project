@@ -2,6 +2,8 @@
 
 All cell numbers below are zero based in [the submitted executed notebook](../notebooks/inf2006_pipeline.ipynb). [The text transcription](../evidence/final_run/notebook_text_outputs.txt) preserves console output for convenient review; it is a local extraction, not another cloud execution. [run_summary.json](../evidence/final_run/run_summary.json) is likewise explicitly labelled as a local transcription.
 
+An earlier 91-day reference run is documented in [evidence/reference_run_2026_11_04](../evidence/reference_run_2026_11_04/). Its measurements are separate from the final run.
+
 | Claim | Expected and recorded result | Evidence |
 |---|---|---|
 | EMR environment | Spark 3.5.5-amzn-1, Python 3.9.25; two executors, two cores and 6g heap each | notebook cell 7 |
@@ -21,12 +23,11 @@ The seven-day [development run log](../evidence/development/run_log.csv) and its
 
 ## Limits that the report must retain
 
-- The final handover covers **91 GDELT days**, not the full 731-day reference corpus. The latter was a reference/planning scope; no 731-day execution is claimed here.
+- The final run covers **91 GDELT days**, not the full 731-day reference corpus. The latter was a reference/planning scope; no 731-day execution is claimed here.
 - The final notebook's raw-byte and complete timing fields are null because its output version differed from the staged raw/evidence paths. Per-file raw bytes/checksums and separate shell timing are retained. Do not turn an arithmetic sum of selected stages into a measured complete-pipeline duration.
-- The three benchmark repetitions (46.62, 45.14 and 41.56 seconds) cover notebook preparation and final fits, not three repetitions of the entire Streaming/Hive/analytics path. There is no complete paired configuration comparison for this final run in the handover. State this limitation rather than reuse unattributed timing.
+- The three benchmark repetitions (46.62, 45.14 and 41.56 seconds) cover notebook preparation and final fits, not three repetitions of the entire Streaming/Hive/analytics path. There is no complete paired configuration comparison for this final run. State this limitation rather than reuse unattributed timing.
 - Reload output reports success and a fresh application. Its saved source has an older fallback VERSION after a restart. Configure VERSION, BUCKET and ACTIVE_CONFIG explicitly before running that cell, as described in the guide. The original notebook was not edited to hide this mismatch.
 - Notebook verification output still names `evidence/emr_ref_m5xlarge` and some original cloud JSON filenames. These original labels are retained verbatim. The Hive locators now correspond to the final_run files linked above; absent original cloud JSONs are not claimed to be included. Use the notebook's recorded outputs for those results.
 - The 34/34 record verifies its listed data/leakage/analysis conditions; it does not prove that every requirement in the brief has been met or that complete timing data is available.
 - Direction does not clearly beat its majority baseline; Q2 has only 13 weekly observations and cannot establish causation. Price ratios are source-data diagnostics, not investable economic returns.
 - The new standalone reload and packaging helpers were added locally. Their source validation is separate from the historical EMR output. No new cloud execution was performed during local preparation.
-- The final report is absent until the team supplies `report.pdf`. Do not upload a package labelled REVIEW ONLY.
