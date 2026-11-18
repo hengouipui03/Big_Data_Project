@@ -26,10 +26,14 @@ REDUCERS=${3:-2}
 LOCAL_AUDIT=${4:-evidence/local/streaming_gdelt_audit.tsv}
 mkdir -p "$EV"
 
-RAW_GDELT=/raw/gdelt/$VER
-RAW_PRICES=/raw/prices/$VER
-AUDIT_OUT=/audit/gdelt_daily/$VER
-STREAMING_JAR=$(ls /usr/lib/hadoop/hadoop-streaming.jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar 2>/dev/null | head -1)
+RAW_GDELT=${BENCH_RAW_GDELT:-/raw/gdelt/$VER}
+RAW_PRICES=${BENCH_RAW_PRICES:-/raw/prices/$VER}
+AUDIT_OUT=${BENCH_AUDIT_OUT:-/audit/gdelt_daily/$VER}
+STREAMING_JAR=
+for candidate in /usr/lib/hadoop/hadoop-streaming.jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar; do
+  if [ -f "$candidate" ]; then STREAMING_JAR=$candidate; break; fi
+done
+[ -n "$STREAMING_JAR" ] || { echo 'Hadoop Streaming jar not found' >&2; exit 1; }
 HIVE_CMD=${HIVE_CMD:-hive}
 FROM=${FROM:-a}
 runstep() { [[ "$1" < "$FROM" ]] && return 1 || return 0; }
@@ -42,7 +46,11 @@ logrow() { echo "$1,$2,$3,$4,$5,\"$6\",$7,$8,$9,\"${10}\"" >> "$RUNLOG"; }
 
 if runstep a; then
 echo "== Stage 2a: Hadoop Streaming audit over $RAW_GDELT -> $AUDIT_OUT ($REDUCERS reducers)"
-hdfs dfs -rm -r -f "$AUDIT_OUT" >/dev/null 2>&1 || true
+if [ -n "${BENCH_AUDIT_OUT:-}" ]; then
+  if hdfs dfs -test -e "$AUDIT_OUT"; then echo "Refusing to overwrite $AUDIT_OUT" >&2; exit 1; fi
+else
+  hdfs dfs -rm -r -f "$AUDIT_OUT" >/dev/null 2>&1 || true
+fi
 S=$(now); t0=$(date +%s)
 hadoop jar "$STREAMING_JAR" \
   -D mapreduce.job.name="inf2006_gdelt_daily_audit_$VER" \
@@ -79,6 +87,8 @@ for k in sorted(set(emr) | set(loc)):
     ok &= m
     print(f"{k:14} {e[0] if e else '-':>11} {l[0] if l else '-':>13} {e[1] if e else '-':>9} {l[1] if l else '-':>11} {e[2] if e else '-':>8} {l[2] if l else '-':>10} {'yes' if m else 'NO'}")
 print("RESULT:", "EMR streaming output matches local run on every date key" if ok else "MISMATCH - investigate")
+if not ok:
+    sys.exit(1)
 EOF
 fi
 

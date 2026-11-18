@@ -1,0 +1,325 @@
+{
+  "seed": 42,
+  "majority_class_from_train": 0.0,
+  "baselines": {
+    "validation": {
+      "majority_class": {
+        "auc": 0.5,
+        "accuracy": 0.6161141186233058,
+        "f1": 0.4697646073290097
+      },
+      "persistence(prev_week_vol>=cutoff)": {
+        "auc": 0.6480475655990496,
+        "accuracy": 0.6283636938396491,
+        "f1": 0.6291469725724952
+      }
+    },
+    "test": {
+      "majority_class": {
+        "auc": 0.5,
+        "accuracy": 0.7587997922410005,
+        "f1": 0.6547386771877549
+      },
+      "persistence(prev_week_vol>=cutoff)": {
+        "auc": 0.6376678840843721,
+        "accuracy": 0.7019457429381917,
+        "f1": 0.7026779888092386
+      }
+    }
+  },
+  "experiments": [
+    {
+      "feature_set": "vol_core",
+      "model": "logreg",
+      "params": {
+        "regParam": 0.0
+      },
+      "train": {
+        "auc": 0.6640737679771399,
+        "accuracy": 0.691200385472505,
+        "f1": 0.6282285343149456,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.6804505761562142,
+        "accuracy": 0.6651519342474415,
+        "f1": 0.6262276709497978,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "vol_core",
+      "model": "logreg",
+      "params": {
+        "regParam": 0.01
+      },
+      "train": {
+        "auc": 0.6635868538525536,
+        "accuracy": 0.6901614166114558,
+        "f1": 0.6242389844328906,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.6819484674432195,
+        "accuracy": 0.6654285375587782,
+        "f1": 0.6233298958547383,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "vol_core",
+      "model": "logreg",
+      "params": {
+        "regParam": 0.1
+      },
+      "train": {
+        "auc": 0.661811084341601,
+        "accuracy": 0.6875564656989701,
+        "f1": 0.6065609480309991,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.6803397799312209,
+        "accuracy": 0.6590666613980322,
+        "f1": 0.5988232285961951,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "vol_core",
+      "model": "rf",
+      "params": {
+        "numTrees": 50,
+        "maxDepth": 4
+      },
+      "train": {
+        "auc": 0.6630652274158763,
+        "accuracy": 0.691546708426188,
+        "f1": 0.6229872956364665,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.6832649837981234,
+        "accuracy": 0.6655865965938278,
+        "f1": 0.6196234120019033,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "vol_core",
+      "model": "rf",
+      "params": {
+        "numTrees": 100,
+        "maxDepth": 6
+      },
+      "train": {
+        "auc": 0.668549478267712,
+        "accuracy": 0.6944678672529061,
+        "f1": 0.6396497513530477,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.685433095531525,
+        "accuracy": 0.6710001185442763,
+        "f1": 0.6389938623591053,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "vol_core",
+      "model": "gbt",
+      "params": {
+        "maxIter": 30,
+        "maxDepth": 2
+      },
+      "train": {
+        "auc": 0.6649089134110501,
+        "accuracy": 0.6910046377160755,
+        "f1": 0.6268414568523195,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.6825490400213157,
+        "accuracy": 0.665902714663927,
+        "f1": 0.625796892769197,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "vol_core",
+      "model": "gbt",
+      "params": {
+        "maxIter": 30,
+        "maxDepth": 3
+      },
+      "train": {
+        "auc": 0.6673920200235266,
+        "accuracy": 0.6927814250436668,
+        "f1": 0.6281757866325298,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.6830723793850761,
+        "accuracy": 0.6634527996206583,
+        "f1": 0.6212898256184504,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "all_price",
+      "model": "logreg",
+      "params": {
+        "regParam": 0.0
+      },
+      "train": {
+        "auc": 0.7018956034956839,
+        "accuracy": 0.7111666566283202,
+        "f1": 0.669404328010738,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.7319573104119012,
+        "accuracy": 0.6982653020903308,
+        "f1": 0.6785561098488744,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "all_price",
+      "model": "logreg",
+      "params": {
+        "regParam": 0.01
+      },
+      "train": {
+        "auc": 0.7012227585024535,
+        "accuracy": 0.7102029753658977,
+        "f1": 0.6646007521738828,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.732756844834056,
+        "accuracy": 0.6989370529892915,
+        "f1": 0.6766607503836006,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "all_price",
+      "model": "logreg",
+      "params": {
+        "regParam": 0.1
+      },
+      "train": {
+        "auc": 0.6956758970537087,
+        "accuracy": 0.7037583569234476,
+        "f1": 0.6410383331628337,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.725010836680172,
+        "accuracy": 0.692535662069783,
+        "f1": 0.6557669162325924,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "all_price",
+      "model": "rf",
+      "params": {
+        "numTrees": 50,
+        "maxDepth": 4
+      },
+      "train": {
+        "auc": 0.6869250677930933,
+        "accuracy": 0.7061675600795037,
+        "f1": 0.6525792091492202,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.7107869595160377,
+        "accuracy": 0.694116252420279,
+        "f1": 0.6657559652315507,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "all_price",
+      "model": "rf",
+      "params": {
+        "numTrees": 100,
+        "maxDepth": 6
+      },
+      "train": {
+        "auc": 0.703889846923917,
+        "accuracy": 0.7129434439559116,
+        "f1": 0.6694831949403026,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.7216742713776707,
+        "accuracy": 0.6998063776820642,
+        "f1": 0.6793331468054276,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "all_price",
+      "model": "gbt",
+      "params": {
+        "maxIter": 30,
+        "maxDepth": 2
+      },
+      "train": {
+        "auc": 0.70314137063203,
+        "accuracy": 0.7110010239113413,
+        "f1": 0.672586765909422,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.7243835008359065,
+        "accuracy": 0.6969218002924092,
+        "f1": 0.6790720884740348,
+        "rows": 25307
+      }
+    },
+    {
+      "feature_set": "all_price",
+      "model": "gbt",
+      "params": {
+        "maxIter": 30,
+        "maxDepth": 3
+      },
+      "train": {
+        "auc": 0.7104308199520784,
+        "accuracy": 0.7123110281274468,
+        "f1": 0.6811398156265236,
+        "rows": 66412
+      },
+      "validation": {
+        "auc": 0.7245120391126585,
+        "accuracy": 0.696012960840874,
+        "f1": 0.6827137093903417,
+        "rows": 25307
+      }
+    }
+  ],
+  "selected": {
+    "feature_set": "all_price",
+    "model": "logreg",
+    "params": {
+      "regParam": 0.01
+    }
+  },
+  "selected_validation": {
+    "auc": 0.732756844834056,
+    "accuracy": 0.6989370529892915,
+    "f1": 0.6766607503836006,
+    "rows": 25307
+  },
+  "test_final": {
+    "auc": 0.7262041512051698,
+    "accuracy": 0.7752606975907946,
+    "f1": 0.7344771081954252,
+    "rows": 25029
+  }
+}

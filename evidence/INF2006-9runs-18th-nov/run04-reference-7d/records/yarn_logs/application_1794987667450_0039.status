@@ -1,0 +1,2 @@
+2026-11-18 09:36:49,184 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-16-63.ec2.internal/172.31.16.63:8032
+2026-11-18 09:36:49,338 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-16-63.ec2.internal/172.31.16.63:10200

@@ -1,0 +1,6 @@
+2026-11-18 08:51:49,917 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-16-63.ec2.internal/172.31.16.63:8032
+2026-11-18 08:51:50,074 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-16-63.ec2.internal/172.31.16.63:10200
+Total Nodes:2
+         Node-Id	     Node-State	Node-Http-Address	Number-of-Running-Containers
+ip-172-31-17-62.ec2.internal:8041	        RUNNING	ip-172-31-17-62.ec2.internal:8042	                           0
+ip-172-31-18-230.ec2.internal:8041	        RUNNING	ip-172-31-18-230.ec2.internal:8042	                           0

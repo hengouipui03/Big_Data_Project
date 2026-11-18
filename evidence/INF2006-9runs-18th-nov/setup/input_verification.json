@@ -1,0 +1,698 @@
+{
+  "all_verified": true,
+  "files": [
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/prices/all_stocks_5yr.csv",
+      "bytes": 29580549,
+      "sha256": "6aea253cd19de60b568143991aaf1fa482456565c389205658d236e595e716cf",
+      "expected_rows": 619040,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160101.export.CSV",
+      "bytes": 43050136,
+      "sha256": "459c6cdafe89b5fbcbdaabdba6f5b6efcbe1f6a3908cb9a3fee54ae6ad8b678c",
+      "expected_rows": 114871,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160102.export.CSV",
+      "bytes": 41186136,
+      "sha256": "b1584e2b978f401812d664666bfa19d05f11ca1d2c77bcb1c6bab9b5312f8990",
+      "expected_rows": 109259,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160103.export.CSV",
+      "bytes": 44670358,
+      "sha256": "863425a3a67f6dec10d514899e9fc40aec5283cfe7c495d6aa7baa537841e3dd",
+      "expected_rows": 117583,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160104.export.CSV",
+      "bytes": 73533412,
+      "sha256": "fb8b1db6ab53f7b005700cd80b16f7a3ce587b25e6fea0a2751324057012462e",
+      "expected_rows": 194646,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160105.export.CSV",
+      "bytes": 80958902,
+      "sha256": "92901bd84a442ba926c5b101561be9e13c9dba806faa7484afc395553879da58",
+      "expected_rows": 213565,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160106.export.CSV",
+      "bytes": 84172036,
+      "sha256": "719def41c6df369d949f6fd165b46ff60b9afbd21ea778be896b5800757a8eab",
+      "expected_rows": 222359,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160107.export.CSV",
+      "bytes": 84082758,
+      "sha256": "9b75edb8fad8780ef6e56f6614d324f9f3c8a1451e19eec6c9b3469651e45438",
+      "expected_rows": 221844,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160108.export.CSV",
+      "bytes": 79470667,
+      "sha256": "bfd63385da0c74619ecec08c155716f4e250de4aa30c1b90907e14dfdfdfd083",
+      "expected_rows": 209919,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160109.export.CSV",
+      "bytes": 55746315,
+      "sha256": "cc443c8adc6dcaadd69079e81bc5584700e343782b046347a180d992e38dc47a",
+      "expected_rows": 147184,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160110.export.CSV",
+      "bytes": 49419061,
+      "sha256": "1f64183ffa8f42f0176d5864a9e0db2a38bd019df9af6e19008d681508b21ad8",
+      "expected_rows": 129936,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160111.export.CSV",
+      "bytes": 76658279,
+      "sha256": "ef70574d99548ca0bf319ba0e029a0db2095a218c7d15bb4629891ec544667ad",
+      "expected_rows": 203378,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160112.export.CSV",
+      "bytes": 83448627,
+      "sha256": "1ddb5cffeaff864775804ee9244648f46e905148bb7999045876de164d3016a1",
+      "expected_rows": 220753,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160113.export.CSV",
+      "bytes": 90476921,
+      "sha256": "9c11158723fa08b2d340419ad667ac5d493b09e533cb0d0375fde972dabd953e",
+      "expected_rows": 238975,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160114.export.CSV",
+      "bytes": 87097948,
+      "sha256": "2b8cf370ae1ced7ebb21307e5ea6a49b2d976bcacbb79f16d593974416441017",
+      "expected_rows": 230527,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160115.export.CSV",
+      "bytes": 83511295,
+      "sha256": "768c8671d478352526acbdc10df5da51a77377a4cc89b866bbb7aaa5880b329f",
+      "expected_rows": 221313,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160116.export.CSV",
+      "bytes": 58549038,
+      "sha256": "cadcd6cdc8961b236e55a65122b3f8a99bce2fd8a75b35ef2493e7ddc32c74c0",
+      "expected_rows": 155023,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160117.export.CSV",
+      "bytes": 55105592,
+      "sha256": "ffb94660874cb1959270540a34c291979f4315c789f788b8970fb4f9bf4e5680",
+      "expected_rows": 145357,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160118.export.CSV",
+      "bytes": 79769859,
+      "sha256": "ff1b8cbe48e49f2b8493cc348fbe5cbd9fd5da523e0cdc101c19402f1017023d",
+      "expected_rows": 211583,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160119.export.CSV",
+      "bytes": 85372159,
+      "sha256": "085e1e78a37eb17d3af7b0e0977319a6f02b12e95816a8234f434e60168b8e53",
+      "expected_rows": 225989,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160120.export.CSV",
+      "bytes": 91577474,
+      "sha256": "c431989bc142a19a27e00bb3b3d455af694531b1ad45caefad8e54ec2a4afd0e",
+      "expected_rows": 242048,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160121.export.CSV",
+      "bytes": 91192340,
+      "sha256": "9ff87f400d50290810411e67982552f801f11a83a50b00a7bc07d510a4e4acdc",
+      "expected_rows": 240629,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160122.export.CSV",
+      "bytes": 86787595,
+      "sha256": "b4562bf956ab0572afee324c8c36d10cd1d664de2ed216bd529a8eb4af514c5d",
+      "expected_rows": 229845,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160123.export.CSV",
+      "bytes": 56024646,
+      "sha256": "5b836dc1d9a8a9392f09c12f90e5ad68df6e9faf7fa878cf5ad58490e1441fa3",
+      "expected_rows": 148711,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160124.export.CSV",
+      "bytes": 50534148,
+      "sha256": "9db63c76bdc5a150311c3f3cad55f65ce6bc953fd77a53462fdea26f6c8522e5",
+      "expected_rows": 133979,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160125.export.CSV",
+      "bytes": 76739940,
+      "sha256": "ec5b1528e8e395c962fa2ff9f0963f3ce280f062719cb3f20052c80b1f87be98",
+      "expected_rows": 204838,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160126.export.CSV",
+      "bytes": 83703650,
+      "sha256": "19dff069981b03553897e95d97fcef7611bfa6139700e4fdc0b676e963837b41",
+      "expected_rows": 222230,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160127.export.CSV",
+      "bytes": 88434869,
+      "sha256": "d06ebd09892c53e2f94ed3b693d5e85cb55c2dbeebf6fb4817de5d2aa688f205",
+      "expected_rows": 234605,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160128.export.CSV",
+      "bytes": 89560293,
+      "sha256": "7cef6dcf62d9c9275559bf86c8499baa652a564211520e743214b5ee011d7201",
+      "expected_rows": 237972,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160129.export.CSV",
+      "bytes": 80474803,
+      "sha256": "69ba0de7da8dc85fdbd29368e2a8bca020b550a5cd9dc6f087acc28847245356",
+      "expected_rows": 213970,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160130.export.CSV",
+      "bytes": 55093447,
+      "sha256": "e7db7cbe8bbf23f4188b6e08f44add739e14b833f866bb2f1a1c5d466c836f41",
+      "expected_rows": 146618,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160131.export.CSV",
+      "bytes": 47835669,
+      "sha256": "b32153c4b2be03895fdacf0335b1dfbb109f1692573f76bea59bfc7a9fe1f3d3",
+      "expected_rows": 127082,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160201.export.CSV",
+      "bytes": 81870226,
+      "sha256": "4ef1185cb0bffa74f1e3cf60eaab566e0c6c02887dd3c411949214b450a02866",
+      "expected_rows": 218534,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160202.export.CSV",
+      "bytes": 86873954,
+      "sha256": "4b546ef812700d79c27d5993ed3f81a1bcee2fa80092e889dc4a55e79de8a14a",
+      "expected_rows": 230346,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160203.export.CSV",
+      "bytes": 87172120,
+      "sha256": "426e3fb63b9043d76d2afa05c592ca20669dacd946a72a2901cb293a1678523b",
+      "expected_rows": 230247,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160204.export.CSV",
+      "bytes": 92436156,
+      "sha256": "242c8a94e3f9cc53657a950a51ee278e641afa10463282b011b6840bde742476",
+      "expected_rows": 244440,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160205.export.CSV",
+      "bytes": 86897448,
+      "sha256": "e65d92939d50af0e7de1021ed3b401c285bb56823b8eec09e6f788fd71582762",
+      "expected_rows": 230332,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160206.export.CSV",
+      "bytes": 55934271,
+      "sha256": "83e6e164eaf86cb931f38ee415124f11d73d336a4c8c4c4a8aedaa5333c1e265",
+      "expected_rows": 148902,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160207.export.CSV",
+      "bytes": 49880511,
+      "sha256": "faab0e6b224ae06a0e4a3e69e2330254326a086f981c9055426d65e08c37314c",
+      "expected_rows": 131873,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160208.export.CSV",
+      "bytes": 76796056,
+      "sha256": "c1b13ec6888b6b2edaac49bb08c74c3a62abc5f17b17c006a9ab660a59bef13c",
+      "expected_rows": 204404,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160209.export.CSV",
+      "bytes": 85151077,
+      "sha256": "2334750320b4e498a19200b57e521818a7af1dfdd77d720ebc9218d535ca6bc2",
+      "expected_rows": 225438,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160210.export.CSV",
+      "bytes": 89719521,
+      "sha256": "00079a26fa7a79456c904465e15854443e64f887a4db84a200c72a5ce8938ee6",
+      "expected_rows": 236801,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160211.export.CSV",
+      "bytes": 93792017,
+      "sha256": "d80414af71dd01d010660f8cc6336cf5ad8a4a4f7eb24466f182c8081a1ff0ba",
+      "expected_rows": 247039,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160212.export.CSV",
+      "bytes": 92756757,
+      "sha256": "980d8044dde36c3295cf782f0ee1b885cbcc46c3077dcded88a6d8f3652f94c9",
+      "expected_rows": 244943,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160213.export.CSV",
+      "bytes": 64621539,
+      "sha256": "95d09663d9eb7ececa1de73ad83f83778a275073744b79138bf272508a914649",
+      "expected_rows": 171283,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160214.export.CSV",
+      "bytes": 57217756,
+      "sha256": "2fda195d73c74fbb8c0f3af54963247d3ba91c58909b99d29622f6631a8b5e54",
+      "expected_rows": 151552,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160215.export.CSV",
+      "bytes": 78254662,
+      "sha256": "b1cb9449c6e1bc90f448601274618130617a76c70ae401fc14f7f86a0aad5627",
+      "expected_rows": 208240,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160216.export.CSV",
+      "bytes": 92100995,
+      "sha256": "01459b148ea2125556f61c59885b410b89ceeb9a3dbe29d1feff947723a50b7c",
+      "expected_rows": 243764,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160217.export.CSV",
+      "bytes": 94601047,
+      "sha256": "38c4f2e8b50c02f69b4fa9b5ae6050b97a9beaff88003d702f230c9984f36bec",
+      "expected_rows": 249814,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160218.export.CSV",
+      "bytes": 95975650,
+      "sha256": "20dbd5da47726bf5c8bd32009fb1094778f66456da0aab5f086a11b1f7312e25",
+      "expected_rows": 253173,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160219.export.CSV",
+      "bytes": 93667464,
+      "sha256": "5fd88ce348fdf1ed5d692a4d4799a854b01754f3b73c4a31e8c0f18e1bb91cb7",
+      "expected_rows": 247608,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160220.export.CSV",
+      "bytes": 62069822,
+      "sha256": "18c3c54c9521034cad8374cf32cefc7d11d65bc252981d57c5b6e497498cd362",
+      "expected_rows": 164283,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160221.export.CSV",
+      "bytes": 55981399,
+      "sha256": "e1e670a520462186cb8ecc3969a410c41ccffd46f909a12151af72d01f199f6a",
+      "expected_rows": 147902,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160222.export.CSV",
+      "bytes": 81011630,
+      "sha256": "7f0d7436bd8ffc2727932743e1c2b5303e954eaad75bc23d12dd4c54bbf20914",
+      "expected_rows": 215071,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160223.export.CSV",
+      "bytes": 90956709,
+      "sha256": "caf72500f765f6afd748491b938e9d20f8da9692d8b3409e50970f9a4dcf1985",
+      "expected_rows": 239988,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160224.export.CSV",
+      "bytes": 93209525,
+      "sha256": "aab0eece519da3f6ea0055312116d981e24ef45be22ac6e149ba96ab7d7ab1bf",
+      "expected_rows": 246672,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160225.export.CSV",
+      "bytes": 93745536,
+      "sha256": "ec35ae9978f2f28e0d220c3d32d5724e96b3f3c61ccea4d7567818109975a530",
+      "expected_rows": 247527,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160226.export.CSV",
+      "bytes": 89643591,
+      "sha256": "6d40e02c5747154f6d9b352e0821c605242d64e8757861cc4053c818b13cca5f",
+      "expected_rows": 236914,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160227.export.CSV",
+      "bytes": 60952652,
+      "sha256": "3d318784a17759e53049bf746cb0e909d79d184f7d7e74da36cff35a62b37e54",
+      "expected_rows": 161239,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160228.export.CSV",
+      "bytes": 52548417,
+      "sha256": "6b4d0df7c866ad6bbdf41f13bea48ddb28122975bfdb6028383389bad0ffb235",
+      "expected_rows": 138889,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160229.export.CSV",
+      "bytes": 78802042,
+      "sha256": "4a4cbddf904736e1b8806ab5154c17a8e10e595a621117007302c046708182e4",
+      "expected_rows": 209195,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160301.export.CSV",
+      "bytes": 88257257,
+      "sha256": "4d88fba9b7c2acb4a4e87adbb7c36013b397363e77d1db15ced22c22de25b083",
+      "expected_rows": 233967,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160302.export.CSV",
+      "bytes": 93628627,
+      "sha256": "48263e9bc38a084d1d1483e7b4c629bfe168801d6820e26dfa0233d5498fa081",
+      "expected_rows": 246662,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160303.export.CSV",
+      "bytes": 91423938,
+      "sha256": "a4d1ddeccf7495e09fe83af7e0cc38b8540199e739c5834df00994873861ee7b",
+      "expected_rows": 241359,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160304.export.CSV",
+      "bytes": 86680385,
+      "sha256": "893db7df7eb2d04d96857dd510abb1fd7b6ed3a101cff9f6f2bd00b45d900a85",
+      "expected_rows": 229908,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160305.export.CSV",
+      "bytes": 54201044,
+      "sha256": "d59d4c1f18175fb576edc597862dc230babed881ba5cf1d6c3ab033fd7306170",
+      "expected_rows": 143773,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160306.export.CSV",
+      "bytes": 52679830,
+      "sha256": "fb691a071b5c8b6b89ea664b154944078a501021e86fd57ef3fe067809b4255b",
+      "expected_rows": 140120,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160307.export.CSV",
+      "bytes": 80556616,
+      "sha256": "74d6928f57752a7323438ffd47dde812895ff35276f3aeab39a0738a5f7476fa",
+      "expected_rows": 214138,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160308.export.CSV",
+      "bytes": 87415845,
+      "sha256": "155a558272901835b9dd43e2b3e1b54472f4647bdfdfc52a9e40ab895eea3a3d",
+      "expected_rows": 231102,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160309.export.CSV",
+      "bytes": 90077555,
+      "sha256": "b1c8ef5022c6de54034661a99a88dde4a51de4a4633fa6172e400a4ce7f60094",
+      "expected_rows": 238101,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160310.export.CSV",
+      "bytes": 91142990,
+      "sha256": "85ef204bc974aad147c28798f414f2a3abc6347be0e81d69915865ae299e63f9",
+      "expected_rows": 240694,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160311.export.CSV",
+      "bytes": 85013014,
+      "sha256": "d8d95a24ce14d375385463245b9d788948f9f968ac1cb1a027a979c0343536f6",
+      "expected_rows": 225180,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160312.export.CSV",
+      "bytes": 55326454,
+      "sha256": "340c5b8e9651cba6a1e718db93056ff956278a88eda1ccb33f22a5b0b830d79a",
+      "expected_rows": 146917,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160313.export.CSV",
+      "bytes": 50500875,
+      "sha256": "5d573850acf74b95425089c8d305cc295cb1d4eba145f90c33a8b2e6fdd03869",
+      "expected_rows": 134098,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160314.export.CSV",
+      "bytes": 83096622,
+      "sha256": "6c83174fb2c6c4da479028a7bf2586afbf87cd6a401075a1f83d94d94aaf33c0",
+      "expected_rows": 221286,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160315.export.CSV",
+      "bytes": 90130192,
+      "sha256": "d3a7e11cde0d1224f72a99c5913b14e9bdaa6f013fdf1a1bd22fdb5a6b25a0c5",
+      "expected_rows": 239103,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160316.export.CSV",
+      "bytes": 90717970,
+      "sha256": "1c53d51719bd0ae88757f210869ff15c5379f9cf1143915a8099018c1ff071ed",
+      "expected_rows": 240057,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160317.export.CSV",
+      "bytes": 87231577,
+      "sha256": "76d7d080e869a23c88c07287c5da2d4e7551947f669ae97754d0b1a8f2f84bce",
+      "expected_rows": 231119,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160318.export.CSV",
+      "bytes": 82188925,
+      "sha256": "9cb1ffe64aad453955e970a0467ce556c733d0187043d923ebe246911020d8e3",
+      "expected_rows": 216821,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160319.export.CSV",
+      "bytes": 51095758,
+      "sha256": "8a13eb913705c4da08dda72ae915d9c316e1c2e283a68371c8adbf3c920901c2",
+      "expected_rows": 134964,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160320.export.CSV",
+      "bytes": 47931136,
+      "sha256": "b9adcd49f79d019232a55fdbb7151ce722767a16c3ec96a4f3cb08ad47a1b507",
+      "expected_rows": 126314,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160321.export.CSV",
+      "bytes": 78202450,
+      "sha256": "b528927ce50e0f655e940f5a96a0bb9bf784f91589fae11ba83c2e8d6e9dddd6",
+      "expected_rows": 206434,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160322.export.CSV",
+      "bytes": 90530754,
+      "sha256": "3ef99cbad30ce279c85cbe7a2e018f2cbec5e484f436876607432ca341df643d",
+      "expected_rows": 236749,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160323.export.CSV",
+      "bytes": 93033727,
+      "sha256": "d08fe18c1f3c3cd0e518b9606206d31091ca7470a34ba80af59a784bdaa3d4c2",
+      "expected_rows": 243355,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160324.export.CSV",
+      "bytes": 88134502,
+      "sha256": "e6f85035dfb542a400a10a56f2d102fda36d23cc7e7f18b6b36c6dbcccb8692b",
+      "expected_rows": 231373,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160325.export.CSV",
+      "bytes": 75229254,
+      "sha256": "4af3172a41709266719ac80e2d79ff34a21cad9602eb6bed333071bb9ad2ecb0",
+      "expected_rows": 197494,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160326.export.CSV",
+      "bytes": 50542938,
+      "sha256": "9ddff1daaed58f65727e130c4b84edcd39bfc449aa142e2b2d7319a4dd61dd4f",
+      "expected_rows": 133538,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160327.export.CSV",
+      "bytes": 45634510,
+      "sha256": "52ada4309246f50abd29ae416d8d2e35c9e881f760ce93f75e407f919ca5a55c",
+      "expected_rows": 120215,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160328.export.CSV",
+      "bytes": 71049322,
+      "sha256": "77cc28b3cb63a21e5a7d7775f154178d61cf80be5b34616d50724a09dd285a99",
+      "expected_rows": 187465,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160329.export.CSV",
+      "bytes": 85286649,
+      "sha256": "5f304bd96471f1a7e595e2d4a5af84a74a1cc6e5d0b4c7cc0a3f66d33163f4fe",
+      "expected_rows": 223933,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160330.export.CSV",
+      "bytes": 88845197,
+      "sha256": "4859202d45aa301c8314d3b40764548ec23e8570ae051bf91bb70cd4dd899fac",
+      "expected_rows": 233459,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/full/gdelt/20160331.export.CSV",
+      "bytes": 90175399,
+      "sha256": "3c96757212b2aadb651f5eaf8d4c71ec8b930442bbe1a6a9ad1e95c9f694b4c3",
+      "expected_rows": 237091,
+      "source_inventory": "evidence/local/q1_2016/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/dev/gdelt/20151201.export.CSV",
+      "bytes": 85885950,
+      "sha256": "dba68634ad4a753bf7179795929e49a60309e0446f15a074f42b6bfe6b0276df",
+      "expected_rows": 228333,
+      "source_inventory": "evidence/local/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/dev/gdelt/20151202.export.CSV",
+      "bytes": 88953343,
+      "sha256": "66a2a28c5de3172888d46e9320ab56ed0d342bc67d2dfc1a7dd7ec5e96b33bb4",
+      "expected_rows": 236578,
+      "source_inventory": "evidence/local/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/dev/gdelt/20151203.export.CSV",
+      "bytes": 88888499,
+      "sha256": "a689ea4e447e10284157b68fcf03ecdd4156ee05e1f136eef6ec07c9e61db2ce",
+      "expected_rows": 235400,
+      "source_inventory": "evidence/local/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/dev/gdelt/20151204.export.CSV",
+      "bytes": 85733537,
+      "sha256": "6bdc9783a3489494f086a53f55ee3343e2c8c3c36b70dce1825b65623dd817e4",
+      "expected_rows": 227122,
+      "source_inventory": "evidence/local/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/dev/gdelt/20151205.export.CSV",
+      "bytes": 56309761,
+      "sha256": "2489c24b67e4b3d82617e23d74dbe85541323bf0b4f314b61a562ac90a9a328e",
+      "expected_rows": 149629,
+      "source_inventory": "evidence/local/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/dev/gdelt/20151206.export.CSV",
+      "bytes": 50685001,
+      "sha256": "38b246fb59b0ae6921e60b4ba1caced4c67e5186b46522efeb7708552bffc027",
+      "expected_rows": 134434,
+      "source_inventory": "evidence/local/inventory.csv"
+    },
+    {
+      "hdfs_path": "/benchmark_runs/18th-nov/inputs/dev/gdelt/20151207.export.CSV",
+      "bytes": 80266558,
+      "sha256": "a3cb338dd164ae4dc80129e3b247e8811abecbfed971fea55c1e681cfdfd8772",
+      "expected_rows": 213738,
+      "source_inventory": "evidence/local/inventory.csv"
+    }
+  ]
+}

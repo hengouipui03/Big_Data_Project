@@ -1,0 +1,83 @@
+{
+    "Instances": [
+        {
+            "Id": "ci-077360325MA9BNMOKAFJ",
+            "Ec2InstanceId": "i-0cdb3f2b2bdeaecb8",
+            "PublicDnsName": "ec2-52-91-59-161.compute-1.amazonaws.com",
+            "PublicIpAddress": "52.91.59.161",
+            "PrivateDnsName": "ip-172-31-17-62.ec2.internal",
+            "PrivateIpAddress": "172.31.17.62",
+            "Status": {
+                "State": "RUNNING",
+                "StateChangeReason": {},
+                "Timeline": {
+                    "CreationDateTime": "2026-11-18T07:34:12.570000+00:00",
+                    "ReadyDateTime": "2026-11-18T07:41:22.149000+00:00"
+                }
+            },
+            "InstanceGroupId": "ig-086601322AWS22CT86DD",
+            "Market": "ON_DEMAND",
+            "InstanceType": "m5.xlarge",
+            "EbsVolumes": [
+                {
+                    "Device": "/dev/sdb",
+                    "VolumeId": "vol-00ffb6d4cf9382459"
+                }
+            ]
+        },
+        {
+            "Id": "ci-03132943A5XKIAOQ0IFN",
+            "Ec2InstanceId": "i-0134c45df70d8002e",
+            "PublicDnsName": "ec2-3-80-125-3.compute-1.amazonaws.com",
+            "PublicIpAddress": "3.80.125.3",
+            "PrivateDnsName": "ip-172-31-18-230.ec2.internal",
+            "PrivateIpAddress": "172.31.18.230",
+            "Status": {
+                "State": "RUNNING",
+                "StateChangeReason": {},
+                "Timeline": {
+                    "CreationDateTime": "2026-11-18T07:34:12.588000+00:00",
+                    "ReadyDateTime": "2026-11-18T07:41:52.966000+00:00"
+                }
+            },
+            "InstanceGroupId": "ig-086601322AWS22CT86DD",
+            "Market": "ON_DEMAND",
+            "InstanceType": "m5.xlarge",
+            "EbsVolumes": [
+                {
+                    "Device": "/dev/sdb",
+                    "VolumeId": "vol-0ab9157f87fdef1ce"
+                }
+            ]
+        },
+        {
+            "Id": "ci-03547813G5464OF3EUG5",
+            "Ec2InstanceId": "i-06383a9d2ed52e60e",
+            "PublicDnsName": "ec2-54-221-40-101.compute-1.amazonaws.com",
+            "PublicIpAddress": "54.221.40.101",
+            "PrivateDnsName": "ip-172-31-16-63.ec2.internal",
+            "PrivateIpAddress": "172.31.16.63",
+            "Status": {
+                "State": "RUNNING",
+                "StateChangeReason": {},
+                "Timeline": {
+                    "CreationDateTime": "2026-11-18T07:34:12.590000+00:00",
+                    "ReadyDateTime": "2026-11-18T07:41:42.636000+00:00"
+                }
+            },
+            "InstanceGroupId": "ig-00011342DHS3I90MG02I",
+            "Market": "ON_DEMAND",
+            "InstanceType": "m5.xlarge",
+            "EbsVolumes": [
+                {
+                    "Device": "/dev/sdc",
+                    "VolumeId": "vol-0b512e313a1016cca"
+                },
+                {
+                    "Device": "/dev/sdb",
+                    "VolumeId": "vol-035fa7b6bd074c1f5"
+                }
+            ]
+        }
+    ]
+}

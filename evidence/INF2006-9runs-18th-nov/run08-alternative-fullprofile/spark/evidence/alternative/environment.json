@@ -1,0 +1,37 @@
+{
+  "run_started_utc": "2026-11-18T10:07:32+00:00",
+  "is_emr": true,
+  "spark_version": "3.5.5-amzn-1",
+  "python": "3.9.25",
+  "application_id": "application_1794987667450_0059",
+  "master": "yarn",
+  "driver_host": "ip-172-31-16-63.ec2.internal",
+  "version": "run08-alternative-fullprofile",
+  "active_config": "alternative",
+  "config_note": {
+    "shuffle_partitions": 8,
+    "aqe": true,
+    "why": "8 partitions ~ 2x total cores for a ~30 MB shuffle; adaptive execution coalesces small partitions"
+  },
+  "seed": 42,
+  "splits": {
+    "train_end": "2015-12-31",
+    "val": [
+      "2016-01-01",
+      "2016-12-31"
+    ],
+    "test_start": "2017-01-01",
+    "data_end": "2017-12-29"
+  },
+  "spark_conf": {
+    "spark.executor.instances": "2",
+    "spark.executor.cores": "2",
+    "spark.executor.memory": "6g",
+    "spark.executor.memoryOverhead": "2g",
+    "spark.driver.memory": "2g",
+    "spark.dynamicAllocation.enabled": "false",
+    "spark.sql.shuffle.partitions": "8",
+    "spark.sql.adaptive.enabled": "true",
+    "spark.sql.catalogImplementation": "hive"
+  }
+}

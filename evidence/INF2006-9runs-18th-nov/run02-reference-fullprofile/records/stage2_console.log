@@ -1,0 +1,662 @@
+== Stage 2a: Hadoop Streaming audit over /benchmark_runs/18th-nov/inputs/full/gdelt -> /benchmark_runs/18th-nov/run02-reference-fullprofile/streaming_audit (2 reducers)
+packageJobJar: [] [/usr/lib/hadoop/hadoop-streaming-3.4.1-amzn-2.jar] /tmp/streamjob6222424950927504300.jar tmpDir=null
+2026-11-18 09:08:51,391 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-16-63.ec2.internal/172.31.16.63:8032
+2026-11-18 09:08:51,503 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-16-63.ec2.internal/172.31.16.63:10200
+2026-11-18 09:08:51,576 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-16-63.ec2.internal/172.31.16.63:8032
+2026-11-18 09:08:51,578 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-16-63.ec2.internal/172.31.16.63:10200
+2026-11-18 09:08:51,809 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoop/.staging/job_1794987667450_0025
+2026-11-18 09:08:52,218 INFO lzo.GPLNativeCodeLoader: Loaded native gpl library
+2026-11-18 09:08:52,220 INFO lzo.LzoCodec: Successfully loaded & initialized native-lzo library [hadoop-lzo rev 049362b7cf53ff5f739d6b1532457f2c6cd495e8]
+2026-11-18 09:08:52,344 INFO mapred.FileInputFormat: Total input files to process : 91
+2026-11-18 09:08:52,463 INFO mapreduce.JobSubmitter: number of splits:91
+2026-11-18 09:08:52,762 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1794987667450_0025
+2026-11-18 09:08:52,762 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2026-11-18 09:08:53,047 INFO conf.Configuration: resource-types.xml not found
+2026-11-18 09:08:53,048 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2026-11-18 09:08:53,130 INFO impl.YarnClientImpl: Submitted application application_1794987667450_0025
+2026-11-18 09:08:53,168 INFO mapreduce.Job: The url to track the job: http://ip-172-31-16-63.ec2.internal:20888/proxy/application_1794987667450_0025/
+2026-11-18 09:08:53,170 INFO mapreduce.Job: Running job: job_1794987667450_0025
+2026-11-18 09:08:59,248 INFO mapreduce.Job: Job job_1794987667450_0025 running in uber mode : false
+2026-11-18 09:08:59,249 INFO mapreduce.Job:  map 0% reduce 0%
+2026-11-18 09:09:09,336 INFO mapreduce.Job:  map 2% reduce 0%
+2026-11-18 09:09:15,373 INFO mapreduce.Job:  map 7% reduce 0%
+2026-11-18 09:09:18,391 INFO mapreduce.Job:  map 9% reduce 0%
+2026-11-18 09:09:25,428 INFO mapreduce.Job:  map 11% reduce 0%
+2026-11-18 09:09:29,454 INFO mapreduce.Job:  map 12% reduce 0%
+2026-11-18 09:09:30,462 INFO mapreduce.Job:  map 15% reduce 0%
+2026-11-18 09:09:33,476 INFO mapreduce.Job:  map 18% reduce 0%
+2026-11-18 09:09:41,517 INFO mapreduce.Job:  map 20% reduce 0%
+2026-11-18 09:09:42,521 INFO mapreduce.Job:  map 21% reduce 0%
+2026-11-18 09:09:44,533 INFO mapreduce.Job:  map 24% reduce 0%
+2026-11-18 09:09:49,555 INFO mapreduce.Job:  map 26% reduce 0%
+2026-11-18 09:09:55,590 INFO mapreduce.Job:  map 27% reduce 0%
+2026-11-18 09:09:57,600 INFO mapreduce.Job:  map 30% reduce 0%
+2026-11-18 09:09:58,605 INFO mapreduce.Job:  map 33% reduce 0%
+2026-11-18 09:10:05,638 INFO mapreduce.Job:  map 34% reduce 0%
+2026-11-18 09:10:06,643 INFO mapreduce.Job:  map 35% reduce 0%
+2026-11-18 09:10:08,652 INFO mapreduce.Job:  map 36% reduce 0%
+2026-11-18 09:10:10,662 INFO mapreduce.Job:  map 37% reduce 0%
+2026-11-18 09:10:11,667 INFO mapreduce.Job:  map 40% reduce 0%
+2026-11-18 09:10:13,675 INFO mapreduce.Job:  map 42% reduce 0%
+2026-11-18 09:10:21,712 INFO mapreduce.Job:  map 46% reduce 0%
+2026-11-18 09:10:28,739 INFO mapreduce.Job:  map 48% reduce 8%
+2026-11-18 09:10:29,743 INFO mapreduce.Job:  map 51% reduce 8%
+2026-11-18 09:10:36,778 INFO mapreduce.Job:  map 53% reduce 8%
+2026-11-18 09:10:37,782 INFO mapreduce.Job:  map 55% reduce 8%
+2026-11-18 09:10:40,793 INFO mapreduce.Job:  map 55% reduce 9%
+2026-11-18 09:10:44,808 INFO mapreduce.Job:  map 57% reduce 9%
+2026-11-18 09:10:45,812 INFO mapreduce.Job:  map 59% reduce 9%
+2026-11-18 09:10:46,822 INFO mapreduce.Job:  map 59% reduce 10%
+2026-11-18 09:10:52,844 INFO mapreduce.Job:  map 62% reduce 10%
+2026-11-18 09:10:53,847 INFO mapreduce.Job:  map 64% reduce 10%
+2026-11-18 09:10:58,874 INFO mapreduce.Job:  map 64% reduce 11%
+2026-11-18 09:11:00,884 INFO mapreduce.Job:  map 66% reduce 11%
+2026-11-18 09:11:01,888 INFO mapreduce.Job:  map 68% reduce 11%
+2026-11-18 09:11:08,918 INFO mapreduce.Job:  map 70% reduce 11%
+2026-11-18 09:11:09,922 INFO mapreduce.Job:  map 73% reduce 11%
+2026-11-18 09:11:10,926 INFO mapreduce.Job:  map 73% reduce 12%
+2026-11-18 09:11:15,957 INFO mapreduce.Job:  map 75% reduce 12%
+2026-11-18 09:11:16,962 INFO mapreduce.Job:  map 77% reduce 12%
+2026-11-18 09:11:22,982 INFO mapreduce.Job:  map 79% reduce 13%
+2026-11-18 09:11:23,986 INFO mapreduce.Job:  map 81% reduce 13%
+2026-11-18 09:11:29,005 INFO mapreduce.Job:  map 82% reduce 14%
+2026-11-18 09:11:31,015 INFO mapreduce.Job:  map 86% reduce 14%
+2026-11-18 09:11:37,041 INFO mapreduce.Job:  map 88% reduce 14%
+2026-11-18 09:11:38,044 INFO mapreduce.Job:  map 90% reduce 14%
+2026-11-18 09:11:41,055 INFO mapreduce.Job:  map 90% reduce 15%
+2026-11-18 09:11:44,070 INFO mapreduce.Job:  map 92% reduce 15%
+2026-11-18 09:11:45,073 INFO mapreduce.Job:  map 95% reduce 15%
+2026-11-18 09:11:47,080 INFO mapreduce.Job:  map 95% reduce 16%
+2026-11-18 09:11:51,109 INFO mapreduce.Job:  map 97% reduce 16%
+2026-11-18 09:11:52,112 INFO mapreduce.Job:  map 99% reduce 16%
+2026-11-18 09:11:56,125 INFO mapreduce.Job:  map 100% reduce 16%
+2026-11-18 09:11:59,136 INFO mapreduce.Job:  map 100% reduce 27%
+2026-11-18 09:12:05,155 INFO mapreduce.Job:  map 100% reduce 39%
+2026-11-18 09:12:09,168 INFO mapreduce.Job:  map 100% reduce 81%
+2026-11-18 09:12:11,174 INFO mapreduce.Job:  map 100% reduce 88%
+2026-11-18 09:12:14,184 INFO mapreduce.Job:  map 100% reduce 92%
+2026-11-18 09:12:15,187 INFO mapreduce.Job:  map 100% reduce 99%
+2026-11-18 09:12:16,190 INFO mapreduce.Job:  map 100% reduce 100%
+2026-11-18 09:12:16,195 INFO mapreduce.Job: Job job_1794987667450_0025 completed successfully
+2026-11-18 09:12:16,308 INFO mapreduce.Job: Counters: 54
+	File System Counters
+		FILE: Number of bytes read=166229157
+		FILE: Number of bytes written=362868239
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=6944854249
+		HDFS: Number of bytes written=2639
+		HDFS: Number of read operations=283
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=4
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Launched map tasks=91
+		Launched reduce tasks=2
+		Data-local map tasks=91
+		Total time spent by all maps in occupied slots (ms)=2271713280
+		Total time spent by all reduces in occupied slots (ms)=884011008
+		Total time spent by all map tasks (ms)=739490
+		Total time spent by all reduce tasks (ms)=143882
+		Total vcore-milliseconds taken by all map tasks=739490
+		Total vcore-milliseconds taken by all reduce tasks=143882
+		Total megabyte-milliseconds taken by all map tasks=2271713280
+		Total megabyte-milliseconds taken by all reduce tasks=884011008
+	Map-Reduce Framework
+		Map input records=18369793
+		Map output records=18369793
+		Map output bytes=591841625
+		Map output materialized bytes=166028860
+		Input split bytes=14014
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=91
+		Reduce shuffle bytes=166028860
+		Reduce input records=18369793
+		Reduce output records=91
+		Spilled Records=36739586
+		Shuffled Maps =182
+		Failed Shuffles=0
+		Merged Map outputs=182
+		GC time elapsed (ms)=3799
+		CPU time spent (ms)=281290
+		Physical memory (bytes) snapshot=49029287936
+		Virtual memory (bytes) snapshot=427117756416
+		Total committed heap usage (bytes)=45732593664
+		Peak Map Physical memory (bytes)=558624768
+		Peak Map Virtual memory (bytes)=4550914048
+		Peak Reduce Physical memory (bytes)=742785024
+		Peak Reduce Virtual memory (bytes)=7460347904
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=6944840235
+	File Output Format Counters 
+		Bytes Written=2639
+2026-11-18 09:12:16,308 INFO streaming.StreamJob: Output directory: /benchmark_runs/18th-nov/run02-reference-fullprofile/streaming_audit
+   streaming took 207 s; 91 output rows
+== Stage 2a check: EMR streaming output vs local (laptop) run
+key             emr_events  local_events  emr_tone  local_tone  emr_lag  local_lag match
+20160101            114871        114871   -2.5845     -2.5845     2914       2914 yes
+20160102            109259        109259   -3.0041     -3.0041     2479       2479 yes
+20160103            117583        117583   -3.3507     -3.3507     3052       3052 yes
+20160104            194646        194646   -2.9763     -2.9763     5838       5838 yes
+20160105            213565        213565   -2.8045     -2.8045     7025       7025 yes
+20160106            222359        222359   -2.5232     -2.5232     6751       6751 yes
+20160107            221844        221844   -2.5111     -2.5111     6831       6831 yes
+20160108            209919        209919   -2.5895     -2.5895     6219       6219 yes
+20160109            147184        147184   -2.9542     -2.9542     4265       4265 yes
+20160110            129936        129936   -2.6724     -2.6724     4121       4121 yes
+20160111            203378        203378   -2.2473     -2.2473     7397       7397 yes
+20160112            220753        220753   -2.3402     -2.3402     8194       8194 yes
+20160113            238975        238975   -2.3436     -2.3436     8608       8608 yes
+20160114            230527        230527   -2.3218     -2.3218     7666       7666 yes
+20160115            221313        221313   -2.3269     -2.3269     7309       7309 yes
+20160116            155023        155023   -2.4897     -2.4897     4658       4658 yes
+20160117            145357        145357   -2.5414     -2.5414     4544       4544 yes
+20160118            211583        211583   -2.2472     -2.2472     6919       6919 yes
+20160119            225989        225989   -2.1236     -2.1236     8364       8364 yes
+20160120            242048        242048   -2.2832     -2.2832     8614       8614 yes
+20160121            240629        240629   -2.2481     -2.2481     7911       7911 yes
+20160122            229845        229845   -2.3690     -2.3690     7937       7937 yes
+20160123            148711        148711   -2.4602     -2.4602     4815       4815 yes
+20160124            133979        133979   -2.2206     -2.2206     4261       4261 yes
+20160125            204838        204838   -2.1267     -2.1267     7504       7504 yes
+20160126            222230        222230   -2.1144     -2.1144     8357       8357 yes
+20160127            234605        234605   -2.2504     -2.2504     7810       7810 yes
+20160128            237972        237972   -2.1832     -2.1832     7959       7959 yes
+20160129            213970        213970   -2.1892     -2.1892     6530       6530 yes
+20160130            146618        146618   -2.2909     -2.2909     4529       4529 yes
+20160131            127082        127082   -2.2495     -2.2495     3762       3762 yes
+20160201            218534        218534   -2.1265     -2.1265     7578       7578 yes
+20160202            230346        230346   -2.0020     -2.0020     8540       8540 yes
+20160203            230247        230247   -2.1262     -2.1262     8149       8149 yes
+20160204            244440        244440   -2.1991     -2.1991     7879       7879 yes
+20160205            230332        230332   -2.1356     -2.1356     7764       7764 yes
+20160206            148902        148902   -2.4087     -2.4087     4867       4867 yes
+20160207            131873        131873   -2.3104     -2.3104     4310       4310 yes
+20160208            204404        204404   -2.1062     -2.1062     7176       7176 yes
+20160209            225438        225438   -2.1633     -2.1633     8382       8382 yes
+20160210            236801        236801   -2.0085     -2.0085     8722       8722 yes
+20160211            247039        247039   -2.1282     -2.1282     8749       8749 yes
+20160212            244943        244943   -2.2224     -2.2224     7588       7588 yes
+20160213            171283        171283   -2.2606     -2.2606     5299       5299 yes
+20160214            151552        151552   -2.1697     -2.1697     4380       4380 yes
+20160215            208240        208240   -2.1421     -2.1421     6932       6932 yes
+20160216            243764        243764   -2.0913     -2.0913     8394       8394 yes
+20160217            249814        249814   -2.0196     -2.0196     8399       8399 yes
+20160218            253173        253173   -2.1239     -2.1239     8450       8450 yes
+20160219            247608        247608   -2.1455     -2.1455     7743       7743 yes
+20160220            164283        164283   -2.4232     -2.4232     4931       4931 yes
+20160221            147902        147902   -2.2608     -2.2608     4093       4093 yes
+20160222            215071        215071   -2.0672     -2.0672     6950       6950 yes
+20160223            239988        239988   -2.1790     -2.1790     8100       8100 yes
+20160224            246672        246672   -2.0719     -2.0719     7837       7837 yes
+20160225            247527        247527   -2.1269     -2.1269     8045       8045 yes
+20160226            236914        236914   -2.2168     -2.2168     6797       6797 yes
+20160227            161239        161239   -2.3982     -2.3982     4403       4403 yes
+20160228            138889        138889   -2.1796     -2.1796     3966       3966 yes
+20160229            209195        209195   -1.9840     -1.9840     6825       6825 yes
+20160301            233967        233967   -2.0284     -2.0284     8310       8310 yes
+20160302            246662        246662   -1.9511     -1.9511     8515       8515 yes
+20160303            241359        241359   -2.0560     -2.0560     8531       8531 yes
+20160304            229908        229908   -2.1290     -2.1290     7675       7675 yes
+20160305            143773        143773   -2.2109     -2.2109     4493       4493 yes
+20160306            140120        140120   -2.1035     -2.1035     4414       4414 yes
+20160307            214138        214138   -1.9727     -1.9727     8192       8192 yes
+20160308            231102        231102   -2.0618     -2.0618     8933       8933 yes
+20160309            238101        238101   -2.0055     -2.0055     8446       8446 yes
+20160310            240694        240694   -2.0254     -2.0254     8030       8030 yes
+20160311            225180        225180   -2.0942     -2.0942     7610       7610 yes
+20160312            146917        146917   -2.3516     -2.3516     4374       4374 yes
+20160313            134098        134098   -2.3355     -2.3355     4153       4153 yes
+20160314            221286        221286   -2.2529     -2.2529     7304       7304 yes
+20160315            239103        239103   -2.2123     -2.2123     8267       8267 yes
+20160316            240057        240057   -1.9911     -1.9911     8155       8155 yes
+20160317            231119        231119   -2.0087     -2.0087     7541       7541 yes
+20160318            216821        216821   -2.1395     -2.1395     6460       6460 yes
+20160319            134964        134964   -2.4939     -2.4939     3685       3685 yes
+20160320            126314        126314   -2.4573     -2.4573     3978       3978 yes
+20160321            206434        206434   -2.0720     -2.0720     6691       6691 yes
+20160322            236749        236749   -2.5017     -2.5017     7428       7428 yes
+20160323            243355        243355   -2.4471     -2.4471     8606       8606 yes
+20160324            231373        231373   -2.4246     -2.4246     7292       7292 yes
+20160325            197494        197494   -2.6351     -2.6351     5750       5750 yes
+20160326            133538        133538   -2.6918     -2.6918     3501       3501 yes
+20160327            120215        120215   -2.5651     -2.5651     3428       3428 yes
+20160328            187465        187465   -2.5146     -2.5146     6135       6135 yes
+20160329            223933        223933   -2.3255     -2.3255     7190       7190 yes
+20160330            233459        233459   -2.1922     -2.1922     7092       7092 yes
+20160331            237091        237091   -2.1838     -2.1838     7063       7063 yes
+RESULT: EMR streaming output matches local run on every date key
+== Stage 2b: Hive register raw tables
+Hive Session ID = a2f0191e-d037-4ccb-9114-fdd4aa33c638
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j2.properties Async: true
+OK
+Time taken: 0.593 seconds
+OK
+Time taken: 0.013 seconds
+OK
+Time taken: 0.031 seconds
+OK
+Time taken: 0.126 seconds
+OK
+Time taken: 0.011 seconds
+OK
+Time taken: 0.03 seconds
+OK
+gdelt_daily_audit
+raw_prices
+Time taken: 0.061 seconds, Fetched: 2 row(s)
+OK
+# col_name            	data_type           	comment             
+trade_date          	string              	yyyy-MM-dd trading day (US market)
+open                	double              	opening price, USD  
+high                	double              	intraday high, USD  
+low                 	double              	intraday low, USD   
+close               	double              	closing price, USD  
+volume              	bigint              	shares traded       
+ticker              	string              	exchange ticker symbol (source column Name)
+	 	 
+# Detailed Table Information	 	 
+Database:           	bench_run02         	 
+OwnerType:          	USER                	 
+Owner:              	hadoop              	 
+CreateTime:         	Wed Nov 18 09:12:29 UTC 2026	 
+LastAccessTime:     	UNKNOWN             	 
+Retention:          	0                   	 
+Location:           	hdfs://ip-172-31-16-63.ec2.internal:8020/benchmark_runs/18th-nov/inputs/full/prices	 
+Table Type:         	EXTERNAL_TABLE      	 
+Table Parameters:	 	 
+	EXTERNAL            	TRUE                
+	bucketing_version   	2                   
+	comment             	Raw daily price bars as downloaded; blank numeric fields read as NULL
+	numFiles            	1                   
+	skip.header.line.count	1                   
+	totalSize           	29580549            
+	transient_lastDdlTime	1794993149          
+	 	 
+# Storage Information	 	 
+SerDe Library:      	org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe	 
+InputFormat:        	org.apache.hadoop.mapred.TextInputFormat	 
+OutputFormat:       	org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat	 
+Compressed:         	No                  	 
+Num Buckets:        	-1                  	 
+Bucket Columns:     	[]                  	 
+Sort Columns:       	[]                  	 
+Storage Desc Params:	 	 
+	field.delim         	,                   
+	line.delim          	\n                  
+	serialization.format	,                   
+Time taken: 0.096 seconds, Fetched: 39 row(s)
+OK
+# col_name            	data_type           	comment             
+audit_key           	string              	DATEADDED yyyymmdd, or BAD_<reason> counter key
+events              	bigint              	number of event rows
+avg_tone            	string              	mean AvgTone (NA for counter keys)
+lag_events          	bigint              	events whose SQLDATE differs from DATEADDED
+	 	 
+# Detailed Table Information	 	 
+Database:           	bench_run02         	 
+OwnerType:          	USER                	 
+Owner:              	hadoop              	 
+CreateTime:         	Wed Nov 18 09:12:29 UTC 2026	 
+LastAccessTime:     	UNKNOWN             	 
+Retention:          	0                   	 
+Location:           	hdfs://ip-172-31-16-63.ec2.internal:8020/benchmark_runs/18th-nov/run02-reference-fullprofile/streaming_audit	 
+Table Type:         	EXTERNAL_TABLE      	 
+Table Parameters:	 	 
+	EXTERNAL            	TRUE                
+	bucketing_version   	2                   
+	comment             	Per-day GDELT audit summary produced by Hadoop Streaming
+	numFiles            	2                   
+	totalSize           	2639                
+	transient_lastDdlTime	1794993149          
+	 	 
+# Storage Information	 	 
+SerDe Library:      	org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe	 
+InputFormat:        	org.apache.hadoop.mapred.TextInputFormat	 
+OutputFormat:       	org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat	 
+Compressed:         	No                  	 
+Num Buckets:        	-1                  	 
+Bucket Columns:     	[]                  	 
+Sort Columns:       	[]                  	 
+Storage Desc Params:	 	 
+	field.delim         	\t                  
+	line.delim          	\n                  
+	serialization.format	\t                  
+Time taken: 0.034 seconds, Fetched: 35 row(s)
+== Stage 2c: Hive quality audit + typed tables (Tez)
+Hive Session ID = 8ca252b3-124f-428b-8756-f029021b1b31
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j2.properties Async: true
+OK
+Time taken: 0.541 seconds
+OK
+Time taken: 0.03 seconds
+Query ID = hadoop_20261118091240_5958dc95-0607-4955-bff0-dd668890e5d8
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0027)
+
+Map 1: -/-	Reducer 2: 0/4	Reducer 3: 0/1	
+Map 1: 0/2	Reducer 2: 0/4	Reducer 3: 0/1	
+Map 1: 0/2	Reducer 2: 0/4	Reducer 3: 0/1	
+Map 1: 0(+2)/2	Reducer 2: 0/4	Reducer 3: 0/1	
+Map 1: 1(+1)/2	Reducer 2: 0(+1)/4	Reducer 3: 0/1	
+Map 1: 2/2	Reducer 2: 4/4	Reducer 3: 0(+1)/1	
+Map 1: 2/2	Reducer 2: 4/4	Reducer 3: 1/1	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run02.db/raw_prices_quality
+OK
+Time taken: 12.398 seconds
+OK
+Time taken: 0.041 seconds
+Query ID = hadoop_20261118091252_34a80f93-1197-4a18-9efe-6a9f45f947a7
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0027)
+
+Map 1: -/-	Reducer 2: 0/2	Reducer 3: 0/1	
+Map 1: 0(+2)/2	Reducer 2: 0/2	Reducer 3: 0/1	
+Map 1: 2/2	Reducer 2: 0(+2)/2	Reducer 3: 0/1	
+Map 1: 2/2	Reducer 2: 1(+1)/2	Reducer 3: 0(+1)/1	
+Map 1: 2/2	Reducer 2: 2/2	Reducer 3: 1/1	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run02.db/raw_prices_duplicates
+OK
+Time taken: 2.96 seconds
+OK
+Time taken: 0.009 seconds
+Query ID = hadoop_20261118091255_4eab64fc-58bb-43af-be7f-600eef69c834
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0027)
+
+Map 1: -/-	Reducer 2: 0/2	
+Map 1: 2/2	Reducer 2: 1(+1)/2	
+Map 1: 2/2	Reducer 2: 2/2	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run02.db/raw_prices_series_length
+OK
+Time taken: 1.176 seconds
+OK
+Time taken: 0.008 seconds
+Query ID = hadoop_20261118091256_eb78bad8-731c-4c70-ba5e-9e1b3e3f033c
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0027)
+
+Map 1: -/-	
+Map 1: 0(+2)/2	
+Map 1: 1(+1)/2	
+Map 1: 2/2	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run02.db/prices_typed
+OK
+Time taken: 2.618 seconds
+OK
+Time taken: 0.007 seconds
+Query ID = hadoop_20261118091259_5c7cecef-11ed-46bf-b8a7-ee42e68254f4
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0027)
+
+Map 1: -/-	
+Map 1: 1/1	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run02.db/gdelt_daily_typed
+OK
+Time taken: 0.545 seconds
+OK
+Time taken: 0.007 seconds
+Query ID = hadoop_20261118091259_57301384-ef68-447f-9fd2-4209efdd39c1
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0027)
+
+Map 1: -/-	
+Map 1: 1/1	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run02.db/gdelt_audit_rejects
+OK
+Time taken: 0.554 seconds
+OK
+Time taken: 0.006 seconds
+Query ID = hadoop_20261118091300_c3e602fb-3be7-47e8-a882-9476e6b9570f
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0027)
+
+Map 1: -/-	Reducer 2: 0/2	
+Map 1: 0(+1)/1	Reducer 2: 0/2	
+Map 1: 1/1	Reducer 2: 2/2	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run02.db/prices_yearly_coverage
+OK
+Time taken: 1.707 seconds
+== Stage 2d: Hive results
+Hive Session ID = 3ec21fd0-cd38-4086-b8f3-f5f96ca89531
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j2.properties Async: true
+OK
+Time taken: 0.531 seconds
+OK
+tab_name
+gdelt_audit_rejects
+gdelt_daily_audit
+gdelt_daily_typed
+prices_typed
+prices_yearly_coverage
+raw_prices
+raw_prices_duplicates
+raw_prices_quality
+raw_prices_series_length
+Time taken: 0.074 seconds, Fetched: 9 row(s)
+OK
+tbl
+raw_prices_quality
+Time taken: 0.871 seconds, Fetched: 1 row(s)
+OK
+raw_prices_quality.rows_total	raw_prices_quality.tickers	raw_prices_quality.date_min	raw_prices_quality.date_max	raw_prices_quality.rows_up_to_2017_12_29	raw_prices_quality.empty_open	raw_prices_quality.empty_high	raw_prices_quality.empty_low	raw_prices_quality.empty_close	raw_prices_quality.empty_volume	raw_prices_quality.ohlc_inconsistent	raw_prices_quality.nonpositive
+619040	505	2013-02-08	2018-02-07	605910	11	8	8	0	0	12	0
+Time taken: 0.319 seconds, Fetched: 1 row(s)
+OK
+tbl
+raw_prices_duplicates
+Time taken: 0.059 seconds, Fetched: 1 row(s)
+OK
+raw_prices_duplicates.duplicate_ticker_date
+0
+Time taken: 0.059 seconds, Fetched: 1 row(s)
+OK
+tbl
+short_series
+Time taken: 0.051 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261118091314_df1123e5-9392-44b6-b214-638131666354
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0028)
+
+Map 1: -/-	Reducer 2: 0/1	
+Map 1: 0/1	Reducer 2: 0/1	
+Map 1: 0/1	Reducer 2: 0/1	
+Map 1: 0(+1)/1	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 0(+1)/1	
+Map 1: 1/1	Reducer 2: 1/1	
+OK
+raw_prices_series_length.ticker	raw_prices_series_length.n_rows	raw_prices_series_length.first_day	raw_prices_series_length.last_day	raw_prices_series_length.short_series
+APTV	44	2017-12-05	2018-02-07	1
+BHF	143	2017-07-17	2018-02-07	1
+BHGE	152	2017-07-03	2018-02-07	1
+DWDP	109	2017-09-01	2018-02-07	1
+DXC	215	2017-04-03	2018-02-07	1
+EVHC	297	2016-12-02	2018-02-07	1
+FTV	404	2016-07-01	2018-02-07	1
+HLT	276	2017-01-04	2018-02-07	1
+UA	464	2016-04-07	2018-02-07	1
+Time taken: 10.23 seconds, Fetched: 9 row(s)
+OK
+tbl
+prices_yearly_coverage
+Time taken: 0.084 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261118091324_9eb24dc2-9dd7-4ca8-95b5-2904d0cf3bad
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0028)
+
+Map 1: -/-	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 1/1	
+OK
+prices_yearly_coverage.yr	prices_yearly_coverage.n_rows	prices_yearly_coverage.tickers	prices_yearly_coverage.first_day	prices_yearly_coverage.last_day
+2013	108438	483	2013-02-08	2013-12-31
+2014	122397	488	2014-01-02	2014-12-31
+2015	123719	495	2015-01-02	2015-12-31
+2016	125324	499	2016-01-04	2016-12-30
+2017	126032	505	2017-01-03	2017-12-29
+2018	13130	505	2018-01-02	2018-02-07
+Time taken: 0.757 seconds, Fetched: 6 row(s)
+OK
+tbl
+gdelt_daily_typed
+Time taken: 0.059 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261118091325_81ca1611-fa0a-43bf-89bc-660109e1124c
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0028)
+
+Map 1: -/-	Reducer 2: 0/1	
+Map 1: 0(+1)/1	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 1/1	
+OK
+gdelt_daily_typed.date_added	gdelt_daily_typed.events	gdelt_daily_typed.avg_tone	gdelt_daily_typed.lag_events
+2016-01-01	114871	-2.5845	2914
+2016-01-02	109259	-3.0041	2479
+2016-01-03	117583	-3.3507	3052
+2016-01-04	194646	-2.9763	5838
+2016-01-05	213565	-2.8045	7025
+2016-01-06	222359	-2.5232	6751
+2016-01-07	221844	-2.5111	6831
+2016-01-08	209919	-2.5895	6219
+2016-01-09	147184	-2.9542	4265
+2016-01-10	129936	-2.6724	4121
+2016-01-11	203378	-2.2473	7397
+2016-01-12	220753	-2.3402	8194
+2016-01-13	238975	-2.3436	8608
+2016-01-14	230527	-2.3218	7666
+2016-01-15	221313	-2.3269	7309
+2016-01-16	155023	-2.4897	4658
+2016-01-17	145357	-2.5414	4544
+2016-01-18	211583	-2.2472	6919
+2016-01-19	225989	-2.1236	8364
+2016-01-20	242048	-2.2832	8614
+2016-01-21	240629	-2.2481	7911
+2016-01-22	229845	-2.369	7937
+2016-01-23	148711	-2.4602	4815
+2016-01-24	133979	-2.2206	4261
+2016-01-25	204838	-2.1267	7504
+2016-01-26	222230	-2.1144	8357
+2016-01-27	234605	-2.2504	7810
+2016-01-28	237972	-2.1832	7959
+2016-01-29	213970	-2.1892	6530
+2016-01-30	146618	-2.2909	4529
+2016-01-31	127082	-2.2495	3762
+2016-02-01	218534	-2.1265	7578
+2016-02-02	230346	-2.002	8540
+2016-02-03	230247	-2.1262	8149
+2016-02-04	244440	-2.1991	7879
+2016-02-05	230332	-2.1356	7764
+2016-02-06	148902	-2.4087	4867
+2016-02-07	131873	-2.3104	4310
+2016-02-08	204404	-2.1062	7176
+2016-02-09	225438	-2.1633	8382
+2016-02-10	236801	-2.0085	8722
+2016-02-11	247039	-2.1282	8749
+2016-02-12	244943	-2.2224	7588
+2016-02-13	171283	-2.2606	5299
+2016-02-14	151552	-2.1697	4380
+2016-02-15	208240	-2.1421	6932
+2016-02-16	243764	-2.0913	8394
+2016-02-17	249814	-2.0196	8399
+2016-02-18	253173	-2.1239	8450
+2016-02-19	247608	-2.1455	7743
+2016-02-20	164283	-2.4232	4931
+2016-02-21	147902	-2.2608	4093
+2016-02-22	215071	-2.0672	6950
+2016-02-23	239988	-2.179	8100
+2016-02-24	246672	-2.0719	7837
+2016-02-25	247527	-2.1269	8045
+2016-02-26	236914	-2.2168	6797
+2016-02-27	161239	-2.3982	4403
+2016-02-28	138889	-2.1796	3966
+2016-02-29	209195	-1.984	6825
+2016-03-01	233967	-2.0284	8310
+2016-03-02	246662	-1.9511	8515
+2016-03-03	241359	-2.056	8531
+2016-03-04	229908	-2.129	7675
+2016-03-05	143773	-2.2109	4493
+2016-03-06	140120	-2.1035	4414
+2016-03-07	214138	-1.9727	8192
+2016-03-08	231102	-2.0618	8933
+2016-03-09	238101	-2.0055	8446
+2016-03-10	240694	-2.0254	8030
+2016-03-11	225180	-2.0942	7610
+2016-03-12	146917	-2.3516	4374
+2016-03-13	134098	-2.3355	4153
+2016-03-14	221286	-2.2529	7304
+2016-03-15	239103	-2.2123	8267
+2016-03-16	240057	-1.9911	8155
+2016-03-17	231119	-2.0087	7541
+2016-03-18	216821	-2.1395	6460
+2016-03-19	134964	-2.4939	3685
+2016-03-20	126314	-2.4573	3978
+2016-03-21	206434	-2.072	6691
+2016-03-22	236749	-2.5017	7428
+2016-03-23	243355	-2.4471	8606
+2016-03-24	231373	-2.4246	7292
+2016-03-25	197494	-2.6351	5750
+2016-03-26	133538	-2.6918	3501
+2016-03-27	120215	-2.5651	3428
+2016-03-28	187465	-2.5146	6135
+2016-03-29	223933	-2.3255	7190
+2016-03-30	233459	-2.1922	7092
+2016-03-31	237091	-2.1838	7063
+Time taken: 1.015 seconds, Fetched: 91 row(s)
+OK
+tbl
+gdelt_audit_rejects
+Time taken: 0.047 seconds, Fetched: 1 row(s)
+OK
+gdelt_audit_rejects.reject_reason	gdelt_audit_rejects.line_count
+Time taken: 0.046 seconds
+OK
+tbl
+row_counts
+Time taken: 0.042 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261118091326_b755f67d-2d9e-4d57-a271-049b9aa03fb8
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0028)
+
+Map 1: -/-	Map 4: -/-	Map 6: -/-	Map 8: -/-	Reducer 2: 0/1	Reducer 5: 0/1	Reducer 7: 0/1	Reducer 9: 0/1	
+Map 1: 0(+1)/2	Map 4: 1/1	Map 6: 1/1	Map 8: 1/1	Reducer 2: 0/1	Reducer 5: 0/1	Reducer 7: 0/1	Reducer 9: 0/1	
+Map 1: 2/2	Map 4: 1/1	Map 6: 1/1	Map 8: 1/1	Reducer 2: 0/1	Reducer 5: 0/1	Reducer 7: 0/1	Reducer 9: 0/1	
+Map 1: 2/2	Map 4: 1/1	Map 6: 1/1	Map 8: 1/1	Reducer 2: 1/1	Reducer 5: 1/1	Reducer 7: 1/1	Reducer 9: 1/1	
+OK
+table_name	n
+raw_prices	619040
+prices_typed	619040
+gdelt_daily_audit	91
+gdelt_daily_typed	91
+Time taken: 2.031 seconds, Fetched: 4 row(s)
+== Hive warehouse contents
+== Stage 2 done. Evidence in /home/hadoop/inf2006-benchmark-18th-nov/run02-reference-fullprofile/evidence/ ; run log:
+stage,engine,start_utc,end_utc,seconds,application_ids,input,output,rows_out,notes
+stage2a_streaming_audit,hadoop_streaming,2026-11-18T09:08:49Z,2026-11-18T09:12:16Z,207,"application_1794987667450_0025",/benchmark_runs/18th-nov/inputs/full/gdelt,/benchmark_runs/18th-nov/run02-reference-fullprofile/streaming_audit,91,"mapper=gdelt_mapper.py reducer=gdelt_reducer.py reducers=2"
+stage2b_hive_register,hive_tez,2026-11-18T09:12:19Z,2026-11-18T09:12:30Z,11,"",/benchmark_runs/18th-nov/inputs/full/prices;/benchmark_runs/18th-nov/run02-reference-fullprofile/streaming_audit,inf2006.raw_prices;inf2006.gdelt_daily_audit,,"external tables, no data movement"
+stage2c_hive_transform,hive_tez,2026-11-18T09:12:30Z,2026-11-18T09:13:02Z,32,"application_1794987667450_0027",inf2006.raw_prices;inf2006.gdelt_daily_audit,inf2006.prices_typed;gdelt_daily_typed;raw_prices_quality;raw_prices_duplicates;raw_prices_series_length;gdelt_audit_rejects;prices_yearly_coverage,,"CTAS on Tez"
+stage2d_hive_results,hive_tez,2026-11-18T09:13:02Z,2026-11-18T09:13:29Z,27,"application_1794987667450_0028",inf2006.*,stdout,,"SELECT evidence"
+
+   Expected in stage2_hive_03_results.log: rows_total=619040 tickers=505 rows_up_to_2017_12_29=605910
+   empty_open=11 empty_high=8 empty_low=8 ohlc_inconsistent=12 nonpositive=0 duplicate_ticker_date=0
+   (these reconcile with evidence/local/quality_summary.json)

@@ -1,0 +1,410 @@
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+26/11/18 09:23:47 INFO EMRParamSideChannel: Setting FGAC mode to false
+26/11/18 09:23:47 INFO SparkContext: Running Spark version 3.5.5-amzn-1
+26/11/18 09:23:47 INFO SparkContext: OS info Linux, 6.1.189-236.400.amzn2023.x86_64, amd64
+26/11/18 09:23:47 INFO SparkContext: Java version 17.0.21
+26/11/18 09:23:47 INFO ResourceUtils: ==============================================================
+26/11/18 09:23:47 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/11/18 09:23:47 INFO ResourceUtils: ==============================================================
+26/11/18 09:23:47 INFO SparkContext: Submitted application: run03-reference-fullprofile
+26/11/18 09:23:47 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 2, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: , memoryOverhead -> name: memoryOverhead, amount: 2048, script: , vendor: , executorType -> name: executorType, amount: 1, script: , vendor: , memory -> name: memory, amount: 6144, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/11/18 09:23:47 INFO ResourceProfile: Limiting resource is cpus at 2 tasks per executor
+26/11/18 09:23:47 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/11/18 09:23:47 INFO ResourceProfile: User executor ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 2, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: , memoryOverhead -> name: memoryOverhead, amount: 2048, script: , vendor: , executorType -> name: executorType, amount: 1, script: , vendor: , memory -> name: memory, amount: 6144, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/11/18 09:23:47 INFO ResourceProfile: Limiting resource is cpus at 2 tasks per executor
+26/11/18 09:23:47 INFO ResourceProfileManager: Added ResourceProfile id: 1
+26/11/18 09:23:47 INFO SecurityManager: Changing view acls to: hadoop
+26/11/18 09:23:47 INFO SecurityManager: Changing modify acls to: hadoop
+26/11/18 09:23:47 INFO SecurityManager: Changing view acls groups to: 
+26/11/18 09:23:47 INFO SecurityManager: Changing modify acls groups to: 
+26/11/18 09:23:47 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: hadoop; groups with view permissions: EMPTY; users with modify permissions: hadoop; groups with modify permissions: EMPTY
+26/11/18 09:23:48 INFO Utils: Successfully started service 'sparkDriver' on port 35969.
+26/11/18 09:23:48 INFO SparkEnv: Registering MapOutputTracker
+26/11/18 09:23:48 INFO SparkEnv: Registering BlockManagerMaster
+26/11/18 09:23:48 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/11/18 09:23:48 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/11/18 09:23:48 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/11/18 09:23:48 INFO DiskBlockManager: Created local directory at /mnt/tmp/blockmgr-b72844ee-34d3-428c-942b-08c41777f34b
+26/11/18 09:23:48 INFO MemoryStore: MemoryStore started with capacity 1048.8 MiB
+26/11/18 09:23:48 INFO SparkEnv: Registering OutputCommitCoordinator
+26/11/18 09:23:48 INFO SubResultCacheManager: Sub-result caches are disabled.
+26/11/18 09:23:48 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/11/18 09:23:48 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/11/18 09:23:48 INFO DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-16-63.ec2.internal/172.31.16.63:8032
+26/11/18 09:23:49 INFO Configuration: resource-types.xml not found
+26/11/18 09:23:49 INFO ResourceUtils: Unable to find 'resource-types.xml'.
+26/11/18 09:23:49 INFO Client: Verifying our application has not requested more than the maximum memory capability of the cluster (12288 MB per container)
+26/11/18 09:23:49 INFO Client: Will allocate AM container, with 896 MB memory including 384 MB overhead
+26/11/18 09:23:49 INFO Client: Setting up container launch context for our AM
+26/11/18 09:23:49 INFO Client: Setting up the launch environment for our AM container
+26/11/18 09:23:49 INFO Client: Preparing resources for our AM container
+26/11/18 09:23:49 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+26/11/18 09:23:51 INFO Client: Uploading resource file:/mnt/tmp/spark-d16f1065-8761-4b4b-a2d2-79bfde03c1fd/__spark_libs__3295100157850143995.zip -> hdfs://ip-172-31-16-63.ec2.internal:8020/user/hadoop/.sparkStaging/application_1794987667450_0034/__spark_libs__3295100157850143995.zip
+26/11/18 09:23:51 INFO Client: Uploading resource file:/etc/spark/conf.dist/hive-site.xml -> hdfs://ip-172-31-16-63.ec2.internal:8020/user/hadoop/.sparkStaging/application_1794987667450_0034/hive-site.xml
+26/11/18 09:23:51 INFO Client: Uploading resource file:/etc/hudi/conf.dist/hudi-defaults.conf -> hdfs://ip-172-31-16-63.ec2.internal:8020/user/hadoop/.sparkStaging/application_1794987667450_0034/hudi-defaults.conf
+26/11/18 09:23:51 INFO Client: Uploading resource s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/dependencies/spark-numpy-env.tar.gz#environment -> hdfs://ip-172-31-16-63.ec2.internal:8020/user/hadoop/.sparkStaging/application_1794987667450_0034/spark-numpy-env.tar.gz
+26/11/18 09:23:53 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/pyspark.zip -> hdfs://ip-172-31-16-63.ec2.internal:8020/user/hadoop/.sparkStaging/application_1794987667450_0034/pyspark.zip
+26/11/18 09:23:53 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/py4j-0.10.9.7-src.zip -> hdfs://ip-172-31-16-63.ec2.internal:8020/user/hadoop/.sparkStaging/application_1794987667450_0034/py4j-0.10.9.7-src.zip
+26/11/18 09:23:53 INFO Client: Uploading resource file:/mnt/tmp/spark-d16f1065-8761-4b4b-a2d2-79bfde03c1fd/__spark_conf__13002858946576497109.zip -> hdfs://ip-172-31-16-63.ec2.internal:8020/user/hadoop/.sparkStaging/application_1794987667450_0034/__spark_conf__.zip
+26/11/18 09:23:53 INFO SecurityManager: Changing view acls to: hadoop
+26/11/18 09:23:53 INFO SecurityManager: Changing modify acls to: hadoop
+26/11/18 09:23:53 INFO SecurityManager: Changing view acls groups to: 
+26/11/18 09:23:53 INFO SecurityManager: Changing modify acls groups to: 
+26/11/18 09:23:53 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: hadoop; groups with view permissions: EMPTY; users with modify permissions: hadoop; groups with modify permissions: EMPTY
+26/11/18 09:23:53 INFO Client: Submitting application application_1794987667450_0034 to ResourceManager
+26/11/18 09:23:53 INFO YarnClientImpl: Submitted application application_1794987667450_0034
+26/11/18 09:23:54 INFO Client: Application report for application_1794987667450_0034 (state: ACCEPTED)
+26/11/18 09:23:54 INFO Client: 
+	 client token: N/A
+	 diagnostics: AM container is launched, waiting for AM container to Register with RM
+	 ApplicationMaster host: N/A
+	 ApplicationMaster RPC port: -1
+	 queue: root.default
+	 start time: 1794993833514
+	 final status: UNDEFINED
+	 tracking URL: http://ip-172-31-16-63.ec2.internal:20888/proxy/application_1794987667450_0034/
+	 user: hadoop
+26/11/18 09:23:59 INFO YarnClientSchedulerBackend: Add WebUI Filter. org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter, Map(PROXY_HOSTS -> ip-172-31-16-63.ec2.internal, PROXY_URI_BASES -> http://ip-172-31-16-63.ec2.internal:20888/proxy/application_1794987667450_0034), /proxy/application_1794987667450_0034
+26/11/18 09:24:00 INFO YarnSchedulerBackend$YarnSchedulerEndpoint: ApplicationMaster registered as NettyRpcEndpointRef(spark-client://YarnAM)
+26/11/18 09:24:00 INFO Client: Application report for application_1794987667450_0034 (state: RUNNING)
+26/11/18 09:24:00 INFO Client: 
+	 client token: N/A
+	 diagnostics: N/A
+	 ApplicationMaster host: 172.31.18.230
+	 ApplicationMaster RPC port: -1
+	 queue: root.default
+	 start time: 1794993833514
+	 final status: UNDEFINED
+	 tracking URL: http://ip-172-31-16-63.ec2.internal:20888/proxy/application_1794987667450_0034/
+	 user: hadoop
+26/11/18 09:24:00 INFO YarnClientSchedulerBackend: Application application_1794987667450_0034 has started running.
+26/11/18 09:24:00 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 42703.
+26/11/18 09:24:00 INFO NettyBlockTransferService: Server created on ip-172-31-16-63.ec2.internal:42703
+26/11/18 09:24:00 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/11/18 09:24:00 INFO BlockManager: external shuffle service port = 7337
+26/11/18 09:24:00 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, ip-172-31-16-63.ec2.internal, 42703, None)
+26/11/18 09:24:00 INFO BlockManagerMasterEndpoint: Registering block manager ip-172-31-16-63.ec2.internal:42703 with 1048.8 MiB RAM, BlockManagerId(driver, ip-172-31-16-63.ec2.internal, 42703, None)
+26/11/18 09:24:00 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, ip-172-31-16-63.ec2.internal, 42703, None)
+26/11/18 09:24:00 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, ip-172-31-16-63.ec2.internal, 42703, None)
+26/11/18 09:24:00 INFO SingleEventLogFileWriter: Logging events to hdfs:/var/log/spark/apps/application_1794987667450_0034.inprogress
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /jobs: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /jobs/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /jobs/job: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /jobs/job/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /stages: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /stages/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /stages/stage: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /stages/stage/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /stages/pool: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /stages/pool/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /storage: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /storage/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /storage/rdd: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /storage/rdd/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /environment: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /environment/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /executors: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /executors/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /executors/threadDump: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /executors/threadDump/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /executors/heapHistogram: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /executors/heapHistogram/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /static: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /api: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /jobs/job/kill: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /stages/stage/kill: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO ServerInfo: Adding filter to /metrics/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+26/11/18 09:24:00 INFO YarnClientSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+BENCHMARK CELL 01_setup.cells:1
+BENCHMARK CELL 01_setup.cells:2
+outputs  : s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/benchmark_runs/18th-nov/run03-reference-fullprofile/spark
+prepared : hdfs:///benchmark_runs/18th-nov/run03-reference-fullprofile/prepared
+models   : hdfs:///benchmark_runs/18th-nov/run03-reference-fullprofile/models and s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/benchmark_runs/18th-nov/run03-reference-fullprofile/spark/models
+BENCHMARK CELL 01_setup.cells:3
+{
+  "run_started_utc": "2026-11-18T09:24:01+00:00",
+  "is_emr": true,
+  "spark_version": "3.5.5-amzn-1",
+  "python": "3.9.25",
+  "application_id": "application_1794987667450_0034",
+  "master": "yarn",
+  "driver_host": "ip-172-31-16-63.ec2.internal",
+  "version": "run03-reference-fullprofile",
+  "active_config": "reference",
+  "config_note": {
+    "shuffle_partitions": 200,
+    "aqe": false,
+    "why": "Spark default shuffle partitions; fixed 2 executors x 2 cores x 6 GiB"
+  },
+  "seed": 42,
+  "splits": {
+    "train_end": "2015-12-31",
+    "val": [
+      "2016-01-01",
+      "2016-12-31"
+    ],
+    "test_start": "2017-01-01",
+    "data_end": "2017-12-29"
+  },
+  "spark_conf": {
+    "spark.executor.instances": "2",
+    "spark.executor.cores": "2",
+    "spark.executor.memory": "6g",
+    "spark.executor.memoryOverhead": "2g",
+    "spark.driver.memory": "2g",
+    "spark.dynamicAllocation.enabled": "false",
+    "spark.sql.shuffle.partitions": "200",
+    "spark.sql.adaptive.enabled": "false",
+    "spark.sql.catalogImplementation": "hive"
+  }
+}
+BENCHMARK CELL 01_setup.cells:4
+26/11/18 09:24:03 WARN HiveConf: HiveConf of name hive.server2.thrift.url does not exist
+Hive tables in inf2006: ['gdelt_audit_rejects', 'gdelt_daily_audit', 'gdelt_daily_typed', 'prices_typed', 'prices_yearly_coverage', 'raw_prices', 'raw_prices_duplicates', 'raw_prices_quality', 'raw_prices_series_length']
+[stage] 1a Spark quality audit of prices_typed: 11.02 s
+{
+  "rows_total": 619040,
+  "tickers": 505,
+  "date_min": "2013-02-08",
+  "date_max": "2018-02-07",
+  "rows_up_to_2017_12_29": 605910,
+  "empty_open": 11,
+  "empty_high": 8,
+  "empty_low": 8,
+  "empty_close": 0,
+  "empty_volume": 0,
+  "ohlc_inconsistent": 12,
+  "nonpositive": 0,
+  "duplicate_ticker_date": 0
+}
+PASS  Task1 prices rows_total (Spark vs local Python profile): expected=619040 actual=619040
+PASS  Task1 prices tickers (Spark vs local Python profile): expected=505 actual=505
+PASS  Task1 prices date_min (Spark vs local Python profile): expected=2013-02-08 actual=2013-02-08
+PASS  Task1 prices date_max (Spark vs local Python profile): expected=2018-02-07 actual=2018-02-07
+PASS  Task1 prices rows_up_to_2017_12_29 (Spark vs local Python profile): expected=605910 actual=605910
+PASS  Task1 prices empty_open (Spark vs local Python profile): expected=11 actual=11
+PASS  Task1 prices empty_high (Spark vs local Python profile): expected=8 actual=8
+PASS  Task1 prices empty_low (Spark vs local Python profile): expected=8 actual=8
+PASS  Task1 prices empty_close (Spark vs local Python profile): expected=0 actual=0
+PASS  Task1 prices empty_volume (Spark vs local Python profile): expected=0 actual=0
+PASS  Task1 prices ohlc_inconsistent (Spark vs local Python profile): expected=12 actual=12
+PASS  Task1 prices nonpositive (Spark vs local Python profile): expected=0 actual=0
+PASS  Task1 prices duplicate_ticker_date (Spark vs local Python profile): expected=0 actual=0
+PASS  Task1 rows_total: Hive table vs Spark: expected=619040 actual=619040
+PASS  Task1 tickers: Hive table vs Spark: expected=505 actual=505
+PASS  Task1 rows_up_to_2017_12_29: Hive table vs Spark: expected=605910 actual=605910
+PASS  Task1 empty_open: Hive table vs Spark: expected=11 actual=11
+PASS  Task1 empty_high: Hive table vs Spark: expected=8 actual=8
+PASS  Task1 empty_low: Hive table vs Spark: expected=8 actual=8
+PASS  Task1 ohlc_inconsistent: Hive table vs Spark: expected=12 actual=12
+
+Hive raw-data audit tables:
++------+------+----------+----------+------------+
+|ticker|n_rows|first_day |last_day  |short_series|
++------+------+----------+----------+------------+
+|APTV  |44    |2017-12-05|2018-02-07|1           |
+|BHF   |143   |2017-07-17|2018-02-07|1           |
+|BHGE  |152   |2017-07-03|2018-02-07|1           |
+|DWDP  |109   |2017-09-01|2018-02-07|1           |
+|DXC   |215   |2017-04-03|2018-02-07|1           |
+|EVHC  |297   |2016-12-02|2018-02-07|1           |
+|FTV   |404   |2016-07-01|2018-02-07|1           |
+|HLT   |276   |2017-01-04|2018-02-07|1           |
+|UA    |464   |2016-04-07|2018-02-07|1           |
++------+------+----------+----------+------------+
+
++-------------+----------+
+|reject_reason|line_count|
++-------------+----------+
++-------------+----------+
+
+GDELT daily audit: {'days': 91, 'first': '2016-01-01', 'last': '2016-03-31', 'events': 18369793, 'events_with_older_event_date': 601633}
+PASS  Task1 GDELT days loaded > 0: expected=>0 actual=91
+BENCHMARK CELL 02_prepare.cells:0
+[stage] 2a clean+reject (PySpark): 10.73 s
+26/11/18 09:24:47 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+[stage] 2b features + weekly targets (PySpark): 25.89 s
+[stage] 2 PREPARE (whole Task 2 in PySpark): 48.57 s
+{
+  "raw_rows": 619040,
+  "clean_rows": 605887,
+  "rejected_rows": 13153,
+  "rejected_by_reason": {
+    "out_of_scope_date": 13130,
+    "missing_ohlc_field": 11,
+    "ohlc_inconsistent": 12
+  },
+  "reconciles": true
+}
+PASS  Task2 raw = clean + rejected: expected=True actual=True
+PASS  Task2 clean rows equal the brief's accepted bars (605,887): expected=605887 actual=605887
+BENCHMARK CELL 02_prepare.cells:1
+High-volatility cut-off learned on TRAIN only (next-week std of daily returns, 67th percentile): 0.013928
+
+=== task: direction ===
+train       rows= 66,424  anchors 2013-05-10 .. 2015-12-18  last outcome known 2015-12-28  tickers=492  positive share=0.533
+            excluded: {'target_crosses_boundary': 492, 'gap_next_block': 3, 'insufficient_history': 6437}
+validation  rows= 25,805  anchors 2016-01-04 .. 2016-12-23  last outcome known 2016-12-30  tickers=498  positive share=0.533
+            excluded: {'target_crosses_boundary': 498, 'insufficient_history': 56}
+test        rows= 25,533  anchors 2017-01-06 .. 2017-12-22  last outcome known 2017-12-29  tickers=504  positive share=0.564
+            excluded: {'no_next_anchor': 504, 'insufficient_history': 79}
+
+=== task: high_vol ===
+train       rows= 66,412  anchors 2013-05-10 .. 2015-12-18  last outcome known 2015-12-28  tickers=492  positive share=0.331
+            excluded: {'short_next_block': 6, 'target_crosses_boundary': 492, 'no_prev_vol': 6, 'gap_next_block': 3, 'insufficient_history': 6437}
+validation  rows= 25,307  anchors 2016-01-04 .. 2016-12-16  last outcome known 2016-12-23  tickers=498  positive share=0.384
+            excluded: {'target_crosses_boundary': 996, 'insufficient_history': 56}
+test        rows= 25,029  anchors 2017-01-06 .. 2017-12-15  last outcome known 2017-12-22  tickers=504  positive share=0.241
+            excluded: {'short_next_block': 504, 'no_next_anchor': 504, 'insufficient_history': 79}
+PASS  Leakage[direction]: every training outcome is known by 2015-12-31: expected=<= 2015-12-31 actual=2015-12-28
+PASS  Leakage[direction]: validation starts after training outcomes end: expected=> 2015-12-28 actual=2016-01-04
+PASS  Leakage[direction]: validation outcomes known by 2016-12-31; test starts after: expected=<= 2016-12-31 < test start actual=2016-12-30 / 2017-01-06
+PASS  Leakage[direction]: no identifier or target in the feature list: expected=ticker/label/target absent actual=[]
+PASS  Leakage[high_vol]: every training outcome is known by 2015-12-31: expected=<= 2015-12-31 actual=2015-12-28
+PASS  Leakage[high_vol]: validation starts after training outcomes end: expected=> 2015-12-28 actual=2016-01-04
+PASS  Leakage[high_vol]: validation outcomes known by 2016-12-31; test starts after: expected=<= 2016-12-31 < test start actual=2016-12-23 / 2017-01-06
+PASS  Leakage[high_vol]: no identifier or target in the feature list: expected=ticker/label/target absent actual=[]
+BENCHMARK CELL 02_prepare.cells:2
+[stage] 2d GDELT news features by anchor (PySpark): 3.77 s
+anchor dates: 282, with a fully covered 7-day news window: 13
++-----------+---------+-----------+-------------------+
+|anchor_date|news_days|news_events|news_tone          |
++-----------+---------+-----------+-------------------+
+|2016-01-08 |7        |1194127    |-2.7764978507311198|
+|2016-01-15 |7        |1380672    |-2.458653567465698 |
+|2016-01-22 |7        |1441942    |-2.3019829293411247|
+|2016-01-29 |7        |1412180    |-2.238300375023014 |
+|2016-02-05 |7        |1411237    |-2.156367553855235 |
++-----------+---------+-----------+-------------------+
+only showing top 5 rows
+
+BENCHMARK CELL 03_models.cells:0
+
+######## direction: experiments on VALIDATION only ########
+26/11/18 09:25:19 WARN InstanceBuilder: Failed to load implementation from:dev.ludovic.netlib.blas.JNIBLAS
+26/11/18 09:25:19 WARN InstanceBuilder: Failed to load implementation from:dev.ludovic.netlib.blas.VectorBLAS
+  [direction] momentum  logreg {'regParam': 0.0}                      val AUC=0.5168  acc=0.5298  f1=0.3923
+  [direction] momentum  logreg {'regParam': 0.01}                     val AUC=0.5118  acc=0.5302  f1=0.3830
+  [direction] momentum  logreg {'regParam': 0.1}                      val AUC=0.5018  acc=0.5316  f1=0.3745
+  [direction] momentum  rf     {'numTrees': 50, 'maxDepth': 4}        val AUC=0.4960  acc=0.5304  f1=0.3756
+  [direction] momentum  rf     {'numTrees': 100, 'maxDepth': 6}       val AUC=0.5036  acc=0.5244  f1=0.4292
+  [direction] momentum  gbt    {'maxIter': 30, 'maxDepth': 2}         val AUC=0.5079  acc=0.5251  f1=0.4227
+  [direction] momentum  gbt    {'maxIter': 30, 'maxDepth': 3}         val AUC=0.5048  acc=0.5228  f1=0.4406
+  [direction] all_price logreg {'regParam': 0.0}                      val AUC=0.5246  acc=0.5311  f1=0.3747
+  [direction] all_price logreg {'regParam': 0.01}                     val AUC=0.5228  acc=0.5322  f1=0.3718
+  [direction] all_price logreg {'regParam': 0.1}                      val AUC=0.5221  acc=0.5328  f1=0.3706
+  [direction] all_price rf     {'numTrees': 50, 'maxDepth': 4}        val AUC=0.5157  acc=0.5337  f1=0.4325
+  [direction] all_price rf     {'numTrees': 100, 'maxDepth': 6}       val AUC=0.5199  acc=0.5321  f1=0.4451
+  [direction] all_price gbt    {'maxIter': 30, 'maxDepth': 2}         val AUC=0.5153  acc=0.5317  f1=0.4523
+  [direction] all_price gbt    {'maxIter': 30, 'maxDepth': 3}         val AUC=0.5117  acc=0.5297  f1=0.4629
+[stage] 3 direction: 14 experiments (train->validation): 99.78 s
+  -> frozen choice for direction: {'feature_set': 'all_price', 'model': 'logreg', 'params': {'regParam': 0.0}}  (validation AUC 0.5246)
+[stage] 3 direction: final fit (train) + test score + save model: 8.04 s
+
+[direction] TEST (scored once): {"auc": 0.5001, "accuracy": 0.5631, "f1": 0.4087, "rows": 25533}
+[direction] baselines on TEST:  {"majority_class": {"auc": 0.5, "accuracy": 0.5637410410057573, "f1": 0.406466228078086}, "momentum_sign(mom5>0)": {"auc": 0.48668128221174417, "accuracy": 0.49531978224258805, "f1": 0.4956296385452436}}
+
+######## high_vol: experiments on VALIDATION only ########
+  [high_vol] vol_core  logreg {'regParam': 0.0}                      val AUC=0.6805  acc=0.6653  f1=0.6264
+  [high_vol] vol_core  logreg {'regParam': 0.01}                     val AUC=0.6820  acc=0.6656  f1=0.6235
+  [high_vol] vol_core  logreg {'regParam': 0.1}                      val AUC=0.6804  acc=0.6591  f1=0.5988
+  [high_vol] vol_core  rf     {'numTrees': 50, 'maxDepth': 4}        val AUC=0.6840  acc=0.6657  f1=0.6214
+  [high_vol] vol_core  rf     {'numTrees': 100, 'maxDepth': 6}       val AUC=0.6856  acc=0.6702  f1=0.6372
+  [high_vol] vol_core  gbt    {'maxIter': 30, 'maxDepth': 2}         val AUC=0.6832  acc=0.6665  f1=0.6275
+  [high_vol] vol_core  gbt    {'maxIter': 30, 'maxDepth': 3}         val AUC=0.6835  acc=0.6650  f1=0.6232
+  [high_vol] all_price logreg {'regParam': 0.0}                      val AUC=0.7320  acc=0.6984  f1=0.6787
+  [high_vol] all_price logreg {'regParam': 0.01}                     val AUC=0.7328  acc=0.6993  f1=0.6770
+  [high_vol] all_price logreg {'regParam': 0.1}                      val AUC=0.7251  acc=0.6927  f1=0.6559
+  [high_vol] all_price rf     {'numTrees': 50, 'maxDepth': 4}        val AUC=0.7109  acc=0.6932  f1=0.6635
+  [high_vol] all_price rf     {'numTrees': 100, 'maxDepth': 6}       val AUC=0.7216  acc=0.6998  f1=0.6787
+  [high_vol] all_price gbt    {'maxIter': 30, 'maxDepth': 2}         val AUC=0.7233  acc=0.6970  f1=0.6798
+  [high_vol] all_price gbt    {'maxIter': 30, 'maxDepth': 3}         val AUC=0.7242  acc=0.6972  f1=0.6837
+[stage] 3 high_vol: 14 experiments (train->validation): 83.35 s
+  -> frozen choice for high_vol: {'feature_set': 'all_price', 'model': 'logreg', 'params': {'regParam': 0.01}}  (validation AUC 0.7328)
+[stage] 3 high_vol: final fit (train) + test score + save model: 6.05 s
+
+[high_vol] TEST (scored once): {"auc": 0.7262, "accuracy": 0.7753, "f1": 0.7345, "rows": 25029}
+[high_vol] baselines on TEST:  {"majority_class": {"auc": 0.5, "accuracy": 0.7588796995485237, "f1": 0.6548468306669086}, "persistence(prev_week_vol>=cutoff)": {"auc": 0.6377919238264662, "accuracy": 0.7020656038994766, "f1": 0.7028061695919661}}
+
+models saved to: hdfs:///benchmark_runs/18th-nov/run03-reference-fullprofile/models and s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/benchmark_runs/18th-nov/run03-reference-fullprofile/spark/models
+BENCHMARK CELL 03_models.cells:1
+Training session recorded -> s3://inf2006-team07-bigdata-1-310947418945-us-east-1-an/benchmark_runs/18th-nov/run03-reference-fullprofile/spark/evidence/reference/training_session.json
+{'application_id': 'application_1794987667450_0034', 'role': 'training session (experiments, final fit, model save)', 'captured_utc': '2026-11-18T09:28:35+00:00'}
+BENCHMARK CELL 03_models.cells:2
++---------+-------------------------------------------+------+--------+------+---------+
+|task     |approach                                   |auc   |accuracy|f1    |test_rows|
++---------+-------------------------------------------+------+--------+------+---------+
+|direction|MODEL logreg/all_price                     |0.5001|0.5631  |0.4087|25533    |
+|direction|baseline majority_class                    |0.5   |0.5637  |0.4065|25533    |
+|direction|baseline momentum_sign(mom5>0)             |0.4867|0.4953  |0.4956|25533    |
+|high_vol |MODEL logreg/all_price                     |0.7262|0.7753  |0.7345|25029    |
+|high_vol |baseline majority_class                    |0.5   |0.7589  |0.6548|25029    |
+|high_vol |baseline persistence(prev_week_vol>=cutoff)|0.6378|0.7021  |0.7028|25029    |
++---------+-------------------------------------------+------+--------+------+---------+
+
+[direction] model test AUC 0.5001 vs best baseline AUC 0.5000  -> model does NOT clearly beat baseline (report honestly)
+[high_vol] model test AUC 0.7262 vs best baseline AUC 0.6378  -> model BEATS baseline
+BENCHMARK CELL 04_analytics.cells:0
+[stage] 4 Q1 volume vs absolute return (PySpark): 5.84 s
++-----------------+------+--------------------+--------------------+--------------------+
+|bucket           |n     |mean_abs_ret        |median_abs_ret      |p90_abs_ret         |
++-----------------+------+--------------------+--------------------+--------------------+
+|1_low (z<-1)     |54956 |0.005782474732910443|0.004403351378655218|0.012452381859787698|
+|2_normal (|z|<=1)|448720|0.009613994241607545|0.007280230475745553|0.02074057986752087 |
+|3_high (1<z<=2)  |42877 |0.015957922000489375|0.012508229098090795|0.033821302372539   |
+|4_very_high (z>2)|29076 |0.026854486309157148|0.019012388162422567|0.05827586206896562 |
++-----------------+------+--------------------+--------------------+--------------------+
+
+PASS  Q1 very-high-volume days move more than low-volume days (mean |return|): expected=True actual=True
+BENCHMARK CELL 04_analytics.cells:1
+26/11/18 09:28:43 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[stage] 4 Q2 news volume vs subsequent behaviour (PySpark): 2.3 s
+weeks with a fully covered news window and usable outcomes: 13
++----------+-----+------------+---------------+------------------------+--------+---------------------+
+|news_group|weeks|ticker_weeks|avg_news_events|avg_next_week_return_pct|share_up|avg_next_week_vol_pct|
++----------+-----+------------+---------------+------------------------+--------+---------------------+
+|T1        |5    |2470        |1337678.0      |-1.361                  |0.424   |1.833                |
+|T2        |4    |1978        |1428141.0      |1.716                   |0.673   |1.554                |
+|T3        |4    |1979        |1485497.0      |1.778                   |0.701   |1.862                |
++----------+-----+------------+---------------+------------------------+--------+---------------------+
+
+weekly Pearson correlation: news volume vs next-week volatility = -0.129;  vs next-week return = 0.679  (n = 13 weeks)
+PASS  Q2 coverage guard (>= 9 usable weeks to interpret): expected=>= 9 actual=13
+BENCHMARK CELL 04_analytics.cells:2
+[stage] 4 Q3 model reliability by quarter / volatility group (PySpark): 4.55 s
+vol20 tercile cut-points from TRAIN: direction [0.01061, 0.01494]  high_vol [0.01061, 0.01495]
++---------+---------+----------+-----+---------+------------+--------+--------------+-------------------+---------------+
+|task     |dim      |grp       |n    |model_acc|majority_acc|rule_acc|share_positive|share_pred_positive|recall_positive|
++---------+---------+----------+-----+---------+------------+--------+--------------+-------------------+---------------+
+|direction|quarter  |2017Q1    |6479 |0.5529   |0.5532      |0.4649  |0.5532        |0.9972             |0.9972         |
+|direction|quarter  |2017Q2    |6501 |0.5304   |0.5305      |0.4749  |0.5305        |0.9977             |0.9977         |
+|direction|quarter  |2017Q3    |6514 |0.5854   |0.5875      |0.5235  |0.5875        |0.9963             |0.995          |
+|direction|quarter  |2017Q4    |6039 |0.5854   |0.5852      |0.5196  |0.5852        |0.9949             |0.9958         |
+|direction|vol_group|1_low_vol |12118|0.5659   |0.5659      |0.5013  |0.5659        |0.9998             |0.9999         |
+|direction|vol_group|2_mid_vol |7158 |0.5706   |0.5703      |0.483   |0.5703        |0.9964             |0.9971         |
+|direction|vol_group|3_high_vol|6257 |0.5491   |0.552       |0.4978  |0.552         |0.9904             |0.9887         |
+|high_vol |quarter  |2017Q1    |6479 |0.7912   |0.7839      |0.7126  |0.2161        |0.0875             |0.2193         |
+|high_vol |quarter  |2017Q2    |6501 |0.775    |0.755       |0.7122  |0.245         |0.0766             |0.1971         |
+|high_vol |quarter  |2017Q3    |6514 |0.7766   |0.7608      |0.6931  |0.2392        |0.0904             |0.2221         |
+|high_vol |quarter  |2017Q4    |5535 |0.7554   |0.7319      |0.6883  |0.2681        |0.1113             |0.2513         |
+|high_vol |vol_group|1_low_vol |11925|0.8633   |0.8636      |0.8381  |0.1364        |5.0E-4             |6.0E-4         |
+|high_vol |vol_group|2_mid_vol |7003 |0.742    |0.7428      |0.6086  |0.2572        |0.0214             |0.04           |
+|high_vol |vol_group|3_high_vol|6101 |0.6414   |0.5725      |0.5435  |0.4275        |0.3465             |0.4858         |
++---------+---------+----------+-----+---------+------------+--------+--------------+-------------------+---------------+
+
++-----+----------+-----+---------+
+|label|prediction|count|task     |
++-----+----------+-----+---------+
+|0.0  |0.0       |36   |direction|
+|0.0  |1.0       |11103|direction|
+|1.0  |0.0       |52   |direction|
+|1.0  |1.0       |14342|direction|
+|0.0  |0.0       |18064|high_vol |
+|0.0  |1.0       |930  |high_vol |
+|1.0  |0.0       |4695 |high_vol |
+|1.0  |1.0       |1340 |high_vol |
++-----+----------+-----+---------+
+

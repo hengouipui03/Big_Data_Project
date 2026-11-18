@@ -1,0 +1,1133 @@
+
+SAMPLE 2026-11-18T09:29:19Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82256   5095088       2% /emr
+/dev/nvme1n1p2      99548140 12444284  87103856      13% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:         3704944 kB
+MemAvailable:   13082172 kB
+Buffers:            3720 kB
+Cached:          9421464 kB
+
+SAMPLE 2026-11-18T09:29:21Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82368   5094976       2% /emr
+/dev/nvme1n1p2      99548140 12263980  87284160      13% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         4289276 kB
+MemAvailable:   13135884 kB
+Buffers:            3720 kB
+Cached:          8906708 kB
+
+SAMPLE 2026-11-18T09:29:32Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82216   5095128       2% /emr
+/dev/nvme1n1p2      99548140 12447336  87100804      13% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:         2887364 kB
+MemAvailable:   12267076 kB
+Buffers:            3720 kB
+Cached:          9423084 kB
+
+SAMPLE 2026-11-18T09:29:34Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82368   5094976       2% /emr
+/dev/nvme1n1p2      99548140 12261992  87286148      13% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         3503972 kB
+MemAvailable:   12353644 kB
+Buffers:            3720 kB
+Cached:          8908544 kB
+
+SAMPLE 2026-11-18T09:29:46Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82216   5095128       2% /emr
+/dev/nvme1n1p2      99548140 12446384  87101756      13% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:         3095140 kB
+MemAvailable:   12479684 kB
+Buffers:            3720 kB
+Cached:          9428320 kB
+
+SAMPLE 2026-11-18T09:29:47Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82368   5094976       2% /emr
+/dev/nvme1n1p2      99548140 12267096  87281044      13% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         3416176 kB
+MemAvailable:   12401888 kB
+Buffers:            3720 kB
+Cached:          9044776 kB
+
+SAMPLE 2026-11-18T09:29:59Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82216   5095128       2% /emr
+/dev/nvme1n1p2      99548140 12445496  87102644      13% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:         3268676 kB
+MemAvailable:   12653128 kB
+Buffers:            3720 kB
+Cached:          9428452 kB
+
+SAMPLE 2026-11-18T09:30:01Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82392   5094952       2% /emr
+/dev/nvme1n1p2      99548140 12269160  87278980      13% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         4147204 kB
+MemAvailable:   13138720 kB
+Buffers:            3720 kB
+Cached:          9051396 kB
+
+SAMPLE 2026-11-18T09:30:12Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82220   5095124       2% /emr
+/dev/nvme1n1p2      99548140 12485300  87062840      13% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:         3655748 kB
+MemAvailable:   13079516 kB
+Buffers:            3720 kB
+Cached:          9467964 kB
+
+SAMPLE 2026-11-18T09:30:14Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82372   5094972       2% /emr
+/dev/nvme1n1p2      99548140 12304948  87243192      13% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         4103508 kB
+MemAvailable:   13130772 kB
+Buffers:            3720 kB
+Cached:          9087276 kB
+
+SAMPLE 2026-11-18T09:30:25Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82220   5095124       2% /emr
+/dev/nvme1n1p2      99548140 12396104  87152036      13% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:         3597028 kB
+MemAvailable:   13065292 kB
+Buffers:            3720 kB
+Cached:          9512396 kB
+
+SAMPLE 2026-11-18T09:30:27Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82372   5094972       2% /emr
+/dev/nvme1n1p2      99548140 12349924  87198216      13% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         3813804 kB
+MemAvailable:   12885976 kB
+Buffers:            3720 kB
+Cached:          9131816 kB
+
+SAMPLE 2026-11-18T09:30:38Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82220   5095124       2% /emr
+/dev/nvme1n1p2      99548140 12441904  87106236      13% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:         3098136 kB
+MemAvailable:   12612676 kB
+Buffers:            3720 kB
+Cached:          9558660 kB
+
+SAMPLE 2026-11-18T09:30:40Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82372   5094972       2% /emr
+/dev/nvme1n1p2      99548140 12355708  87192432      13% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         3001788 kB
+MemAvailable:   12079652 kB
+Buffers:            3720 kB
+Cached:          9137468 kB
+
+SAMPLE 2026-11-18T09:30:51Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      576   3199048       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82768   5094576       2% /emr
+/dev/nvme1n1p2      99548140 12459080  87089060      13% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+tmpfs                1599812        0   1599812       0% /run/user/0
+tmpfs                1599812        0   1599812       0% /run/user/988
+tmpfs                1599812        0   1599812       0% /run/user/990
+MemTotal:       15998120 kB
+MemFree:         2995704 kB
+MemAvailable:   12534724 kB
+Buffers:            3720 kB
+Cached:          9582852 kB
+
+SAMPLE 2026-11-18T09:30:53Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      560   3233472       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82412   5094932       2% /emr
+/dev/nvme1n1p2      99548140 12369956  87178184      13% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/0
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         3274096 kB
+MemAvailable:   12366596 kB
+Buffers:            3720 kB
+Cached:          9151872 kB
+
+SAMPLE 2026-11-18T09:31:04Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      556   3199068       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82796   5094548       2% /emr
+/dev/nvme1n1p2      99548140 12459408  87088732      13% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:         3550476 kB
+MemAvailable:   13086680 kB
+Buffers:            3720 kB
+Cached:          9580160 kB
+
+SAMPLE 2026-11-18T09:31:06Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82412   5094932       2% /emr
+/dev/nvme1n1p2      99548140 12413724  87134416      13% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         3537500 kB
+MemAvailable:   12671664 kB
+Buffers:            3720 kB
+Cached:          9193932 kB
+
+SAMPLE 2026-11-18T09:31:17Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      556   3199068       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82776   5094568       2% /emr
+/dev/nvme1n1p2      99548140 12506000  87042140      13% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:         3038740 kB
+MemAvailable:   12623580 kB
+Buffers:            3720 kB
+Cached:          9628616 kB
+
+SAMPLE 2026-11-18T09:31:19Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82412   5094932       2% /emr
+/dev/nvme1n1p2      99548140 12365888  87182252      13% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         4031196 kB
+MemAvailable:   13121252 kB
+Buffers:            3720 kB
+Cached:          9149960 kB
+
+SAMPLE 2026-11-18T09:31:30Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82736   5094608       2% /emr
+/dev/nvme1n1p2      99548140 13543088  86005052      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:         2406376 kB
+MemAvailable:   12897948 kB
+Buffers:            3720 kB
+Cached:         10523056 kB
+
+SAMPLE 2026-11-18T09:31:32Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82372   5094972       2% /emr
+/dev/nvme1n1p2      99548140 12781288  86766852      13% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         3618616 kB
+MemAvailable:   13124388 kB
+Buffers:            3720 kB
+Cached:          9565708 kB
+
+SAMPLE 2026-11-18T09:31:43Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82736   5094608       2% /emr
+/dev/nvme1n1p2      99548140 13550680  85997460      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:         1536964 kB
+MemAvailable:   12031860 kB
+Buffers:            3720 kB
+Cached:         10525632 kB
+
+SAMPLE 2026-11-18T09:31:45Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    81428   5095916       2% /emr
+/dev/nvme1n1p2      99548140 13320268  86227872      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         2392104 kB
+MemAvailable:   12439544 kB
+Buffers:            3720 kB
+Cached:         10095796 kB
+
+SAMPLE 2026-11-18T09:31:57Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82736   5094608       2% /emr
+/dev/nvme1n1p2      99548140 13449760  86098380      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          643632 kB
+MemAvailable:   11172436 kB
+Buffers:            3720 kB
+Cached:         10558016 kB
+
+SAMPLE 2026-11-18T09:31:58Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    81428   5095916       2% /emr
+/dev/nvme1n1p2      99548140 13360308  86187832      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:         1396548 kB
+MemAvailable:   11477340 kB
+Buffers:            3720 kB
+Cached:         10127932 kB
+
+SAMPLE 2026-11-18T09:32:10Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    81796   5095548       2% /emr
+/dev/nvme1n1p2      99548140 13457328  86090812      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          154768 kB
+MemAvailable:   10223160 kB
+Buffers:            3720 kB
+Cached:         10096128 kB
+
+SAMPLE 2026-11-18T09:32:11Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82436   5094908       2% /emr
+/dev/nvme1n1p2      99548140 13374788  86173352      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          733360 kB
+MemAvailable:   10691400 kB
+Buffers:            3720 kB
+Cached:          9999456 kB
+
+SAMPLE 2026-11-18T09:32:23Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82800   5094544       2% /emr
+/dev/nvme1n1p2      99548140 13499184  86048956      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          151976 kB
+MemAvailable:    9589060 kB
+Buffers:            3720 kB
+Cached:          9449240 kB
+
+SAMPLE 2026-11-18T09:32:25Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82436   5094908       2% /emr
+/dev/nvme1n1p2      99548140 13425304  86122836      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          339472 kB
+MemAvailable:    9976136 kB
+Buffers:            3720 kB
+Cached:          9666460 kB
+
+SAMPLE 2026-11-18T09:32:36Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82800   5094544       2% /emr
+/dev/nvme1n1p2      99548140 13554528  85993612      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          158652 kB
+MemAvailable:    9559612 kB
+Buffers:            3720 kB
+Cached:          9410416 kB
+
+SAMPLE 2026-11-18T09:32:38Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82436   5094908       2% /emr
+/dev/nvme1n1p2      99548140 13498788  86049352      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          297120 kB
+MemAvailable:    9929948 kB
+Buffers:            3720 kB
+Cached:          9658648 kB
+
+SAMPLE 2026-11-18T09:32:49Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82804   5094540       2% /emr
+/dev/nvme1n1p2      99548140 13572284  85975856      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          146672 kB
+MemAvailable:    9537924 kB
+Buffers:            3720 kB
+Cached:          9397692 kB
+
+SAMPLE 2026-11-18T09:32:51Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      576   3233456       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83500   5093844       2% /emr
+/dev/nvme1n1p2      99548140 13507108  86041032      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+tmpfs                1617012        0   1617012       0% /run/user/0
+tmpfs                1617012        0   1617012       0% /run/user/988
+tmpfs                1617012        0   1617012       0% /run/user/990
+MemTotal:       16170152 kB
+MemFree:          236780 kB
+MemAvailable:    9891180 kB
+Buffers:            3720 kB
+Cached:          9677176 kB
+
+SAMPLE 2026-11-18T09:33:02Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82804   5094540       2% /emr
+/dev/nvme1n1p2      99548140 13564156  85983984      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          158024 kB
+MemAvailable:    9510336 kB
+Buffers:            3720 kB
+Cached:          9358776 kB
+
+SAMPLE 2026-11-18T09:33:04Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      556   3233476       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83060   5094284       2% /emr
+/dev/nvme1n1p2      99548140 13475792  86072348      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          276332 kB
+MemAvailable:    9912556 kB
+Buffers:            3720 kB
+Cached:          9641960 kB
+
+SAMPLE 2026-11-18T09:33:15Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82804   5094540       2% /emr
+/dev/nvme1n1p2      99548140 13563688  85984452      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          154740 kB
+MemAvailable:    9491584 kB
+Buffers:            3720 kB
+Cached:          9343268 kB
+
+SAMPLE 2026-11-18T09:33:17Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      556   3233476       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83060   5094284       2% /emr
+/dev/nvme1n1p2      99548140 13477296  86070844      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          280140 kB
+MemAvailable:    9898124 kB
+Buffers:            3720 kB
+Cached:          9623708 kB
+
+SAMPLE 2026-11-18T09:33:28Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82804   5094540       2% /emr
+/dev/nvme1n1p2      99548140 13563344  85984796      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          155484 kB
+MemAvailable:    9484076 kB
+Buffers:            3720 kB
+Cached:          9335392 kB
+
+SAMPLE 2026-11-18T09:33:30Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83060   5094284       2% /emr
+/dev/nvme1n1p2      99548140 13479936  86068204      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          277212 kB
+MemAvailable:    9899656 kB
+Buffers:            3720 kB
+Cached:          9628356 kB
+
+SAMPLE 2026-11-18T09:33:41Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82804   5094540       2% /emr
+/dev/nvme1n1p2      99548140 13629300  85918840      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          152372 kB
+MemAvailable:    9484424 kB
+Buffers:            3720 kB
+Cached:          9338596 kB
+
+SAMPLE 2026-11-18T09:33:43Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83060   5094284       2% /emr
+/dev/nvme1n1p2      99548140 13545580  86002560      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          267252 kB
+MemAvailable:    9904608 kB
+Buffers:            3720 kB
+Cached:          9642844 kB
+
+SAMPLE 2026-11-18T09:33:54Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    82804   5094540       2% /emr
+/dev/nvme1n1p2      99548140 13633380  85914760      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          150960 kB
+MemAvailable:    9476832 kB
+Buffers:            3720 kB
+Cached:          9332180 kB
+
+SAMPLE 2026-11-18T09:33:56Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83060   5094284       2% /emr
+/dev/nvme1n1p2      99548140 13547652  86000488      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          254708 kB
+MemAvailable:    9900780 kB
+Buffers:            3720 kB
+Cached:          9651288 kB
+
+SAMPLE 2026-11-18T09:34:07Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      560   3199064       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83380   5093964       2% /emr
+/dev/nvme1n1p2      99548140 13634052  85914088      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          153300 kB
+MemAvailable:    9329352 kB
+Buffers:            3720 kB
+Cached:          9182396 kB
+
+SAMPLE 2026-11-18T09:34:09Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      560   3233472       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83368   5093976       2% /emr
+/dev/nvme1n1p2      99548140 13544424  86003716      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+tmpfs                1617012        0   1617012       0% /run/user/0
+MemTotal:       16170152 kB
+MemFree:          314416 kB
+MemAvailable:    9746724 kB
+Buffers:            3720 kB
+Cached:          9558980 kB
+
+SAMPLE 2026-11-18T09:34:20Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      560   3199064       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83476   5093868       2% /emr
+/dev/nvme1n1p2      99548140 13633224  85914916      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/0
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          291636 kB
+MemAvailable:    9420552 kB
+Buffers:            3720 kB
+Cached:          9153712 kB
+
+SAMPLE 2026-11-18T09:34:21Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83372   5093972       2% /emr
+/dev/nvme1n1p2      99548140 13543528  86004612      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          310380 kB
+MemAvailable:    9754808 kB
+Buffers:            3720 kB
+Cached:          9571220 kB
+
+SAMPLE 2026-11-18T09:34:33Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83476   5093868       2% /emr
+/dev/nvme1n1p2      99548140 13635508  85912632      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          282844 kB
+MemAvailable:    9423792 kB
+Buffers:            3720 kB
+Cached:          9165588 kB
+
+SAMPLE 2026-11-18T09:34:34Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83172   5094172       2% /emr
+/dev/nvme1n1p2      99548140 13544700  86003440      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          300344 kB
+MemAvailable:    9754536 kB
+Buffers:            3720 kB
+Cached:          9580836 kB
+
+SAMPLE 2026-11-18T09:34:46Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83480   5093864       2% /emr
+/dev/nvme1n1p2      99548140 13673040  85875100      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          260392 kB
+MemAvailable:    9409436 kB
+Buffers:            3720 kB
+Cached:          9173752 kB
+
+SAMPLE 2026-11-18T09:34:47Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83172   5094172       2% /emr
+/dev/nvme1n1p2      99548140 13546652  86001488      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          323080 kB
+MemAvailable:    9785956 kB
+Buffers:            3720 kB
+Cached:          9589052 kB
+
+SAMPLE 2026-11-18T09:34:59Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83520   5093824       2% /emr
+/dev/nvme1n1p2      99548140 13672760  85875380      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          263300 kB
+MemAvailable:    9415668 kB
+Buffers:            3720 kB
+Cached:          9176892 kB
+
+SAMPLE 2026-11-18T09:35:00Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83212   5094132       2% /emr
+/dev/nvme1n1p2      99548140 13554576  85993564      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          354108 kB
+MemAvailable:    9820240 kB
+Buffers:            3720 kB
+Cached:          9592268 kB
+
+SAMPLE 2026-11-18T09:35:12Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83520   5093824       2% /emr
+/dev/nvme1n1p2      99548140 13672096  85876044      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          257988 kB
+MemAvailable:    9426128 kB
+Buffers:            3720 kB
+Cached:          9192208 kB
+
+SAMPLE 2026-11-18T09:35:13Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83212   5094132       2% /emr
+/dev/nvme1n1p2      99548140 13555368  85992772      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          359720 kB
+MemAvailable:    9842732 kB
+Buffers:            3720 kB
+Cached:          9608704 kB
+
+SAMPLE 2026-11-18T09:35:25Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83480   5093864       2% /emr
+/dev/nvme1n1p2      99548140 13637776  85910364      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          263280 kB
+MemAvailable:    9442472 kB
+Buffers:            3720 kB
+Cached:          9203272 kB
+
+SAMPLE 2026-11-18T09:35:26Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83172   5094172       2% /emr
+/dev/nvme1n1p2      99548140 13691160  85856980      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          405808 kB
+MemAvailable:    9899524 kB
+Buffers:            3720 kB
+Cached:          9619388 kB
+
+SAMPLE 2026-11-18T09:35:38Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83504   5093840       2% /emr
+/dev/nvme1n1p2      99548140 13652152  85895988      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          295836 kB
+MemAvailable:    9479384 kB
+Buffers:            3720 kB
+Cached:          9207388 kB
+
+SAMPLE 2026-11-18T09:35:39Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83172   5094172       2% /emr
+/dev/nvme1n1p2      99548140 13696852  85851288      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          416368 kB
+MemAvailable:    9915632 kB
+Buffers:            3720 kB
+Cached:          9624760 kB
+
+SAMPLE 2026-11-18T09:35:51Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      560   3199064       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83504   5093840       2% /emr
+/dev/nvme1n1p2      99548140 13660956  85887184      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/0
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          351632 kB
+MemAvailable:    9544900 kB
+Buffers:            3720 kB
+Cached:          9216788 kB
+
+SAMPLE 2026-11-18T09:35:52Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      560   3233472       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83172   5094172       2% /emr
+/dev/nvme1n1p2      99548140 13703108  85845032      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/0
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          439020 kB
+MemAvailable:    9946536 kB
+Buffers:            3720 kB
+Cached:          9632672 kB
+
+SAMPLE 2026-11-18T09:36:04Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83504   5093840       2% /emr
+/dev/nvme1n1p2      99548140 13677528  85870612      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          393392 kB
+MemAvailable:    9601284 kB
+Buffers:            3720 kB
+Cached:          9230992 kB
+
+SAMPLE 2026-11-18T09:36:05Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83172   5094172       2% /emr
+/dev/nvme1n1p2      99548140 13719928  85828212      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          480100 kB
+MemAvailable:   10001404 kB
+Buffers:            3720 kB
+Cached:          9646220 kB
+
+SAMPLE 2026-11-18T09:36:17Z ip-172-31-17-62.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                7999060        0   7999060       0% /dev/shm
+tmpfs                3199624      552   3199072       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521584  21857852      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83484   5093860       2% /emr
+/dev/nvme1n1p2      99548140 13732920  85815220      14% /mnt
+tmpfs                1599812        0   1599812       0% /run/user/993
+MemTotal:       15998120 kB
+MemFree:          363736 kB
+MemAvailable:    9597212 kB
+Buffers:            3720 kB
+Cached:          9250976 kB
+
+SAMPLE 2026-11-18T09:36:18Z ip-172-31-18-230.ec2.internal
+Filesystem       1024-blocks     Used Available Capacity Mounted on
+devtmpfs                4096        0      4096       0% /dev
+tmpfs                8085076        0   8085076       0% /dev/shm
+tmpfs                3234032      552   3233480       1% /run
+efivarfs                 128        3       121       3% /sys/firmware/efi/efivars
+/dev/nvme0n1p1      31379436  9521580  21857856      31% /
+/dev/nvme0n1p128       10202     1318      8884      13% /boot/efi
+/dev/nvme1n1p1       5177344    83172   5094172       2% /emr
+/dev/nvme1n1p2      99548140 13770276  85777864      14% /mnt
+tmpfs                1617012        0   1617012       0% /run/user/993
+MemTotal:       16170152 kB
+MemFree:          462512 kB
+MemAvailable:   10006708 kB
+Buffers:            3720 kB
+Cached:          9663016 kB

@@ -1,0 +1,644 @@
+{
+  "run_id": "run07-alternative-fullprofile",
+  "database": "bench_run07",
+  "config": "alternative",
+  "application_id": "application_1794987667450_0054",
+  "stages": [
+    {
+      "stage": "1a Spark quality audit of prices_typed",
+      "start_utc": "2026-11-18T09:58:06+00:00",
+      "end_utc": "2026-11-18T09:58:17+00:00",
+      "seconds": 10.55,
+      "ok": true,
+      "rows": 619040
+    },
+    {
+      "stage": "2a clean+reject (PySpark)",
+      "start_utc": "2026-11-18T09:58:19+00:00",
+      "end_utc": "2026-11-18T09:58:26+00:00",
+      "seconds": 6.64,
+      "ok": true,
+      "rows": 619040
+    },
+    {
+      "stage": "2b features + weekly targets (PySpark)",
+      "start_utc": "2026-11-18T09:58:26+00:00",
+      "end_utc": "2026-11-18T09:58:40+00:00",
+      "seconds": 13.49,
+      "ok": true,
+      "rows": 125831
+    },
+    {
+      "stage": "2 PREPARE (whole Task 2 in PySpark)",
+      "start_utc": "2026-11-18T09:58:19+00:00",
+      "end_utc": "2026-11-18T09:58:46+00:00",
+      "seconds": 26.82,
+      "ok": true
+    },
+    {
+      "stage": "2d GDELT news features by anchor (PySpark)",
+      "start_utc": "2026-11-18T09:58:48+00:00",
+      "end_utc": "2026-11-18T09:58:50+00:00",
+      "seconds": 1.32,
+      "ok": true,
+      "rows": 282
+    },
+    {
+      "stage": "3 direction: 14 experiments (train->validation)",
+      "start_utc": "2026-11-18T09:58:51+00:00",
+      "end_utc": "2026-11-18T10:00:20+00:00",
+      "seconds": 89.45,
+      "ok": true
+    },
+    {
+      "stage": "3 direction: final fit (train) + test score + save model",
+      "start_utc": "2026-11-18T10:00:20+00:00",
+      "end_utc": "2026-11-18T10:00:28+00:00",
+      "seconds": 7.49,
+      "ok": true
+    },
+    {
+      "stage": "3 high_vol: 14 experiments (train->validation)",
+      "start_utc": "2026-11-18T10:00:30+00:00",
+      "end_utc": "2026-11-18T10:01:43+00:00",
+      "seconds": 73.68,
+      "ok": true
+    },
+    {
+      "stage": "3 high_vol: final fit (train) + test score + save model",
+      "start_utc": "2026-11-18T10:01:43+00:00",
+      "end_utc": "2026-11-18T10:01:49+00:00",
+      "seconds": 6.06,
+      "ok": true
+    },
+    {
+      "stage": "4 Q1 volume vs absolute return (PySpark)",
+      "start_utc": "2026-11-18T10:01:52+00:00",
+      "end_utc": "2026-11-18T10:01:57+00:00",
+      "seconds": 4.4,
+      "ok": true,
+      "rows": 575629
+    },
+    {
+      "stage": "4 Q2 news volume vs subsequent behaviour (PySpark)",
+      "start_utc": "2026-11-18T10:01:57+00:00",
+      "end_utc": "2026-11-18T10:01:58+00:00",
+      "seconds": 1.12,
+      "ok": true,
+      "rows": 13
+    },
+    {
+      "stage": "4 Q3 model reliability by quarter / volatility group (PySpark)",
+      "start_utc": "2026-11-18T10:01:59+00:00",
+      "end_utc": "2026-11-18T10:02:00+00:00",
+      "seconds": 1.55,
+      "ok": true,
+      "rows": 14
+    }
+  ],
+  "checks": [
+    {
+      "check": "Task1 prices rows_total (Spark vs local Python profile)",
+      "expected": "619040",
+      "actual": "619040",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices tickers (Spark vs local Python profile)",
+      "expected": "505",
+      "actual": "505",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices date_min (Spark vs local Python profile)",
+      "expected": "2013-02-08",
+      "actual": "2013-02-08",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices date_max (Spark vs local Python profile)",
+      "expected": "2018-02-07",
+      "actual": "2018-02-07",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices rows_up_to_2017_12_29 (Spark vs local Python profile)",
+      "expected": "605910",
+      "actual": "605910",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices empty_open (Spark vs local Python profile)",
+      "expected": "11",
+      "actual": "11",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices empty_high (Spark vs local Python profile)",
+      "expected": "8",
+      "actual": "8",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices empty_low (Spark vs local Python profile)",
+      "expected": "8",
+      "actual": "8",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices empty_close (Spark vs local Python profile)",
+      "expected": "0",
+      "actual": "0",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices empty_volume (Spark vs local Python profile)",
+      "expected": "0",
+      "actual": "0",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices ohlc_inconsistent (Spark vs local Python profile)",
+      "expected": "12",
+      "actual": "12",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices nonpositive (Spark vs local Python profile)",
+      "expected": "0",
+      "actual": "0",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 prices duplicate_ticker_date (Spark vs local Python profile)",
+      "expected": "0",
+      "actual": "0",
+      "passed": true,
+      "evidence": "evidence/local/quality_summary.json"
+    },
+    {
+      "check": "Task1 rows_total: Hive table vs Spark",
+      "expected": "619040",
+      "actual": "619040",
+      "passed": true,
+      "evidence": "evidence/<emr-run-folder>/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 tickers: Hive table vs Spark",
+      "expected": "505",
+      "actual": "505",
+      "passed": true,
+      "evidence": "evidence/<emr-run-folder>/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 rows_up_to_2017_12_29: Hive table vs Spark",
+      "expected": "605910",
+      "actual": "605910",
+      "passed": true,
+      "evidence": "evidence/<emr-run-folder>/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 empty_open: Hive table vs Spark",
+      "expected": "11",
+      "actual": "11",
+      "passed": true,
+      "evidence": "evidence/<emr-run-folder>/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 empty_high: Hive table vs Spark",
+      "expected": "8",
+      "actual": "8",
+      "passed": true,
+      "evidence": "evidence/<emr-run-folder>/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 empty_low: Hive table vs Spark",
+      "expected": "8",
+      "actual": "8",
+      "passed": true,
+      "evidence": "evidence/<emr-run-folder>/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 ohlc_inconsistent: Hive table vs Spark",
+      "expected": "12",
+      "actual": "12",
+      "passed": true,
+      "evidence": "evidence/<emr-run-folder>/stage2_hive_03_results.log"
+    },
+    {
+      "check": "Task1 GDELT days loaded > 0",
+      "expected": ">0",
+      "actual": "91",
+      "passed": true,
+      "evidence": "Hive gdelt_daily_typed"
+    },
+    {
+      "check": "Task2 raw = clean + rejected",
+      "expected": "True",
+      "actual": "True",
+      "passed": true,
+      "evidence": "reconciliation.json"
+    },
+    {
+      "check": "Task2 clean rows equal the brief's accepted bars (605,887)",
+      "expected": "605887",
+      "actual": "605887",
+      "passed": true,
+      "evidence": "reconciliation.json"
+    },
+    {
+      "check": "Leakage[direction]: every training outcome is known by 2015-12-31",
+      "expected": "<= 2015-12-31",
+      "actual": "2015-12-28",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[direction]: validation starts after training outcomes end",
+      "expected": "> 2015-12-28",
+      "actual": "2016-01-04",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[direction]: validation outcomes known by 2016-12-31; test starts after",
+      "expected": "<= 2016-12-31 < test start",
+      "actual": "2016-12-30 / 2017-01-06",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[direction]: no identifier or target in the feature list",
+      "expected": "ticker/label/target absent",
+      "actual": "[]",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[high_vol]: every training outcome is known by 2015-12-31",
+      "expected": "<= 2015-12-31",
+      "actual": "2015-12-28",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[high_vol]: validation starts after training outcomes end",
+      "expected": "> 2015-12-28",
+      "actual": "2016-01-04",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[high_vol]: validation outcomes known by 2016-12-31; test starts after",
+      "expected": "<= 2016-12-31 < test start",
+      "actual": "2016-12-23 / 2017-01-06",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Leakage[high_vol]: no identifier or target in the feature list",
+      "expected": "ticker/label/target absent",
+      "actual": "[]",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "check": "Q1 very-high-volume days move more than low-volume days (mean |return|)",
+      "expected": "True",
+      "actual": "True",
+      "passed": true,
+      "evidence": "t4_q1_volume_vs_abs_return.json"
+    },
+    {
+      "check": "Q2 coverage guard (>= 9 usable weeks to interpret)",
+      "expected": ">= 9",
+      "actual": "13",
+      "passed": true,
+      "evidence": "informational: below 9 the notebook refuses to interpret"
+    }
+  ],
+  "executor_metrics": [
+    {
+      "id": "driver",
+      "hostPort": "ip-172-31-16-63.ec2.internal:44427",
+      "isActive": true,
+      "rddBlocks": 0,
+      "memoryUsed": 209798095,
+      "diskUsed": 0,
+      "totalCores": 0,
+      "maxTasks": 0,
+      "activeTasks": 0,
+      "failedTasks": 0,
+      "completedTasks": 0,
+      "totalTasks": 0,
+      "totalDuration": 253236,
+      "totalGCTime": 2702,
+      "totalInputBytes": 0,
+      "totalShuffleRead": 0,
+      "totalShuffleWrite": 0,
+      "isBlacklisted": false,
+      "maxMemory": 1099746508,
+      "addTime": "2026-11-18T09:58:02.292GMT",
+      "executorLogs": {},
+      "memoryMetrics": {
+        "usedOnHeapStorageMemory": 209798095,
+        "usedOffHeapStorageMemory": 0,
+        "totalOnHeapStorageMemory": 1099746508,
+        "totalOffHeapStorageMemory": 0
+      },
+      "blacklistedInStages": [],
+      "peakMemoryMetrics": {
+        "JVMHeapMemory": 515227136,
+        "JVMOffHeapMemory": 356854768,
+        "OnHeapExecutionMemory": 0,
+        "OffHeapExecutionMemory": 0,
+        "OnHeapStorageMemory": 11606690,
+        "OffHeapStorageMemory": 0,
+        "OnHeapUnifiedMemory": 11606690,
+        "OffHeapUnifiedMemory": 0,
+        "DirectPoolMemory": 21268665,
+        "MappedPoolMemory": 0,
+        "ProcessTreeJVMVMemory": 0,
+        "ProcessTreeJVMRSSMemory": 0,
+        "ProcessTreePythonVMemory": 0,
+        "ProcessTreePythonRSSMemory": 0,
+        "ProcessTreeOtherVMemory": 0,
+        "ProcessTreeOtherRSSMemory": 0,
+        "MinorGCCount": 299,
+        "MinorGCTime": 2702,
+        "MajorGCCount": 0,
+        "MajorGCTime": 0,
+        "TotalGCTime": 2702
+      },
+      "attributes": {},
+      "resources": {},
+      "resourceProfileId": 0,
+      "isExcluded": false,
+      "excludedInStages": []
+    },
+    {
+      "id": "2",
+      "hostPort": "ip-172-31-17-62.ec2.internal:35907",
+      "isActive": true,
+      "rddBlocks": 22,
+      "memoryUsed": 209094418,
+      "diskUsed": 0,
+      "totalCores": 2,
+      "maxTasks": 2,
+      "activeTasks": 0,
+      "failedTasks": 0,
+      "completedTasks": 5058,
+      "totalTasks": 5058,
+      "totalDuration": 251268,
+      "totalGCTime": 3123,
+      "totalInputBytes": 5897676160,
+      "totalShuffleRead": 148645733,
+      "totalShuffleWrite": 114275090,
+      "isBlacklisted": false,
+      "maxMemory": 3247649587,
+      "addTime": "2026-11-18T09:58:09.101GMT",
+      "executorLogs": {
+        "stdout": "http://ip-172-31-17-62.ec2.internal:8042/node/containerlogs/container_1794987667450_0054_01_000004/hadoop/stdout?start=-4096",
+        "stderr": "http://ip-172-31-17-62.ec2.internal:8042/node/containerlogs/container_1794987667450_0054_01_000004/hadoop/stderr?start=-4096"
+      },
+      "memoryMetrics": {
+        "usedOnHeapStorageMemory": 209094418,
+        "usedOffHeapStorageMemory": 0,
+        "totalOnHeapStorageMemory": 3247649587,
+        "totalOffHeapStorageMemory": 0
+      },
+      "blacklistedInStages": [],
+      "peakMemoryMetrics": {
+        "JVMHeapMemory": 2490135464,
+        "JVMOffHeapMemory": 257651136,
+        "OnHeapExecutionMemory": 0,
+        "OffHeapExecutionMemory": 0,
+        "OnHeapStorageMemory": 108174054,
+        "OffHeapStorageMemory": 0,
+        "OnHeapUnifiedMemory": 108174054,
+        "OffHeapUnifiedMemory": 0,
+        "DirectPoolMemory": 30224070,
+        "MappedPoolMemory": 0,
+        "ProcessTreeJVMVMemory": 0,
+        "ProcessTreeJVMRSSMemory": 0,
+        "ProcessTreePythonVMemory": 0,
+        "ProcessTreePythonRSSMemory": 0,
+        "ProcessTreeOtherVMemory": 0,
+        "ProcessTreeOtherRSSMemory": 0,
+        "MinorGCCount": 55,
+        "MinorGCTime": 1215,
+        "MajorGCCount": 7,
+        "MajorGCTime": 646,
+        "TotalGCTime": 1861
+      },
+      "attributes": {
+        "NM_HTTP_ADDRESS": "ip-172-31-17-62.ec2.internal:8042",
+        "USER": "hadoop",
+        "LOG_FILES": "stderr,stdout",
+        "NM_HTTP_PORT": "8042",
+        "CLUSTER_ID": "",
+        "NM_PORT": "8041",
+        "HTTP_SCHEME": "http://",
+        "NM_HOST": "ip-172-31-17-62.ec2.internal",
+        "CONTAINER_ID": "container_1794987667450_0054_01_000004"
+      },
+      "resources": {},
+      "resourceProfileId": 0,
+      "isExcluded": false,
+      "excludedInStages": []
+    },
+    {
+      "id": "1",
+      "hostPort": "ip-172-31-18-230.ec2.internal:41307",
+      "isActive": true,
+      "rddBlocks": 23,
+      "memoryUsed": 208457517,
+      "diskUsed": 0,
+      "totalCores": 2,
+      "maxTasks": 2,
+      "activeTasks": 0,
+      "failedTasks": 0,
+      "completedTasks": 5061,
+      "totalTasks": 5061,
+      "totalDuration": 221556,
+      "totalGCTime": 1940,
+      "totalInputBytes": 5399211538,
+      "totalShuffleRead": 163244706,
+      "totalShuffleWrite": 117403384,
+      "isBlacklisted": false,
+      "maxMemory": 3247649587,
+      "addTime": "2026-11-18T09:58:05.189GMT",
+      "executorLogs": {
+        "stdout": "http://ip-172-31-18-230.ec2.internal:8042/node/containerlogs/container_1794987667450_0054_01_000002/hadoop/stdout?start=-4096",
+        "stderr": "http://ip-172-31-18-230.ec2.internal:8042/node/containerlogs/container_1794987667450_0054_01_000002/hadoop/stderr?start=-4096"
+      },
+      "memoryMetrics": {
+        "usedOnHeapStorageMemory": 208457517,
+        "usedOffHeapStorageMemory": 0,
+        "totalOnHeapStorageMemory": 3247649587,
+        "totalOffHeapStorageMemory": 0
+      },
+      "blacklistedInStages": [],
+      "peakMemoryMetrics": {
+        "JVMHeapMemory": 2345557728,
+        "JVMOffHeapMemory": 255297936,
+        "OnHeapExecutionMemory": 142606336,
+        "OffHeapExecutionMemory": 0,
+        "OnHeapStorageMemory": 163372330,
+        "OffHeapStorageMemory": 0,
+        "OnHeapUnifiedMemory": 163372330,
+        "OffHeapUnifiedMemory": 0,
+        "DirectPoolMemory": 33676410,
+        "MappedPoolMemory": 0,
+        "ProcessTreeJVMVMemory": 0,
+        "ProcessTreeJVMRSSMemory": 0,
+        "ProcessTreePythonVMemory": 0,
+        "ProcessTreePythonRSSMemory": 0,
+        "ProcessTreeOtherVMemory": 0,
+        "ProcessTreeOtherRSSMemory": 0,
+        "MinorGCCount": 62,
+        "MinorGCTime": 717,
+        "MajorGCCount": 7,
+        "MajorGCTime": 548,
+        "TotalGCTime": 1265
+      },
+      "attributes": {
+        "NM_HTTP_ADDRESS": "ip-172-31-18-230.ec2.internal:8042",
+        "USER": "hadoop",
+        "LOG_FILES": "stderr,stdout",
+        "NM_HTTP_PORT": "8042",
+        "CLUSTER_ID": "",
+        "NM_PORT": "8041",
+        "HTTP_SCHEME": "http://",
+        "NM_HOST": "ip-172-31-18-230.ec2.internal",
+        "CONTAINER_ID": "container_1794987667450_0054_01_000002"
+      },
+      "resources": {},
+      "resourceProfileId": 0,
+      "isExcluded": false,
+      "excludedInStages": []
+    }
+  ],
+  "gdelt_summary": {
+    "days": 91,
+    "first": "2016-01-01",
+    "last": "2016-03-31",
+    "events": 18369793,
+    "events_with_older_event_date": 601633
+  },
+  "prepared": {
+    "reconciliation": {
+      "raw_rows": 619040,
+      "clean_rows": 605887,
+      "rejected_rows": 13153,
+      "rejected_by_reason": {
+        "ohlc_inconsistent": 12,
+        "missing_ohlc_field": 11,
+        "out_of_scope_date": 13130
+      },
+      "reconciles": true
+    },
+    "high_vol_cutoff": 0.013924162409302467,
+    "split_report": {
+      "direction": {
+        "train": {
+          "rows": 66424,
+          "first_anchor": "2013-05-10",
+          "last_anchor": "2015-12-18",
+          "last_outcome_date": "2015-12-28",
+          "tickers": 492,
+          "share_positive": 0.5334517644224979,
+          "anchor_rows_total": 73356,
+          "excluded_by_reason": {
+            "insufficient_history": 6437,
+            "gap_next_block": 3,
+            "target_crosses_boundary": 492
+          }
+        },
+        "validation": {
+          "rows": 25805,
+          "first_anchor": "2016-01-04",
+          "last_anchor": "2016-12-23",
+          "last_outcome_date": "2016-12-30",
+          "tickers": 498,
+          "share_positive": 0.5328037202092618,
+          "anchor_rows_total": 26359,
+          "excluded_by_reason": {
+            "insufficient_history": 56,
+            "target_crosses_boundary": 498
+          }
+        },
+        "test": {
+          "rows": 25533,
+          "first_anchor": "2017-01-06",
+          "last_anchor": "2017-12-22",
+          "last_outcome_date": "2017-12-29",
+          "tickers": 504,
+          "share_positive": 0.5637410410057573,
+          "anchor_rows_total": 26116,
+          "excluded_by_reason": {
+            "no_next_anchor": 504,
+            "insufficient_history": 79
+          }
+        }
+      },
+      "high_vol": {
+        "train": {
+          "rows": 66412,
+          "first_anchor": "2013-05-10",
+          "last_anchor": "2015-12-18",
+          "last_outcome_date": "2015-12-28",
+          "tickers": 492,
+          "share_positive": 0.3307986508462326,
+          "anchor_rows_total": 73356,
+          "excluded_by_reason": {
+            "insufficient_history": 6437,
+            "short_next_block": 6,
+            "no_prev_vol": 6,
+            "target_crosses_boundary": 492,
+            "gap_next_block": 3
+          }
+        },
+        "validation": {
+          "rows": 25307,
+          "first_anchor": "2016-01-04",
+          "last_anchor": "2016-12-16",
+          "last_outcome_date": "2016-12-23",
+          "tickers": 498,
+          "share_positive": 0.3838858813766942,
+          "anchor_rows_total": 26359,
+          "excluded_by_reason": {
+            "insufficient_history": 56,
+            "target_crosses_boundary": 996
+          }
+        },
+        "test": {
+          "rows": 25029,
+          "first_anchor": "2017-01-06",
+          "last_anchor": "2017-12-15",
+          "last_outcome_date": "2017-12-22",
+          "tickers": 504,
+          "share_positive": 0.24120020775899956,
+          "anchor_rows_total": 26116,
+          "excluded_by_reason": {
+            "no_next_anchor": 504,
+            "short_next_block": 504,
+            "insufficient_history": 79
+          }
+        }
+      }
+    }
+  }
+}

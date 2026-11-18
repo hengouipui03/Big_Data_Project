@@ -1,0 +1,217 @@
+#@@ md
+## 2. Cleaning, features and chronological splits (Task 2, PySpark)
+
+**Inputs:** Hive table `inf2006.prices_typed` (all 619,040 raw rows, typed by Hive) and `inf2006.gdelt_daily_typed`.
+**Outputs** (HDFS, distinct zones): `clean/`, `rejected/`, `weekly_all/`, `direction/{train,validation,test}/`, `high_vol/{train,validation,test}/`, `news_by_anchor/`.
+
+**Cleaning rules** (first matching rule wins; every rejected row keeps its reason):
+
+| Reason | Rule | Why |
+|---|---|---|
+| `bad_key` | missing/unparsable date or ticker | row cannot be placed in time |
+| `out_of_scope_date` | date after 2017-12-29 | assessed price scope ends 2017-12-29 |
+| `missing_close_or_volume` | close or volume empty | cannot compute returns/volume features |
+| `missing_ohlc_field` | open, high or low empty | the brief's 605,887 "accepted bars" excludes these 11 rows |
+| `nonpositive_price` / `negative_volume` | price ≤ 0, volume < 0 | invalid |
+| `ohlc_inconsistent` | high < low/open/close or low > open/close | internally inconsistent bar |
+| `duplicate_key` | repeated (ticker, date) | keep one |
+
+Genuine calendar gaps are **kept as gaps** (nothing is filled, and nothing is filled from future data).
+
+**Weekly design.** A *week block* runs Friday→Thursday; the **anchor** is the first trading day of the block (normally the Friday; the next trading day if the Friday is a holiday).
+All features describe information up to the bar **before** the anchor. Two prediction targets are built from the same table:
+
+* `direction`: `ret_next = open(next anchor) / open(anchor) − 1`, label 1 if `ret_next > 0`.
+* `high_vol`: realised volatility of the **next** week block (std of its daily returns); label 1 if it is ≥ the 67th percentile of **training** next-week volatility (cut-off learned on the training split only).
+
+A row is kept in a split only if its outcome is fully known **inside that split's period**; others are excluded with a reason (`target_crosses_boundary`, `gap_next_block`, `missing_open`, `short_next_block`, …).
+
+#@@ code
+FEATS = ["mom1", "mom5", "mom20", "vol5", "vol20", "volratio", "range5", "ma20gap", "gap_days", "prev_block_vol"]
+TASK_SPECS = {
+    "direction": {"status": "status_dir", "label": "label_dir", "value": "ret_next"},
+    "high_vol":  {"status": "status_vol", "label": "label_vol", "value": "next_block_vol"},
+}
+SPLITS = ["train", "validation", "test"]
+
+def prepare(prep_root, log_prefix=""):
+    """Task 2 end to end. Returns a dict with reconciliation, split report and the high-vol cut-off."""
+    out = {}
+    D = lambda s: F.lit(s).cast("date")
+    raw = load_prices_typed()
+
+    # ---------------------------------------------------------------- 2a clean / reject
+    with stage(f"{log_prefix}2a clean+reject (PySpark)") as st:
+        parsed = raw.select(F.col("ticker"), F.col("trade_date").alias("date"),
+                            *[F.col(c).cast("double").alias(c) for c in ["open", "high", "low", "close", "volume"]])
+        n_raw = parsed.count()
+        px = [F.col(c) for c in ("open", "high", "low", "close")]
+        reason = (F.when(F.col("date").isNull() | F.col("ticker").isNull() | (F.col("ticker") == ""), "bad_key")
+                  .when(F.col("date") > D(DATA_END), "out_of_scope_date")
+                  .when(F.col("close").isNull() | F.col("volume").isNull(), "missing_close_or_volume")
+                  .when(F.col("open").isNull() | F.col("high").isNull() | F.col("low").isNull(), "missing_ohlc_field")
+                  .when(F.least(*px) <= 0, "nonpositive_price")
+                  .when(F.col("volume") < 0, "negative_volume")
+                  .when((F.col("high") < F.col("low")) | (F.col("high") < F.col("open")) | (F.col("high") < F.col("close"))
+                        | (F.col("low") > F.col("open")) | (F.col("low") > F.col("close")), "ohlc_inconsistent"))
+        tagged = parsed.withColumn("reject_reason", reason)
+        ok = tagged.where(F.col("reject_reason").isNull())
+        dw = Window.partitionBy("ticker", "date").orderBy("open", "high", "low", "close", "volume")
+        ok = ok.withColumn("_dup", F.row_number().over(dw))
+        dups = ok.where("_dup > 1").withColumn("reject_reason", F.lit("duplicate_key")).drop("_dup")
+        clean = ok.where("_dup = 1").drop("_dup", "reject_reason")
+        rejected = tagged.where(F.col("reject_reason").isNotNull()).unionByName(dups)
+        clean.write.mode("overwrite").parquet(f"{prep_root}/clean")
+        rejected.write.mode("overwrite").parquet(f"{prep_root}/rejected")
+        clean = spark.read.parquet(f"{prep_root}/clean")
+        rejected = spark.read.parquet(f"{prep_root}/rejected")
+        n_clean, n_rej = clean.count(), rejected.count()
+        by = {r["reject_reason"]: r["n"] for r in rejected.groupBy("reject_reason").agg(F.count("*").alias("n")).collect()}
+        st.meta["rows"] = n_raw
+    out["reconciliation"] = {"raw_rows": n_raw, "clean_rows": n_clean, "rejected_rows": n_rej, "rejected_by_reason": by,
+                             "reconciles": n_raw == n_clean + n_rej}
+
+    # ---------------------------------------------------------------- 2b as-of features and weekly targets
+    with stage(f"{log_prefix}2b features + weekly targets (PySpark)") as st:
+        w = Window.partitionBy("ticker").orderBy("date")
+        w5, w20, w60 = w.rowsBetween(-4, 0), w.rowsBetween(-19, 0), w.rowsBetween(-59, 0)
+        d = (clean.withColumn("rn", F.row_number().over(w))
+             .withColumn("ret1", F.col("close") / F.lag("close", 1).over(w) - 1)
+             .withColumn("mom5", F.col("close") / F.lag("close", 5).over(w) - 1)
+             .withColumn("mom20", F.col("close") / F.lag("close", 20).over(w) - 1)
+             .withColumn("vol5", F.stddev("ret1").over(w5))
+             .withColumn("vol20", F.stddev("ret1").over(w20))
+             .withColumn("volratio", F.avg("volume").over(w5) / F.avg("volume").over(w60))
+             .withColumn("range5", F.avg((F.col("high") - F.col("low")) / F.col("close")).over(w5))
+             .withColumn("ma20gap", F.col("close") / F.avg("close").over(w20) - 1)
+             .withColumn("mom1", F.col("ret1")))
+        base_feats = ["mom1", "mom5", "mom20", "vol5", "vol20", "volratio", "range5", "ma20gap"]
+        for c in base_feats:                      # shift one bar: the value at day t uses bars up to t-1 only
+            d = d.withColumn(c, F.lag(c, 1).over(w))
+        d = (d.withColumn("hist_n", F.lag("rn", 1).over(w))
+             .withColumn("gap_days", F.datediff("date", F.lag("date", 1).over(w)).cast("double"))
+             .withColumn("block", F.date_sub("date", (F.dayofweek("date") + 1) % 7)))   # Friday that starts the block
+
+        # per-block realised volatility (uses the block's own daily returns)
+        # NB: ret1 was not shifted above only for mom1's source; ret1 itself is the same-day return
+        bstat = (d.groupBy("ticker", "block")
+                 .agg(F.stddev("ret1").alias("block_vol"), F.count("ret1").alias("block_n"), F.max("date").alias("block_last")))
+        bw = Window.partitionBy("ticker", "block").orderBy("date")
+        anchors = (d.withColumn("_k", F.row_number().over(bw)).where("_k = 1").drop("_k")
+                   .join(bstat, ["ticker", "block"], "left"))
+        aw = Window.partitionBy("ticker").orderBy("block")
+        anchors = (anchors
+                   .withColumn("next_block", F.lead("block").over(aw)).withColumn("next_anchor_date", F.lead("date").over(aw))
+                   .withColumn("next_open", F.lead("open").over(aw)).withColumn("next_block_vol", F.lead("block_vol").over(aw))
+                   .withColumn("next_block_n", F.lead("block_n").over(aw)).withColumn("next_block_last", F.lead("block_last").over(aw))
+                   .withColumn("prev_block", F.lag("block").over(aw)).withColumn("_pv", F.lag("block_vol").over(aw))
+                   .withColumn("_pn", F.lag("block_n").over(aw))
+                   .withColumn("prev_block_vol", F.when((F.col("prev_block") == F.date_sub("block", 7)) & (F.col("_pn") >= 3), F.col("_pv")))
+                   .withColumn("ret_next", F.col("next_open") / F.col("open") - 1))
+
+        split = (F.when(F.col("anchor_date") <= D(TRAIN_END), "train")
+                 .when((F.col("anchor_date") >= D(VAL_START)) & (F.col("anchor_date") <= D(VAL_END)), "validation")
+                 .when(F.col("anchor_date") >= D(TEST_START), "test"))
+        split_end = F.when(F.col("split") == "train", D(TRAIN_END)).when(F.col("split") == "validation", D(VAL_END)).otherwise(D(DATA_END))
+        common = (F.when(F.col("hist_n").isNull() | (F.col("hist_n") < MIN_HISTORY), "insufficient_history")
+                  .when(F.col("next_block").isNull(), "no_next_anchor")
+                  .when(F.col("next_block") != F.date_add("block", 7), "gap_next_block"))
+        status_dir = (common.when(F.col("open").isNull() | F.col("next_open").isNull(), "missing_open")
+                      .when(F.col("next_anchor_date") > split_end, "target_crosses_boundary").otherwise("ok"))
+        status_vol = (common.when(F.col("next_block_vol").isNull() | (F.col("next_block_n") < 3), "short_next_block")
+                      .when(F.col("prev_block_vol").isNull(), "no_prev_vol")
+                      .when(F.col("next_block_last") > split_end, "target_crosses_boundary").otherwise("ok"))
+        weekly = (anchors.withColumnRenamed("date", "anchor_date").withColumn("split", split)
+                  .withColumn("status_dir", status_dir).withColumn("status_vol", status_vol)
+                  .withColumn("label_dir", F.when(F.col("ret_next").isNull(), None).otherwise((F.col("ret_next") > 0).cast("int")))
+                  .select("ticker", "anchor_date", "next_anchor_date", "split", "status_dir", "status_vol",
+                          "ret_next", "label_dir", "next_block_vol", *FEATS).cache())
+        # learned-from-train quantity #1: the high-volatility cut-off (training split only)
+        cutoff = (weekly.where("split = 'train' and status_vol = 'ok'").approxQuantile("next_block_vol", [HIGH_VOL_Q], 0.001))[0]
+        weekly = weekly.withColumn("label_vol", F.when(F.col("status_vol") == "ok", (F.col("next_block_vol") >= F.lit(cutoff)).cast("int")))
+        weekly.write.mode("overwrite").parquet(f"{prep_root}/weekly_all")
+        weekly = spark.read.parquet(f"{prep_root}/weekly_all")
+        for task, spec in TASK_SPECS.items():
+            for s in SPLITS:
+                (weekly.where((F.col("split") == s) & (F.col(spec["status"]) == "ok"))
+                 .select("ticker", "anchor_date", "next_anchor_date", F.col(spec["value"]).alias("target_value"),
+                         F.col(spec["label"]).cast("double").alias("label"), *[F.col(c).cast("double") for c in FEATS])
+                 .write.mode("overwrite").parquet(f"{prep_root}/{task}/{s}"))
+        st.meta["rows"] = weekly.count()
+    out["high_vol_cutoff"] = cutoff
+
+    # ---------------------------------------------------------------- 2c split report
+    rep = {}
+    for task, spec in TASK_SPECS.items():
+        rep[task] = {}
+        for s in SPLITS:
+            sub = weekly.where(F.col("split") == s)
+            okd = sub.where(F.col(spec["status"]) == "ok")
+            a = okd.agg(F.count("*").alias("rows"), F.min("anchor_date").cast("string").alias("first_anchor"),
+                        F.max("anchor_date").cast("string").alias("last_anchor"),
+                        F.max("next_anchor_date").cast("string").alias("last_outcome_date"),
+                        F.countDistinct("ticker").alias("tickers"), F.avg(spec["label"]).alias("share_positive")).first().asDict()
+            a["anchor_rows_total"] = sub.count()
+            a["excluded_by_reason"] = {r["s"]: r["n"] for r in sub.where(F.col(spec["status"]) != "ok")
+                                       .groupBy(F.col(spec["status"]).alias("s")).agg(F.count("*").alias("n")).collect()}
+            rep[task][s] = a
+    out["split_report"] = rep
+    return out
+
+with stage("2 PREPARE (whole Task 2 in PySpark)") as st_all:
+    PREPARED = prepare(PREP)
+
+REC = PREPARED["reconciliation"]
+print(json.dumps(REC, indent=2))
+check("Task2 raw = clean + rejected", True, REC["reconciles"], evidence="reconciliation.json")
+check("Task2 clean rows equal the brief's accepted bars (605,887)", 605887, REC["clean_rows"], evidence="reconciliation.json")
+save_json("t2_reconciliation.json", REC)
+
+#@@ md
+### 2.1 Chronological splits, exclusions and leakage controls
+
+Train = weekly anchors 2013-2015, validation = 2016, test = 2017 (no shuffling). Report below: date coverage, row counts, exclusions, label balance.
+
+#@@ code
+print("High-volatility cut-off learned on TRAIN only (next-week std of daily returns, 67th percentile): %.6f" % PREPARED["high_vol_cutoff"])
+for task, rep in PREPARED["split_report"].items():
+    print(f"\n=== task: {task} ===")
+    for s, a in rep.items():
+        print(f"{s:11s} rows={a['rows']:>7,}  anchors {a['first_anchor']} .. {a['last_anchor']}  "
+              f"last outcome known {a['last_outcome_date']}  tickers={a['tickers']}  positive share={a['share_positive']:.3f}")
+        print(f"{'':11s} excluded: {a['excluded_by_reason']}")
+save_json("t2_split_report.json", {"high_vol_cutoff": PREPARED["high_vol_cutoff"], **PREPARED["split_report"]})
+
+# leakage self-checks, computed from the prepared tables
+for task in TASK_SPECS:
+    tr = spark.read.parquet(f"{PREP}/{task}/train"); va = spark.read.parquet(f"{PREP}/{task}/validation"); te = spark.read.parquet(f"{PREP}/{task}/test")
+    tr_last = tr.agg(F.max("next_anchor_date")).first()[0]; va_first = va.agg(F.min("anchor_date")).first()[0]
+    va_last = va.agg(F.max("next_anchor_date")).first()[0]; te_first = te.agg(F.min("anchor_date")).first()[0]
+    check(f"Leakage[{task}]: every training outcome is known by {TRAIN_END}", f"<= {TRAIN_END}", str(tr_last), ok=str(tr_last) <= TRAIN_END)
+    check(f"Leakage[{task}]: validation starts after training outcomes end", f"> {tr_last}", str(va_first), ok=str(va_first) > str(tr_last))
+    check(f"Leakage[{task}]: validation outcomes known by {VAL_END}; test starts after", f"<= {VAL_END} < test start",
+          f"{va_last} / {te_first}", ok=str(va_last) <= VAL_END and str(te_first) >= TEST_START)
+    check(f"Leakage[{task}]: no identifier or target in the feature list", "ticker/label/target absent",
+          [c for c in FEATS if c in ("ticker", "label", "target_value", "ret_next", "next_block_vol")],
+          ok=not any(c in ("ticker", "label", "target_value", "ret_next", "next_block_vol") for c in FEATS))
+
+#@@ md
+### 2.2 Optional auxiliary signal: GDELT news volume available *before* each anchor
+
+For every weekly anchor `A` we sum GDELT events whose **date added** lies in `[A−7, A−1]` (strictly before the anchor day) — so only information available when the prediction is made is used. `news_days = 7` means the 7-day window is fully covered by the acquired GDELT files.
+This is **market-wide** (one value per week for all tickers), so the number of *independent* observations is the number of weeks, not the number of rows. It is used for descriptive analysis (Section 4, Q2), not as a model feature, because the acquired GDELT window does not overlap the training period (see Section 4 limitations).
+
+#@@ code
+with stage("2d GDELT news features by anchor (PySpark)") as st:
+    anchors_d = spark.read.parquet(f"{PREP}/weekly_all").select("anchor_date").distinct()
+    gdn = load_gdelt_daily().select("date_added", "events", "avg_tone")
+    news_by_anchor = (anchors_d.join(gdn, (gdn.date_added >= F.date_sub(anchors_d.anchor_date, 7)) & (gdn.date_added < anchors_d.anchor_date), "left")
+                      .groupBy("anchor_date")
+                      .agg(F.count("date_added").alias("news_days"), F.sum("events").alias("news_events"),
+                           (F.sum(F.col("events") * F.col("avg_tone")) / F.sum("events")).alias("news_tone")))
+    news_by_anchor.write.mode("overwrite").parquet(f"{PREP}/news_by_anchor")
+    st.meta["rows"] = news_by_anchor.count()
+news_cov = spark.read.parquet(f"{PREP}/news_by_anchor")
+n_full = news_cov.where("news_days = 7").count()
+print(f"anchor dates: {news_cov.count()}, with a fully covered 7-day news window: {n_full}")
+show(news_cov.where("news_days = 7").orderBy("anchor_date"), 5)

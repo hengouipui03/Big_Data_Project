@@ -1,0 +1,97 @@
+Hive Session ID = 57290532-e048-44a1-969b-735fcb813e7f
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j2.properties Async: true
+OK
+Time taken: 0.527 seconds
+OK
+Time taken: 0.03 seconds
+Query ID = hadoop_20261118095659_fcb3139a-70fe-44fd-b2da-5807406befd7
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0052)
+
+Map 1: -/-	Reducer 2: 0/4	Reducer 3: 0/1	
+Map 1: 0/2	Reducer 2: 0/4	Reducer 3: 0/1	
+Map 1: 0(+2)/2	Reducer 2: 0/4	Reducer 3: 0/1	
+Map 1: 2/2	Reducer 2: 3(+1)/4	Reducer 3: 0(+1)/1	
+Map 1: 2/2	Reducer 2: 4/4	Reducer 3: 1/1	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run07.db/raw_prices_quality
+OK
+Time taken: 11.66 seconds
+OK
+Time taken: 0.009 seconds
+Query ID = hadoop_20261118095710_8f209101-9eb0-4b63-ae8b-50112c25db47
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0052)
+
+Map 1: -/-	Reducer 2: 0/2	Reducer 3: 0/1	
+Map 1: 0(+2)/2	Reducer 2: 0/2	Reducer 3: 0/1	
+Map 1: 2/2	Reducer 2: 0(+2)/2	Reducer 3: 0/1	
+Map 1: 2/2	Reducer 2: 2/2	Reducer 3: 1/1	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run07.db/raw_prices_duplicates
+OK
+Time taken: 2.728 seconds
+OK
+Time taken: 0.006 seconds
+Query ID = hadoop_20261118095713_a89bf4ba-43c1-4dd5-953e-defcb01c6bd7
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0052)
+
+Map 1: -/-	Reducer 2: 0/2	
+Map 1: 2/2	Reducer 2: 2/2	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run07.db/raw_prices_series_length
+OK
+Time taken: 0.748 seconds
+OK
+Time taken: 0.007 seconds
+Query ID = hadoop_20261118095714_61cea4c0-fccb-49b3-ac20-dcd465e41236
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0052)
+
+Map 1: -/-	
+Map 1: 0(+2)/2	
+Map 1: 1(+1)/2	
+Map 1: 2/2	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run07.db/prices_typed
+OK
+Time taken: 2.469 seconds
+OK
+Time taken: 0.007 seconds
+Query ID = hadoop_20261118095716_fe70e443-088e-4aa1-a7a9-94d2cdf0569d
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0052)
+
+Map 1: -/-	
+Map 1: 1/1	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run07.db/gdelt_daily_typed
+OK
+Time taken: 0.441 seconds
+OK
+Time taken: 0.006 seconds
+Query ID = hadoop_20261118095717_6cccca7d-36e1-4a25-bd0e-27755bc72ea7
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0052)
+
+Map 1: -/-	
+Map 1: 1/1	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run07.db/gdelt_audit_rejects
+OK
+Time taken: 0.405 seconds
+OK
+Time taken: 0.006 seconds
+Query ID = hadoop_20261118095717_cf9012a7-476b-4b8d-a40e-4b72db51952b
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0052)
+
+Map 1: -/-	Reducer 2: 0/2	
+Map 1: 0(+1)/1	Reducer 2: 0/2	
+Map 1: 1/1	Reducer 2: 2/2	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run07.db/prices_yearly_coverage
+OK
+Time taken: 1.535 seconds

@@ -1,0 +1,47 @@
+{
+  "reference_full": {
+    "runs": [
+      "run01-reference-fullprofile",
+      "run02-reference-fullprofile",
+      "run03-reference-fullprofile"
+    ],
+    "seconds": [
+      591,
+      596,
+      584
+    ],
+    "median_seconds": 591,
+    "minimum_seconds": 584,
+    "maximum_seconds": 596
+  },
+  "reference_7d": {
+    "runs": [
+      "run04-reference-7d",
+      "run05-reference-7d",
+      "run06-reference-7d"
+    ],
+    "seconds": [
+      429,
+      422,
+      418
+    ],
+    "median_seconds": 422,
+    "minimum_seconds": 418,
+    "maximum_seconds": 429
+  },
+  "alternative_full": {
+    "runs": [
+      "run07-alternative-fullprofile",
+      "run08-alternative-fullprofile",
+      "run09-alternative-fullprofile"
+    ],
+    "seconds": [
+      617,
+      542,
+      538
+    ],
+    "median_seconds": 542,
+    "minimum_seconds": 538,
+    "maximum_seconds": 617
+  }
+}

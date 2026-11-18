@@ -1,0 +1,62 @@
+Configured Capacity: 202800848896 (188.87 GB)
+Present Capacity: 194370527470 (181.02 GB)
+DFS Remaining: 176680857600 (164.55 GB)
+DFS Used: 17689669870 (16.47 GB)
+DFS Used%: 9.10%
+Replicated Blocks:
+	Under replicated blocks: 0
+	Blocks with corrupt replicas: 0
+	Missing blocks: 0
+	Missing blocks (with replication factor 1): 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+Erasure Coded Block Groups: 
+	Low redundancy block groups: 0
+	Block groups with corrupt internal blocks: 0
+	Missing block groups: 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+
+-------------------------------------------------
+Live datanodes (2):
+
+Name: 172.31.17.62:9866 (ip-172-31-17-62.ec2.internal)
+Hostname: ip-172-31-17-62.ec2.internal
+Decommission Status : Normal
+Configured Capacity: 101400424448 (94.44 GB)
+DFS Used: 8839452068 (8.23 GB)
+Non DFS Used: 4199619164 (3.91 GB)
+DFS Remaining: 88361353216 (82.29 GB)
+DFS Used%: 8.72%
+DFS Remaining%: 87.14%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 0
+Last contact: Wed Nov 18 09:36:50 UTC 2026
+Last Block Report: Wed Nov 18 07:40:08 UTC 2026
+Num of Blocks: 2687
+
+
+Name: 172.31.18.230:9866 (ip-172-31-18-230.ec2.internal)
+Hostname: ip-172-31-18-230.ec2.internal
+Decommission Status : Normal
+Configured Capacity: 101400424448 (94.44 GB)
+DFS Used: 8850217802 (8.24 GB)
+Non DFS Used: 4230702262 (3.94 GB)
+DFS Remaining: 88319504384 (82.25 GB)
+DFS Used%: 8.73%
+DFS Remaining%: 87.10%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 1
+Last contact: Wed Nov 18 09:36:50 UTC 2026
+Last Block Report: Wed Nov 18 07:40:08 UTC 2026
+Num of Blocks: 2686
+
+

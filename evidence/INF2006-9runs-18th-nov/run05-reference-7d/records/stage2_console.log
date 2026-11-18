@@ -1,0 +1,444 @@
+== Stage 2a: Hadoop Streaming audit over /benchmark_runs/18th-nov/inputs/dev/gdelt -> /benchmark_runs/18th-nov/run05-reference-7d/streaming_audit (2 reducers)
+packageJobJar: [] [/usr/lib/hadoop/hadoop-streaming-3.4.1-amzn-2.jar] /tmp/streamjob14272820460402852853.jar tmpDir=null
+2026-11-18 09:36:59,522 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-16-63.ec2.internal/172.31.16.63:8032
+2026-11-18 09:36:59,629 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-16-63.ec2.internal/172.31.16.63:10200
+2026-11-18 09:36:59,685 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at ip-172-31-16-63.ec2.internal/172.31.16.63:8032
+2026-11-18 09:36:59,686 INFO client.AHSProxy: Connecting to Application History server at ip-172-31-16-63.ec2.internal/172.31.16.63:10200
+2026-11-18 09:36:59,863 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoop/.staging/job_1794987667450_0040
+2026-11-18 09:37:00,189 INFO lzo.GPLNativeCodeLoader: Loaded native gpl library
+2026-11-18 09:37:00,191 INFO lzo.LzoCodec: Successfully loaded & initialized native-lzo library [hadoop-lzo rev 049362b7cf53ff5f739d6b1532457f2c6cd495e8]
+2026-11-18 09:37:00,249 INFO mapred.FileInputFormat: Total input files to process : 7
+2026-11-18 09:37:00,296 INFO mapreduce.JobSubmitter: number of splits:12
+2026-11-18 09:37:00,530 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1794987667450_0040
+2026-11-18 09:37:00,530 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2026-11-18 09:37:00,719 INFO conf.Configuration: resource-types.xml not found
+2026-11-18 09:37:00,720 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2026-11-18 09:37:00,769 INFO impl.YarnClientImpl: Submitted application application_1794987667450_0040
+2026-11-18 09:37:00,796 INFO mapreduce.Job: The url to track the job: http://ip-172-31-16-63.ec2.internal:20888/proxy/application_1794987667450_0040/
+2026-11-18 09:37:00,797 INFO mapreduce.Job: Running job: job_1794987667450_0040
+2026-11-18 09:37:06,863 INFO mapreduce.Job: Job job_1794987667450_0040 running in uber mode : false
+2026-11-18 09:37:06,864 INFO mapreduce.Job:  map 0% reduce 0%
+2026-11-18 09:37:15,941 INFO mapreduce.Job:  map 17% reduce 0%
+2026-11-18 09:37:19,970 INFO mapreduce.Job:  map 25% reduce 0%
+2026-11-18 09:37:20,976 INFO mapreduce.Job:  map 50% reduce 0%
+2026-11-18 09:37:21,981 INFO mapreduce.Job:  map 58% reduce 0%
+2026-11-18 09:37:22,987 INFO mapreduce.Job:  map 67% reduce 0%
+2026-11-18 09:37:29,015 INFO mapreduce.Job:  map 75% reduce 0%
+2026-11-18 09:37:31,024 INFO mapreduce.Job:  map 100% reduce 0%
+2026-11-18 09:37:34,038 INFO mapreduce.Job:  map 100% reduce 50%
+2026-11-18 09:37:36,047 INFO mapreduce.Job:  map 100% reduce 100%
+2026-11-18 09:37:36,054 INFO mapreduce.Job: Job job_1794987667450_0040 completed successfully
+2026-11-18 09:37:36,141 INFO mapreduce.Job: Counters: 55
+	File System Counters
+		FILE: Number of bytes read=12893839
+		FILE: Number of bytes written=30386933
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=536817150
+		HDFS: Number of bytes written=203
+		HDFS: Number of read operations=46
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=4
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Killed map tasks=1
+		Launched map tasks=12
+		Launched reduce tasks=2
+		Data-local map tasks=12
+		Total time spent by all maps in occupied slots (ms)=334202880
+		Total time spent by all reduces in occupied slots (ms)=91164672
+		Total time spent by all map tasks (ms)=108790
+		Total time spent by all reduce tasks (ms)=14838
+		Total vcore-milliseconds taken by all map tasks=108790
+		Total vcore-milliseconds taken by all reduce tasks=14838
+		Total megabyte-milliseconds taken by all map tasks=334202880
+		Total megabyte-milliseconds taken by all reduce tasks=91164672
+	Map-Reduce Framework
+		Map input records=1425234
+		Map output records=1425234
+		Map output bytes=45930928
+		Map output materialized bytes=12885780
+		Input split bytes=1836
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=7
+		Reduce shuffle bytes=12885780
+		Reduce input records=1425234
+		Reduce output records=7
+		Spilled Records=2850468
+		Shuffled Maps =24
+		Failed Shuffles=0
+		Merged Map outputs=24
+		GC time elapsed (ms)=610
+		CPU time spent (ms)=30160
+		Physical memory (bytes) snapshot=6990700544
+		Virtual memory (bytes) snapshot=68852162560
+		Total committed heap usage (bytes)=6635388928
+		Peak Map Physical memory (bytes)=542228480
+		Peak Map Virtual memory (bytes)=4539121664
+		Peak Reduce Physical memory (bytes)=377462784
+		Peak Reduce Virtual memory (bytes)=7224573952
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=536815314
+	File Output Format Counters 
+		Bytes Written=203
+2026-11-18 09:37:36,141 INFO streaming.StreamJob: Output directory: /benchmark_runs/18th-nov/run05-reference-7d/streaming_audit
+   streaming took 39 s; 7 output rows
+== Stage 2a check: EMR streaming output vs local (laptop) run
+key             emr_events  local_events  emr_tone  local_tone  emr_lag  local_lag match
+20151201            228333        228333   -2.1441     -2.1441     8211       8211 yes
+20151202            236578        236578   -2.0437     -2.0437     8453       8453 yes
+20151203            235400        235400   -2.2298     -2.2298     8267       8267 yes
+20151204            227122        227122   -2.2320     -2.2320     7707       7707 yes
+20151205            149629        149629   -2.4895     -2.4895     4642       4642 yes
+20151206            134434        134434   -2.3953     -2.3953     4271       4271 yes
+20151207            213738        213738   -2.1165     -2.1165     8079       8079 yes
+RESULT: EMR streaming output matches local run on every date key
+== Stage 2b: Hive register raw tables
+Hive Session ID = 95677bc2-7022-470a-a159-4f4f4f5ee97c
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j2.properties Async: true
+OK
+Time taken: 0.442 seconds
+OK
+Time taken: 0.012 seconds
+OK
+Time taken: 0.032 seconds
+OK
+Time taken: 0.095 seconds
+OK
+Time taken: 0.007 seconds
+OK
+Time taken: 0.041 seconds
+OK
+gdelt_daily_audit
+raw_prices
+Time taken: 0.086 seconds, Fetched: 2 row(s)
+OK
+# col_name            	data_type           	comment             
+trade_date          	string              	yyyy-MM-dd trading day (US market)
+open                	double              	opening price, USD  
+high                	double              	intraday high, USD  
+low                 	double              	intraday low, USD   
+close               	double              	closing price, USD  
+volume              	bigint              	shares traded       
+ticker              	string              	exchange ticker symbol (source column Name)
+	 	 
+# Detailed Table Information	 	 
+Database:           	bench_run05         	 
+OwnerType:          	USER                	 
+Owner:              	hadoop              	 
+CreateTime:         	Wed Nov 18 09:37:49 UTC 2026	 
+LastAccessTime:     	UNKNOWN             	 
+Retention:          	0                   	 
+Location:           	hdfs://ip-172-31-16-63.ec2.internal:8020/benchmark_runs/18th-nov/inputs/full/prices	 
+Table Type:         	EXTERNAL_TABLE      	 
+Table Parameters:	 	 
+	EXTERNAL            	TRUE                
+	bucketing_version   	2                   
+	comment             	Raw daily price bars as downloaded; blank numeric fields read as NULL
+	numFiles            	1                   
+	skip.header.line.count	1                   
+	totalSize           	29580549            
+	transient_lastDdlTime	1794994669          
+	 	 
+# Storage Information	 	 
+SerDe Library:      	org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe	 
+InputFormat:        	org.apache.hadoop.mapred.TextInputFormat	 
+OutputFormat:       	org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat	 
+Compressed:         	No                  	 
+Num Buckets:        	-1                  	 
+Bucket Columns:     	[]                  	 
+Sort Columns:       	[]                  	 
+Storage Desc Params:	 	 
+	field.delim         	,                   
+	line.delim          	\n                  
+	serialization.format	,                   
+Time taken: 0.103 seconds, Fetched: 39 row(s)
+OK
+# col_name            	data_type           	comment             
+audit_key           	string              	DATEADDED yyyymmdd, or BAD_<reason> counter key
+events              	bigint              	number of event rows
+avg_tone            	string              	mean AvgTone (NA for counter keys)
+lag_events          	bigint              	events whose SQLDATE differs from DATEADDED
+	 	 
+# Detailed Table Information	 	 
+Database:           	bench_run05         	 
+OwnerType:          	USER                	 
+Owner:              	hadoop              	 
+CreateTime:         	Wed Nov 18 09:37:49 UTC 2026	 
+LastAccessTime:     	UNKNOWN             	 
+Retention:          	0                   	 
+Location:           	hdfs://ip-172-31-16-63.ec2.internal:8020/benchmark_runs/18th-nov/run05-reference-7d/streaming_audit	 
+Table Type:         	EXTERNAL_TABLE      	 
+Table Parameters:	 	 
+	EXTERNAL            	TRUE                
+	bucketing_version   	2                   
+	comment             	Per-day GDELT audit summary produced by Hadoop Streaming
+	numFiles            	2                   
+	totalSize           	203                 
+	transient_lastDdlTime	1794994669          
+	 	 
+# Storage Information	 	 
+SerDe Library:      	org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe	 
+InputFormat:        	org.apache.hadoop.mapred.TextInputFormat	 
+OutputFormat:       	org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat	 
+Compressed:         	No                  	 
+Num Buckets:        	-1                  	 
+Bucket Columns:     	[]                  	 
+Sort Columns:       	[]                  	 
+Storage Desc Params:	 	 
+	field.delim         	\t                  
+	line.delim          	\n                  
+	serialization.format	\t                  
+Time taken: 0.063 seconds, Fetched: 35 row(s)
+== Stage 2c: Hive quality audit + typed tables (Tez)
+Hive Session ID = 54030f31-3e27-46e9-9df7-31a238c07ef7
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j2.properties Async: true
+OK
+Time taken: 0.518 seconds
+OK
+Time taken: 0.028 seconds
+Query ID = hadoop_20261118093759_e6ba6d18-e769-45af-8e33-e7569df569f2
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0042)
+
+Map 1: -/-	Reducer 2: 0/4	Reducer 3: 0/1	
+Map 1: 0/2	Reducer 2: 0/4	Reducer 3: 0/1	
+Map 1: 0/2	Reducer 2: 0/4	Reducer 3: 0/1	
+Map 1: 0(+2)/2	Reducer 2: 0/4	Reducer 3: 0/1	
+Map 1: 0(+2)/2	Reducer 2: 0/4	Reducer 3: 0/1	
+Map 1: 2/2	Reducer 2: 0(+2)/4	Reducer 3: 0/1	
+Map 1: 2/2	Reducer 2: 4/4	Reducer 3: 1/1	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run05.db/raw_prices_quality
+OK
+Time taken: 13.766 seconds
+OK
+Time taken: 0.012 seconds
+Query ID = hadoop_20261118093813_22218704-a532-4d09-be47-4c5e899170a8
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0042)
+
+Map 1: -/-	Reducer 2: 0/2	Reducer 3: 0/1	
+Map 1: 0(+2)/2	Reducer 2: 0/2	Reducer 3: 0/1	
+Map 1: 1(+1)/2	Reducer 2: 0(+1)/2	Reducer 3: 0/1	
+Map 1: 2/2	Reducer 2: 0(+2)/2	Reducer 3: 0/1	
+Map 1: 2/2	Reducer 2: 1(+1)/2	Reducer 3: 0(+1)/1	
+Map 1: 2/2	Reducer 2: 2/2	Reducer 3: 1/1	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run05.db/raw_prices_duplicates
+OK
+Time taken: 4.105 seconds
+OK
+Time taken: 0.007 seconds
+Query ID = hadoop_20261118093817_8a920faf-8f74-4b80-a281-c61b8990d624
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0042)
+
+Map 1: -/-	Reducer 2: 0/2	
+Map 1: 2/2	Reducer 2: 0(+2)/2	
+Map 1: 2/2	Reducer 2: 2/2	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run05.db/raw_prices_series_length
+OK
+Time taken: 0.935 seconds
+OK
+Time taken: 0.021 seconds
+Query ID = hadoop_20261118093818_71c2e3b5-984b-4b5f-9b5c-61b051f5f112
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0042)
+
+Map 1: -/-	
+Map 1: 0(+2)/2	
+Map 1: 2/2	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run05.db/prices_typed
+OK
+Time taken: 3.397 seconds
+OK
+Time taken: 0.007 seconds
+Query ID = hadoop_20261118093821_91fb7852-53e3-473d-b1e4-afa088cd78df
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0042)
+
+Map 1: -/-	
+Map 1: 1/1	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run05.db/gdelt_daily_typed
+OK
+Time taken: 0.544 seconds
+OK
+Time taken: 0.007 seconds
+Query ID = hadoop_20261118093822_196efdc4-39f5-4b71-896b-964ac69cbd0e
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0042)
+
+Map 1: -/-	
+Map 1: 1/1	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run05.db/gdelt_audit_rejects
+OK
+Time taken: 0.359 seconds
+OK
+Time taken: 0.005 seconds
+Query ID = hadoop_20261118093822_051bf9b0-3589-4db3-8724-aa6625b17fdc
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0042)
+
+Map 1: -/-	Reducer 2: 0/2	
+Map 1: 0(+1)/1	Reducer 2: 0/2	
+Map 1: 1/1	Reducer 2: 1(+1)/2	
+Map 1: 1/1	Reducer 2: 2/2	
+Moving data to directory hdfs://ip-172-31-16-63.ec2.internal:8020/user/hive/warehouse/bench_run05.db/prices_yearly_coverage
+OK
+Time taken: 1.84 seconds
+== Stage 2d: Hive results
+Hive Session ID = a64db503-4665-4808-9199-07038fe62c4f
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j2.properties Async: true
+OK
+Time taken: 0.659 seconds
+OK
+tab_name
+gdelt_audit_rejects
+gdelt_daily_audit
+gdelt_daily_typed
+prices_typed
+prices_yearly_coverage
+raw_prices
+raw_prices_duplicates
+raw_prices_quality
+raw_prices_series_length
+Time taken: 0.079 seconds, Fetched: 9 row(s)
+OK
+tbl
+raw_prices_quality
+Time taken: 0.919 seconds, Fetched: 1 row(s)
+OK
+raw_prices_quality.rows_total	raw_prices_quality.tickers	raw_prices_quality.date_min	raw_prices_quality.date_max	raw_prices_quality.rows_up_to_2017_12_29	raw_prices_quality.empty_open	raw_prices_quality.empty_high	raw_prices_quality.empty_low	raw_prices_quality.empty_close	raw_prices_quality.empty_volume	raw_prices_quality.ohlc_inconsistent	raw_prices_quality.nonpositive
+619040	505	2013-02-08	2018-02-07	605910	11	8	8	0	0	12	0
+Time taken: 0.285 seconds, Fetched: 1 row(s)
+OK
+tbl
+raw_prices_duplicates
+Time taken: 0.058 seconds, Fetched: 1 row(s)
+OK
+raw_prices_duplicates.duplicate_ticker_date
+0
+Time taken: 0.069 seconds, Fetched: 1 row(s)
+OK
+tbl
+short_series
+Time taken: 0.052 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261118093836_8277a7ef-7a5f-4cf1-af1c-221c8f07e386
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0043)
+
+Map 1: -/-	Reducer 2: 0/1	
+Map 1: 0/1	Reducer 2: 0/1	
+Map 1: 0(+1)/1	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 1/1	
+OK
+raw_prices_series_length.ticker	raw_prices_series_length.n_rows	raw_prices_series_length.first_day	raw_prices_series_length.last_day	raw_prices_series_length.short_series
+APTV	44	2017-12-05	2018-02-07	1
+BHF	143	2017-07-17	2018-02-07	1
+BHGE	152	2017-07-03	2018-02-07	1
+DWDP	109	2017-09-01	2018-02-07	1
+DXC	215	2017-04-03	2018-02-07	1
+EVHC	297	2016-12-02	2018-02-07	1
+FTV	404	2016-07-01	2018-02-07	1
+HLT	276	2017-01-04	2018-02-07	1
+UA	464	2016-04-07	2018-02-07	1
+Time taken: 7.829 seconds, Fetched: 9 row(s)
+OK
+tbl
+prices_yearly_coverage
+Time taken: 0.051 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261118093844_6df8d56b-0ff1-4610-a79f-0834d5d2040e
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0043)
+
+Map 1: -/-	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 1/1	
+OK
+prices_yearly_coverage.yr	prices_yearly_coverage.n_rows	prices_yearly_coverage.tickers	prices_yearly_coverage.first_day	prices_yearly_coverage.last_day
+2013	108438	483	2013-02-08	2013-12-31
+2014	122397	488	2014-01-02	2014-12-31
+2015	123719	495	2015-01-02	2015-12-31
+2016	125324	499	2016-01-04	2016-12-30
+2017	126032	505	2017-01-03	2017-12-29
+2018	13130	505	2018-01-02	2018-02-07
+Time taken: 0.582 seconds, Fetched: 6 row(s)
+OK
+tbl
+gdelt_daily_typed
+Time taken: 0.045 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261118093845_903e5246-5f7d-4321-a94c-622032e9be82
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0043)
+
+Map 1: -/-	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 0/1	
+Map 1: 1/1	Reducer 2: 1/1	
+OK
+gdelt_daily_typed.date_added	gdelt_daily_typed.events	gdelt_daily_typed.avg_tone	gdelt_daily_typed.lag_events
+2015-12-01	228333	-2.1441	8211
+2015-12-02	236578	-2.0437	8453
+2015-12-03	235400	-2.2298	8267
+2015-12-04	227122	-2.232	7707
+2015-12-05	149629	-2.4895	4642
+2015-12-06	134434	-2.3953	4271
+2015-12-07	213738	-2.1165	8079
+Time taken: 0.807 seconds, Fetched: 7 row(s)
+OK
+tbl
+gdelt_audit_rejects
+Time taken: 0.042 seconds, Fetched: 1 row(s)
+OK
+gdelt_audit_rejects.reject_reason	gdelt_audit_rejects.line_count
+Time taken: 0.053 seconds
+OK
+tbl
+row_counts
+Time taken: 0.048 seconds, Fetched: 1 row(s)
+Query ID = hadoop_20261118093846_0ce5b3b2-84eb-4546-9c38-d517ea7d7169
+Total jobs = 1
+Launching Job 1 out of 1
+Status: Running (Executing on YARN cluster with App id application_1794987667450_0043)
+
+Map 1: -/-	Map 4: -/-	Map 6: -/-	Map 8: -/-	Reducer 2: 0/1	Reducer 5: 0/1	Reducer 7: 0/1	Reducer 9: 0/1	
+Map 1: 0(+1)/2	Map 4: 1/1	Map 6: 1/1	Map 8: 1/1	Reducer 2: 0/1	Reducer 5: 0/1	Reducer 7: 0/1	Reducer 9: 0/1	
+Map 1: 2/2	Map 4: 1/1	Map 6: 1/1	Map 8: 1/1	Reducer 2: 0/1	Reducer 5: 0/1	Reducer 7: 0/1	Reducer 9: 0(+1)/1	
+Map 1: 2/2	Map 4: 1/1	Map 6: 1/1	Map 8: 1/1	Reducer 2: 1/1	Reducer 5: 1/1	Reducer 7: 1/1	Reducer 9: 1/1	
+OK
+table_name	n
+raw_prices	619040
+gdelt_daily_audit	7
+gdelt_daily_typed	7
+prices_typed	619040
+Time taken: 1.883 seconds, Fetched: 4 row(s)
+== Hive warehouse contents
+== Stage 2 done. Evidence in /home/hadoop/inf2006-benchmark-18th-nov/run05-reference-7d/evidence/ ; run log:
+stage,engine,start_utc,end_utc,seconds,application_ids,input,output,rows_out,notes
+stage2a_streaming_audit,hadoop_streaming,2026-11-18T09:36:57Z,2026-11-18T09:37:36Z,39,"application_1794987667450_0040",/benchmark_runs/18th-nov/inputs/dev/gdelt,/benchmark_runs/18th-nov/run05-reference-7d/streaming_audit,7,"mapper=gdelt_mapper.py reducer=gdelt_reducer.py reducers=2"
+stage2b_hive_register,hive_tez,2026-11-18T09:37:38Z,2026-11-18T09:37:50Z,12,"",/benchmark_runs/18th-nov/inputs/full/prices;/benchmark_runs/18th-nov/run05-reference-7d/streaming_audit,inf2006.raw_prices;inf2006.gdelt_daily_audit,,"external tables, no data movement"
+stage2c_hive_transform,hive_tez,2026-11-18T09:37:50Z,2026-11-18T09:38:25Z,35,"application_1794987667450_0042",inf2006.raw_prices;inf2006.gdelt_daily_audit,inf2006.prices_typed;gdelt_daily_typed;raw_prices_quality;raw_prices_duplicates;raw_prices_series_length;gdelt_audit_rejects;prices_yearly_coverage,,"CTAS on Tez"
+stage2d_hive_results,hive_tez,2026-11-18T09:38:25Z,2026-11-18T09:38:48Z,23,"application_1794987667450_0043",inf2006.*,stdout,,"SELECT evidence"
+
+   Expected in stage2_hive_03_results.log: rows_total=619040 tickers=505 rows_up_to_2017_12_29=605910
+   empty_open=11 empty_high=8 empty_low=8 ohlc_inconsistent=12 nonpositive=0 duplicate_ticker_date=0
+   (these reconcile with evidence/local/quality_summary.json)
